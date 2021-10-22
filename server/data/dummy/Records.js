@@ -1,0 +1,68 @@
+const Records = [
+  {
+    id: 1,
+    event: '테니스',
+    win: 3,
+    lose: 1,
+    point: 10,
+    userId: 1,
+  },
+  {
+    id: 2,
+    event: '베드민턴',
+    win: 0,
+    lose: 0,
+    point: 0,
+    userId: 1,
+  },
+  {
+    id: 3,
+    event: '스쿼시',
+    win: 0,
+    lose: 0,
+    point: 0,
+    userId: 1,
+  },
+  {
+    id: 4,
+    event: '탁구',
+    win: 0,
+    lose: 0,
+    point: 0,
+    userId: 1,
+  },
+  {
+    id: 5,
+    event: '테니스',
+    win: 1,
+    lose: 3,
+    point: 6,
+    userId: 2,
+  },
+  {
+    id: 6,
+    event: '베드민턴',
+    win: 0,
+    lose: 0,
+    point: 0,
+    userId: 2,
+  },
+  {
+    id: 7,
+    event: '스쿼시',
+    win: 0,
+    lose: 0,
+    point: 0,
+    userId: 2,
+  },
+  {
+    id: 8,
+    event: '탁구',
+    win: 0,
+    lose: 0,
+    point: 0,
+    userId: 2,
+  },
+];
+
+export default Records;
