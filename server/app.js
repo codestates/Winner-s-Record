@@ -1,0 +1,41 @@
+import express from 'express';
+import 'express-async-errors';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import morgan from 'morgan';
+
+const app = express();
+const corsOptions = {
+  origin: true,
+  method: '*',
+  allowedHeaders: ['Content-type', 'Authorization'],
+  credentials: true,
+};
+
+app.use(express.json());
+app.use(cors(corsOptions));
+app.use(cookieParser());
+app.use(morgan('tiny'));
+
+app.use('/', (req, res, next) => {
+  res.send(`Winner's Record`);
+});
+
+// app.use('/auth');
+// app.use('/post');
+// app.use('/entry');
+// app.use('/match');
+// app.use('/record');
+// app.use('/like');
+// app.use('/rank');
+
+app.use((req, res, next) => {
+  res.sendStatus(404);
+});
+
+app.use((error, req, res, next) => {
+  console.error(error);
+  res.sendStatus(500);
+});
+
+app.listen(8080);
