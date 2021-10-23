@@ -65,6 +65,7 @@ export default function Login() {
         <button>네이버</button>
         <button>구글</button>
       </div>
+      <div className='copyright'>© Copyright 2021 Team MeltingBrain. All rights reserved.</div>
     </>
   );
 }
