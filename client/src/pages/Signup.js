@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import SignupCompleteModal from "../components/SignupCompleteModal";
+import NeedLoginModal from "../components/NeedLoginModal";
 import axios from "axios";
 
 export default function Signup() {
@@ -211,7 +212,7 @@ export default function Signup() {
           </button>
         ) : ( */}
         <button onClick={openModalHandler}>가입하기</button>
-        <SignupCompleteModal
+        <NeedLoginModal
           isModalOpen={isModalOpen}
           openModalHandler={openModalHandler}
         />
