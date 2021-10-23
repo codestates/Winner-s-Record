@@ -1,3 +1,13 @@
 export default function SignupCompleteModal({ isModalOpen, openModalHandler }) {
-  return <>{isModalOpen ? <div className="modalBackdrop"></div> : <div />}</>;
+  return (
+    <>
+      {isModalOpen ? (
+        <div className="modal--backdrop">
+          <div className="modal--view">hello</div>
+        </div>
+      ) : (
+        <div />
+      )}
+    </>
+  );
 }
