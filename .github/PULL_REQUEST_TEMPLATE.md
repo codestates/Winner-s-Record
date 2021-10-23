@@ -7,7 +7,7 @@
 
 ### 반영 브랜치
 
-feature/login -> dev
+feat/ -> dev
 
 ### 변경 사항
 
