@@ -1,0 +1,14 @@
+// variables
+$main-color: #4e894b;
+$sub-color: #eaa938;
+
+//mixin
+@import "./mixin";
+
+// components
+@import "./modal";
+
+// pages
+@import "./pages/Landing";
+@import "./pages/Login";
+@import "./pages/Signup";
