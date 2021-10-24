@@ -192,7 +192,7 @@ export default function Signup() {
         )}
         <input
           type="password"
-          placeholder="비밀번호확인"
+          placeholder="비밀번호 확인"
           onChange={handleInputValue("checkPW")}
           onKeyPress={handleKeyPress}
         />
