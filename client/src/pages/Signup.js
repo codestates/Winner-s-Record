@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import SignupCompleteModal from "../components/SignupCompleteModal";
-import NeedLoginModal from "../components/NeedLoginModal";
 import axios from "axios";
 
 export default function Signup() {
@@ -73,6 +72,10 @@ export default function Signup() {
       setMessage({ ...message, username: "한글만 입력해주세요" });
       return;
     }
+    if (signupInfo.username.length > 7 || signupInfo.username.length < 2) {
+      setMessage({ ...message, username: "2~7자로 입력해주세요" });
+      return;
+    }
     axios
       .post("", { [key]: e.target.value }) //
       .then((res) => {
@@ -94,8 +97,7 @@ export default function Signup() {
     axios
       .post("", { email, username, password })
       .then((res) => {
-        console.log("hi");
-        // signupComplete();
+        openModalHandler();
       })
       .catch((err) => {
         console.log(err);
@@ -202,7 +204,7 @@ export default function Signup() {
       </div>
       <div className="btnContainer">
         <button onClick={() => history.push("/main")}>돌아가기</button>
-        {/* {isValid ? (
+        {isValid ? (
           <button
             style={{ color: "green" }}
             type="submit"
@@ -210,9 +212,10 @@ export default function Signup() {
           >
             가입하기
           </button>
-        ) : ( */}
-        <button onClick={openModalHandler}>가입하기</button>
-        <NeedLoginModal
+        ) : (
+          <button onClick={openModalHandler}>가입하기</button> // onclick 옮기기
+        )}
+        <SignupCompleteModal
           isModalOpen={isModalOpen}
           openModalHandler={openModalHandler}
         />
