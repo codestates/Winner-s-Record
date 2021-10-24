@@ -15,7 +15,11 @@ export default function Login() {
   const handleLogin = () => {
     const { email, password } = loginInfo;
     axios
-      .post("", { email, password }, { withCredentials: true })
+      .post(
+        "http://localhost:8080/auth/login",
+        { email, password },
+        { withCredentials: true }
+      )
       .then((res) => {
         // const { userId, userName, accessToken } = res.data.data;
         // localStorage.setItem("token", accessToken);

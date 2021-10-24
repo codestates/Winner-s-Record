@@ -13,22 +13,23 @@ export default function Signup() {
   const history = useHistory();
   const [signupInfo, setSignupInfo] = useState({
     email: "",
-    username: "",
+    nickname: "",
     password: "",
     checkPW: "",
   });
 
   const [validation, setValidation] = useState({
     email: false,
-    checkEmail: true,
-    username: false,
+    checkEmail: false,
+    nickname: false,
+    checkNickname: false,
     password: false,
     checkPW: false,
   });
 
   const [message, setMessage] = useState({
     email: "이메일 주소를 입력해주세요",
-    username: "닉네임은 2~7자리 한글로 입력해주세요",
+    nickname: "닉네임은 2~7자리 한글로 입력해주세요",
     password: "비밀번호는 8자리 이상, 숫자, 문자, 특수문자가 포함되어야 합니다",
     checkPW: "비밀번호를 확인해주세요",
   });
@@ -39,7 +40,7 @@ export default function Signup() {
     return regExp.test(asValue);
   }
 
-  function isUsername(asValue) {
+  function isNickname(asValue) {
     var regExp = /^[가-힣]+$/;
     return regExp.test(asValue);
   }
@@ -56,7 +57,7 @@ export default function Signup() {
       return;
     }
     axios
-      .post("", { [key]: e.target.value }) //
+      .post("http://localhost:8080/auth/email", { [key]: e.target.value }) //
       .then((res) => {
         setValidation({ ...validation, checkEmail: true });
         setMessage({ ...message, email: "사용 가능한 이메일입니다" });
@@ -68,23 +69,23 @@ export default function Signup() {
   };
 
   const handleOnblurName = (key) => (e) => {
-    if (!isUsername(signupInfo.username)) {
-      setMessage({ ...message, username: "한글만 입력해주세요" });
+    if (!isNickname(signupInfo.nickname)) {
+      setMessage({ ...message, nickname: "한글만 입력해주세요" });
       return;
     }
-    if (signupInfo.username.length > 7 || signupInfo.username.length < 2) {
-      setMessage({ ...message, username: "2~7자로 입력해주세요" });
+    if (signupInfo.nickname.length > 7 || signupInfo.nickname.length < 2) {
+      setMessage({ ...message, nickname: "2~7자로 입력해주세요" });
       return;
     }
     axios
-      .post("", { [key]: e.target.value }) //
+      .post("http://localhost:8080/auth/nickname", { [key]: e.target.value }) //
       .then((res) => {
-        setValidation({ ...validation, username: true });
-        setMessage({ ...message, username: "사용 가능한 닉네임입니다" });
+        setValidation({ ...validation, checkNickname: true });
+        setMessage({ ...message, nickname: "사용 가능한 닉네임입니다" });
       })
       .catch((err) => {
-        setValidation({ ...validation, username: false });
-        setMessage({ ...message, username: "중복된 닉네임입니다" });
+        setValidation({ ...validation, checkNickname: false });
+        setMessage({ ...message, nickname: "중복된 닉네임입니다" });
       });
   };
 
@@ -93,9 +94,9 @@ export default function Signup() {
   };
 
   const handleSignup = () => {
-    const { email, username, password } = signupInfo;
+    const { email, nickname, password } = signupInfo;
     axios
-      .post("", { email, username, password })
+      .post("http://localhost:8080/auth", { email, nickname, password })
       .then((res) => {
         openModalHandler();
       })
@@ -112,10 +113,11 @@ export default function Signup() {
 
   const isValid =
     validation.email &&
-    validation.username &&
+    validation.checkEmail &&
+    validation.nickname &&
+    validation.checkNickname &&
     validation.password &&
-    validation.checkPW &&
-    validation.checkEmail;
+    validation.checkPW;
 
   useEffect(() => {
     setMessage({
@@ -132,15 +134,15 @@ export default function Signup() {
           ? signupInfo.checkPW === signupInfo.password
             ? "비밀번호가 일치합니다"
             : "비밀번호가 불일치합니다"
-          : "비밀번호를 입력해주세요",
+          : "비밀번호를 확인해주세요",
     });
     setValidation({
       ...validation,
       email: isEmail(signupInfo.email),
-      username:
-        isUsername(signupInfo.username) &&
-        signupInfo.username.length >= 2 &&
-        signupInfo.username.length < 8,
+      nickname:
+        isNickname(signupInfo.nickname) &&
+        signupInfo.nickname.length >= 2 &&
+        signupInfo.nickname.length < 8,
       password: isPassword(signupInfo.password),
       checkPW: signupInfo.password === signupInfo.checkPW,
     });
@@ -165,16 +167,16 @@ export default function Signup() {
           <div>{message.email}</div>
         )}
         <input
-          type="username"
+          type="nickname"
           placeholder="닉네임"
-          onBlur={handleOnblurName("username")}
-          onChange={handleInputValue("username")}
+          onBlur={handleOnblurName("nickname")}
+          onChange={handleInputValue("nickname")}
           onKeyPress={handleKeyPress}
         />
-        {message.username === "한글만 입력해주세요" ? (
-          <div>{message.username}</div>
+        {message.nickname === "한글만 입력해주세요" ? (
+          <div>{message.nickname}</div>
         ) : (
-          <div>{message.username}</div>
+          <div>{message.nickname}</div>
         )}
         <input
           type="password"
@@ -213,7 +215,7 @@ export default function Signup() {
             가입하기
           </button>
         ) : (
-          <button onClick={openModalHandler}>가입하기</button> // onclick 옮기기
+          <button>가입하기</button> // onclick 옮기기
         )}
         <SignupCompleteModal
           isModalOpen={isModalOpen}

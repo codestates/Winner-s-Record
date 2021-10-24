@@ -9,7 +9,10 @@ export default function EditCompleteModal({ isModalOpen, openModalHandler }) {
           <div className="modal--view">
             <div>회원정보 수정이 완료되었습니다</div>
             <div className="modal--btnContainer">
-              <button onClick={() => history.replace("/mypage")}>확인</button>
+              <button onClick={openModalHandler}>확인</button>
+              <button onClick={() => history.replace("/mypage")}>
+                마이페이지
+              </button>
             </div>
           </div>
         </div>
