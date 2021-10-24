@@ -5,7 +5,7 @@ const Users = [
     email: 'a@gmail.com',
     nickname: '성수동조코비치',
     password: 'abcd1234',
-    img: '1',
+    img: 1,
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ const Users = [
     email: 'b@kakao.com',
     nickname: '지리산신령님',
     password: 'abcd1234',
-    img: '2',
+    img: 2,
   },
   {
     id: 3,
@@ -21,7 +21,7 @@ const Users = [
     email: 'test1@gmail.com',
     nickname: '가온누리',
     password: 'abcd1234',
-    img: '',
+    img: 3,
   },
   {
     id: 4,
@@ -29,7 +29,7 @@ const Users = [
     email: 'test2@gmail.com',
     nickname: '나봄',
     password: 'abcd1234',
-    img: '',
+    img: 4,
   },
   {
     id: 5,
@@ -37,7 +37,7 @@ const Users = [
     email: 'test3@gmail.com',
     nickname: '누리봄',
     password: 'abcd1234',
-    img: '',
+    img: 5,
   },
   {
     id: 6,
@@ -45,7 +45,7 @@ const Users = [
     email: 'test4@gmail.com',
     nickname: '라별',
     password: 'abcd1234',
-    img: '',
+    img: 6,
   },
   {
     id: 7,
@@ -53,7 +53,7 @@ const Users = [
     email: 'test5@gmail.com',
     nickname: '무지개가맑다',
     password: 'abcd1234',
-    img: '',
+    img: 7,
   },
   {
     id: 8,
@@ -61,7 +61,7 @@ const Users = [
     email: 'test6@gmail.com',
     nickname: '밝은빛누리예',
     password: 'abcd1234',
-    img: '',
+    img: 8,
   },
   {
     id: 9,
@@ -69,7 +69,7 @@ const Users = [
     email: 'test7@gmail.com',
     nickname: '보늬하늬',
     password: 'abcd1234',
-    img: '',
+    img: 1,
   },
   {
     id: 10,
@@ -77,7 +77,7 @@ const Users = [
     email: 'test8@gmail.com',
     nickname: '고로쇠물달다',
     password: 'abcd1234',
-    img: '',
+    img: 2,
   },
   {
     id: 11,
@@ -85,7 +85,7 @@ const Users = [
     email: 'test9@gmail.com',
     nickname: '빛솔',
     password: 'abcd1234',
-    img: '',
+    img: 3,
   },
   {
     id: 12,
@@ -93,7 +93,7 @@ const Users = [
     email: 'test10@gmail.com',
     nickname: '이루리',
     password: 'abcd1234',
-    img: '',
+    img: 4,
   },
   {
     id: 13,
@@ -101,7 +101,7 @@ const Users = [
     email: 'test11@gmail.com',
     nickname: '다산탁구왕',
     password: 'abcd1234',
-    img: '',
+    img: 5,
   },
   {
     id: 14,
@@ -109,7 +109,7 @@ const Users = [
     email: 'test12@gmail.com',
     nickname: '내이름김탁구',
     password: 'abcd1234',
-    img: '',
+    img: 6,
   },
   {
     id: 15,
@@ -117,7 +117,7 @@ const Users = [
     email: 'c@kakao.com',
     nickname: '찬누리',
     password: 'abcd1234',
-    img: '',
+    img: 7,
   },
   {
     id: 16,
@@ -125,7 +125,7 @@ const Users = [
     email: 'd@kakao.com',
     nickname: '골톤',
     password: 'abcd1234',
-    img: '',
+    img: 8,
   },
   {
     id: 17,
@@ -133,7 +133,7 @@ const Users = [
     email: 'e@kakao.com',
     nickname: '티아라',
     password: 'abcd1234',
-    img: '',
+    img: 1,
   },
   {
     id: 18,
@@ -141,7 +141,7 @@ const Users = [
     email: 'f@kakao.com',
     nickname: '람보람보',
     password: 'abcd1234',
-    img: '',
+    img: 2,
   },
   {
     id: 19,
@@ -149,7 +149,7 @@ const Users = [
     email: 'a@naver.com',
     nickname: '다산동밥샙',
     password: 'abcd1234',
-    img: '',
+    img: 3,
   },
   {
     id: 20,
@@ -157,7 +157,7 @@ const Users = [
     email: 'b@naver.com',
     nickname: '테니스한판',
     password: 'abcd1234',
-    img: '',
+    img: 4,
   },
   {
     id: 21,
@@ -165,7 +165,7 @@ const Users = [
     email: 'c@naver.com',
     nickname: '평강왕자',
     password: 'abcd1234',
-    img: '',
+    img: 5,
   },
   {
     id: 22,
@@ -173,7 +173,7 @@ const Users = [
     email: 'd@naver.com',
     nickname: '떡볶이볶떡',
     password: 'abcd1234',
-    img: '',
+    img: 6,
   },
 ];
 
