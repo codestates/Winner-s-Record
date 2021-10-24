@@ -1,10 +1,13 @@
 import 'express-async-errors';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+
 import * as userData from '../data/auth.js';
 
-const ACCESS_SECRET = 'abcd';
-const BCRYPT_SALT_ROUNDS = 12;
+// import '../env.js';
+// import {access_secret} from '../config.js';
+// console.log('ACCESS_SECRET :', process.env.ACCESS_SECRET);
+// console.log(access_secret);
 
 export async function emailValidator(req, res) {
   const email = req.body.email;
