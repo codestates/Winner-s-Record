@@ -17,17 +17,16 @@ export default function Login() {
     axios
       .post("", { email, password }, { withCredentials: true })
       .then((res) => {
-        const { userId, userName, accessToken } = res.data.data;
-        localStorage.setItem("token", accessToken);
-        localStorage.setItem("userId", userId);
-        localStorage.setItem("userName", userName);
-
-        const token = localStorage.getItem("token");
-        if (token) {
-          // dispatch(login());
-          // dispatch(setUserInfo({ token, userId, userName }));
-          history.push("/main");
-        }
+        // const { userId, userName, accessToken } = res.data.data;
+        // localStorage.setItem("token", accessToken);
+        // localStorage.setItem("userId", userId);
+        // localStorage.setItem("userName", userName);
+        // const token = localStorage.getItem("token");
+        // if (token) {
+        //   // dispatch(login());
+        //   // dispatch(setUserInfo({ token, userId, userName }));
+        //   history.push("/main");
+        // }
       })
       .catch((err) => {
         setErrorMessage("이메일 또는 비밀번호를 확인해주세요");
