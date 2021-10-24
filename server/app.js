@@ -3,6 +3,7 @@ import 'express-async-errors';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
+import authRouter from './router/auth.js';
 
 const app = express();
 const corsOptions = {
@@ -17,11 +18,11 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(morgan('tiny'));
 
-app.use('/', (req, res, next) => {
-  res.send(`Winner's Record`);
-});
+// app.use('/', (req, res, next) => {
+//   res.send(`Winner's Record`);
+// });
 
-// app.use('/auth');
+app.use('/auth', authRouter);
 // app.use('/post');
 // app.use('/entry');
 // app.use('/match');
