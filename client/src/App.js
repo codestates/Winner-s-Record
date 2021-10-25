@@ -6,6 +6,7 @@ import Landing from "./pages/Landing";
 import Edit from "./pages/Edit";
 import Error from "./pages/Error";
 import Main from "./pages/Main";
+import Post from "./pages/Post";
 
 // styles
 import "./reset.css";
@@ -18,6 +19,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Landing />
+          </Route>
+          <Route path="/post/:postId">
+            <Post />
           </Route>
           <Route path="/main">
             <Main />
