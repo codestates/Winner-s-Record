@@ -109,6 +109,21 @@ const Posts_Images = [
     postId: 10,
     imgId: 22,
   },
+  {
+    id: 23,
+    postId: 11,
+    imgId: 42,
+  },
+  {
+    id: 24,
+    postId: 11,
+    imgId: 43,
+  },
+  {
+    id: 25,
+    postId: 11,
+    imgId: 44,
+  },
 ];
 
 export default Posts_Images;
