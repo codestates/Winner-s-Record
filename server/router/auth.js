@@ -10,5 +10,8 @@ router.post('/email', authController.emailValidator);
 router.post('/nickname', authController.nicknameValidator);
 router.post('/login', authController.login);
 router.post('/logout', jwtValidator, authController.logout);
+router.post('/password', jwtValidator, authController.passwordValidator);
+router.put('/', jwtValidator, authController.edit);
+router.put('/img', jwtValidator, authController.editImg);
 
 export default router;
