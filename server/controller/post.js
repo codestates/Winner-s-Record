@@ -1,7 +1,7 @@
 import 'express-async-errors';
 import * as postData from '../data/post.js';
 
-export async function searchPost(req, res) {
+export async function searchPost (req, res) {
   const {type, event, title, place, hostId, guestId} = req.query
 
   if(type && event && title) {

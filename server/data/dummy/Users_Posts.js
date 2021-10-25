@@ -27,12 +27,12 @@ const Users_Posts = [
   {
     id: 6,
     userId: 2,
-    postId: 6,
+    postId: 7,
   },
   {
     id: 7,
     userId: 2,
-    postId: 7,
+    postId: 10,
   },
   {
     id: 8,
