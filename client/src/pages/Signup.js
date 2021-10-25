@@ -96,7 +96,12 @@ export default function Signup() {
   const handleSignup = () => {
     const { email, nickname, password } = signupInfo;
     axios
-      .post("http://localhost:8080/auth", { email, nickname, password })
+      .post("http://localhost:8080/auth", {
+        email,
+        nickname,
+        password,
+        type: "web",
+      })
       .then((res) => {
         openModalHandler();
       })
@@ -215,7 +220,7 @@ export default function Signup() {
             가입하기
           </button>
         ) : (
-          <button>가입하기</button> // onclick 옮기기
+          <button>가입하기</button>
         )}
         <SignupCompleteModal
           isModalOpen={isModalOpen}
