@@ -96,7 +96,12 @@ export default function Signup() {
   const handleSignup = () => {
     const { email, nickname, password } = signupInfo;
     axios
-      .post("http://localhost:8080/auth", { email, nickname, password })
+      .post("http://localhost:8080/auth", {
+        email,
+        nickname,
+        password,
+        type: "web",
+      })
       .then((res) => {
         openModalHandler();
       })
