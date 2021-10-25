@@ -39,7 +39,7 @@ const GameSelector = ({ setGame }) => {
           <li
             className="search--dropdown--item"
             onClick={(e) => {
-              setGame("tabletennis");
+              setGame("pingpong");
               setIsClicked(false);
               setDisplayGame(e.target.textContent);
             }}
