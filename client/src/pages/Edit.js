@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "../modules/userInfo";
+import DeleteUserModal from "../components/DeleteUserModal";
 import EditCompleteModal from "../components/EditCompleteModal";
 import axios from "axios";
 
@@ -9,10 +10,15 @@ export default function Edit() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const openModalHandler = () => {
-    setIsModalOpen(!isModalOpen);
+  const openEditModalHandler = () => {
+    setIsEditModalOpen(!isEditModalOpen);
+  };
+
+  const openDeleteModalHandler = () => {
+    setIsDeleteModalOpen(!isDeleteModalOpen);
   };
 
   const [editInfo, setEditInfo] = useState({
@@ -113,7 +119,7 @@ export default function Edit() {
         localStorage.setItem("userInfo", userdata);
         setEditInfo({ ...editInfo, nickname: "" });
         dispatch(setUserInfo(userdata));
-        openModalHandler();
+        openEditModalHandler();
       })
       .catch((err) => {
         console.log(err);
@@ -141,8 +147,7 @@ export default function Edit() {
           checkPW: "",
         });
         dispatch(setUserInfo(userdata));
-        openModalHandler();
-        openModalHandler();
+        openEditModalHandler();
       })
       .catch((err) => {
         console.log(err);
@@ -174,7 +179,9 @@ export default function Edit() {
       ...message,
       password:
         editInfo.password.length >= 8
-          ? isPassword(editInfo.password)
+          ? editInfo.oldpassword === editInfo.password
+            ? "현재 비밀번호와 같습니다"
+            : isPassword(editInfo.password)
             ? "사용할 수 있는 비밀번호 입니다"
             : "비밀번호는 숫자, 문자, 특수문자가 포함되어야합니다"
           : "비밀번호는 8자리 이상, 숫자, 문자, 특수문자가 포함되어야 합니다",
@@ -192,7 +199,9 @@ export default function Edit() {
         isNickname(editInfo.nickname) &&
         editInfo.nickname.length >= 2 &&
         editInfo.nickname.length < 8,
-      password: isPassword(editInfo.password),
+      password:
+        isPassword(editInfo.password) &&
+        editInfo.password !== editInfo.oldpassword,
       checkPW: editInfo.password === editInfo.checkPW,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -272,9 +281,14 @@ export default function Edit() {
       </div>
       <div className="btnContainer">
         <button onClick={() => history.push("/mypage")}>돌아가기</button>
+        <button onClick={openDeleteModalHandler}>탈퇴하기</button>
         <EditCompleteModal
-          isModalOpen={isModalOpen}
-          openModalHandler={openModalHandler}
+          isModalOpen={isEditModalOpen}
+          openModalHandler={openEditModalHandler}
+        />
+        <DeleteUserModal
+          isModalOpen={isDeleteModalOpen}
+          openModalHandler={openDeleteModalHandler}
         />
       </div>
     </div>
