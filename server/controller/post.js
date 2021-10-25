@@ -14,7 +14,7 @@ export async function searchPost(req, res) {
       post3[i].like = like[i]
       post3[i].img = img[i]
     }
-    res.status(200).send({data: post3})
+    return res.status(200).send({data: post3})
   } 
   else if(type && event && place) {
     const post = await postData.findByType(type)
@@ -27,7 +27,7 @@ export async function searchPost(req, res) {
       post3[i].like = like[i]
       post3[i].img = img[i]
     }
-    res.status(200).send({data: post3})
+    return res.status(200).send({data: post3})
   } 
   else if (hostId) {
     const user = await postData.validUser(hostId)
@@ -40,9 +40,9 @@ export async function searchPost(req, res) {
         post[i].like = like[i]
         post[i].img = img[i]
       }
-      res.status(200).send({data: post})
+      return res.status(200).send({data: post})
     } else {
-      res.status(404).send({message: '해당 포스트가 없습니다'})
+      return res.status(404).send({message: '해당 포스트가 없습니다'})
     }
   } 
   else if (guestId) {
@@ -56,9 +56,9 @@ export async function searchPost(req, res) {
         post[i].like = like[i]
         post[i].img = img[i]
       }
-      res.status(200).send({data: post})
+      return res.status(200).send({data: post})
     } else {
-      res.status(404).send({message: '해당 포스트가 없습니다'})
+      return res.status(404).send({message: '해당 포스트가 없습니다'})
     }
   }
   res.status(404).send({message: '해당 포스트가 없습니다'})
