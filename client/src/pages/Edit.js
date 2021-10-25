@@ -55,6 +55,7 @@ export default function Edit() {
   }
 
   const handleOnblurName = () => {
+    // 바꾸고 싶은 닉네임 적은다음에 칸 옮기면 서버에 중복확인해주는 요청
     const { nickname } = editInfo;
     if (!isNickname(nickname)) {
       setMessage({ ...message, nickname: "한글만 입력해주세요" });
@@ -129,7 +130,6 @@ export default function Edit() {
   const handleEditPW = () => {
     const { password } = editInfo;
     const oldToken = localStorage.getItem("token");
-
     axios
       .put(
         "http://localhost:8080/auth",

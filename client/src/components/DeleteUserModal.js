@@ -23,6 +23,7 @@ export default function DeleteUserModal({ isModalOpen, openModalHandler }) {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {
+        setInput("");
         localStorage.clear();
         dispatch(setLogout());
         dispatch(deleteUserInfo());
@@ -31,6 +32,11 @@ export default function DeleteUserModal({ isModalOpen, openModalHandler }) {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const handleCancle = () => {
+    openModalHandler();
+    setInput("");
   };
 
   const handleKeyPress = (e) => {
@@ -44,6 +50,8 @@ export default function DeleteUserModal({ isModalOpen, openModalHandler }) {
       setErrorMessage(
         "버튼을 클릭하시면 모든 데이터가 삭제되고 메인페이지로 이동합니다"
       );
+    } else {
+      setErrorMessage(`'동의합니다'를 입력해주세요`);
     }
   }, [input]);
   return (
@@ -62,7 +70,7 @@ export default function DeleteUserModal({ isModalOpen, openModalHandler }) {
             />
             <div>{errorMessage}</div>
             <div className="modal--btnContainer">
-              <button onClick={openModalHandler}>취소하기</button>
+              <button onClick={handleCancle}>취소하기</button>
               {input === "동의합니다" ? (
                 <button style={{ color: "green" }} onClick={handleDelete}>
                   탈퇴하기
