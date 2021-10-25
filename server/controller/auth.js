@@ -49,14 +49,12 @@ export async function signup(req, res) {
 
 export async function login(req, res) {
   const {email, password} = req.body;
-  console.log(email, password);
   const user = await userData.findByEmail(email);
   console.log(user);
   if (!user) {
     return res.status(400).json({message: '이메일이나 비밀번호가 틀립니다'});
   }
   const passwordCheck = await bcrypt.compare(password, user.password);
-  console.log(passwordCheck);
   if (!passwordCheck) {
     return res.status(400).json({message: '이메일이나 비밀번호가 틀립니다'});
   }
@@ -66,4 +64,13 @@ export async function login(req, res) {
     token,
     userdata: {email: user.email, nickname: user.nickname, img: user.img},
   });
+}
+
+export async function logout(req, res) {
+  const user = await userData.findById(req.userId);
+  if (user) {
+    res.status(200).json({message: '로그아웃 성공'});
+  } else {
+    res.status(401).json({message: '로그아웃 실패'});
+  }
 }
