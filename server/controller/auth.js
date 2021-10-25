@@ -1,13 +1,11 @@
 import 'express-async-errors';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-
 import * as userData from '../data/auth.js';
+import * as jwtFunc from '../middleware/jwt.js';
 
-// import '../env.js';
-// import {access_secret} from '../config.js';
-// console.log('ACCESS_SECRET :', process.env.ACCESS_SECRET);
-// console.log(access_secret);
+//.env
+const BCRYPT_SALT_ROUNDS = 12;
 
 export async function emailValidator(req, res) {
   const email = req.body.email;
@@ -29,7 +27,6 @@ export async function nicknameValidator(req, res) {
 
 export async function signup(req, res) {
   const {email, nickname, password, type} = req.body;
-  console.log(email, nickname, password, type);
   if (
     email === undefined ||
     nickname === undefined ||
@@ -48,4 +45,25 @@ export async function signup(req, res) {
     img: userImg[Math.floor(Math.random() * userImg.length)],
   });
   return res.status(201).json({userId});
+}
+
+export async function login(req, res) {
+  const {email, password} = req.body;
+  console.log(email, password);
+  const user = await userData.findByEmail(email);
+  console.log(user);
+  if (!user) {
+    return res.status(400).json({message: '이메일이나 비밀번호가 틀립니다'});
+  }
+  const passwordCheck = await bcrypt.compare(password, user.password);
+  console.log(passwordCheck);
+  if (!passwordCheck) {
+    return res.status(400).json({message: '이메일이나 비밀번호가 틀립니다'});
+  }
+  delete user.password;
+  const token = jwtFunc.createToken(user);
+  res.status(200).json({
+    token,
+    userdata: {email: user.email, nickname: user.nickname, img: user.img},
+  });
 }
