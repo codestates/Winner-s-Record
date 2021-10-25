@@ -1,7 +1,7 @@
 import 'express-async-errors';
 import * as rankData from '../data/rank.js';
 
-export async function searchRank(req, res) {
+export async function searchRank (req, res) {
   const {event, nickname} = req.query
 
   if (event) {

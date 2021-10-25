@@ -8,7 +8,7 @@ import * as entryData from '../data/entry.js';
 import * as boardData from '../data/board.js';
 import {config} from '../config.js';
 
-export async function searchPost(req, res) {
+export async function searchPost (req, res) {
   const {type, event, title, place, hostId, guestId} = req.query
 
   if(type && event && title) {

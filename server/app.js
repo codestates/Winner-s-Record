@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import authRouter from './router/auth.js';
 import postRouter from './router/post.js';
 import rankRouter from './router/rank.js';
+import likeRouter from './router/like.js';
 import {config} from './config.js';
 
 const app = express();
@@ -30,7 +31,7 @@ app.use('/post', postRouter);
 // app.use('/entry');
 // app.use('/match');
 // app.use('/record');
-// app.use('/like');
+app.use('/like', likeRouter);
 app.use('/rank', rankRouter);
 
 app.use((req, res, next) => {
