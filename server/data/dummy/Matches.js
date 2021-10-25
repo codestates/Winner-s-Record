@@ -71,6 +71,14 @@ const Matches = [
     loserId: 12,
     postId: 10,
   },
+  {
+    id: 10,
+    type: '매치',
+    event: '탁구',
+    winnerId: 7,
+    loserId: 8,
+    postId: 4,
+  },
 ];
 
 export default Matches;

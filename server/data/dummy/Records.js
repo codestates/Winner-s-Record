@@ -218,9 +218,9 @@ const Records = [
   {
     id: 28,
     event: '탁구',
-    win: 1,
+    win: 2,
     lose: 0,
-    point: 3,
+    point: 6,
     userId: 7,
   },
   {
@@ -251,8 +251,8 @@ const Records = [
     id: 32,
     event: '탁구',
     win: 0,
-    lose: 1,
-    point: 1,
+    lose: 2,
+    point: 2,
     userId: 8,
   },
   {

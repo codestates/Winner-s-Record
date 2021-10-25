@@ -4,6 +4,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import authRouter from './router/auth.js';
+import postRouter from './router/post.js';
 
 const app = express();
 const corsOptions = {
@@ -23,7 +24,7 @@ app.use('/wr', (req, res, next) => {
 });
 
 app.use('/auth', authRouter);
-// app.use('/post');
+app.use('/post', postRouter);
 // app.use('/entry');
 // app.use('/match');
 // app.use('/record');
