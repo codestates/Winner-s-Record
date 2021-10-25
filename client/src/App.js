@@ -4,6 +4,8 @@ import Signup from "./pages/Signup";
 import Mypage from "./pages/Mypage";
 import Landing from "./pages/Landing";
 import Edit from "./pages/Edit";
+import Error from "./pages/Error";
+import Main from "./pages/Main";
 
 // styles
 import "./reset.css";
@@ -17,6 +19,9 @@ function App() {
           <Route exact path="/">
             <Landing />
           </Route>
+          <Route path="/main">
+            <Main />
+          </Route>
           <Route path="/login">
             <Login />
           </Route>
@@ -28,6 +33,9 @@ function App() {
           </Route>
           <Route path="/mypage/edit">
             <Edit />
+          </Route>
+          <Route path="/">
+            <Error />
           </Route>
         </Switch>
       </Router>
