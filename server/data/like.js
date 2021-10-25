@@ -20,4 +20,3 @@ export async function findById(id) {
 export async function validId(id) {
   return Users.find((el) => el.id === parseInt(id))
 }
-

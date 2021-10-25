@@ -1,16 +1,20 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "../modules/userInfo";
 import EditCompleteModal from "../components/EditCompleteModal";
 import axios from "axios";
 
 export default function Edit() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModalHandler = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const history = useHistory();
   const [editInfo, setEditInfo] = useState({
     nickname: "",
     oldpassword: "",
@@ -68,11 +72,15 @@ export default function Edit() {
 
   const handleOnblurPassword = () => {
     const { oldpassword } = editInfo;
+    if (!isPassword(oldpassword)) {
+      setMessage({ ...message, oldpassword: "현재 비밀번호를 확인해주세요" });
+      return;
+    }
     const token = localStorage.getItem("token");
     axios
       .post(
         "http://localhost:8080/auth/password",
-        { oldpassword },
+        { password: oldpassword },
         { headers: { authorization: `Bearer ${token}` } }
       )
       .then((res) => {
@@ -81,7 +89,7 @@ export default function Edit() {
       })
       .catch((err) => {
         setValidation({ ...validation, oldpassword: false });
-        setMessage({ ...message, oldpassword: "비밀번호를 확인해주세요" });
+        setMessage({ ...message, oldpassword: "현재 비밀번호를 확인해주세요" });
       });
   };
 
@@ -91,14 +99,20 @@ export default function Edit() {
 
   const handleEditName = () => {
     const { nickname } = editInfo;
-    const token = localStorage.getItem("token");
+    const oldToken = localStorage.getItem("token");
     axios
       .put(
         "http://localhost:8080/auth",
-        { nickname },
-        { headers: { authorization: `Bearer ${token}` } }
+        { nickname, password: null },
+        { headers: { authorization: `Bearer ${oldToken}` } }
       )
       .then((res) => {
+        const { token, userdata } = res.data;
+        localStorage.removeItem("token", oldToken);
+        localStorage.setItem("token", token);
+        localStorage.setItem("userInfo", userdata);
+        setEditInfo({ ...editInfo, nickname: "" });
+        dispatch(setUserInfo(userdata));
         openModalHandler();
       })
       .catch((err) => {
@@ -108,14 +122,26 @@ export default function Edit() {
 
   const handleEditPW = () => {
     const { password } = editInfo;
-    const token = localStorage.getItem("token");
+    const oldToken = localStorage.getItem("token");
+
     axios
       .put(
         "http://localhost:8080/auth",
-        { password },
-        { headers: { authorization: `Bearer ${token}` } }
+        { nickname: null, password },
+        { headers: { authorization: `Bearer ${oldToken}` } }
       )
       .then((res) => {
+        const { token, userdata } = res.data;
+        localStorage.removeItem("token", oldToken);
+        localStorage.setItem("token", token);
+        setEditInfo({
+          ...editInfo,
+          oldpassword: "",
+          password: "",
+          checkPW: "",
+        });
+        dispatch(setUserInfo(userdata));
+        openModalHandler();
         openModalHandler();
       })
       .catch((err) => {
@@ -181,6 +207,7 @@ export default function Edit() {
             onBlur={handleOnblurName}
             onChange={handleInputValue("nickname")}
             onKeyPress={handleKeyPress}
+            value={editInfo.nickname}
           />
           {message.nickname === "한글만 입력해주세요" ? (
             <div>{message.nickname}</div>
@@ -202,6 +229,7 @@ export default function Edit() {
             onBlur={handleOnblurPassword}
             onChange={handleInputValue("oldpassword")}
             onKeyPress={handleKeyPress}
+            value={editInfo.oldpassword}
           />
           <div>{message.oldpassword}</div>
           <input
@@ -209,6 +237,7 @@ export default function Edit() {
             placeholder="새 비밀번호"
             onChange={handleInputValue("password")}
             onKeyPress={handleKeyPress}
+            value={editInfo.password}
           />
           {message.password ===
           "비밀번호는 8자리 이상, 숫자, 문자, 특수문자가 포함되어야 합니다" ? (
@@ -223,6 +252,7 @@ export default function Edit() {
             placeholder="새 비밀번호 확인"
             onChange={handleInputValue("checkPW")}
             onKeyPress={handleKeyPress}
+            value={editInfo.checkPW}
           />
           {message.checkPW === "비밀번호가 불일치합니다" ? (
             <div>{message.checkPW}</div>
