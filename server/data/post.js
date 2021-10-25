@@ -66,3 +66,12 @@ export async function validUser(id) {
 export async function findById(id) {
   return Posts.find((post) => post.id === id);
 }
+
+export async function validEvent(event) {
+  return (event === 'all' || event === 'tennis' || event === 'pingpong' || event === 'squash' || event === 'badminton')
+}
+
+export async function validType(type) {
+  return (type === 'all' || type === 'trade' || type === 'match' || type === 'tounarment')
+}
+

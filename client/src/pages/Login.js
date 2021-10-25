@@ -1,9 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "../modules/userInfo";
+import { setLogin } from "../modules/isLogin";
 
 export default function Login() {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -21,16 +25,15 @@ export default function Login() {
         { withCredentials: true }
       )
       .then((res) => {
-        // const { userId, userName, accessToken } = res.data.data;
-        // localStorage.setItem("token", accessToken);
-        // localStorage.setItem("userId", userId);
-        // localStorage.setItem("userName", userName);
-        // const token = localStorage.getItem("token");
-        // if (token) {
-        //   // dispatch(login());
-        //   // dispatch(setUserInfo({ token, userId, userName }));
-        //   history.push("/main");
-        // }
+        const { token, userdata } = res.data;
+        localStorage.setItem("token", token);
+        localStorage.setItem("userInfo", userdata);
+        const accessToken = localStorage.getItem("token");
+        if (accessToken) {
+          dispatch(setLogin()); // 로그인 상태 변경
+          dispatch(setUserInfo(userdata)); // 유저 정보 입력
+          history.push("/main");
+        }
       })
       .catch((err) => {
         setErrorMessage("이메일 또는 비밀번호를 확인해주세요");
