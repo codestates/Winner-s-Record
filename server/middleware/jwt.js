@@ -1,11 +1,11 @@
 import jwt from 'jsonwebtoken';
 import * as userData from '../data/auth.js';
-
-//.env
-const ACCESS_SECRET = 'abcd';
+import {config} from '../config.js';
 
 export const createToken = (userData) => {
-  return jwt.sign(userData, ACCESS_SECRET, {expiresIn: '1d'});
+  return jwt.sign(userData, String(config.jwt.secretKey), {
+    expiresIn: Number(config.jwt.expiresInSec),
+  });
 };
 
 export const jwtValidator = async (req, res, next) => {
@@ -16,7 +16,7 @@ export const jwtValidator = async (req, res, next) => {
   }
 
   const token = authorization.split(' ')[1];
-  jwt.verify(token, ACCESS_SECRET, async (error, data) => {
+  jwt.verify(token, String(config.jwt.secretKey), async (error, data) => {
     if (error) {
       return res.status(403).json({message: '권한이 없습니다'});
     }

@@ -1,11 +1,8 @@
 import 'express-async-errors';
-import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import * as userData from '../data/auth.js';
 import * as jwtFunc from '../middleware/jwt.js';
-
-//.env
-const BCRYPT_SALT_ROUNDS = 12;
+import {config} from '../config.js';
 
 export async function emailValidator(req, res) {
   const email = req.body.email;
@@ -36,7 +33,10 @@ export async function signup(req, res) {
     return res.status(400).json({message: '회원가입 실패'});
   }
   const userImg = [1, 2, 3, 4, 5, 6, 7, 8];
-  const hashedPassword = await bcrypt.hash(password, BCRYPT_SALT_ROUNDS);
+  const hashedPassword = await bcrypt.hash(
+    password,
+    Number(config.bcrypt.saltRounds)
+  );
   const userId = await userData.createUser({
     email,
     password: hashedPassword,
