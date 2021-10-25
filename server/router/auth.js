@@ -13,5 +13,6 @@ router.post('/logout', jwtValidator, authController.logout);
 router.post('/password', jwtValidator, authController.passwordValidator);
 router.put('/', jwtValidator, authController.edit);
 router.put('/img', jwtValidator, authController.editImg);
+router.delete('/', jwtValidator, authController.remove);
 
 export default router;

@@ -163,3 +163,12 @@ export async function editImg(req, res) {
     },
   });
 }
+
+export async function remove(req, res) {
+  const userId = req.userId;
+  if (!userId) {
+    return res.status(400).json({message: '회원탈퇴 실패'});
+  }
+  userData.remove(userId);
+  return res.sendStatus(204);
+}

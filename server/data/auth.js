@@ -53,3 +53,6 @@ export async function editImg(id, img) {
     return user;
   }
 }
+export async function remove(id) {
+  return Users.filter((user) => user.id !== id);
+}
