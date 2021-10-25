@@ -10,7 +10,6 @@ export const createToken = (userData) => {
 
 export const jwtValidator = async (req, res, next) => {
   const authorization = req.headers.authorization;
-  console.log(authorization);
   if (!(authorization && authorization.startsWith('Bearer '))) {
     return res.status(403).json({message: '권한이 없습니다'});
   }
