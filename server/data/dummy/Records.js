@@ -1,7 +1,7 @@
 const Records = [
   {
     id: 1,
-    event: '테니스',
+    event: 'tennis',
     win: 1,
     lose: 0,
     point: 3,
@@ -9,7 +9,7 @@ const Records = [
   },
   {
     id: 2,
-    event: '베드민턴',
+    event: 'badminton',
     win: 0,
     lose: 0,
     point: 0,
@@ -17,7 +17,7 @@ const Records = [
   },
   {
     id: 3,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -25,7 +25,7 @@ const Records = [
   },
   {
     id: 4,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 0,
     point: 0,
@@ -33,7 +33,7 @@ const Records = [
   },
   {
     id: 5,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 1,
     point: 1,
@@ -41,7 +41,7 @@ const Records = [
   },
   {
     id: 6,
-    event: '베드민턴',
+    event: 'badminton',
     win: 0,
     lose: 0,
     point: 0,
@@ -49,7 +49,7 @@ const Records = [
   },
   {
     id: 7,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -57,7 +57,7 @@ const Records = [
   },
   {
     id: 8,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 0,
     point: 0,
@@ -65,7 +65,7 @@ const Records = [
   },
   {
     id: 9,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 0,
     point: 0,
@@ -73,7 +73,7 @@ const Records = [
   },
   {
     id: 10,
-    event: '베드민턴',
+    event: 'badminton',
     win: 0,
     lose: 0,
     point: 0,
@@ -81,7 +81,7 @@ const Records = [
   },
   {
     id: 11,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -89,7 +89,7 @@ const Records = [
   },
   {
     id: 12,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 0,
     point: 0,
@@ -97,7 +97,7 @@ const Records = [
   },
   {
     id: 13,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 0,
     point: 0,
@@ -105,7 +105,7 @@ const Records = [
   },
   {
     id: 14,
-    event: '베드민턴',
+    event: 'badminton',
     win: 0,
     lose: 0,
     point: 0,
@@ -113,7 +113,7 @@ const Records = [
   },
   {
     id: 15,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -121,7 +121,7 @@ const Records = [
   },
   {
     id: 16,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 0,
     point: 0,
@@ -129,7 +129,7 @@ const Records = [
   },
   {
     id: 17,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 0,
     point: 0,
@@ -137,7 +137,7 @@ const Records = [
   },
   {
     id: 18,
-    event: '베드민턴',
+    event: 'badminton',
     win: 0,
     lose: 0,
     point: 0,
@@ -145,7 +145,7 @@ const Records = [
   },
   {
     id: 19,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -153,7 +153,7 @@ const Records = [
   },
   {
     id: 20,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 0,
     point: 0,
@@ -161,7 +161,7 @@ const Records = [
   },
   {
     id: 21,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 0,
     point: 0,
@@ -169,15 +169,15 @@ const Records = [
   },
   {
     id: 22,
-    event: '베드민턴',
+    event: 'badminton',
     win: 0,
-    lose: 01,
+    lose: 1,
     point: 0,
     userId: 6,
   },
   {
     id: 23,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -185,7 +185,7 @@ const Records = [
   },
   {
     id: 24,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 0,
     point: 0,
@@ -193,7 +193,7 @@ const Records = [
   },
   {
     id: 25,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 0,
     point: 0,
@@ -201,7 +201,7 @@ const Records = [
   },
   {
     id: 26,
-    event: '베드민턴',
+    event: 'badminton',
     win: 0,
     lose: 0,
     point: 0,
@@ -209,7 +209,7 @@ const Records = [
   },
   {
     id: 27,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -217,7 +217,7 @@ const Records = [
   },
   {
     id: 28,
-    event: '탁구',
+    event: 'pingpong',
     win: 2,
     lose: 0,
     point: 6,
@@ -225,7 +225,7 @@ const Records = [
   },
   {
     id: 29,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 0,
     point: 0,
@@ -233,7 +233,7 @@ const Records = [
   },
   {
     id: 30,
-    event: '베드민턴',
+    event: 'badminton',
     win: 0,
     lose: 0,
     point: 0,
@@ -241,7 +241,7 @@ const Records = [
   },
   {
     id: 31,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -249,7 +249,7 @@ const Records = [
   },
   {
     id: 32,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 2,
     point: 2,
@@ -257,7 +257,7 @@ const Records = [
   },
   {
     id: 33,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 0,
     point: 0,
@@ -265,7 +265,7 @@ const Records = [
   },
   {
     id: 34,
-    event: '베드민턴',
+    event: 'badminton',
     win: 0,
     lose: 0,
     point: 0,
@@ -273,7 +273,7 @@ const Records = [
   },
   {
     id: 35,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -281,7 +281,7 @@ const Records = [
   },
   {
     id: 36,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 0,
     point: 0,
@@ -289,7 +289,7 @@ const Records = [
   },
   {
     id: 37,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 0,
     point: 0,
@@ -297,7 +297,7 @@ const Records = [
   },
   {
     id: 38,
-    event: '베드민턴',
+    event: 'badminton',
     win: 3,
     lose: 0,
     point: 9,
@@ -305,7 +305,7 @@ const Records = [
   },
   {
     id: 39,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -313,7 +313,7 @@ const Records = [
   },
   {
     id: 40,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 0,
     point: 0,
@@ -321,7 +321,7 @@ const Records = [
   },
   {
     id: 41,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 0,
     point: 0,
@@ -329,7 +329,7 @@ const Records = [
   },
   {
     id: 42,
-    event: '베드민턴',
+    event: 'badminton',
     win: 1,
     lose: 1,
     point: 4,
@@ -337,7 +337,7 @@ const Records = [
   },
   {
     id: 43,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -345,7 +345,7 @@ const Records = [
   },
   {
     id: 44,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 0,
     point: 0,
@@ -353,7 +353,7 @@ const Records = [
   },
   {
     id: 45,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 0,
     point: 0,
@@ -361,7 +361,7 @@ const Records = [
   },
   {
     id: 46,
-    event: '베드민턴',
+    event: 'badminton',
     win: 2,
     lose: 1,
     point: 7,
@@ -369,7 +369,7 @@ const Records = [
   },
   {
     id: 47,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -377,7 +377,7 @@ const Records = [
   },
   {
     id: 48,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 0,
     point: 0,
@@ -385,7 +385,7 @@ const Records = [
   },
   {
     id: 49,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 0,
     point: 0,
@@ -393,7 +393,7 @@ const Records = [
   },
   {
     id: 50,
-    event: '베드민턴',
+    event: 'badminton',
     win: 1,
     lose: 1,
     point: 4,
@@ -401,7 +401,7 @@ const Records = [
   },
   {
     id: 51,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -409,7 +409,7 @@ const Records = [
   },
   {
     id: 52,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 0,
     point: 0,
@@ -417,7 +417,7 @@ const Records = [
   },
   {
     id: 53,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 0,
     point: 0,
@@ -425,7 +425,7 @@ const Records = [
   },
   {
     id: 54,
-    event: '베드민턴',
+    event: 'badminton',
     win: 0,
     lose: 1,
     point: 1,
@@ -433,7 +433,7 @@ const Records = [
   },
   {
     id: 55,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -441,7 +441,7 @@ const Records = [
   },
   {
     id: 56,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 0,
     point: 0,
@@ -449,7 +449,7 @@ const Records = [
   },
   {
     id: 57,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 0,
     point: 0,
@@ -457,7 +457,7 @@ const Records = [
   },
   {
     id: 58,
-    event: '베드민턴',
+    event: 'badminton',
     win: 0,
     lose: 1,
     point: 1,
@@ -465,7 +465,7 @@ const Records = [
   },
   {
     id: 59,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -473,7 +473,7 @@ const Records = [
   },
   {
     id: 60,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 0,
     point: 0,
@@ -481,7 +481,7 @@ const Records = [
   },
   {
     id: 61,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 0,
     point: 0,
@@ -489,7 +489,7 @@ const Records = [
   },
   {
     id: 62,
-    event: '베드민턴',
+    event: 'badminton',
     win: 0,
     lose: 1,
     point: 1,
@@ -497,7 +497,7 @@ const Records = [
   },
   {
     id: 63,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -505,7 +505,7 @@ const Records = [
   },
   {
     id: 64,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 0,
     point: 0,
@@ -513,7 +513,7 @@ const Records = [
   },
   {
     id: 65,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 0,
     point: 0,
@@ -521,7 +521,7 @@ const Records = [
   },
   {
     id: 66,
-    event: '베드민턴',
+    event: 'badminton',
     win: 0,
     lose: 0,
     point: 0,
@@ -529,7 +529,7 @@ const Records = [
   },
   {
     id: 67,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -537,7 +537,7 @@ const Records = [
   },
   {
     id: 68,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 0,
     point: 0,
@@ -545,7 +545,7 @@ const Records = [
   },
   {
     id: 69,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 0,
     point: 0,
@@ -553,7 +553,7 @@ const Records = [
   },
   {
     id: 70,
-    event: '베드민턴',
+    event: 'badminton',
     win: 0,
     lose: 0,
     point: 0,
@@ -561,7 +561,7 @@ const Records = [
   },
   {
     id: 71,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -569,7 +569,7 @@ const Records = [
   },
   {
     id: 72,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 0,
     point: 0,
@@ -577,7 +577,7 @@ const Records = [
   },
   {
     id: 73,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 0,
     point: 0,
@@ -585,7 +585,7 @@ const Records = [
   },
   {
     id: 74,
-    event: '베드민턴',
+    event: 'badminton',
     win: 0,
     lose: 1,
     point: 1,
@@ -593,7 +593,7 @@ const Records = [
   },
   {
     id: 75,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -601,7 +601,7 @@ const Records = [
   },
   {
     id: 76,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 0,
     point: 0,
@@ -609,7 +609,7 @@ const Records = [
   },
   {
     id: 77,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 0,
     point: 0,
@@ -617,7 +617,7 @@ const Records = [
   },
   {
     id: 78,
-    event: '베드민턴',
+    event: 'badminton',
     win: 0,
     lose: 0,
     point: 0,
@@ -625,7 +625,7 @@ const Records = [
   },
   {
     id: 79,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -633,7 +633,7 @@ const Records = [
   },
   {
     id: 80,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 0,
     point: 0,
@@ -641,7 +641,7 @@ const Records = [
   },
   {
     id: 81,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 0,
     point: 0,
@@ -649,7 +649,7 @@ const Records = [
   },
   {
     id: 82,
-    event: '베드민턴',
+    event: 'badminton',
     win: 0,
     lose: 0,
     point: 0,
@@ -657,7 +657,7 @@ const Records = [
   },
   {
     id: 83,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -665,7 +665,7 @@ const Records = [
   },
   {
     id: 84,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 0,
     point: 0,
@@ -673,7 +673,7 @@ const Records = [
   },
   {
     id: 85,
-    event: '테니스',
+    event: 'tennis',
     win: 0,
     lose: 0,
     point: 0,
@@ -681,7 +681,7 @@ const Records = [
   },
   {
     id: 86,
-    event: '베드민턴',
+    event: 'badminton',
     win: 0,
     lose: 0,
     point: 0,
@@ -689,7 +689,7 @@ const Records = [
   },
   {
     id: 87,
-    event: '스쿼시',
+    event: 'squash',
     win: 0,
     lose: 0,
     point: 0,
@@ -697,7 +697,7 @@ const Records = [
   },
   {
     id: 88,
-    event: '탁구',
+    event: 'pingpong',
     win: 0,
     lose: 0,
     point: 0,
