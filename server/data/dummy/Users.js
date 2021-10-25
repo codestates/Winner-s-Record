@@ -183,6 +183,14 @@ const Users = [
     type: 'web',
     img: 4,
   },
+  {
+    id: 24,
+    email: 't@t.com',
+    password: '$2b$12$NL6ys2Vw.ZxTeTYeYuXbhOLsOCQceNFYG8PjYOmopP05XtplMILOS',
+    nickname: '테스트',
+    type: 'web',
+    img: 3,
+  },
 ];
 
 export default Users;
