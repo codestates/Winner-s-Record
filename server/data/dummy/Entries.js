@@ -131,6 +131,18 @@ const Entries = [
     postId: 10,
     userId: 16,
   },
+  {
+    id: 23,
+    status: '호스트', 
+    postId: 11,
+    userId: 7,
+  },
+  {
+    id: 24,
+    status: '확정', 
+    postId: 11,
+    userId: 8,
+  },
 ];
 
 export default Entries;
