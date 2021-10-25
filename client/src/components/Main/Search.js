@@ -6,15 +6,15 @@ import GameSelector from "./GameSelector";
 import OptionSelector from "./OptionSelector";
 import SearchBar from "./SearchBar";
 
-const Search = () => {
+const Search = ({ setPostList }) => {
   const [game, setGame] = useState("all");
   const [option, setOption] = useState("title");
   const [input, setInput] = useState("all");
   const [postType, setPostType] = useState("all");
 
   useEffect(() => {
-    console.log(postType);
-  }, [postType]);
+    searchHandler();
+  }, []);
 
   const searchHandler = () => {
     if (!input) {
@@ -25,7 +25,16 @@ const Search = () => {
         `http://localhost:8080/post?type=${postType}&event=${game}&${option}=${input}`
       )
       .then((res) => {
-        console.log(res);
+        const sorted = res.data.data.sort((a, b) => {
+          if (a.status === "대기" && b.status !== "대기") {
+            return -1;
+          } else if (a.status !== "대기" && b.status === "대기") {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+        setPostList(sorted);
       });
   };
 

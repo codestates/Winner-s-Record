@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = localStorage.getItem("userInfo") || {
-  id: null,
+  userId: null,
   type: null,
   email: null,
   nickname: null,
-  password: null,
   img: null,
 };
 
