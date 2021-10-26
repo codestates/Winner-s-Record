@@ -76,7 +76,7 @@ const Post = () => {
 
       <div className="post--text">{text}</div>
       <div className="post--map">
-        <PostMap />
+        <PostMap place={place} />
       </div>
       <div className="post--btns">
         <PostPrimaryButton userId={userData.userId} type={type} />
