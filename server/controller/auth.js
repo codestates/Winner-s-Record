@@ -89,6 +89,10 @@ export async function login(req, res) {
   });
 }
 
+export async function kakaoLogin(req, res) {
+  const token = req.headers.token;
+}
+
 export async function logout(req, res) {
   const user = await userData.findById(req.userId);
   if (user) {
