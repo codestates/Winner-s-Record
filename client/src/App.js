@@ -38,7 +38,7 @@ function App() {
           <Route path="/signup">
             <Signup />
           </Route>
-          <Route exact path="/mypage">
+          <Route path={"/profile/:userId"}>
             <Mypage />
           </Route>
           <Route path="/mypage/edit">
