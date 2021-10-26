@@ -88,8 +88,12 @@ export async function getOne(req, res) {
     userId = 'guest';
   } else {
     const token = authorization.split(' ')[1];
-    const user = await jwt.verify(token, String(config.jwt.secretKey));
-    userId = user.id;
+    if (token === null) {
+      userId = 'guest';
+    } else {
+      const user = await jwt.verify(token, String(config.jwt.secretKey));
+      userId = user.id;
+    }
   }
   const postId = parseInt(req.params.postId);
 
