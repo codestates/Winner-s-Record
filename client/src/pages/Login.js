@@ -40,6 +40,17 @@ export default function Login() {
       });
   };
 
+  const handleKakao = () => {
+    axios
+      .get("http://localhost:8080/auth/kakao/login")
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const handleKeyPress = (e) => {
     if (e.type === "keypress" && e.code === "Enter" && isValid) {
       handleLogin();
@@ -77,7 +88,7 @@ export default function Login() {
         <button onClick={() => history.push("/signup")}>회원가입</button>
       </div>
       <div className="login--socialContainer">
-        <button>카카오</button>
+        <button onClick={handleKakao}>카카오</button>
         <button>네이버</button>
         <button>구글</button>
       </div>
