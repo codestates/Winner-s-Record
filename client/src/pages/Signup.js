@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import SignupCompleteModal from "../components/SignupCompleteModal";
+import SignupCompleteModal from "../components/Signup/SignupCompleteModal";
 import axios from "axios";
 
 export default function Signup() {
@@ -156,6 +156,15 @@ export default function Signup() {
 
   return (
     <div>
+      <div>
+        <div
+          onClick={() => {
+            history.replace("/main");
+          }}
+        >
+          로고
+        </div>
+      </div>
       <div className="inputContainer">
         <input
           type="email"
@@ -210,7 +219,6 @@ export default function Signup() {
         )}
       </div>
       <div className="btnContainer">
-        <button onClick={() => history.push("/main")}>돌아가기</button>
         {isValid ? (
           <button
             style={{ color: "green" }}

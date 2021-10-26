@@ -26,6 +26,7 @@ export default function Login() {
       )
       .then((res) => {
         const { token, userdata } = res.data;
+        console.log(res.data.userdata);
         localStorage.setItem("token", token);
         localStorage.setItem("userInfo", userdata);
         const accessToken = localStorage.getItem("token");
@@ -37,6 +38,39 @@ export default function Login() {
       })
       .catch((err) => {
         setErrorMessage("이메일 또는 비밀번호를 확인해주세요");
+      });
+  };
+
+  const handleKakao = () => {
+    axios
+      .get("http://localhost:8080/auth/kakao/login")
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleNaver = () => {
+    axios
+      .get("http://localhost:8080/auth/naver/login")
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleGoogle = () => {
+    axios
+      .get("http://localhost:8080/auth/google/login")
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -77,9 +111,9 @@ export default function Login() {
         <button onClick={() => history.push("/signup")}>회원가입</button>
       </div>
       <div className="login--socialContainer">
-        <button>카카오</button>
-        <button>네이버</button>
-        <button>구글</button>
+        <button onClick={handleKakao}>카카오</button>
+        <button onClick={handleNaver}>네이버</button>
+        <button onClick={handleGoogle}>구글</button>
       </div>
       <div className="login--copyright">
         © Copyright 2021 Team MeltingBrain. All rights reserved.

@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "../modules/userInfo";
-import DeleteUserModal from "../components/DeleteUserModal";
-import EditCompleteModal from "../components/EditCompleteModal";
+import EditCompleteModal from "../components/Mypage/EditCompleteModal";
+import DeleteUserModal from "../components/Mypage/DeleteUserModal";
 import axios from "axios";
 
 export default function Edit() {

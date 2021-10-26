@@ -1,8 +1,8 @@
 import { useHistory } from "react-router";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setLogout } from "../modules/isLogin";
-import { deleteUserInfo } from "../modules/userInfo";
+import { setLogout } from "../../modules/isLogin";
+import { deleteUserInfo } from "../../modules/userInfo";
 import axios from "axios";
 
 export default function DeleteUserModal({ isModalOpen, openModalHandler }) {

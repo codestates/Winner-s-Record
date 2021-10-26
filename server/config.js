@@ -12,4 +12,9 @@ export const config = {
   host: {
     port: process.env.HOST_PORT,
   },
+  kakao: {
+    clientId: process.env.KAKAO_CLIENT_ID,
+    clientSecret: process.env.KAKAO_CLIENT_SECRET,
+    redirectUrl: process.env.KAKAO_REDIRECTURI,
+  },
 };

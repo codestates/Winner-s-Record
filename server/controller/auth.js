@@ -1,4 +1,5 @@
 import 'express-async-errors';
+import axios from 'axios';
 import bcrypt from 'bcrypt';
 import * as userData from '../data/auth.js';
 import * as imgData from '../data/img.js';
@@ -90,7 +91,39 @@ export async function login(req, res) {
 }
 
 export async function kakaoLogin(req, res) {
-  const token = req.headers.token;
+  console.log('카카오로그인 요청');
+  // 로그인 버튼
+  //`https://kauth.kakao.com/oauth/authorize?client_id=${config.kakao.clientId}&redirect_uri=${config.kakao.redirectUrl}&&response_type=code`
+  return res.redirect(
+    `https://kauth.kakao.com/oauth/authorize?client_id=42184b4ebbf71c527914d5cf6269aae0&redirect_uri=http://localhost:8080/auth/kakao/callback&&response_type=code`
+  );
+}
+
+export async function kakaoCallback(req, res) {
+  const code = req.query.code;
+  console.log('코드 : ', code);
+  try {
+    const result = await axios.post(
+      `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${config.kakao.clientId}&redirect_uri=${config.kakao.redirectUrl}callback&code=${code}`
+    );
+    const userInfo = await axios.get(`https://kapi.kakao.com/v2/user/me`, {
+      headers: {
+        Authorization: `Bearer ${result.data.access_token}`,
+      },
+    });
+    console.log(userInfo.data.id);
+    res.send(
+      '이제 받은 유저정보 유저테이블에 해당 id가 없으면 해당 id로 유저테이블에 유저생성, 쿠키주기, 있으면 있는걸로 꺼내서 쿠키주기'
+    );
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({message: '서버에러'});
+  }
+}
+
+export async function kakaoUserinfo(req, res) {
+  console.log(req.user);
+  res.status(200).send(req.user);
 }
 
 export async function logout(req, res) {

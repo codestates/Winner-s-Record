@@ -129,10 +129,10 @@ const Users = [
   },
   {
     id: 17,
-    type: 'social',
+    type: 'web',
     email: 'e@kakao.com',
     nickname: '티아라',
-    password: '$2b$12$w0Avc/lzr3A2gTW48MEVYetfsP/Q1wAt8OUNXgsLKLTzw..RMw0KG',
+    password: '$2b$12$NL6ys2Vw.ZxTeTYeYuXbhOLsOCQceNFYG8PjYOmopP05XtplMILOS',
     img: 1,
   },
   {

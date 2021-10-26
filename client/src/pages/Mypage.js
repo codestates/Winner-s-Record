@@ -1,18 +1,23 @@
+import { useState } from "react";
 import { useHistory } from "react-router";
 
 export default function Mypage() {
+  const [userInfo, setUserInfo] = useState({
+    nickname: "",
+    image: "",
+  });
   const history = useHistory();
 
   return (
     <div>
       <div className="mypage--profilecontainer">
         <div className="mypage--photo">사진</div>
-        <span className="mypage--username">이름</span>
+        <span className="mypage--username">{userInfo.nickname}</span>
         <span
           className="mypage--edit"
           onClick={() => history.push("/mypage/edit")}
         >
-          수정
+          수정아이콘
         </span>
       </div>
       <div className="mypage--rankingcontainer">
