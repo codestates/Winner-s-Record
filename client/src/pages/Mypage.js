@@ -1,34 +1,75 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "../modules/userInfo";
+import { setLogin } from "../modules/isLogin";
 import PostList from "../components/Main/PostList";
+import axios from "axios";
 
 export default function Mypage() {
+  const { userId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-  const [userInfo, setUserInfo] = useState({
-    userId: "",
-    nickname: "",
-    image: "",
-  });
-
-  const [list, setList] = useState([]);
+  const userInfo = useSelector((state) => state.userInfoReducer);
+  const dispatch = useDispatch();
   const history = useHistory();
+  const isValid = userId === userInfo.userId;
+  const [list, setList] = useState([]);
 
   const handleCreatedList = () => {
-    axios.get("endpoint/post?hostId=userId");
+    axios
+      .get(`http://localhost:8080/post?hostId=${userId}`)
+      .then((res) => {
+        console.log(res.data);
+        setList(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleLikeList = () => {
-    axios.get();
+    axios
+      .get(`http://localhost:8080/like/${userId}`)
+      .then((res) => {
+        console.log(res.data);
+        setList(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
-  const handleProgressList = () => {};
+  const handleProgressList = () => {
+    axios
+      .get(`http://localhost:8080/post?guestId=${userId}`)
+      .then((res) => {
+        console.log(res.data);
+        setList(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-    } else {
+      axios
+        .get("http://localhost:8080/auth/", {
+          headers: { authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          const { userdata } = res.data;
+          dispatch(setLogin()); // 로그인 상태 변경
+          dispatch(setUserInfo(userdata)); // 유저 정보 입력
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
+    handleCreatedList();
+    setIsLoading(false);
   }, []);
 
   return (
@@ -38,12 +79,14 @@ export default function Mypage() {
           <div className="mypage--profilecontainer">
             <div className="mypage--photo">사진</div>
             <span className="mypage--username">{userInfo.nickname}</span>
-            <span
-              className="mypage--edit"
-              onClick={() => history.push("/mypage/edit")}
-            >
-              수정아이콘
-            </span>
+            {isValid ? (
+              <span
+                className="mypage--edit"
+                onClick={() => history.push("/mypage/edit")}
+              >
+                수정아이콘
+              </span>
+            ) : null}
           </div>
           <div className="mypage--rankingcontainer">
             <div className="mypage--rankingtap">
