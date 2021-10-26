@@ -6,7 +6,6 @@ const initialState = localStorage.getItem("userInfo") || {
   email: null,
   nickname: null,
   img: null,
-  token: null,
 };
 
 const userInfoSlice = createSlice({
