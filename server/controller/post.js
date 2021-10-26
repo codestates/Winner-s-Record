@@ -82,7 +82,7 @@ export async function searchPost(req, res) {
 }
 
 export async function getOne(req, res) {
-  const authorization = req.headers.authorization;
+  const authorization = req.headers.Authorization;
   let userId;
   if (!authorization) {
     userId = 'guest';
