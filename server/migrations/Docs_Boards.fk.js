@@ -18,7 +18,7 @@ module.exports = {
       type: 'foreign key',
       name: 'Docs_Boards.boardId-fk',
       references: {
-        table: 'Docs',
+        table: 'Boards',
         field: 'id',
       },
       onDelete: 'cascade',
