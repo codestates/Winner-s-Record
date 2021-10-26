@@ -8,12 +8,10 @@ import PostPrimaryButton from "../components/Post/PostPrimaryButton";
 import LikeButton from "../components/Post/LikeButton";
 import PostModal from "../components/Post/PostModal";
 import NeedLoginModal from "../components/NeedLoginModal";
-import { useSelector } from "react-redux";
 import PostMap from "../components/Post/PostMap";
 
 const Post = () => {
   const { postId } = useParams();
-  const userInfo = useSelector((state) => state.userInfoReducer);
   const [postInfo, setPostInfo] = useState({
     userData: {
       userId: null,

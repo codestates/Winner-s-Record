@@ -12,6 +12,7 @@ import Post from "./pages/Post";
 // styles
 import "./reset.css";
 import "./styles/main.scss";
+import Entry from "./pages/Entry";
 
 function App() {
   return (
@@ -21,8 +22,11 @@ function App() {
           <Route exact path="/">
             <Landing />
           </Route>
-          <Route path="/post/:postId">
+          <Route exact path="/post/:postId">
             <Post />
+          </Route>
+          <Route path="/post/:postId/entry">
+            <Entry />
           </Route>
           <Route path="/main">
             <Main />

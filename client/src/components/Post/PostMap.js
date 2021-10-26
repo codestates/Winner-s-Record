@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import DaumPostcode from "react-daum-postcode";
 
 const { kakao } = window;
 
@@ -8,7 +7,6 @@ const PostMap = ({
 }) => {
   // place => {x, y, place}
   const container = useRef(null);
-  const addr = useRef(null);
 
   useEffect(() => {
     const location = new kakao.maps.LatLng(place.y, place.x);

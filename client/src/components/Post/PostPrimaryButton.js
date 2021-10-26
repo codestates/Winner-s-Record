@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const TradeButton = ({ userId }) => {
-  const userLoggedIn = useSelector((state) => state.userInfoReducer);
+  const userLoggedIn = useSelector((state) => state.userInfo);
 
   const changeStatus = () => {
     // 아시오스 요청 보내기

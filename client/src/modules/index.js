@@ -1,11 +1,13 @@
 import { combineReducers } from "redux";
 
-import loginReducer from "./isLogin";
-import userInfoReducer from "./userInfo";
+import isLogin from "./isLogin";
+import userInfo from "./userInfo";
+import prevPage from "./prevPage";
 
 const rootReducer = combineReducers({
-  loginReducer,
-  userInfoReducer,
+  isLogin,
+  userInfo,
+  prevPage,
 });
 
 export default rootReducer;

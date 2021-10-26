@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 
 const LikeButton = ({ like, setLoginModal, postInfo, setPostInfo, postId }) => {
   const { isLogin, userInfo } = useSelector((state) => ({
-    isLogin: state.loginReducer,
-    userInfo: state.userInfoReducer,
+    isLogin: state.isLogin,
+    userInfo: state.userInfo,
   }));
 
   const clickHandler = () => {
