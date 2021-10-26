@@ -28,7 +28,7 @@ export default function Login() {
         const { token, userdata } = res.data;
         console.log(res.data.userdata);
         localStorage.setItem("token", token);
-        localStorage.setItem("userInfo", userdata);
+        localStorage.setItem("userInfo", JSON.stringify(userdata)); // json
         const accessToken = localStorage.getItem("token");
         if (accessToken) {
           dispatch(setLogin()); // 로그인 상태 변경
