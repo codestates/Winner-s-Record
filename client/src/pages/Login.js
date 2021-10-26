@@ -51,6 +51,28 @@ export default function Login() {
       });
   };
 
+  const handleNaver = () => {
+    axios
+      .get("http://localhost:8080/auth/naver/login")
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleGoogle = () => {
+    axios
+      .get("http://localhost:8080/auth/google/login")
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const handleKeyPress = (e) => {
     if (e.type === "keypress" && e.code === "Enter" && isValid) {
       handleLogin();
@@ -89,8 +111,8 @@ export default function Login() {
       </div>
       <div className="login--socialContainer">
         <button onClick={handleKakao}>카카오</button>
-        <button>네이버</button>
-        <button>구글</button>
+        <button onClick={handleNaver}>네이버</button>
+        <button onClick={handleGoogle}>구글</button>
       </div>
       <div className="login--copyright">
         © Copyright 2021 Team MeltingBrain. All rights reserved.
