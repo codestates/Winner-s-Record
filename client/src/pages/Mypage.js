@@ -10,7 +10,7 @@ import axios from "axios";
 export default function Mypage() {
   const { userId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-  const userInfo = useSelector((state) => state.userInfoReducer);
+  const userInfo = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
   const history = useHistory();
   const isValid = userId === userInfo.userId;
