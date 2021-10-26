@@ -8,6 +8,7 @@ import postRouter from './router/post.js';
 import rankRouter from './router/rank.js';
 import likeRouter from './router/like.js';
 import matchRouter from './router/match.js';
+import entryRouter from './router/entry.js';
 import {config} from './config.js';
 
 const app = express();
@@ -29,8 +30,8 @@ app.use('/wr', (req, res, next) => {
 
 app.use('/auth', authRouter);
 app.use('/post', postRouter);
-// app.use('/entry');
 app.use('/match', matchRouter);
+app.use('/entry', entryRouter);
 // app.use('/record');
 app.use('/like', likeRouter);
 app.use('/rank', rankRouter);
