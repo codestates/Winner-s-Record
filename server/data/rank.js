@@ -6,9 +6,9 @@ export async function findByEvent(event) {
   const record = Records.filter((el) => el.event === event)
   for(let i = 0; i < record.length; i++) {
     for(let j = 0; j < Users.length; j++) {
-      if(record[i].userId === Users[i].id) {
-        record[i].nickname = Users[i].nickname
-        record[i].img = Images.find((el) => el.id === Users[i].img).link
+      if(record[i].userId === Users[j].id) {
+        record[i].nickname = Users[j].nickname
+        record[i].img = Images.find((el) => el.id === Users[j].img).link
       }
     }
   }
@@ -23,7 +23,7 @@ export async function findByNickname(nickname) {
     for(let j = 0; j < user.length; j++) {
       if(userRecord[i].userId === user[j].id) {
         userRecord[i].nickname = user[j].nickname
-        userRecord[i].img = Images.find((el) => el.id === Users[i].img).link
+        userRecord[i].img = Images.find((el) => el.id === Users[j].img).link
       }
     }
   }

@@ -17,6 +17,27 @@ export async function findById(id) {
   return userPost
 }
 
+export async function addLikePost(userId, postId) {
+  const checkPostId = Posts.find((el) => el.id === postId)
+  if(checkPostId) {
+    const post = {id: Users_Posts.length+1, userId: userId, postId: postId}
+    Users_Posts.push(post)
+    return post
+  } else {
+    return
+  }
+}
+
+export async function deleteLikePost(userId, postId) {
+  const checkPostId = Posts.find((el) => el.id === postId)
+  if(checkPostId) {
+    Users_Posts.filter((el) => el.userId === userId && el.postId === postId)
+    return 'ok'
+  } else {
+    return
+  }
+}
+
 export async function validId(id) {
   return Users.find((el) => el.id === parseInt(id))
 }
