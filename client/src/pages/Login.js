@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUserInfo } from "../modules/userInfo";
 import { setLogin } from "../modules/isLogin";
 
 export default function Login() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const prevPage = useSelector((state) => state.prevPage);
   const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -31,7 +32,7 @@ export default function Login() {
         if (accessToken) {
           dispatch(setLogin()); // 로그인 상태 변경
           dispatch(setUserInfo(userdata)); // 유저 정보 입력
-          history.push("/main");
+          history.push(prevPage);
         }
       })
       .catch((err) => {
