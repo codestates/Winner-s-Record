@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import SignupCompleteModal from "../components/SignupCompleteModal";
+import SignupCompleteModal from "../components/Signup/SignupCompleteModal";
 import axios from "axios";
 
 export default function Signup() {
