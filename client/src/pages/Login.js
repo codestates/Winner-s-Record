@@ -26,6 +26,7 @@ export default function Login() {
       )
       .then((res) => {
         const { token, userdata } = res.data;
+        console.log(res.data.userdata);
         localStorage.setItem("token", token);
         localStorage.setItem("userInfo", userdata);
         const accessToken = localStorage.getItem("token");
