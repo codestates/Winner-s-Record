@@ -9,6 +9,7 @@ import LikeButton from "../components/Post/LikeButton";
 import PostModal from "../components/Post/PostModal";
 import NeedLoginModal from "../components/NeedLoginModal";
 import { useSelector } from "react-redux";
+import PostMap from "../components/Post/PostMap";
 
 const Post = () => {
   const { postId } = useParams();
@@ -25,7 +26,10 @@ const Post = () => {
   const [loginModal, setLoginModal] = useState(false);
 
   const getPostData = () => {
-    const Authorization = `Bearer ${userInfo.token}`;
+    const token = localStorage.getItem("token");
+
+    const Authorization = `Bearer ${token}`;
+    console.log(Authorization);
     axios
       .get(`http://localhost:8080/post/${postId}`, {
         headers: { Authorization },
@@ -33,7 +37,9 @@ const Post = () => {
       })
       .then((res) => {
         setPostInfo(res.data.data);
-        console.log(res);
+      })
+      .catch((res) => {
+        console.error(res);
       });
   };
 
@@ -69,7 +75,9 @@ const Post = () => {
       </div>
 
       <div className="post--text">{text}</div>
-      <div className="post--map">{`맵 자리 ${place}`}</div>
+      <div className="post--map">
+        <PostMap />
+      </div>
       <div className="post--btns">
         <PostPrimaryButton userId={userData.userId} type={type} />
         <LikeButton

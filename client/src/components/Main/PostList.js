@@ -3,17 +3,17 @@ import PostListContent from "./PostListContent";
 
 const PostList = ({ postList }) => {
   return (
-    <div className="list--container">
+    <ul className="list--container">
       {postList.map((e) => {
         return (
-          <div className="list--link--container">
+          <li className="list--link--container" key={e.id}>
             <Link to={`/post/${e.id}`}>
               <PostListContent postInfo={e} />
             </Link>
-          </div>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 };
 

@@ -52,7 +52,7 @@ const LikeButton = ({ like, setLoginModal, postInfo, setPostInfo, postId }) => {
         clickHandler();
       }}
     >
-      <i class={`${like ? "fas" : "far"} fa-heart`}></i>
+      <i className={`${like ? "fas" : "far"} fa-heart`}></i>
     </div>
   );
 };

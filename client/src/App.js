@@ -12,12 +12,14 @@ import Post from "./pages/Post";
 // styles
 import "./reset.css";
 import "./styles/main.scss";
+import PostMap from "./components/Post/PostMap";
 
 function App() {
   return (
     <>
       <Router>
         <Switch>
+          <Route path="/maptest" component={PostMap} />
           <Route exact path="/">
             <Landing />
           </Route>
