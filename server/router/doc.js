@@ -1,10 +1,10 @@
 import express from 'express';
 import 'express-async-errors';
-import * as postController from '../controller/doc.js';
+import * as docController from '../controller/doc.js';
 
 const router = express.Router();
 
-router.get('/', postController.searchPost);
-router.get('/:postId', postController.getOne);
+router.get('/', docController.searchDoc);
+router.get('/:docId', docController.getOne);
 
 export default router;

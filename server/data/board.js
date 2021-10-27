@@ -1,8 +1,8 @@
 import db from '../models/index.js';
 
-export async function findByPostId(postId) {
-  console.log('보드찾기 postId : ', postId);
-  const allBoard = db.Docs_boards.filter((el) => el.PostId === postId);
+export async function findByDocId(docId) {
+  console.log('보드찾기 docId : ', docId);
+  const allBoard = db.Docs_boards.filter((el) => el.docId === docId);
   console.log('aaaa', allBoard);
   const allBoardId = allBoard.map((el) => {
     return el.BoardId;

@@ -4,7 +4,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import authRouter from './router/auth.js';
-import postRouter from './router/doc.js';
+import docRouter from './router/doc.js';
 import rankRouter from './router/rank.js';
 import likeRouter from './router/like.js';
 import matchRouter from './router/match.js';
@@ -29,7 +29,7 @@ app.use('/wr', (req, res, next) => {
 });
 
 app.use('/auth', authRouter);
-app.use('/post', postRouter);
+app.use('/doc', docRouter);
 app.use('/match', matchRouter);
 app.use('/entry', entryRouter);
 // app.use('/record');

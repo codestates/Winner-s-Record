@@ -1,6 +1,6 @@
 import db from '../models/index.js';
 
-export async function findByPostId(postId) {
+export async function findByDocId(postId) {
   const allEntries = Entries.filter((el) => el.postId === postId);
   return allEntries
     .filter((el) => el.status !== '대기')
