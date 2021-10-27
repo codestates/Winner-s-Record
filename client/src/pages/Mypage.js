@@ -18,7 +18,7 @@ export default function Mypage() {
 
   const handleCreatedList = () => {
     axios
-      .get(`http://localhost:8080/post?hostId=${userId}`)
+      .get(`http://localhost:8080/doc?hostId=${userId}`)
       .then((res) => {
         console.log(res.data);
         setList(res.data);
@@ -42,7 +42,7 @@ export default function Mypage() {
 
   const handleProgressList = () => {
     axios
-      .get(`http://localhost:8080/post?guestId=${userId}`)
+      .get(`http://localhost:8080/doc?guestId=${userId}`)
       .then((res) => {
         console.log(res.data);
         setList(res.data);
