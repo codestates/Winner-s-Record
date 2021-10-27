@@ -24,33 +24,36 @@ export async function createUser(user) {
 }
 
 export async function findByEmail(email) {
-  const user = await db.Users.findOne({
-    where: {email},
-  }).then((data) => data.dataValues);
-  if (!user) {
+  try {
+    const user = await db.Users.findOne({
+      where: {email},
+    }).then((data) => data.dataValues);
+    return user;
+  } catch {
     return null;
   }
-  return user;
 }
 
 export async function findByNickname(nickname) {
-  const user = await db.Users.findOne({
-    where: {nickname},
-  }).then((data) => data.dataValues);
-  if (!user) {
+  try {
+    const user = await db.Users.findOne({
+      where: {nickname},
+    }).then((data) => data.dataValues);
+    return user;
+  } catch {
     return null;
   }
-  return user;
 }
 
 export async function findById(id) {
-  const user = await db.Users.findOne({
-    where: {id},
-  }).then((data) => data.dataValues);
-  if (!user) {
+  try {
+    const user = await db.Users.findOne({
+      where: {id},
+    }).then((data) => data.dataValues);
+    return user;
+  } catch {
     return null;
   }
-  return user;
 }
 
 export async function editNickname(id, nickname) {
