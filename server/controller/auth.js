@@ -236,6 +236,7 @@ export async function editImg(req, res) {
   res.status(200).json({
     token,
     userdata: {
+      userId: editedUser.id,
       email: editedUser.email,
       nickname: editedUser.nickname,
       img: editedUser.img,
