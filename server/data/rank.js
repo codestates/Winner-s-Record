@@ -62,7 +62,6 @@ export async function findNicknameRank(event, nickname) {
   } else {
     rankList = recordList.slice(index-3, index+2)
   }
-  console.log(rankList)
   const userId = rankList.map((el) => el.userId)
   const users = await db.Users.findAll({
     where: {
