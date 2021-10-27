@@ -13,8 +13,30 @@ import Post from "./pages/Post";
 import "./reset.css";
 import "./styles/main.scss";
 import Entry from "./pages/Entry";
+import { useEffect } from "react";
+
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "./modules/userInfo";
+import { setLogin } from "./modules/isLogin";
+import axios from "axios";
 
 function App() {
+  const dispatch = useDispatch();
+  const getUserInfo = () => {
+    const Authorization = `Bearer ${localStorage.getItem("token")}`;
+    axios
+      .get("http://localhost:8080/auth/me", { headers: { Authorization } })
+      .then((res) => {
+        console.log(res.data);
+        dispatch(setLogin());
+        dispatch(setUserInfo(res.data));
+      });
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
   return (
     <>
       <Router>

@@ -8,8 +8,9 @@ const EntryPlayer = ({
   setApplied,
   setFixed,
   hostId,
-  setIsModalActive,
-  setIsLoginModalActive,
+  setActiveModal,
+  setModalText,
+  setLoginModal,
 }) => {
   const { userInfo, isLogin } = useSelector((state) => ({
     userInfo: state.userInfo,
@@ -38,9 +39,10 @@ const EntryPlayer = ({
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     const endpoint = `http://localhost:8080/entry/${postId}`;
     if (!isLogin) {
-      setIsLoginModalActive(true);
+      setLoginModal(true);
     } else if (hostId !== userInfo.userId && userId !== userInfo.userId) {
-      setIsModalActive(true);
+      setActiveModal(true);
+      setModalText("권한이 없습니다.");
     } else {
       if (userData.status === "확정") {
         axios
