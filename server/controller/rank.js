@@ -9,7 +9,7 @@ export async function searchRank (req, res) {
     if(sport && user === 'ok') {
       const eventRecord = await rankData.findAllRank(event)
       return res.status(200).send({data: eventRecord})
-    } else if(sport && user.dataValues){
+    } else if(sport && user !== null){
       const nicknameRecord = await rankData.findNicknameRank(event, nickname)
       return res.status(200).send({data: nicknameRecord})
     }
