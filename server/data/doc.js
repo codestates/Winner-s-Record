@@ -1,18 +1,17 @@
 import pkg from 'sequelize';
 import db from '../models/index.js';
-const { Op } = pkg;
 
 export async function findByType(type) {
   if (type === 'all') {
-    return db.Docs.findAll()
+    return db.Docs.findAll();
   }
   const result = await db.Docs.findAll({
-    where : {
-      type: type
-    }
-  }).catch(err => console.log(err))
+    where: {
+      type: type,
+    },
+  }).catch((err) => console.log(err));
 
-  return result
+  return result;
 }
 
 export async function findByEvent(data, event) {
@@ -36,16 +35,17 @@ export async function findByPlace(data, place) {
   return data.filter((post) => post.place.includes(place));
 }
 
-export async function countLike(data) {ㅎ
-  const docId = data.map((el) => el.dataValues.id)
+export async function countLike(data) {
+  ㅎ;
+  const docId = data.map((el) => el.dataValues.id);
   const result = await db.Users_Docs.findAll({
     where: {
       docId: {
-        [Op.in]: docId
-      }
-    }
-  })
-  console.log(result)
+        [Op.in]: docId,
+      },
+    },
+  });
+  console.log(result);
 }
 
 export async function findByImg(data) {
@@ -73,7 +73,13 @@ export async function validUser(id) {
 }
 
 export async function findById(id) {
-  return Docs.find((post) => post.id === id);
+  try {
+    return db.Docs.findOne({
+      where: {id},
+    }).then((data) => data.dataValues);
+  } catch {
+    return null;
+  }
 }
 
 export async function validEvent(event) {
