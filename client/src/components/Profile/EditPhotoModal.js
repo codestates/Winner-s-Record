@@ -59,7 +59,7 @@ export default function EditPhotoModal({ isModalOpen, openModalHandler }) {
     uploadFile(File);
     const oldToken = localStorage.getItem("token");
     axios
-      .post(
+      .put(
         "http://localhost:8080/auth/img",
         { img },
         { headers: { authorization: `Bearer ${oldToken}` } }
