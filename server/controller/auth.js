@@ -1,4 +1,5 @@
 import 'express-async-errors';
+import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import bcrypt from 'bcrypt';
 import * as userData from '../data/auth.js';
@@ -7,15 +8,40 @@ import * as jwtFunc from '../middleware/jwt.js';
 import {config} from '../config.js';
 
 export async function userInfo(req, res) {
-  const userId = req.userId;
-  const user = await userData.findById(userId);
-  if (user) {
-    return res
-      .status(200)
-      .json({userId: user.id, nickname: user.nickname, img: user.img});
-  } else {
-    return res.status(400).json({message: '잘못된 요청입니다'});
+  const userId = req.params.userId;
+  const authorization = req.headers.authorization;
+  let token;
+  if (authorization) {
+    token = authorization.split(' ')[1];
   }
+  const profile = await userData.findById(userId);
+  if (!authorization || token === 'null') {
+    if (profile) {
+      return res.status(200).json({
+        profileData: {
+          id: profile.id,
+          nickname: profile.nickname,
+          img: profile.img,
+        },
+      });
+    } else {
+      return res.status(400).json({message: '잘못된 요청입니다'});
+    }
+  }
+  jwt.verify(token, String(config.jwt.secretKey), async (error, data) => {
+    if (error) {
+      return res.status(403).json({message: '권한이 없습니다'});
+    }
+    const user = await userData.findById(data.id);
+    return res.status(200).json({
+      profileData: {
+        id: profile.id,
+        nickname: profile.nickname,
+        img: profile.img,
+      },
+      userData: {id: user.id, nickname: user.nickname, img: user.img},
+    });
+  });
 }
 
 export async function emailValidator(req, res) {
