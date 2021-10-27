@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { setUserInfo } from "../modules/userInfo";
 import { setLogin } from "../modules/isLogin";
 import PostList from "../components/Main/PostList";
+import EditPhotoModal from "../components/Mypage/EditPhotoModal";
+import LoadingIndicator from "../components/LoadingIndicator";
 import axios from "axios";
 
 export default function Mypage() {
@@ -15,6 +17,10 @@ export default function Mypage() {
   const history = useHistory();
   const isValid = userId === userInfo.userId;
   const [list, setList] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModalHandler = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
   const handleCreatedList = () => {
     axios
@@ -74,10 +80,18 @@ export default function Mypage() {
 
   return (
     <>
-      {isLoading ? null : (
+      {isLoading ? (
+        <LoadingIndicator />
+      ) : (
         <div>
           <div className="mypage--profilecontainer">
-            <div className="mypage--photo">사진</div>
+            {isValid ? (
+              <div className="mypage--photo" onClick={openModalHandler}>
+                <img src={userInfo.img} alt="profile" />
+              </div>
+            ) : (
+              <div className="mypage--photo">사진</div>
+            )}
             <span className="mypage--username">{userInfo.nickname}</span>
             {isValid ? (
               <span
@@ -109,6 +123,10 @@ export default function Mypage() {
             <PostList postList={list} />
           </div>
           <div className="mypage--postcontainer"></div>
+          <EditPhotoModal
+            openModalHandler={openModalHandler}
+            isModalOpen={isModalOpen}
+          />
         </div>
       )}
     </>
