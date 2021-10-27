@@ -19,8 +19,8 @@ export default function Mypage() {
     nickname: "",
     img: "",
   });
-  const isValid = profileData.userId === userInfo.userId;
   const userInfo = useSelector((state) => state.userInfo);
+  const isValid = profileData.userId === userInfo.userId;
   const history = useHistory();
   const dispatch = useDispatch();
   const openModalHandler = () => {
