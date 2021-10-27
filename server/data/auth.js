@@ -1,55 +1,90 @@
 import db from '../models/index.js';
 
-export async function createUser(user) {}
+export async function randomUserImg(list) {
+  const imgId = list[Math.floor(Math.random() * list.length)];
+  const img = await db.Images.findOne({
+    where: {id: imgId},
+  }).then((data) => data.dataValues);
+  console.log('img :', img.link);
+  return img.link;
+}
+
+export async function createUser(user) {
+  const {email, password, nickname, type, img} = user;
+  if (type === 'web') {
+    const newUser = await db.Users.create({
+      type,
+      email,
+      nickname,
+      password,
+      img,
+    }).then((data) => data.dataValues);
+    return newUser.id;
+  }
+}
 
 export async function findByEmail(email) {
-  console.log(db.Users);
-  const already = await db.Users.findOne({
+  const user = await db.Users.findOne({
     where: {email},
-  });
-  console.log(already);
-  return already;
+  }).then((data) => data.dataValues);
+  if (!user) {
+    return null;
+  }
+  return user;
 }
 
 export async function findByNickname(nickname) {
-  return Users.find((user) => user.nickname === nickname);
+  const user = await db.Users.findOne({
+    where: {nickname},
+  }).then((data) => data.dataValues);
+  if (!user) {
+    return null;
+  }
+  return user;
 }
 
 export async function findById(id) {
-  return Users.find((user) => user.id === id);
+  const user = await db.Users.findOne({
+    where: {id},
+  }).then((data) => data.dataValues);
+  if (!user) {
+    return null;
+  }
+  return user;
 }
 
 export async function editNickname(id, nickname) {
-  const user = Users.find((user) => user.id === id);
-  if (!user) {
-    return `${id} not found`;
-  } else {
-    user.nickname = nickname;
-    console.log('닉네임변경 후 : ', user);
-    return user;
-  }
+  const query = `UPDATE Users SET nickname='${nickname}'
+      WHERE id='${id}';`;
+  await db.Users.sequelize.query(query);
+  const user = await db.Users.findOne({
+    where: {id},
+  }).then((data) => data.dataValues);
+  return user;
 }
 
 export async function editPassword(id, password) {
-  const user = Users.find((user) => user.id === id);
-  if (!user) {
-    return `${id} not found`;
-  } else {
-    user.password = password;
-    console.log('비밀번호변경 후 : ', user);
-    return user;
-  }
+  const query = `UPDATE Users SET password='${password}'
+      WHERE id='${id}';`;
+  await db.Users.sequelize.query(query);
+  const user = await db.Users.findOne({
+    where: {id},
+  }).then((data) => data.dataValues);
+  return user;
 }
 export async function editImg(id, img) {
-  const user = Users.find((user) => user.id === id);
-  if (!user) {
-    return `${id} not found`;
-  } else {
-    user.img = img;
-    console.log('이미지변경 후 : ', user);
-    return user;
-  }
+  const query = `UPDATE Users SET img='${img}'
+      WHERE id='${id}';`;
+  await db.Users.sequelize.query(query);
+  const user = await db.Users.findOne({
+    where: {id},
+  }).then((data) => data.dataValues);
+  return user;
 }
+
 export async function remove(id) {
-  return Users.filter((user) => user.id !== id);
+  await db.Users.destroy({
+    where: {id},
+  });
+  return;
 }
