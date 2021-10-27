@@ -13,6 +13,8 @@ export default function EditPhotoModal({ isModalOpen, openModalHandler }) {
     setPreview(imageURL);
   };
 
+  // const upload 여기서 업로드하고 그 주소 따온 다음에 포스트 요청 보내기
+
   const handleEdit = () => {
     const oldToken = localStorage.getItem("token");
     axios
@@ -36,13 +38,14 @@ export default function EditPhotoModal({ isModalOpen, openModalHandler }) {
           <div className="modal--view">
             <div>
               <input
-                // ref={profileImgInput}
                 type="file"
                 accept="image/*"
                 name="file"
                 onChange={imgOnchange}
               />
-              <img src={preview} />
+              <div>
+                <img src={preview} />
+              </div>
             </div>
             <div className="modal--btnContainer">
               <button onClick={openModalHandler}>돌아가기</button>
