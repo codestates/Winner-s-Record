@@ -15,15 +15,15 @@ const sequelize = new Sequelize(
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.Users = require('./user')(sequelize, Sequelize);
-db.Boards = require('./board')(sequelize, Sequelize);
-db.Docs = require('./doc')(sequelize, Sequelize);
-db.Docs_Boards = require('./docs_board')(sequelize, Sequelize);
-db.Docs_Images = require('./docs_image')(sequelize, Sequelize);
-db.Entries = require('./entrie')(sequelize, Sequelize);
-db.Images = require('./image')(sequelize, Sequelize);
-db.Matches = require('./matche')(sequelize, Sequelize);
-db.Records = require('./record')(sequelize, Sequelize);
-db.Users_Docs = require('./users_doc')(sequelize, Sequelize);
+db.Users = require('./users')(sequelize, Sequelize);
+db.Boards = require('./boards')(sequelize, Sequelize);
+db.Docs = require('./docs')(sequelize, Sequelize);
+db.Docs_Boards = require('./docs_boards')(sequelize, Sequelize);
+db.Docs_Images = require('./docs_images')(sequelize, Sequelize);
+db.Entries = require('./entries')(sequelize, Sequelize);
+db.Images = require('./images')(sequelize, Sequelize);
+db.Matches = require('./matches')(sequelize, Sequelize);
+db.Records = require('./records')(sequelize, Sequelize);
+db.Users_Docs = require('./users_docs')(sequelize, Sequelize);
 
 module.exports = db;
