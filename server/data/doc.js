@@ -36,7 +36,7 @@ export async function findByPlace(data, place) {
   return data.filter((post) => post.place.includes(place));
 }
 
-export async function countLike(data) {
+export async function countLike(data) {ㅎ
   const docId = data.map((el) => el.dataValues.id)
   const result = await db.Users_Docs.findAll({
     where: {
