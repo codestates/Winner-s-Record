@@ -9,6 +9,7 @@ import LikeButton from "../components/Post/LikeButton";
 import PostModal from "../components/Post/PostModal";
 import NeedLoginModal from "../components/NeedLoginModal";
 import PostMap from "../components/Post/PostMap";
+import PostComments from "../components/Post/PostComments";
 
 const Post = () => {
   const { postId } = useParams();
@@ -29,7 +30,7 @@ const Post = () => {
     const Authorization = `Bearer ${token}`;
     console.log(Authorization);
     axios
-      .get(`http://localhost:8080/post/${postId}`, {
+      .get(`http://localhost:8080/doc/${postId}`, {
         headers: { Authorization },
         withCredentials: true,
       })
@@ -49,7 +50,7 @@ const Post = () => {
     console.log(loginModal);
   }, [loginModal]);
 
-  let { userData, title, text, place, like, img, type } = postInfo;
+  let { userData, title, text, place, like, img, type, board = [] } = postInfo;
 
   return (
     <div className="post--container">
@@ -76,6 +77,9 @@ const Post = () => {
       <div className="post--map">
         <PostMap place={place} />
       </div>
+
+      <PostComments board={board} setPostInfo={setPostInfo} />
+
       <div className="post--btns">
         <PostPrimaryButton userId={userData.userId} type={type} />
         <LikeButton
