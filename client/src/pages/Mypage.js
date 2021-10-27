@@ -12,20 +12,20 @@ import axios from "axios";
 export default function Mypage() {
   const { userId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-  const userInfo = useSelector((state) => state.userInfo);
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const isValid = profileData.userId === userInfo.userId;
   const [list, setList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModalHandler = () => {
-    setIsModalOpen(!isModalOpen);
-  };
   const [profileData, setProfileData] = useState({
     userId: "",
     nickname: "",
     img: "",
   });
+  const isValid = profileData.userId === userInfo.userId;
+  const userInfo = useSelector((state) => state.userInfo);
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const openModalHandler = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
   const handleCreatedList = () => {
     axios
