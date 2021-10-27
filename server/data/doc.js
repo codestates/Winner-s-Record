@@ -1,24 +1,32 @@
+import pkg from 'sequelize';
 import db from '../models/index.js';
+const { Op } = pkg;
 
 export async function findByType(type) {
   if (type === 'all') {
-    return Docs;
+    return db.Docs.findAll()
   }
-  return Docs.filter((post) => post.type === type);
+  const result = await db.Docs.findAll({
+    where : {
+      type: type
+    }
+  }).catch(err => console.log(err))
+
+  return result
 }
 
 export async function findByEvent(data, event) {
   if (event === 'all') {
     return data;
   }
-  return data.filter((post) => post.event === event);
+  return data.filter((post) => post.dataValues.event === event);
 }
 
 export async function findByTitle(data, title) {
   if (title === 'all') {
     return data;
   }
-  return data.filter((post) => post.title.includes(title));
+  return data.filter((post) => post.dataValues.title.includes(title));
 }
 
 export async function findByPlace(data, place) {
@@ -29,9 +37,15 @@ export async function findByPlace(data, place) {
 }
 
 export async function countLike(data) {
-  return data.map(
-    (post) => Users_docs.filter((el) => el.postId === post.id).length
-  );
+  const docId = data.map((el) => el.dataValues.id)
+  const result = await db.Users_Docs.findAll({
+    where: {
+      docId: {
+        [Op.in]: docId
+      }
+    }
+  })
+  console.log(result)
 }
 
 export async function findByImg(data) {

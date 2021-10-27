@@ -18,12 +18,12 @@ db.Sequelize = Sequelize;
 db.Users = require('./user')(sequelize, Sequelize);
 db.Boards = require('./board')(sequelize, Sequelize);
 db.Docs = require('./doc')(sequelize, Sequelize);
-db.Docs_boards = require('./docs_board')(sequelize, Sequelize);
-db.Docs_images = require('./docs_image')(sequelize, Sequelize);
+db.Docs_Boards = require('./docs_board')(sequelize, Sequelize);
+db.Docs_Images = require('./docs_image')(sequelize, Sequelize);
 db.Entries = require('./entrie')(sequelize, Sequelize);
 db.Images = require('./image')(sequelize, Sequelize);
 db.Matches = require('./matche')(sequelize, Sequelize);
 db.Records = require('./record')(sequelize, Sequelize);
-db.Users_docs = require('./users_docs')(sequelize, Sequelize);
+db.Users_Docs = require('./users_doc')(sequelize, Sequelize);
 
 module.exports = db;

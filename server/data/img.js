@@ -4,7 +4,7 @@ export async function findById(id) {
   return Images.find((img) => img.id === id);
 }
 
-export async function getPostImg(postId) {
+export async function getDocImg(postId) {
   const allImg = Docs_images.filter((img) => img.postId === postId).map(
     (el) => {
       return el.imgId;
