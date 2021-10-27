@@ -19,19 +19,21 @@ export async function searchDoc(req, res) {
       const doc2 = await docData.findByEvent(doc, event);
       const doc3 = await docData.findByTitle(doc2, title);
       const docList = doc3.map((el) => el.dataValues)
-      const like = await docData.countLike(docList);
-      const img = await docData.findByImg(docList);
-      const key = Object.keys(img)
-
-      for (let i = 0; i < docList.length; i++) {
-        for(let j = 0; j < key.length; j++) {
-          if(docList[i].id === parseInt(key[j])) {
-            docList[i].like = like[docList[j].id] || 0
-            docList[i].img = img[docList[j].id]
+      if(docList.length !== 0) {
+        const like = await docData.countLike(docList);
+        const img = await docData.findByImg(docList);
+        const key = Object.keys(img)
+  
+        for (let i = 0; i < docList.length; i++) {
+          for(let j = 0; j < key.length; j++) {
+            if(docList[i].id === parseInt(key[j])) {
+              docList[i].like = like[docList[j].id] || 0
+              docList[i].img = img[docList[j].id]
+            }
           }
         }
+        return res.status(200).send({data: docList});
       }
-      return res.status(200).send({data: docList});
     } else {
       return res.status(404).send({message: '해당 포스트가 없습니다'});
     }
@@ -43,19 +45,21 @@ export async function searchDoc(req, res) {
       const doc2 = await docData.findByEvent(doc, event);
       const doc3 = await docData.findByPlace(doc2, place);
       const docList = doc3.map((el) => el.dataValues)
-      const like = await docData.countLike(docList);
-      const img = await docData.findByImg(docList);
-      const key = Object.keys(img)
-
-      for (let i = 0; i < docList.length; i++) {
-        for(let j = 0; j < key.length; j++) {
-          if(docList[i].id === parseInt(key[j])) {
-            docList[i].like = like[docList[j].id] || 0
-            docList[i].img = img[docList[j].id]
+      if(docList.length !== 0) {
+        const like = await docData.countLike(docList);
+        const img = await docData.findByImg(docList);
+        const key = Object.keys(img)
+  
+        for (let i = 0; i < docList.length; i++) {
+          for(let j = 0; j < key.length; j++) {
+            if(docList[i].id === parseInt(key[j])) {
+              docList[i].like = like[docList[j].id] || 0
+              docList[i].img = img[docList[j].id]
+            }
           }
         }
+        return res.status(200).send({data: docList});
       }
-      return res.status(200).send({data: docList});
     } else {
       return res.status(404).send({message: '해당 포스트가 없습니다'});
     } 
