@@ -2,12 +2,8 @@ import db from '../models/index.js';
 
 export async function createRecords(result) {
   const {event, winnerId, loserId} = result;
-  console.log('result : ', result);
   const winnerRecord = await db.Records.findOne({
-    where: {
-      event,
-      userId: winnerId,
-    },
+    where: {event, userId: winnerId},
   }).then((data) => data.dataValues);
   const loserRecord = await db.Records.findOne({
     where: {event, userId: loserId},
