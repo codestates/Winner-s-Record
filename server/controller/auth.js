@@ -27,7 +27,6 @@ export async function nicknameValidator(req, res) {
 export async function passwordValidator(req, res) {
   const userId = req.userId;
   const password = req.body.password;
-  console.log(userId, password);
   const user = await userData.findById(userId);
   if (!user) {
     return res.status(404).json({message: '해당 유저가 존재하지 않습니다'});
@@ -50,7 +49,7 @@ export async function signup(req, res) {
     return res.status(400).json({message: '회원가입 실패'});
   }
 
-  const userImg = [1, 2, 3, 4, 5, 6, 7, 8];
+  const imgLink = await userData.randomUserImg([1, 2, 3, 4, 5, 6, 7, 8]);
   const hashedPassword = await bcrypt.hash(
     password,
     Number(config.bcrypt.saltRounds)
@@ -60,7 +59,7 @@ export async function signup(req, res) {
     password: hashedPassword,
     nickname,
     type,
-    img: userImg[Math.floor(Math.random() * userImg.length)],
+    img: imgLink,
   });
   return res.status(201).json({userId});
 }
@@ -68,6 +67,7 @@ export async function signup(req, res) {
 export async function login(req, res) {
   const {email, password} = req.body;
   const user = await userData.findByEmail(email);
+  console.log('유저 : ', user);
   if (!user) {
     return res.status(400).json({message: '이메일이나 비밀번호가 틀립니다'});
   }
@@ -77,7 +77,6 @@ export async function login(req, res) {
   }
   delete user.password;
 
-  const imgLink = await imgData.findById(user.img);
   const token = jwtFunc.createToken(user);
   res.status(200).json({
     token,
@@ -85,7 +84,7 @@ export async function login(req, res) {
       userId: user.id,
       email: user.email,
       nickname: user.nickname,
-      img: imgLink,
+      img: user.img,
     },
   });
 }
@@ -147,15 +146,15 @@ export async function edit(req, res) {
   }
   let editedUser;
   if (password === null) {
-    editedUser = await userData.editNickname(userId, nickname);
+    editedUser = await userData.editNickname(user.id, nickname);
   } else if (nickname === null) {
     const hashedPassword = await bcrypt.hash(
       password,
       Number(config.bcrypt.saltRounds)
     );
-    editedUser = await userData.editPassword(userId, hashedPassword);
+    editedUser = await userData.editPassword(user.id, hashedPassword);
   } else {
-    editedUser = await userData.editNickname(userId, nickname);
+    editedUser = await userData.editNickname(user.id, nickname);
     const hashedPassword = await bcrypt.hash(
       password,
       Number(config.bcrypt.saltRounds)
@@ -165,38 +164,35 @@ export async function edit(req, res) {
   delete editedUser.password;
 
   const token = jwtFunc.createToken(editedUser);
-  const imgLink = await imgData.findById(editedUser.img);
 
   res.status(200).json({
     token,
     userdata: {
       email: editedUser.email,
       nickname: editedUser.nickname,
-      img: imgLink,
+      img: editedUser.img,
     },
   });
 }
 
 export async function editImg(req, res) {
-  const img = req.img;
-  const imgId = imgData.createImg(img);
+  const img = req.body.img;
   const userId = req.userId;
   const user = await userData.findById(userId);
   if (!user) {
     return res.status(400).json({message: '회원정보 수정 실패'});
   }
-  const editedUser = await userData.editImg(userId, imgId);
+  const editedUser = await userData.editImg(userId, img);
   delete editedUser.password;
 
   const token = jwtFunc.createToken(editedUser);
-  const imgLink = await imgData.findById(editedUser.img);
 
   res.status(200).json({
     token,
     userdata: {
       email: editedUser.email,
       nickname: editedUser.nickname,
-      img: imgLink,
+      img: editedUser.img,
     },
   });
 }

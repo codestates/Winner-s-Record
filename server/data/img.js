@@ -16,10 +16,8 @@ export async function getPostImg(postId) {
 }
 
 export async function createImg(link) {
-  const newImg = {
-    id: Images.length + 1,
+  const newImg = await db.Images.create({
     link,
-  };
-  Images.push(newImg);
-  return newImg.id;
+  }).then((data) => data.dataValues);
+  return newImg.link;
 }
