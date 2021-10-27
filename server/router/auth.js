@@ -5,6 +5,7 @@ import {jwtValidator} from '../middleware/jwt.js';
 
 const router = express.Router();
 
+router.get('/me', jwtValidator, authController.me);
 router.get('/:userId', authController.userInfo);
 router.post('/', authController.signup);
 router.post('/email', authController.emailValidator);
