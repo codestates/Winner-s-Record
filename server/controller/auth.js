@@ -6,6 +6,18 @@ import * as imgData from '../data/img.js';
 import * as jwtFunc from '../middleware/jwt.js';
 import {config} from '../config.js';
 
+export async function userInfo(req, res) {
+  const userId = req.userId;
+  const user = await userData.findById(userId);
+  if (user) {
+    return res
+      .status(200)
+      .json({userId: user.id, nickname: user.nickname, img: user.img});
+  } else {
+    return res.status(400).json({message: '잘못된 요청입니다'});
+  }
+}
+
 export async function emailValidator(req, res) {
   const email = req.body.email;
   const already = await userData.findByEmail(email);

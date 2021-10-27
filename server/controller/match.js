@@ -8,6 +8,7 @@ export async function insertResult(req, res) {
   const hostId = req.userId;
   const postId = parseInt(req.params.postId);
   const post = await postData.findById(postId);
+  console.log('포스트정보 : ', post);
   if (hostId !== post.userId) {
     return res.status(403).json({message: '권한이 없습니다'});
   }
