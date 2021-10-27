@@ -2,7 +2,7 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import Redirect from "./pages/Redirect";
 import Signup from "./pages/Signup";
-import Profile from "./pages/Mypage";
+import Profile from "./pages/Profile";
 import Landing from "./pages/Landing";
 import Edit from "./pages/Edit";
 import Error from "./pages/Error";
@@ -40,11 +40,11 @@ function App() {
           <Route path="/signup">
             <Signup />
           </Route>
-          <Route path={"/profile/:userId"}>
-            <Profile />
-          </Route>
           <Route path="/profile/edit">
             <Edit />
+          </Route>
+          <Route path={"/profile/:userId"}>
+            <Profile />
           </Route>
           <Route path="/">
             <Error />

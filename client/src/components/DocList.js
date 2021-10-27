@@ -43,13 +43,17 @@ export default function DocList({ userId, isMypage }) {
   }, []);
 
   return (
-    <div className="profile--tap">
+    <div className="doclist">
       <ul>
         <li onClick={handleCreatedList}>작성글</li>
-        {isMypage ? <li onClick={handleLikeList}>관심글</li> : null}
         <li onClick={handleProgressList}>진행중</li>
+        {isMypage ? <li onClick={handleLikeList}>관심글</li> : null}
       </ul>
-      <PostList postList={list} />
+      {list.length ? (
+        <PostList postList={list} />
+      ) : (
+        "게시글이 존재하지 않습니다"
+      )}
     </div>
   );
 }
