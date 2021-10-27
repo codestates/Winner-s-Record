@@ -33,43 +33,95 @@ export async function findByPlace(data, place) {
   if (place === 'all') {
     return data;
   }
-  return data.filter((post) => post.place.includes(place));
+  return data.filter((post) => post.dataValues.place.includes(place));
 }
 
-export async function countLike(data) {ㅎ
-  const docId = data.map((el) => el.dataValues.id)
-  const result = await db.Users_Docs.findAll({
+export async function countLike(data) {
+  const docId = data.map((el) => el.id)
+  const likeList = await db.Users_Docs.findAll({
     where: {
       docId: {
         [Op.in]: docId
       }
     }
-  })
-  console.log(result)
+  }).catch(err => console.log(err))
+
+  const result = {}
+  for(let i = 0; i < likeList.length; i++) {
+    if(result[likeList[i].docId] === undefined) {
+      result[likeList[i].docId] = 1
+    } else {
+      result[likeList[i].docId]++
+    }
+  }
+  return result
 }
 
 export async function findByImg(data) {
-  const id = data.map((post) =>
-    Docs_images.filter((el) => el.postId === post.id)
-  );
-  return id.map((post) =>
-    post.map((el) => Images.find((ele) => ele.id === el.imgId).link)
-  );
+  const docId = data.map((el) => el.id)
+  const docList = await db.Docs_Images.findAll({
+    where: {
+      docId: {
+        [Op.in]: docId
+      }
+    }
+  }).catch(err => console.log(err))
+  const imgId = docList.map((el) => el.imgId)
+  const imgList = await db.Images.findAll({
+    where: {
+      id: {
+        [Op.in]: imgId
+      }
+    }
+  }).catch(err => console.log(err))
+
+  const result = {}
+  for(let i = 0; i < docList.length; i++) {
+    for(let j = 0; j < imgList.length; j++) {
+      if(result[docList[i].docId] === undefined && docList[i].imgId === imgList[j].id) {
+        result[docList[i].docId] = [imgList[j].link]
+      } else if (docList[i].imgId === imgList[j].id){
+          result[docList[i].docId].push(imgList[j].link)
+      }
+    }
+  }
+  return result
 }
 
 export async function findByHost(hostId) {
-  return Docs.filter((post) => post.userId === parseInt(hostId));
+  const result = await db.Docs.findAll({
+    where: {
+      userId: hostId
+    }
+  }).catch(err => console.log(err))
+  return result
 }
 
 export async function findByGuest(guestId) {
-  const id = Entries.filter(
-    (entry) => entry.userId === parseInt(guestId) && entry.status === '확정'
-  );
-  return id.map((el) => Docs.filter((post) => post.id === el.postId)[0]);
+  const participant = await db.Entries.findAll({
+    where: {
+      userId: guestId,
+      status: '확정'
+    }
+  }).catch(err => console.log(err))
+  const parDocId = participant.map((el) => el.dataValues.docId)
+  const result = await db.Docs.findAll({
+    where: {
+      id: {
+        [Op.in]: parDocId
+      }
+    }
+  }).catch(err => console.log(err))
+  return result
 }
 
 export async function validUser(id) {
-  return Users.find((el) => el.id === parseInt(id));
+  const result = await db.Users.findOne({
+    where: {
+      id: id
+    }
+  }).catch(err => console.log(err))
+  return result
 }
 
 export async function findById(id) {
