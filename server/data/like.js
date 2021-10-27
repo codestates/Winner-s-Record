@@ -43,3 +43,13 @@ export async function deleteLikePost(userId, postId) {
 export async function validId(id) {
   return Users.find((el) => el.id === parseInt(id));
 }
+
+export async function findByUserId(userId) {
+  const likeDoc = await db.Users_Docs.findAll({
+    attributes: ['docId'],
+    where: {userId},
+  });
+  return likeDoc.map((el) => {
+    return el.dataValues.docId;
+  });
+}

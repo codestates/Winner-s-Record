@@ -1,13 +1,29 @@
+import Sequelize from 'sequelize';
 import db from '../models/index.js';
+const Op = Sequelize.Op;
 
-export async function findByDocId(postId) {
-  const allEntries = Entries.filter((el) => el.postId === postId);
-  return allEntries
-    .filter((el) => el.status !== '대기')
-    .map((el) => el.userId)
-    .map((el) => {
-      return Users.find((el2) => el2.id === el)?.nickname;
-    });
+export async function findByDocId(docId) {
+  const allEntries = await db.Entries.findAll({
+    attributes: ['userId'],
+    where: {
+      docId,
+      status: {
+        [Op.ne]: '대기',
+      },
+    },
+  });
+  const entryId = allEntries.map((el) => {
+    return el.dataValues.userId;
+  });
+  const entryNickname = [];
+  for (let i = 0; i < entryId.length; i++) {
+    let nickname = await db.Users.findOne({
+      attributes: ['nickname'],
+      where: {id: entryId[i]},
+    }).then((data) => data.dataValues.nickname);
+    entryNickname.push(nickname);
+  }
+  return entryNickname;
 }
 
 export async function addPostEntry(userId, postId) {
