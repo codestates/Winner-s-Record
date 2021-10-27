@@ -56,13 +56,12 @@ export async function findNicknameRank(event, nickname) {
   let rankList
   console.log(index)
   if(index === 0 || index === 1 || index === 2) {
-    rankList = recordList.slice(0, 4)
+    rankList = recordList.slice(0, 5)
   } else if (index >= recordList.length-2) {
-    rankList = recordList.slice(recordList.length - 4, recordList.length-1)
+    rankList = recordList.slice(recordList.length - 5, recordList.length)
   } else {
     rankList = recordList.slice(index-3, index+2)
   }
-  console.log(rankList)
   const userId = rankList.map((el) => el.userId)
   const users = await db.Users.findAll({
     where: {

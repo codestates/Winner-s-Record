@@ -4,7 +4,7 @@ const { Op } = pkg;
 
 export async function findByType(type) {
   if (type === 'all') {
-    return db.Docs.findAll();
+    return db.Docs.findAll().catch((err) => console.log(err));
   }
   const result = await db.Docs.findAll({
     where: {
@@ -66,6 +66,7 @@ export async function findByImg(data) {
       }
     }
   }).catch(err => console.log(err))
+
   const imgId = docList.map((el) => el.imgId)
   const imgList = await db.Images.findAll({
     where: {
@@ -104,6 +105,7 @@ export async function findByGuest(guestId) {
       status: '확정'
     }
   }).catch(err => console.log(err))
+  
   const parDocId = participant.map((el) => el.dataValues.docId)
   const result = await db.Docs.findAll({
     where: {
