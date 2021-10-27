@@ -12,7 +12,7 @@ export default function Ranking({ nickname }) {
     axios
       .get(`http://localhost:8080/rank?event=${event}nickname=${nickname}`)
       .then((res) => {
-        // setScore(res.data);
+        setScore(res.data);
       })
       .catch((err) => {
         console.log(err);

@@ -1,19 +1,24 @@
 import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
 import { setUserInfo } from "../../modules/userInfo";
 
 export default function EditPhotoModal({ isModalOpen, openModalHandler }) {
-  const history = useHistory();
   const dispatch = useDispatch();
-  const [img, setImg] = useState("");
+  const [preview, setPreview] = useState(null);
+
+  const imgOnchange = (event) => {
+    const imageFile = event.target.files[0];
+    const imageURL = URL.createObjectURL(imageFile);
+    setPreview(imageURL);
+  };
+
   const handleEdit = () => {
     const oldToken = localStorage.getItem("token");
     axios
       .post(
         "http://localhost:8080/auth/img",
-        { img },
+        // { img },
         { headers: { authorization: `Bearer ${oldToken}` } }
       )
       .then((res) => {
@@ -29,12 +34,19 @@ export default function EditPhotoModal({ isModalOpen, openModalHandler }) {
       {isModalOpen ? (
         <div className="modal--backdrop">
           <div className="modal--view">
-            <div>프로필 사진을 변경해주세요</div>
+            <div>
+              <input
+                // ref={profileImgInput}
+                type="file"
+                accept="image/*"
+                name="file"
+                onChange={imgOnchange}
+              />
+              <img src={preview} />
+            </div>
             <div className="modal--btnContainer">
               <button onClick={openModalHandler}>돌아가기</button>
-              <button onClick={() => history.replace("/mypage")}>
-                변경하기
-              </button>
+              <button onClick={handleEdit}>변경하기</button>
             </div>
           </div>
         </div>
