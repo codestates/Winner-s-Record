@@ -5,6 +5,6 @@ import {jwtValidator} from '../middleware/jwt.js';
 
 const router = express.Router();
 
-router.post('/:postId', jwtValidator, matchController.insertResult);
+router.post('/:docId', jwtValidator, matchController.insertResult);
 
 export default router;
