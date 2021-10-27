@@ -1,17 +1,14 @@
-import Users from './dummy/Users.js';
+import db from '../models/index.js';
 
-export async function createUser(user) {
-  const newUser = {
-    id: Users.length + 1,
-    ...user,
-  };
-  Users.push(newUser);
-  console.log(Users);
-  return newUser.id;
-}
+export async function createUser(user) {}
 
 export async function findByEmail(email) {
-  return Users.find((user) => user.email === email);
+  console.log(db.Users);
+  const already = await db.Users.findOne({
+    where: {email},
+  });
+  console.log(already);
+  return already;
 }
 
 export async function findByNickname(nickname) {

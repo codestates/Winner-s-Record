@@ -17,4 +17,10 @@ export const config = {
     clientSecret: process.env.KAKAO_CLIENT_SECRET,
     redirectUrl: process.env.KAKAO_REDIRECTURI,
   },
+  db: {
+    dbUser: process.env.DATABASE_USER,
+    dbPassword: process.env.DATABASE_PASSWORD,
+    dbHost: process.env.DATABASE_HOST,
+    dbPort: process.env.DATABASE_PORT,
+  },
 };

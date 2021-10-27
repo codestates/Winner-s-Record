@@ -4,7 +4,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import authRouter from './router/auth.js';
-import postRouter from './router/post.js';
+import postRouter from './router/doc.js';
 import rankRouter from './router/rank.js';
 import likeRouter from './router/like.js';
 import matchRouter from './router/match.js';

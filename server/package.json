@@ -27,6 +27,7 @@
     "sequelize-cli": "^6.2.0"
   },
   "devDependencies": {
+    "babel-register": "^6.26.0",
     "nodemon": "^2.0.14"
   }
 }

@@ -1,15 +1,10 @@
-import Posts from './dummy/Posts.js';
-import Users_Posts from './dummy/Users_Posts.js';
-import Posts_Images from './dummy/Posts_Images.js';
-import Images from './dummy/Images.js';
-import Entries from './dummy/Entries.js';
-import Users from './dummy/Users.js';
+import db from '../models/index.js';
 
 export async function findByType(type) {
   if (type === 'all') {
-    return Posts;
+    return Docs;
   }
-  return Posts.filter((post) => post.type === type);
+  return Docs.filter((post) => post.type === type);
 }
 
 export async function findByEvent(data, event) {
@@ -35,13 +30,13 @@ export async function findByPlace(data, place) {
 
 export async function countLike(data) {
   return data.map(
-    (post) => Users_Posts.filter((el) => el.postId === post.id).length
+    (post) => Users_docs.filter((el) => el.postId === post.id).length
   );
 }
 
 export async function findByImg(data) {
   const id = data.map((post) =>
-    Posts_Images.filter((el) => el.postId === post.id)
+    Docs_images.filter((el) => el.postId === post.id)
   );
   return id.map((post) =>
     post.map((el) => Images.find((ele) => ele.id === el.imgId).link)
@@ -49,14 +44,14 @@ export async function findByImg(data) {
 }
 
 export async function findByHost(hostId) {
-  return Posts.filter((post) => post.userId === parseInt(hostId));
+  return Docs.filter((post) => post.userId === parseInt(hostId));
 }
 
 export async function findByGuest(guestId) {
   const id = Entries.filter(
     (entry) => entry.userId === parseInt(guestId) && entry.status === '확정'
   );
-  return id.map((el) => Posts.filter((post) => post.id === el.postId)[0]);
+  return id.map((el) => Docs.filter((post) => post.id === el.postId)[0]);
 }
 
 export async function validUser(id) {
@@ -64,14 +59,24 @@ export async function validUser(id) {
 }
 
 export async function findById(id) {
-  return Posts.find((post) => post.id === id);
+  return Docs.find((post) => post.id === id);
 }
 
 export async function validEvent(event) {
-  return (event === 'all' || event === 'tennis' || event === 'pingpong' || event === 'squash' || event === 'badminton')
+  return (
+    event === 'all' ||
+    event === 'tennis' ||
+    event === 'pingpong' ||
+    event === 'squash' ||
+    event === 'badminton'
+  );
 }
 
 export async function validType(type) {
-  return (type === 'all' || type === 'trade' || type === 'match' || type === 'tounarment')
+  return (
+    type === 'all' ||
+    type === 'trade' ||
+    type === 'match' ||
+    type === 'tounarment'
+  );
 }
-
