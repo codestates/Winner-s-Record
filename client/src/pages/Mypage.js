@@ -5,11 +5,11 @@ import { useDispatch } from "react-redux";
 import { setUserInfo } from "../modules/userInfo";
 import { setLogin } from "../modules/isLogin";
 import PostList from "../components/Main/PostList";
-import EditPhotoModal from "../components/Mypage/EditPhotoModal";
+import EditPhotoModal from "../components/Profile/EditPhotoModal";
 import LoadingIndicator from "../components/LoadingIndicator";
 import axios from "axios";
 
-export default function Mypage() {
+export default function Profile() {
   const { userId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [list, setList] = useState([]);
@@ -65,7 +65,6 @@ export default function Mypage() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token);
     axios
       .get(`http://localhost:8080/auth/${userId}`, {
         headers: { authorization: `Bearer ${token}` },
@@ -91,28 +90,23 @@ export default function Mypage() {
         <LoadingIndicator />
       ) : (
         <div>
-          <div className="mypage--profilecontainer">
-            {isValid ? (
-              <div className="mypage--photo" onClick={openModalHandler}>
-                <img src={profileData.img} alt="profile" />
-              </div>
-            ) : (
-              <div className="mypage--photo">
-                <img src={profileData.img} alt="profile" />
-              </div>
-            )}
-            <span className="mypage--username">{profileData.nickname}</span>
+          <div className="profile--container">
+            <div className="profile--photo">
+              <img src={profileData.img} alt="profile" />
+              {isValid ? <div onClick={openModalHandler}>사진 변경</div> : null}
+            </div>
+            <span className="profile--username">{profileData.nickname}</span>
             {isValid ? (
               <span
-                className="mypage--edit"
-                onClick={() => history.push("/mypage/edit")}
+                className="profile--edit"
+                onClick={() => history.push("/profile/edit")}
               >
                 수정
               </span>
             ) : null}
           </div>
-          <div className="mypage--rankingcontainer">
-            <div className="mypage--rankingtap">
+          <div className="profile--rankingcontainer">
+            <div className="profile--rankingtap">
               <ul>
                 <li>테니스</li>
                 <li>스쿼시</li>
@@ -120,18 +114,18 @@ export default function Mypage() {
                 <li>탁구</li>
               </ul>
             </div>
-            <div className="mypage--ranking">위</div>
-            <div className="mypage--score">승 패 점</div>
+            <div className="profile--ranking">위</div>
+            <div className="profile--score">승 패 점</div>
           </div>
-          <div className="mypage--tap">
+          <div className="profile--tap">
             <ul>
               <li onClick={handleCreatedList}>작성글</li>
-              <li onClick={handleLikeList}>관심글</li>
+              {isValid ? <li onClick={handleLikeList}>관심글</li> : null}
               <li onClick={handleProgressList}>진행중</li>
             </ul>
             <PostList postList={list} />
           </div>
-          <div className="mypage--postcontainer"></div>
+          <div className="profile--postcontainer"></div>
           <EditPhotoModal
             openModalHandler={openModalHandler}
             isModalOpen={isModalOpen}
