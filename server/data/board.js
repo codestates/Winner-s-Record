@@ -21,6 +21,20 @@ export async function findByDocId(docId) {
     }).then((data) => data.dataValues);
     board.push(text);
   }
+  const users = board.map((el) => el.userId);
+  const userData = [];
+  for (let i = 0; i < users.length; i++) {
+    let data = await db.Users.findOne({
+      attributes: ['nickname', 'img'],
+      where: {id: users[i]},
+    }).then((data) => data.dataValues);
+    userData.push(data);
+  }
+
+  for (let i = 0; i < board.length; i++) {
+    Object.assign(board[i], userData[i]);
+  }
+
   return board;
 
   // const board = allBoardId.map((el) => {

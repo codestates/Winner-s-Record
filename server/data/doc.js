@@ -1,6 +1,6 @@
-import Sequelize from 'sequelize';
+import pkg from 'sequelize';
 import db from '../models/index.js';
-const Op = Sequelize.Op
+const { Op } = pkg;
 
 export async function findByType(type) {
   if (type === 'all') {
