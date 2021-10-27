@@ -2,7 +2,7 @@ import 'express-async-errors';
 import * as matchData from '../data/match.js';
 import * as recordData from '../data/records.js';
 import * as userData from '../data/auth.js';
-import * as postData from '../data/post.js';
+import * as postData from '../data/doc.js';
 
 export async function insertResult(req, res) {
   const hostId = req.userId;

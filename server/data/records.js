@@ -1,4 +1,4 @@
-import Records from './dummy/Records.js';
+import db from '../models/index.js';
 
 export async function createRecords(result) {
   //result  = {event, winnerId, loserId}

@@ -1,4 +1,4 @@
-import Matches from './dummy/Matches.js';
+import db from '../models/index.js';
 
 export async function createMatch(result) {
   const newMatch = {
