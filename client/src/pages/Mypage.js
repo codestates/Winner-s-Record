@@ -15,12 +15,17 @@ export default function Mypage() {
   const userInfo = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
   const history = useHistory();
-  const isValid = userId === userInfo.userId;
+  const isValid = profileData.userId === userInfo.userId;
   const [list, setList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModalHandler = () => {
     setIsModalOpen(!isModalOpen);
   };
+  const [profileData, setProfileData] = useState({
+    userId: "",
+    nickname: "",
+    img: "",
+  });
 
   const handleCreatedList = () => {
     axios
@@ -60,20 +65,22 @@ export default function Mypage() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
-      axios
-        .get("http://localhost:8080/auth/", {
-          headers: { authorization: `Bearer ${token}` },
-        })
-        .then((res) => {
-          const { userdata } = res.data;
+    console.log(token);
+    axios
+      .get(`http://localhost:8080/auth/${userId}`, {
+        headers: { authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        const { userdata, profiledata } = res.data;
+        setProfileData(profiledata);
+        if (token) {
           dispatch(setLogin()); // 로그인 상태 변경
           dispatch(setUserInfo(userdata)); // 유저 정보 입력
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     handleCreatedList();
     setIsLoading(false);
   }, []);
@@ -87,18 +94,20 @@ export default function Mypage() {
           <div className="mypage--profilecontainer">
             {isValid ? (
               <div className="mypage--photo" onClick={openModalHandler}>
-                <img src={userInfo.img} alt="profile" />
+                <img src={profileData.img} alt="profile" />
               </div>
             ) : (
-              <div className="mypage--photo">사진</div>
+              <div className="mypage--photo">
+                <img src={profileData.img} alt="profile" />
+              </div>
             )}
-            <span className="mypage--username">{userInfo.nickname}</span>
+            <span className="mypage--username">{profileData.nickname}</span>
             {isValid ? (
               <span
                 className="mypage--edit"
                 onClick={() => history.push("/mypage/edit")}
               >
-                수정아이콘
+                수정
               </span>
             ) : null}
           </div>
