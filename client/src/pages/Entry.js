@@ -1,16 +1,22 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import EntryPlayer from "../components/Entry/EntryPlayer";
+import { ApplyBtn, FixBtn } from "../components/Entry/EntryPrimaryButton";
 import NeedLoginModal from "../components/NeedLoginModal";
 
 const Entry = () => {
   const { postId } = useParams();
+  const userInfo = useSelector((state) => state.userInfo);
   const [fixed, setFixed] = useState([]);
   const [applied, setApplied] = useState([]);
   const [host, setHost] = useState({});
-  const [isModalActive, setIsModalActive] = useState(false);
-  const [isLoginModalActive, setIsLoginModalActive] = useState(false);
+
+  const [loginModal, setLoginModal] = useState(false);
+
+  const [activeModal, setActiveModal] = useState(false);
+  const [modalText, setModalText] = useState("권한이 없습니다.");
 
   const getData = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
@@ -34,6 +40,7 @@ const Entry = () => {
         setApplied(applied);
       });
   };
+
   useEffect(() => {
     getData();
   }, []);
@@ -48,8 +55,9 @@ const Entry = () => {
           userData={host}
           setApplied={setApplied}
           setFixed={setFixed}
-          setIsModalActive={setIsModalActive}
-          setIsLoginModalActive={setIsLoginModalActive}
+          setActiveModal={setActiveModal}
+          setModalText={setModalText}
+          setLoginModal={setLoginModal}
         />
         {fixed.map((userData) => {
           return (
@@ -59,8 +67,9 @@ const Entry = () => {
               setApplied={setApplied}
               setFixed={setFixed}
               hostId={host.userId}
-              setIsModalActive={setIsModalActive}
-              setIsLoginModalActive={setIsLoginModalActive}
+              setActiveModal={setActiveModal}
+              setModalText={setModalText}
+              setLoginModal={setLoginModal}
             />
           );
         })}
@@ -75,21 +84,47 @@ const Entry = () => {
               setApplied={setApplied}
               setFixed={setFixed}
               hostId={host.userid}
-              setIsModalActive={setIsModalActive}
-              setIsLoginModalActive={setIsLoginModalActive}
+              setActiveModal={setActiveModal}
+              setModalText={setModalText}
+              setLoginModal={setLoginModal}
             />
           );
         })}
       </ul>
-      {isModalActive ? (
+
+      {userInfo.userId === host.userId ? (
+        <FixBtn
+          fixed={fixed}
+          setActiveModal={setActiveModal}
+          setModalText={setModalText}
+        />
+      ) : (
+        <ApplyBtn
+          postId={postId}
+          fixed={fixed}
+          setApplied={setApplied}
+          setLoginModal={setLoginModal}
+          setActiveModal={setActiveModal}
+          setModalText={setModalText}
+        />
+      )}
+
+      {activeModal ? (
         <div className={"modal--backdrop"}>
-          <div className={"modal--view"}></div>
+          <div className={"modal--view"}>
+            <div className="modal--text">{modalText}</div>
+            <div
+              className="modal--btn"
+              onClick={() => {
+                setActiveModal(false);
+              }}
+            >
+              닫기
+            </div>
+          </div>
         </div>
       ) : null}
-      <NeedLoginModal
-        isModalOpen={isLoginModalActive}
-        setIsModalOpen={setIsLoginModalActive}
-      />
+      <NeedLoginModal isModalOpen={loginModal} setIsModalOpen={setLoginModal} />
     </div>
   );
 };

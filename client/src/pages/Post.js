@@ -28,7 +28,6 @@ const Post = () => {
     const token = localStorage.getItem("token");
 
     const Authorization = `Bearer ${token}`;
-    console.log(Authorization);
     axios
       .get(`http://localhost:8080/doc/${postId}`, {
         headers: { Authorization },
@@ -46,14 +45,11 @@ const Post = () => {
     getPostData();
   }, []);
 
-  useEffect(() => {
-    console.log(loginModal);
-  }, [loginModal]);
-
   let { userData, title, text, place, like, img, type, board = [] } = postInfo;
 
   return (
     <div className="post--container">
+      {/* {isLoading ? null : <ImageCarousel images={img} />} */}
       <ImageCarousel images={img} />
       <div className="post--header">
         <div className="post--title">{title}</div>
