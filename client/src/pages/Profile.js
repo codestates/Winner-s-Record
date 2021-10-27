@@ -8,7 +8,7 @@ import { setLogin } from "../modules/isLogin";
 import LoadingIndicator from "../components/LoadingIndicator";
 import UserInfo from "../components/Profile/UserInfo";
 import Ranking from "../components/Profile/Ranking";
-import DocList from "../components/DocList";
+import DocList from "../components/Profile/DocList";
 import Error from "./Error";
 
 export default function Profile() {

@@ -1,4 +1,4 @@
-import PostList from "./Main/PostList";
+import PostList from "../Main/PostList";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
