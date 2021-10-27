@@ -1,18 +1,17 @@
 import pkg from 'sequelize';
 import db from '../models/index.js';
-const { Op } = pkg;
 
 export async function findByType(type) {
   if (type === 'all') {
-    return db.Docs.findAll()
+    return db.Docs.findAll();
   }
   const result = await db.Docs.findAll({
-    where : {
-      type: type
-    }
-  }).catch(err => console.log(err))
+    where: {
+      type: type,
+    },
+  }).catch((err) => console.log(err));
 
-  return result
+  return result;
 }
 
 export async function findByEvent(data, event) {
@@ -125,7 +124,13 @@ export async function validUser(id) {
 }
 
 export async function findById(id) {
-  return Docs.find((post) => post.id === id);
+  try {
+    return db.Docs.findOne({
+      where: {id},
+    }).then((data) => data.dataValues);
+  } catch {
+    return null;
+  }
 }
 
 export async function validEvent(event) {
