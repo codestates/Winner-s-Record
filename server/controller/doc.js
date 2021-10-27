@@ -18,68 +18,91 @@ export async function searchDoc(req, res) {
       const doc = await docData.findByType(type);
       const doc2 = await docData.findByEvent(doc, event);
       const doc3 = await docData.findByTitle(doc2, title);
-      const like = await docData.countLike(doc3);
-  //     const img = await docData.findByImg(doc3);
+      const docList = doc3.map((el) => el.dataValues)
+      const like = await docData.countLike(docList);
+      const img = await docData.findByImg(docList);
+      const key = Object.keys(img)
 
-  //     for (let i = 0; i < doc3.length; i++) {
-  //       doc3[i].like = like[i];
-  //       doc3[i].img = img[i];
-  //     }
-  //     return res.status(200).send({data: doc3});
-  //   } else {
-  //     return res.status(404).send({message: '해당 포스트가 없습니다'});
-  //   }
-  // } else if (type && event && place) {
-  //   const types = await docData.validType(type);
-  //   const events = await docData.validEvent(event);
-  //   if (types && events) {
-  //     const doc = await docData.findByType(type);
-  //     const doc2 = await docData.findByEvent(doc, event);
-  //     const doc3 = await docData.findByPlace(doc2, place);
-  //     const like = await docData.countLike(doc3);
-  //     const img = await docData.findByImg(doc3);
-
-  //     for (let i = 0; i < doc3.length; i++) {
-  //       doc3[i].like = like[i];
-  //       doc3[i].img = img[i];
-  //     }
-  //     return res.status(200).send({data: doc3});
-  //   } else {
-  //     return res.status(404).send({message: '해당 포스트가 없습니다'});
-  //   }
-  // } else if (hostId) {
-  //   const user = await docData.validUser(hostId);
-  //   if (user) {
-  //     const doc = await docData.findByHost(hostId);
-  //     const like = await docData.countLike(doc);
-  //     const img = await docData.findByImg(doc);
-
-  //     for (let i = 0; i < doc.length; i++) {
-  //       doc[i].like = like[i];
-  //       doc[i].img = img[i];
-  //     }
-  //     return res.status(200).json({data: doc});
-  //   } else {
-  //     return res.status(404).json({message: '해당 포스트가 없습니다'});
-  //   }
-  // } else if (guestId) {
-  //   const user = await docData.validUser(guestId);
-  //   if (user) {
-  //     const doc = await docData.findByGuest(guestId);
-  //     const like = await docData.countLike(doc);
-  //     const img = await docData.findByImg(doc);
-
-  //     for (let i = 0; i < doc.length; i++) {
-  //       doc[i].like = like[i];
-  //       doc[i].img = img[i];
-  //     }
-  //     return res.status(200).json({data: doc});
-  //   } else {
-  //     return res.status(404).json({message: '해당 포스트가 없습니다'});
+      for (let i = 0; i < docList.length; i++) {
+        for(let j = 0; j < key.length; j++) {
+          if(docList[i].id === parseInt(key[j])) {
+            docList[i].like = like[docList[j].id] || 0
+            docList[i].img = img[docList[j].id]
+          }
+        }
+      }
+      return res.status(200).send({data: docList});
+    } else {
+      return res.status(404).send({message: '해당 포스트가 없습니다'});
     }
-  res.status(200).send('adba')
+  } else if (type && event && place) {
+    const types = await docData.validType(type);
+    const events = await docData.validEvent(event);
+    if (types && events) {
+      const doc = await docData.findByType(type);
+      const doc2 = await docData.findByEvent(doc, event);
+      const doc3 = await docData.findByPlace(doc2, place);
+      const docList = doc3.map((el) => el.dataValues)
+      const like = await docData.countLike(docList);
+      const img = await docData.findByImg(docList);
+      const key = Object.keys(img)
+
+      for (let i = 0; i < docList.length; i++) {
+        for(let j = 0; j < key.length; j++) {
+          if(docList[i].id === parseInt(key[j])) {
+            docList[i].like = like[docList[j].id] || 0
+            docList[i].img = img[docList[j].id]
+          }
+        }
+      }
+      return res.status(200).send({data: docList});
+    } else {
+      return res.status(404).send({message: '해당 포스트가 없습니다'});
+    } 
+  }else if (hostId) {
+    const user = await docData.validUser(hostId);
+    const doc = await docData.findByHost(hostId);
+    const docList = doc.map((el) => el.dataValues)
+    if (user && docList.length !== 0) {
+      const like = await docData.countLike(docList);
+      const img = await docData.findByImg(docList);
+      const key = Object.keys(img)
+
+      for (let i = 0; i < docList.length; i++) {
+        for(let j = 0; j < key.length; j++) {
+          if(docList[i].id === parseInt(key[j])) {
+            docList[i].like = like[docList[j].id] || 0
+            docList[i].img = img[docList[j].id]
+          }
+        }
+      }
+      return res.status(200).send({data: docList});
+    } else {
+      return res.status(404).send({message: '해당 포스트가 없습니다'});
+    } 
+  } else if (guestId) {
+    const user = await docData.validUser(guestId);
+    const doc = await docData.findByGuest(guestId);
+    const docList = doc.map((el) => el.dataValues)
+    if (user && docList.length !== 0) {
+      const like = await docData.countLike(docList);
+      const img = await docData.findByImg(docList);
+      const key = Object.keys(img)
+
+      for (let i = 0; i < docList.length; i++) {
+        for(let j = 0; j < key.length; j++) {
+          if(docList[i].id === parseInt(key[j])) {
+            docList[i].like = like[docList[j].id] || 0
+            docList[i].img = img[docList[j].id]
+          }
+        }
+      }
+      return res.status(200).send({data: docList});
+    } else {
+      return res.status(404).send({message: '해당 포스트가 없습니다'});
+    }
   }
-  res.status(404).json({message: '해당 포스트가 없습니다'});
+  return res.status(404).json({message: '해당 포스트가 없습니다'});
 }
 
 export async function getOne(req, res) {
