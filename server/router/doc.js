@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get('/', docController.searchDoc);
 router.get('/:docId', docController.getOne);
+router.post('/', jwtValidator, docController.create);
 router.put('/:docId', jwtValidator, docController.editDoc);
 
 export default router;

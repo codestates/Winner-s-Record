@@ -203,3 +203,61 @@ export async function editDoc(docId, data) {
   }).catch((err) => console.log(err));
   return editedDoc;
 }
+
+export async function create(userId, data) {
+  const {type, title, event, place, price, text, img} = data;
+  let created;
+  if (type === 'trade') {
+    created = await db.Docs.create({
+      userId,
+      type,
+      status: '대기',
+      event,
+      title,
+      text,
+      price,
+      place,
+    });
+  } else {
+    created = await db.Docs.create({
+      userId,
+      type,
+      status: '대기',
+      event,
+      title,
+      text,
+      place,
+    });
+  }
+  // 사진추가 후 Doc_Images 생성
+  if (img) {
+    for (let i = 0; i < img.length; i++) {
+      const newImg = await db.Images.create({
+        link: img[i],
+      });
+      await db.Docs_Images.create({
+        docId: created.dataValues.id,
+        imgId: newImg.dataValues.id,
+      });
+    }
+  }
+
+  // 보드에 호스트로 안녕하세요 생성, Docs_Boards 생성
+  const firstBoard = await db.Boards.create({
+    userId,
+    text: '안녕하세요',
+  });
+  await db.Docs_Boards.create({
+    docId: created.dataValues.id,
+    boardId: firstBoard.dataValues.id,
+  });
+
+  //entry에 호스트 생성
+  await db.Entries.create({
+    status: '호스트',
+    docId: created.dataValues.id,
+    userId,
+  });
+
+  return created.dataValues;
+}

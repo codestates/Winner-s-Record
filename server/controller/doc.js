@@ -7,6 +7,7 @@ import * as likeData from '../data/like.js';
 import * as entryData from '../data/entry.js';
 import * as boardData from '../data/board.js';
 import {config} from '../config.js';
+import db from '../models/index.js';
 
 export async function searchDoc(req, res) {
   const {type, event, title, place, hostId, guestId} = req.query;
@@ -128,94 +129,69 @@ export async function getOne(req, res) {
   const doc = await docData.findById(docId);
   if (!doc) {
     return res.status(404).json({message: '해당 포스트가 없습니다'});
-  } else {
-    const hostUser = await userData.findById(doc.userId);
-    const docImgLink = await docData.findByImg([doc]);
+  }
+  const hostUser = await userData.findById(doc.userId);
+  const docImgLink = await docData.findByImg([doc]);
 
-    let like;
-    console.log('유져아이디 : ', userId);
-    if (userId === 'guest') {
+  let like;
+  if (userId === 'guest') {
+    like = false;
+  } else {
+    const likeList = await likeData.findByUserId(userId);
+    if (likeList.length === 0) {
       like = false;
     } else {
-      const likeList = await likeData.findByUserId(userId);
-      if (likeList.length === 0) {
-        like = false;
-      } else {
-        likeList.includes(docId) ? (like = true) : (like = false);
-      }
+      likeList.includes(docId) ? (like = true) : (like = false);
     }
+  }
 
-    console.log('like : ', like);
+  const player = await entryData.findByDocId(docId, doc.status);
+  const board = await boardData.findByDocId(docId);
 
-    const player = await entryData.findByDocId(docId);
-    const board = await boardData.findByDocId(docId);
-
-    if (doc.type === 'trade') {
-      return res.status(200).json({
-        data: {
-          userData: {
-            userId: hostUser.id,
-            nickname: hostUser.nickname,
-            img: hostUser.img,
-          },
-          type: doc.type,
-          status: doc.status,
-          title: doc.title,
-          event: doc.event,
-          price: doc.price,
-          place: doc.place,
-          text: doc.text,
-          img: docImgLink[docId.toString()],
-          like,
+  if (doc.type === 'trade') {
+    return res.status(200).json({
+      data: {
+        userData: {
+          userId: hostUser.id,
+          nickname: hostUser.nickname,
+          img: hostUser.img,
         },
-      });
-    } else {
-      if (doc.status === '대기') {
-        return res.status(200).json({
-          data: {
-            userData: {
-              userId: hostUser.id,
-              nickname: hostUser.nickname,
-              img: hostUser.img,
-            },
-            type: doc.type,
-            status: doc.status,
-            title: doc.title,
-            event: doc.event,
-            place: doc.place,
-            text: doc.text,
-            img: docImgLink[docId.toString()],
-            like,
-          },
-        });
-      } else if (doc.status === '진행' || doc.status === '완료') {
-        return res.status(200).json({
-          data: {
-            userData: {
-              userId: hostUser.id,
-              nickname: hostUser.nickname,
-              img: hostUser.img,
-            },
-            type: doc.type,
-            status: doc.status,
-            title: doc.title,
-            event: doc.event,
-            place: doc.place,
-            text: doc.text,
-            img: docImgLink[docId.toString()],
-            like,
-            player,
-            board,
-          },
-        });
-      }
-    }
+        type: doc.type,
+        status: doc.status,
+        title: doc.title,
+        event: doc.event,
+        price: doc.price,
+        place: doc.place,
+        text: doc.text,
+        img: docImgLink[docId.toString()],
+        like,
+      },
+    });
+  } else {
+    return res.status(200).json({
+      data: {
+        userData: {
+          userId: hostUser.id,
+          nickname: hostUser.nickname,
+          img: hostUser.img,
+        },
+        type: doc.type,
+        status: doc.status,
+        title: doc.title,
+        event: doc.event,
+        place: doc.place,
+        text: doc.text,
+        img: docImgLink[docId.toString()],
+        like,
+        player,
+        board,
+      },
+    });
   }
 }
 
 export async function editDoc(req, res) {
   const userId = req.userId;
-  console.log('토큰유저아이디', userId);
   const docId = req.params.docId;
   const host = await docData.findById(docId);
   if (host.userId !== userId) {
@@ -235,7 +211,7 @@ export async function editDoc(req, res) {
     likeList.length === 0 ? (like = false) : (like = true);
   }
 
-  const player = await entryData.findByDocId(docId);
+  const player = await entryData.findByDocId(docId, editedDoc.status);
   const board = await boardData.findByDocId(docId);
 
   if (editedDoc.type === 'trade') {
@@ -258,44 +234,57 @@ export async function editDoc(req, res) {
       },
     });
   } else {
-    if (editedDoc.status === '대기') {
-      return res.status(200).json({
-        data: {
-          userData: {
-            userId: hostUser.id,
-            nickname: hostUser.nickname,
-            img: hostUser.img,
-          },
-          type: editedDoc.type,
-          status: editedDoc.status,
-          title: editedDoc.title,
-          event: editedDoc.event,
-          place: editedDoc.place,
-          text: editedDoc.text,
-          img: docImgLink[docId.toString()],
-          like,
+    return res.status(200).json({
+      data: {
+        userData: {
+          userId: hostUser.id,
+          nickname: hostUser.nickname,
+          img: hostUser.img,
         },
-      });
-    } else if (editedDoc.status === '진행') {
-      return res.status(200).json({
-        data: {
-          userData: {
-            userId: hostUser.id,
-            nickname: hostUser.nickname,
-            img: hostUser.img,
-          },
-          type: editedDoc.type,
-          status: editedDoc.status,
-          title: editedDoc.title,
-          event: editedDoc.event,
-          place: editedDoc.place,
-          text: editedDoc.text,
-          img: docImgLink[docId.toString()],
-          like,
-          player,
-          board,
-        },
-      });
-    }
+        type: editedDoc.type,
+        status: editedDoc.status,
+        title: editedDoc.title,
+        event: editedDoc.event,
+        place: editedDoc.place,
+        text: editedDoc.text,
+        img: docImgLink[docId.toString()],
+        like,
+        player,
+        board,
+      },
+    });
   }
+}
+
+export async function create(req, res) {
+  const userId = req.userId;
+  const hostUser = await userData.findById(userId);
+
+  const created = await docData.create(userId, req.body);
+
+  const docImgLink = await docData.findByImg([created]);
+
+  console.log(created);
+  const player = await entryData.findByDocId(created.id, '대기');
+  const board = await boardData.findByDocId(created.id);
+
+  return res.status(200).json({
+    data: {
+      userData: {
+        userId: hostUser.id,
+        nickname: hostUser.nickname,
+        img: hostUser.img,
+      },
+      type: created.type,
+      status: created.status,
+      title: created.title,
+      event: created.event,
+      place: created.place,
+      text: created.text,
+      img: docImgLink[created.id.toString()],
+      like: false,
+      player,
+      board,
+    },
+  });
 }
