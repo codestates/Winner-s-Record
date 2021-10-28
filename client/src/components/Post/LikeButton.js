@@ -27,7 +27,7 @@ const LikeButton = ({ like, setLoginModal, postInfo, setPostInfo, postId }) => {
           { headers: { Authorization } }
         )
         .then((res) => {
-          if (res.status !== 200) {
+          if (res.status !== 201) {
             console.log("에러발생", res);
           } else {
             setPostInfo({ ...postInfo, like: true });

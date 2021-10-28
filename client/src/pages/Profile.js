@@ -7,7 +7,7 @@ import { setLogin } from "../modules/isLogin";
 
 import LoadingIndicator from "../components/LoadingIndicator";
 import UserInfo from "../components/Profile/UserInfo";
-import Ranking from "../components/Profile/Ranking";
+import Rank from "../components/Profile/Rank";
 import DocList from "../components/Profile/DocList";
 import Error from "./Error";
 
@@ -51,7 +51,7 @@ export default function Profile() {
       ) : profileData.userId ? (
         <div>
           <UserInfo isMypage={isMypage} profileData={profileData} />
-          <Ranking nickname={profileData.nickname} />
+          <Rank nickname={profileData.nickname} />
           <DocList userId={userId} isMypage={isMypage} />
         </div>
       ) : (
