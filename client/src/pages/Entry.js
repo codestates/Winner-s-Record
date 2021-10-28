@@ -26,14 +26,21 @@ const Entry = () => {
       })
       .then((res) => {
         console.log("데이터", res.data);
-        const fixed = res.data.data.filter((e) => {
-          return e.status === "확정" ? true : false;
-        });
-        const applied = res.data.data.filter((e) => {
-          return e.status === "대기" ? true : false;
-        });
+
         const host = res.data.data.filter((e) => {
           return e.status === "호스트" ? true : false;
+        });
+
+        const fixed = res.data.data.filter((e) => {
+          console.log("inner", host[0].userId);
+          return e.status === "확정" && e.userId !== host[0].userId
+            ? true
+            : false;
+        });
+        const applied = res.data.data.filter((e) => {
+          return e.status === "대기" && e.userId !== host[0].userId
+            ? true
+            : false;
         });
 
         setHost(host[0]);
@@ -55,6 +62,7 @@ const Entry = () => {
               postId={postId}
               userData={userData}
               setApplied={setApplied}
+              fixed={fixed}
               setFixed={setFixed}
               hostId={host.userId}
               setIsModalActive={setIsModalActive}
@@ -72,6 +80,7 @@ const Entry = () => {
               postId={postId}
               userData={userData}
               setApplied={setApplied}
+              fixed={fixed}
               setFixed={setFixed}
               hostId={host.userId}
               setIsModalActive={setIsModalActive}

@@ -6,6 +6,7 @@ const EntryPlayer = ({
   postId,
   userData,
   setApplied,
+  fixed,
   setFixed,
   hostId,
   setIsModalActive,
@@ -21,18 +22,24 @@ const EntryPlayer = ({
   const fixPlayer = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     const endpoint = `http://localhost:8080/entry/${postId}`;
-    axios
-      .post(endpoint, { userId }, { headers: { Authorization } })
-      .then((res) => {
-        const fixed = res.data.data.filter((e) => {
-          return e.status === "확정" ? true : false;
+    if (fixed.length) {
+      setModalText("다수의 상대를 지정할 수 없어요.");
+      setIsModalActive(true);
+    } else {
+      axios
+        .put(endpoint, { userId }, { headers: { Authorization } })
+        .then((res) => {
+          console.log(res);
+          const fixed = res.data.data.filter((e) => {
+            return e.status === "확정" && e.userId !== hostId ? true : false;
+          });
+          const applied = res.data.data.filter((e) => {
+            return e.status === "대기" && e.userId !== hostId ? true : false;
+          });
+          setFixed(fixed);
+          setApplied(applied);
         });
-        const applied = res.data.data.filter((e) => {
-          return e.status === "대기" ? true : false;
-        });
-        setFixed(fixed);
-        setApplied(applied);
-      });
+    }
   };
 
   const deleteHandler = () => {
@@ -48,13 +55,13 @@ const EntryPlayer = ({
       if (userData.status === "확정") {
         console.log("여기 확정인 아이들만");
         axios
-          .post(endpoint, { userId }, { headers: { Authorization } })
+          .put(endpoint, { userId }, { headers: { Authorization } })
           .then((res) => {
             const fixed = res.data.data.filter((e) => {
-              return e.status === "확정" ? true : false;
+              return e.status === "확정" && e.userId !== hostId ? true : false;
             });
             const applied = res.data.data.filter((e) => {
-              return e.status === "대기" ? true : false;
+              return e.status === "대기" && e.userId !== hostId ? true : false;
             });
             setFixed(fixed);
             setApplied(applied);
@@ -64,10 +71,10 @@ const EntryPlayer = ({
           .delete(endpoint, { headers: { Authorization }, data: { userId } })
           .then((res) => {
             const fixed = res.data.data.filter((e) => {
-              return e.status === "확정" ? true : false;
+              return e.status === "확정" && e.userId !== hostId ? true : false;
             });
             const applied = res.data.data.filter((e) => {
-              return e.status === "대기" ? true : false;
+              return e.status === "대기" && e.userId !== hostId ? true : false;
             });
             setFixed(fixed);
             setApplied(applied);

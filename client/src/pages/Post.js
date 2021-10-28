@@ -14,6 +14,7 @@ import PostEditBtns from "../components/Post/PostEditBtns";
 import { useSelector } from "react-redux";
 
 const Post = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const userInfo = useSelector((state) => state.userInfo);
   const { postId } = useParams();
   const [postInfo, setPostInfo] = useState({
@@ -25,7 +26,7 @@ const Post = () => {
   });
 
   useEffect(() => {
-    console.log(postInfo);
+    console.log("포스트 인포 확인하세요", postInfo);
   }, [postInfo]);
 
   const [isModalActive, setIsModalActive] = useState(false);
@@ -53,6 +54,9 @@ const Post = () => {
 
   useEffect(() => {
     getPostData();
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 300);
   }, []);
 
   let {
@@ -92,15 +96,19 @@ const Post = () => {
       ) : null}
 
       <div className="post--btns">
-        <PostPrimaryButton
-          hostId={userData.userId}
-          type={type}
-          status={status}
-          setLoginModal={setLoginModal}
-          setIsModalActive={setIsModalActive}
-          setModalText={setModalText}
-          setModalBtnType={setModalBtnType}
-        />
+        {isLoading ? null : (
+          <PostPrimaryButton
+            hostId={userData.userId}
+            type={type}
+            status={status}
+            setLoginModal={setLoginModal}
+            setIsModalActive={setIsModalActive}
+            setModalText={setModalText}
+            setModalBtnType={setModalBtnType}
+            player={player}
+          />
+        )}
+
         <LikeButton
           like={like}
           setLoginModal={setLoginModal}
@@ -117,6 +125,7 @@ const Post = () => {
           modalBtnType={modalBtnType}
           status={status}
           setPostInfo={setPostInfo}
+          player={player}
         />
       ) : null}
     </div>

@@ -31,7 +31,7 @@ export async function entryList(req, res) {
     const token = authorization.split(" ")[1];
     const user = await jwt.verify(token, String(config.jwt.secretKey));
     const entryList = await entryData.getEntryList(docId);
-    if (entryPost && user) {
+    if (entryList && user) {
       const entryUser = await entryData.entryList(docId, entryList);
       return res.status(200).send({ data: entryUser });
     } else {

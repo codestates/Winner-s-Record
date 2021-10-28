@@ -40,7 +40,15 @@ const TradeButton = ({
   );
 };
 
-const MatchButton = ({ hostId, setLoginModal, status, player = [] }) => {
+const MatchButton = ({
+  hostId,
+  setLoginModal,
+  status,
+  player = [],
+  setModalBtnType,
+  setModalText,
+  setIsModalActive,
+}) => {
   const history = useHistory();
   const { postId } = useParams();
   const [buttonName, setButtonName] = useState("신청자 목록");
@@ -52,12 +60,15 @@ const MatchButton = ({ hostId, setLoginModal, status, player = [] }) => {
   const clickHandler = () => {
     if (!isLogin) {
       setLoginModal(true);
-    } else if (buttonName === "결과확인") {
+    } else if (buttonName === "결과 확인") {
       // 결과 페이지로 리디렉션
       history.push(`/post`);
     } else if (buttonName === "참가 신청" || buttonName === "신청자 목록") {
       history.push(`/post/${postId}/entry`);
     } else {
+      setModalText("승자를 선택해주세요!");
+      setModalBtnType("choosewinner");
+      setIsModalActive(true);
       // 결과 입력
     }
   };
@@ -92,9 +103,11 @@ const PostPrimaryButton = ({
   hostId,
   type,
   status,
+  setLoginModal,
   setIsModalActive,
   setModalText,
   setModalBtnType,
+  player,
 }) => {
   return (
     <>
@@ -107,7 +120,15 @@ const PostPrimaryButton = ({
           setModalBtnType={setModalBtnType}
         />
       ) : (
-        <MatchButton hostId={hostId} />
+        <MatchButton
+          hostId={hostId}
+          setLoginModal={setLoginModal}
+          status={status}
+          player={player}
+          setModalBtnType={setModalBtnType}
+          setModalText={setModalText}
+          setIsModalActive={setIsModalActive}
+        />
       )}
     </>
   );

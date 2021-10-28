@@ -13,6 +13,7 @@ const userInfoSlice = createSlice({
   initialState,
   reducers: {
     setUserInfo(state, { payload }) {
+      console.log(payload);
       return { ...state, ...payload };
     },
     deleteUserInfo(state, { payload }) {

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 
 const FixBtn = ({ fixed, setIsModalActive, setModalText }) => {
-  const postId = useParams();
+  const { postId } = useParams();
   const history = useHistory();
 
   const clickHandler = () => {
@@ -12,14 +12,20 @@ const FixBtn = ({ fixed, setIsModalActive, setModalText }) => {
       setIsModalActive(true);
     } else {
       const Authorization = `Bearer ${localStorage.getItem("token")}`;
-      axios.post(
-        `http://localhost:8080/doc/${postId}`,
-        { status: "진행" },
-        { headers: { Authorization } }.then((res) => {
+      axios
+        .put(
+          `http://localhost:8080/doc/${postId}`,
+          { status: "진행" },
+          { headers: { Authorization } }
+        )
+        .then((res) => {
           console.log(res.data);
           history.push(`/post/${postId}`);
-        })
-      );
+          setModalText("상대가 지정되었습니다.");
+          setIsModalActive(true);
+          // 상대가 확정되었습니다.
+          // 닫기 모달
+        });
     }
   };
   return (
