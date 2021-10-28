@@ -16,9 +16,7 @@ const LikeButton = ({ like, setLoginModal, postInfo, setPostInfo, postId }) => {
   };
   const changeStatus = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
-    console.log("온클릭 이벤트 시작");
     if (!like) {
-      console.log("너 왜 안뜨니 ?");
       // 좋아요 추가
       axios
         .post(

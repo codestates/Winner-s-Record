@@ -25,14 +25,22 @@ const Entry = () => {
         headers: { Authorization },
       })
       .then((res) => {
-        const fixed = res.data.data.filter((e) => {
-          return e.status === "확정" ? true : false;
-        });
-        const applied = res.data.data.filter((e) => {
-          return e.status === "대기" ? true : false;
-        });
+        console.log("데이터", res.data);
+
         const host = res.data.data.filter((e) => {
           return e.status === "호스트" ? true : false;
+        });
+
+        const fixed = res.data.data.filter((e) => {
+          console.log("inner", host[0].userId);
+          return e.status === "확정" && e.userId !== host[0].userId
+            ? true
+            : false;
+        });
+        const applied = res.data.data.filter((e) => {
+          return e.status === "대기" && e.userId !== host[0].userId
+            ? true
+            : false;
         });
 
         setHost(host[0]);
@@ -40,7 +48,6 @@ const Entry = () => {
         setApplied(applied);
       });
   };
-
   useEffect(() => {
     getData();
   }, []);
@@ -49,22 +56,13 @@ const Entry = () => {
     <div className="entry--container">
       <div className="entry--nametag">참가 확정 인원</div>
       <ul className="entry--fixed--container">
-        {/* 호스트가 가장 상단 */}
-        <EntryPlayer
-          postId={postId}
-          userData={host}
-          setApplied={setApplied}
-          setFixed={setFixed}
-          setIsModalActive={setIsModalActive}
-          setModalText={setModalText}
-          setLoginModal={setLoginModal}
-        />
         {fixed.map((userData) => {
           return (
             <EntryPlayer
               postId={postId}
               userData={userData}
               setApplied={setApplied}
+              fixed={fixed}
               setFixed={setFixed}
               hostId={host.userId}
               setIsModalActive={setIsModalActive}
@@ -82,8 +80,9 @@ const Entry = () => {
               postId={postId}
               userData={userData}
               setApplied={setApplied}
+              fixed={fixed}
               setFixed={setFixed}
-              hostId={host.userid}
+              hostId={host.userId}
               setIsModalActive={setIsModalActive}
               setModalText={setModalText}
               setLoginModal={setLoginModal}

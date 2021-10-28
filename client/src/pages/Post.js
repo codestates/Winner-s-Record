@@ -14,6 +14,7 @@ import PostEditBtns from "../components/Post/PostEditBtns";
 import { useSelector } from "react-redux";
 
 const Post = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const userInfo = useSelector((state) => state.userInfo);
   const { postId } = useParams();
   const [postInfo, setPostInfo] = useState({
@@ -25,7 +26,7 @@ const Post = () => {
   });
 
   useEffect(() => {
-    console.log(postInfo);
+    console.log("포스트 인포 확인하세요", postInfo);
   }, [postInfo]);
 
   const [isModalActive, setIsModalActive] = useState(false);
@@ -43,6 +44,7 @@ const Post = () => {
         withCredentials: true,
       })
       .then((res) => {
+        console.log(res);
         setPostInfo(res.data.data);
       })
       .catch((res) => {
@@ -52,6 +54,9 @@ const Post = () => {
 
   useEffect(() => {
     getPostData();
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 300);
   }, []);
 
   let {
@@ -64,6 +69,7 @@ const Post = () => {
     type,
     board = [],
     player = [],
+    status,
   } = postInfo;
 
   return (
@@ -85,12 +91,24 @@ const Post = () => {
       <div className="post--text">{text}</div>
       <PostMap place={place} />
 
-      {player.includes(userInfo.nickname) ? (
+      {status !== "대기" && player.includes(userInfo.nickname) ? (
         <PostComments board={board} setPostInfo={setPostInfo} />
       ) : null}
 
       <div className="post--btns">
-        <PostPrimaryButton userId={userData.userId} type={type} />
+        {isLoading ? null : (
+          <PostPrimaryButton
+            hostId={userData.userId}
+            type={type}
+            status={status}
+            setLoginModal={setLoginModal}
+            setIsModalActive={setIsModalActive}
+            setModalText={setModalText}
+            setModalBtnType={setModalBtnType}
+            player={player}
+          />
+        )}
+
         <LikeButton
           like={like}
           setLoginModal={setLoginModal}
@@ -105,6 +123,9 @@ const Post = () => {
           setIsModalActive={setIsModalActive}
           modalText={modalText}
           modalBtnType={modalBtnType}
+          status={status}
+          setPostInfo={setPostInfo}
+          player={player}
         />
       ) : null}
     </div>

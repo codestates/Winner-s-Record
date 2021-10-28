@@ -22,7 +22,7 @@ const Search = ({ setPostList }) => {
     }
     axios
       .get(
-        `http://localhost:8080/post?type=${postType}&event=${game}&${option}=${input}`
+        `http://localhost:8080/doc?type=${postType}&event=${game}&${option}=${input}`
       )
       .then((res) => {
         const sorted = res.data.data.sort((a, b) => {
