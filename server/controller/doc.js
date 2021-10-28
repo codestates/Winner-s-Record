@@ -132,23 +132,23 @@ export async function getOne(req, res) {
     const hostUser = await userData.findById(doc.userId);
     const docImgLink = await docData.findByImg([doc]);
 
-    console.log(hostUser.nickname, hostUser.img, docImgLink[docId.toString()]);
-
     let like;
+    console.log('유져아이디 : ', userId);
     if (userId === 'guest') {
       like = false;
     } else {
       const likeList = await likeData.findByUserId(userId);
-      likeList.length === 0 ? (like = false) : (like = true);
+      if (likeList.length === 0) {
+        like = false;
+      } else {
+        likeList.includes(docId) ? (like = true) : (like = false);
+      }
     }
 
     console.log('like : ', like);
 
     const player = await entryData.findByDocId(docId);
     const board = await boardData.findByDocId(docId);
-
-    console.log('player : ', player);
-    console.log('board : ', board);
 
     if (doc.type === 'trade') {
       return res.status(200).json({
