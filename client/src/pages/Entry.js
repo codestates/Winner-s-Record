@@ -15,7 +15,7 @@ const Entry = () => {
 
   const [loginModal, setLoginModal] = useState(false);
 
-  const [activeModal, setActiveModal] = useState(false);
+  const [isModalActive, setIsModalActive] = useState(false);
   const [modalText, setModalText] = useState("권한이 없습니다.");
 
   const getData = () => {
@@ -55,7 +55,7 @@ const Entry = () => {
           userData={host}
           setApplied={setApplied}
           setFixed={setFixed}
-          setActiveModal={setActiveModal}
+          setIsModalActive={setIsModalActive}
           setModalText={setModalText}
           setLoginModal={setLoginModal}
         />
@@ -67,7 +67,7 @@ const Entry = () => {
               setApplied={setApplied}
               setFixed={setFixed}
               hostId={host.userId}
-              setActiveModal={setActiveModal}
+              setIsModalActive={setIsModalActive}
               setModalText={setModalText}
               setLoginModal={setLoginModal}
             />
@@ -84,7 +84,7 @@ const Entry = () => {
               setApplied={setApplied}
               setFixed={setFixed}
               hostId={host.userid}
-              setActiveModal={setActiveModal}
+              setIsModalActive={setIsModalActive}
               setModalText={setModalText}
               setLoginModal={setLoginModal}
             />
@@ -95,7 +95,7 @@ const Entry = () => {
       {userInfo.userId === host.userId ? (
         <FixBtn
           fixed={fixed}
-          setActiveModal={setActiveModal}
+          setIsModalActive={setIsModalActive}
           setModalText={setModalText}
         />
       ) : (
@@ -104,19 +104,19 @@ const Entry = () => {
           fixed={fixed}
           setApplied={setApplied}
           setLoginModal={setLoginModal}
-          setActiveModal={setActiveModal}
+          setIsModalActive={setIsModalActive}
           setModalText={setModalText}
         />
       )}
 
-      {activeModal ? (
+      {isModalActive ? (
         <div className={"modal--backdrop"}>
           <div className={"modal--view"}>
             <div className="modal--text">{modalText}</div>
             <div
               className="modal--btn"
               onClick={() => {
-                setActiveModal(false);
+                setIsModalActive(false);
               }}
             >
               닫기

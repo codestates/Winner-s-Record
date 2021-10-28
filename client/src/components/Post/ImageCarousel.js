@@ -34,7 +34,12 @@ const ImageCarousel = ({ images = [] }) => {
 
       <ul className="post--ic--image--indicator">
         {images.map((e, idx) => {
-          return <li className={`${idxImg === idx ? "displaying" : ""}`}></li>;
+          return (
+            <li
+              key={idx}
+              className={`${idxImg === idx ? "displaying" : ""}`}
+            ></li>
+          );
         })}
       </ul>
     </div>

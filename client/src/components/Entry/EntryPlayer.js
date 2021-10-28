@@ -8,7 +8,7 @@ const EntryPlayer = ({
   setApplied,
   setFixed,
   hostId,
-  setActiveModal,
+  setIsModalActive,
   setModalText,
   setLoginModal,
 }) => {
@@ -41,7 +41,7 @@ const EntryPlayer = ({
     if (!isLogin) {
       setLoginModal(true);
     } else if (hostId !== userInfo.userId && userId !== userInfo.userId) {
-      setActiveModal(true);
+      setIsModalActive(true);
       setModalText("권한이 없습니다.");
     } else {
       if (userData.status === "확정") {

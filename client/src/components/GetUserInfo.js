@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { setUserInfo } from "../modules/userInfo";
 import { setLogin } from "../modules/isLogin";
 
-export const GetUserInfo = () => {
+const GetUserInfo = () => {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   if (token) {
