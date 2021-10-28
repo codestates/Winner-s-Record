@@ -4,7 +4,13 @@ const { Op } = pkg;
 
 export async function findByType(type) {
   if (type === 'all') {
-    return db.Docs.findAll().catch((err) => console.log(err));
+    return db.Docs.findAll({
+      where: {
+        type: {
+          [Op.or]: ['trade', 'match']
+        }
+      }
+    }).catch((err) => console.log(err));
   }
   const result = await db.Docs.findAll({
     where: {
