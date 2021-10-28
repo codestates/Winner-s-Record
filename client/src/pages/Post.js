@@ -10,6 +10,8 @@ import PostModal from "../components/Post/PostModal";
 import NeedLoginModal from "../components/NeedLoginModal";
 import PostMap from "../components/Post/PostMap";
 import PostComments from "../components/Post/PostComments";
+import PostUserInfo from "../components/Post/PostUserInfo";
+import PostEditBtns from "../components/Post/PostEditBtns";
 
 const Post = () => {
   const { postId } = useParams();
@@ -22,7 +24,9 @@ const Post = () => {
   });
 
   const [isModalActive, setIsModalActive] = useState(false);
+  const [modalText, setModalText] = useState("");
   const [loginModal, setLoginModal] = useState(false);
+  const [modalBtnType, setModalBtnType] = useState("close");
 
   const getPostData = () => {
     const token = localStorage.getItem("token");
@@ -49,30 +53,21 @@ const Post = () => {
 
   return (
     <div className="post--container">
-      {/* {isLoading ? null : <ImageCarousel images={img} />} */}
       <ImageCarousel images={img} />
       <div className="post--header">
         <div className="post--title">{title}</div>
-        <div className="post--editbtns--container">
-          <div>수정</div>
-          <div>삭제</div>
-        </div>
-      </div>
-      <div className="post--userinfo--container">
-        <Link to={`/mypage/${userData.userId}`}>
-          <div className="post--userinfo--inner">
-            <div className="post--userinfo--img">
-              <img src={userData.img.link} alt={userData.nickname} />
-            </div>
-            <div className="post--userinfo--name">{userData.nickname}</div>
-          </div>
-        </Link>
+        <PostEditBtns
+          hostId={userData.userId}
+          setModalText={setModalText}
+          setIsModalActive={setIsModalActive}
+          setModalBtnType={setModalBtnType}
+          setLoginModal={setLoginModal}
+        />
       </div>
 
+      <PostUserInfo userData={userData} />
       <div className="post--text">{text}</div>
-      <div className="post--map">
-        <PostMap place={place} />
-      </div>
+      <PostMap place={place} />
 
       <PostComments board={board} setPostInfo={setPostInfo} />
 
@@ -87,7 +82,13 @@ const Post = () => {
         />
       </div>
       <NeedLoginModal isModalOpen={loginModal} setIsModalOpen={setLoginModal} />
-      {isModalActive ? <PostModal setIsModalActive={setIsModalActive} /> : null}
+      {isModalActive ? (
+        <PostModal
+          setIsModalActive={setIsModalActive}
+          modalText={modalText}
+          modalBtnType={modalBtnType}
+        />
+      ) : null}
     </div>
   );
 };

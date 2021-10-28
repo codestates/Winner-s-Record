@@ -28,8 +28,10 @@ const PostMap = ({
   }, []);
 
   return (
-    <div className="post--map--container">
-      <div className="post--map" ref={container} />
+    <div className="post--map">
+      <div className="post--map--container">
+        <div className="post--map" ref={container} />
+      </div>
     </div>
   );
 };

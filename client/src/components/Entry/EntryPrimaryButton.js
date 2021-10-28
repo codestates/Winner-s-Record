@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-const FixBtn = ({ fixed, setActiveModal, setModalText }) => {
+const FixBtn = ({ fixed, setIsModalActive, setModalText }) => {
   const clickHandler = () => {
     if (fixed.length < 1) {
       setModalText("상대를 지정해주세요.");
-      setActiveModal(true);
+      setIsModalActive(true);
     } else {
       // 경기 확정 상태 변경 axios 요청
     }
@@ -22,7 +22,7 @@ const ApplyBtn = ({
   fixed,
   setApplied,
   setLoginModal,
-  setActiveModal,
+  setIsModalActive,
   setModalText,
 }) => {
   const { isLogin, userInfo } = useSelector((state) => ({
@@ -38,7 +38,7 @@ const ApplyBtn = ({
       }).length
     ) {
       setModalText("신청자 목록을 확인해주세요.");
-      setActiveModal(true);
+      setIsModalActive(true);
     } else {
       const Authorization = `Bearer ${localStorage.getItem("token")}`;
       axios
