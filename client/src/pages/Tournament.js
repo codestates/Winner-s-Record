@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import Search from "../components/Tournament/Search";
 
 import TopButton from "../components/TopButton";
+import Search from "../components/Tournament/Search";
+
+import PostList from "../components/Tournament/PostList";
 
 const Tournament = () => {
   const [postList, setPostList] = useState([]);
 
   return (
     <div className="tournament--container">
-      <Search />
-      <div>포스트 리스트</div>
+      <Search setPostList={setPostList} />
+      <PostList postList={postList} />
       <TopButton />
     </div>
   );

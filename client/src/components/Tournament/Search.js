@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-import TypeSelector from "./TypeSelector";
 import GameSelector from "./GameSelector";
 import OptionSelector from "./OptionSelector";
 import SearchBar from "./SearchBar";
@@ -10,7 +9,6 @@ const Search = ({ setPostList }) => {
   const [game, setGame] = useState("all");
   const [option, setOption] = useState("title");
   const [input, setInput] = useState("all");
-  const [postType, setPostType] = useState("");
 
   useEffect(() => {
     searchHandler();
@@ -40,7 +38,6 @@ const Search = ({ setPostList }) => {
 
   return (
     <div>
-      <TypeSelector postType={postType} setPostType={setPostType} />
       <GameSelector setGame={setGame} />
       <OptionSelector setOption={setOption} />
       <SearchBar searchHandler={searchHandler} setInput={setInput} />
