@@ -9,6 +9,7 @@ import rankRouter from './router/rank.js';
 import likeRouter from './router/like.js';
 import matchRouter from './router/match.js';
 import entryRouter from './router/entry.js';
+import boardRouter from './router/board.js';
 import {config} from './config.js';
 
 const app = express();
@@ -35,6 +36,7 @@ app.use('/entry', entryRouter);
 // app.use('/record');
 app.use('/like', likeRouter);
 app.use('/rank', rankRouter);
+app.use('/board', boardRouter);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
