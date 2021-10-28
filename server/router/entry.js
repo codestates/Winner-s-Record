@@ -4,8 +4,8 @@ import * as entryController from '../controller/entry.js';
 
 const router = express.Router();
 
-router.get('/:postId', entryController.addEntry);
-router.delete('/:postId', entryController.deleteEntry);
-router.put('/:postId', entryController.changeStatus);
+router.get('/:docId', entryController.addEntry);
+router.delete('/:docId', entryController.deleteEntry);
+router.put('/:docId', entryController.changeStatus);
 
 export default router;
