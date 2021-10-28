@@ -5,11 +5,13 @@ import { setPrevPage } from "../modules/prevPage";
 export default function NeedLoginModal({ isModalOpen, setIsModalOpen }) {
   const history = useHistory();
   const dispatch = useDispatch();
+
   const handleClick = () => {
     const prevPage = window.location.href.split("http://localhost:3000")[1];
     dispatch(setPrevPage(prevPage));
-    history.push("/login");
+    history.replace("/login");
   };
+
   return (
     <>
       {isModalOpen ? (

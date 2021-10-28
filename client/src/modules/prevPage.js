@@ -5,8 +5,8 @@ const initialState = "/main";
 const prevPageSlice = createSlice({
   name: "prevPage",
   initialState,
-  reducer: {
-    setPrevPage(state, payload) {
+  reducers: {
+    setPrevPage(state, { payload }) {
       return payload;
     },
   },

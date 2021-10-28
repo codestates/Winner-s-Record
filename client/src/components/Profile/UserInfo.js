@@ -1,5 +1,5 @@
 import { useHistory } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import EditPhotoModal from "./EditPhotoModal";
 
 export default function UserInfo({ isMypage, profileData }) {
@@ -8,6 +8,7 @@ export default function UserInfo({ isMypage, profileData }) {
   const openModalHandler = () => {
     setIsModalOpen(!isModalOpen);
   };
+
   return (
     <div className="profile--container">
       <div className="profile--photo">
@@ -24,6 +25,7 @@ export default function UserInfo({ isMypage, profileData }) {
         </span>
       ) : null}
       <EditPhotoModal
+        prevPhoto={profileData.img}
         openModalHandler={openModalHandler}
         isModalOpen={isModalOpen}
       />
