@@ -36,9 +36,41 @@ export async function findByDocId(docId) {
   }
 
   return board;
+}
 
-  // const board = allBoardId.map((el) => {
-  //   return db.Boards.find((el2) => el2.id === el);
-  // });
-  // return board;
+export async function isEntry(docId, userId) {
+  const user = await db.Entries.findOne({
+    where: {docId, userId},
+  });
+  let result;
+  user ? (result = true) : (result = false);
+  return result;
+}
+
+export async function isAuth(boardId, userId) {
+  const board = await db.Boards.findOne({
+    where: {id: boardId, userId},
+  });
+  let result;
+  board ? (result = true) : (result = false);
+  return result;
+}
+
+export async function create(docId, userId, text) {
+  const created = await db.Boards.create({
+    userId,
+    text,
+  });
+  console.log(created.dataValues);
+  await db.Docs_Boards.create({
+    docId,
+    boardId: created.dataValues.id,
+  });
+  return created.dataValues.id;
+}
+
+export async function remove(boardId) {
+  await db.Boards.destroy({
+    where: {id: boardId},
+  });
 }
