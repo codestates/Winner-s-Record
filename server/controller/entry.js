@@ -4,16 +4,16 @@ import jwt from 'jsonwebtoken';
 import {config} from '../config.js';
 
 export async function addEntry (req, res) {
-  const postId = req.params.postId
+  const docId = req.params.docId
   const authorization = req.headers.authorization
   if(!authorization) {
     return res.status(403).send({message: '권한이 없습니다'})
   } else {
     const token = authorization.split(' ')[1];
     const user = await jwt.verify(token, String(config.jwt.secretKey));
-    const entryPost = await entryData.addPostEntry(user.id, postId)
+    const entryPost = await entryData.addPostEntry(user.id, docId)
     if(entryPost && user) {
-      const entryUser = await entryData.entryList(postId, entryPost)
+      const entryUser = await entryData.entryList(docId, entryPost)
       return res.status(200).send({data: entryUser})
     } else {
       return res.status(403).send({message: '권한이 없습니다'})
@@ -22,7 +22,7 @@ export async function addEntry (req, res) {
 } 
 
 export async function deleteEntry (req, res) {
-  const postId = req.params.postId
+  const docId = req.params.docId
   const authorization = req.headers.authorization
   const userId = req.body.userId
   if(!authorization) {
@@ -30,9 +30,9 @@ export async function deleteEntry (req, res) {
   } else {
     const token = authorization.split(' ')[1];
     const user = await jwt.verify(token, String(config.jwt.secretKey));
-    const entryPost = await entryData.deleteEntryPost(user.id, postId, userId)
+    const entryPost = await entryData.deleteEntryPost(user.id, docId, userId)
     if(entryPost && user) {
-      const entryUser = await entryData.entryList(postId, entryPost)
+      const entryUser = await entryData.entryList(docId, entryPost)
       return res.status(200).send({data: entryUser})
     } else {
       return res.status(403).send({message: '권한이 없습니다'})
@@ -41,7 +41,7 @@ export async function deleteEntry (req, res) {
 }
 
 export async function changeStatus (req, res) {
-  const postId = req.params.postId
+  const docId = req.params.docId
   const authorization = req.headers.authorization
   const userId = req.body.userId
   if(!authorization) {
@@ -49,9 +49,9 @@ export async function changeStatus (req, res) {
   } else {
     const token = authorization.split(' ')[1];
     const user = await jwt.verify(token, String(config.jwt.secretKey));
-    const entryPost = await entryData.changeEntryStatus(user.id, postId, userId)
+    const entryPost = await entryData.changeEntryStatus(user.id, docId, userId)
     if(entryPost && user) {
-      const entryUser = await entryData.entryList(postId, entryPost)
+      const entryUser = await entryData.entryList(docId, entryPost)
       return res.status(200).send({data: entryUser})
     } else {
       return res.status(403).send({message: '권한이 없습니다'})

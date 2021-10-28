@@ -1,6 +1,6 @@
-import Sequelize from 'sequelize';
+import pkg from 'sequelize';
 import db from '../models/index.js';
-const Op = Sequelize.Op;
+const {Op} = pkg;
 
 export async function findByDocId(docId) {
   const allEntries = await db.Entries.findAll({
@@ -26,76 +26,183 @@ export async function findByDocId(docId) {
   return entryNickname;
 }
 
-export async function addPostEntry(userId, postId) {
-  const post = Docs.find((el) => el.id === parseInt(postId));
-  if (post.type === 'tounarment' && post.status === '대기') {
-    const entry = {
-      id: Entries.length + 1,
+export async function addPostEntry(userId, docId) {
+  const doc = await db.Docs.findOne({
+    where: {
+      id: docId
+    }
+  }).catch((err) => console.log(err));
+
+  if (doc !== null && doc.type === 'tounarment' && doc.status === '대기') {
+    const entry = await db.Entries.create({
       status: '대기',
-      postId: parseInt(postId),
-      userId: userId,
-    };
-    Entries.push(entry);
-    const entries = Entries.filter(
-      (el) => el.postId === parseInt(postId) && el.status !== '호스트'
-    );
-    return entries;
-  } else {
-    return;
+      docId: docId,
+      userId: userId
+    }).catch((err) => console.log(err));
+
+    const entries = await db.Entries.findAll({
+      where: {
+        docId: docId,
+        status: {
+          [Op.not]: '호스트'
+        }
+      }
+    }).catch((err) => console.log(err));
+    return entries.map((el) => el.dataValues)
+  } else if (doc !== null && doc.type === 'tounarment' && doc.status === '진행') {
+    const playEntries = await db.Entries.findAll({
+      where: {
+        docId: docId,
+        status: {
+          [Op.not]: '호스트'
+        }
+      }
+    }).catch((err) => console.log(err));
+    return playEntries.map((el) => el.dataValues)
   }
 }
 
-export async function entryList(postId, entries) {
-  const event = Docs.find((el) => el.id === parseInt(postId)).event;
+export async function entryList(docId, entries) {
+  const event = await db.Docs.findOne({
+    where: {
+      id: docId
+    }
+  }).then((res) => res.dataValues.event)
+  .catch((err) => console.log(err));
+
   const userId = entries.map((el) => el.userId);
-  const users = Users.filter((el) => userId.includes(el.id));
-  let rank = Records.filter((el) => el.event === event)
-    .sort((a, b) =>
-      a.nickname < b.nickname ? -1 : a.nickname > b.nickname ? 1 : 0
-    )
-    .sort((a, b) => b.point - a.point);
+  const users = await db.Users.findAll({
+    where: {
+      id: {
+        [Op.in]: userId
+      }
+    }
+  }).catch((err) => console.log(err));
+  const userList = users.map((el) => el.dataValues)
+
+  const rank = await db.Records.findAll({
+    where: {
+      event: event
+    }
+  }).catch((err) => console.log(err));
+
+  const rankList = rank.map((el) => el.dataValues)
+  .sort((a, b) => b.point - a.point);
+
   for (let i = 0; i < entries.length; i++) {
-    entries[i].nickname = users[i].nickname;
-    entries[i].img = Images.find((el) => el.id === users[i].img).link;
-    entries[i].win = rank.find((el) => el.userId === users[i].id).win;
-    entries[i].lose = rank.find((el) => el.userId === users[i].id).lose;
-    entries[i].point = rank.find((el) => el.userId === users[i].id).point;
-    entries[i].rank = rank.findIndex((el) => el.userId === users[i].id) + 1;
+    for (let j = 0; j < userList.length; j++) {
+      if(entries[i].userId === userList[j].id) {
+        entries[i].nickname = userList[j].nickname
+        entries[i].img = userList[j].img
+      }
+    }
+  }
+
+  for(let i = 0; i < entries.length; i++) {
+    for(let j = 0; j < rankList.length; j++) {
+      if(entries[i].userId === rankList[j].userId) {
+        entries[i].win = rankList[j].win
+        entries[i].lose = rankList[j].lose
+        entries[i].point = rankList[j].point
+        entries[i].rank = rankList.indexOf(rankList[j])+1
+      }
+    }
   }
   return entries;
 }
 
-export async function deleteEntryPost(hostId, postId, userId) {
-  const entries = Entries.filter(
-    (el) => el.postId === parseInt(postId) && el.status !== '호스트'
-  );
-  const entryUser = entries
-    .filter((el) => el.status === '대기')
-    .map((el) => el.userId);
-  const entryPost = Docs.find((el) => el.id === parseInt(postId));
-  if (entryPost.userId === hostId && entryUser.includes(userId)) {
-    return entries.filter((el) => el.userId !== userId);
-  } else {
-    return;
+export async function deleteEntryPost(hostId, docId, userId) {
+  const checkHostDoc = await db.Entries.findOne({
+    where: {
+      docId: docId,
+      status: '호스트'
+    }
+  }).then((res) => res.dataValues)
+  .catch((err) => console.log(err));
+
+  if(checkHostDoc.userId === hostId) {
+    const entry = await db.Entries.findOne({
+      where: {
+        docId: docId,
+        userId: userId
+      }
+    }).then((res) => res.dataValues)
+    .catch((err) => console.log(err));
+    if(entry !== undefined && entry.status === '대기') {
+      const deleteUser = await db.Entries.destroy({
+        where: {
+          id: entry.id
+        }
+      }).catch((err) => console.log(err));
+      
+      const playEntries = await db.Entries.findAll({
+        where: {
+          docId: docId,
+          status: {
+            [Op.not]: '호스트'
+          }
+        }
+      }).catch((err) => console.log(err));
+      return playEntries.map((el) => el.dataValues)
+    }
   }
 }
 
-export async function changeEntryStatus(hostId, postId, userId) {
-  const entries = Entries.filter(
-    (el) => el.postId === parseInt(postId) && el.status !== '호스트'
-  );
-  const entryUser = entries.map((el) => el.userId);
-  const entryPost = Docs.find((el) => el.id === parseInt(postId));
-  if (entryPost.userId === hostId && entryUser.includes(userId)) {
-    for (let i = 0; i < entries.length; i++) {
-      if (entries[i].userId === userId && entries[i].status === '확정') {
-        entries[i].status = '대기';
-      } else if (entries[i].userId === userId && entries[i].status === '대기') {
-        entries[i].status = '확정';
-      }
+export async function changeEntryStatus(hostId, docId, userId) {
+  const checkHostDoc = await db.Entries.findOne({
+    where: {
+      docId: docId,
+      status: '호스트'
     }
-    return entries;
-  } else {
-    return;
+  }).then((res) => res.dataValues)
+  .catch((err) => console.log(err));
+
+  if(checkHostDoc.userId === hostId) {
+    const entry = await db.Entries.findOne({
+      where: {
+        docId: docId,
+        userId: userId
+      }
+    }).then((res) => res.dataValues)
+    .catch((err) => console.log(err));
+
+    if(entry !== undefined && entry.status === '확정') {
+      const updateStatus = await db.Entries.update({
+        status: '대기'
+      }, {
+        where: {
+            id: entry.id
+          }
+      }).catch((err) => console.log(err));
+
+      const playEntries = await db.Entries.findAll({
+        where: {
+          docId: docId,
+          status: {
+            [Op.not]: '호스트'
+          }
+        }
+      }).catch((err) => console.log(err));
+      return playEntries.map((el) => el.dataValues)
+
+    } else if (entry !== undefined && entry.status === '대기') {
+      const updateStatus2 = await db.Entries.update({
+        status: '확정'
+      }, {
+        where: {
+          id: entry.id
+        }
+      }).catch((err) => console.log(err));
+
+      const playEntries = await db.Entries.findAll({
+        where: {
+          docId: docId,
+          status: {
+            [Op.not]: '호스트'
+          }
+        }
+      }).catch((err) => console.log(err));
+      return playEntries.map((el) => el.dataValues)
+    }
   }
 }

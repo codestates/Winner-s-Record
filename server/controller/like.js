@@ -26,7 +26,7 @@ export async function addLike (req, res) {
     const user = await jwt.verify(token, String(config.jwt.secretKey));
     const likeDoc = await likeData.addLikeDoc(user.id, docId)
     if(user && likeDoc) {
-      return res.status(200).send({likeId: likeDoc.id})
+      return res.status(201).send({likeId: likeDoc.id})
     } else {
       return res.status(401).send({message: '로그인이 필요한 기능입니다'})
     }
