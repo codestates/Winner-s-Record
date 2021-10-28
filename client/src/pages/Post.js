@@ -43,6 +43,7 @@ const Post = () => {
         withCredentials: true,
       })
       .then((res) => {
+        console.log(res);
         setPostInfo(res.data.data);
       })
       .catch((res) => {
@@ -64,6 +65,7 @@ const Post = () => {
     type,
     board = [],
     player = [],
+    status,
   } = postInfo;
 
   return (
@@ -85,12 +87,20 @@ const Post = () => {
       <div className="post--text">{text}</div>
       <PostMap place={place} />
 
-      {player.includes(userInfo.nickname) ? (
+      {status !== "대기" && player.includes(userInfo.nickname) ? (
         <PostComments board={board} setPostInfo={setPostInfo} />
       ) : null}
 
       <div className="post--btns">
-        <PostPrimaryButton userId={userData.userId} type={type} />
+        <PostPrimaryButton
+          hostId={userData.userId}
+          type={type}
+          status={status}
+          setLoginModal={setLoginModal}
+          setIsModalActive={setIsModalActive}
+          setModalText={setModalText}
+          setModalBtnType={setModalBtnType}
+        />
         <LikeButton
           like={like}
           setLoginModal={setLoginModal}
@@ -105,6 +115,8 @@ const Post = () => {
           setIsModalActive={setIsModalActive}
           modalText={modalText}
           modalBtnType={modalBtnType}
+          status={status}
+          setPostInfo={setPostInfo}
         />
       ) : null}
     </div>

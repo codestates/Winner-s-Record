@@ -38,6 +38,7 @@ const EntryPlayer = ({
   const deleteHandler = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     const endpoint = `http://localhost:8080/entry/${postId}`;
+
     if (!isLogin) {
       setLoginModal(true);
     } else if (hostId !== userInfo.userId && userId !== userInfo.userId) {
@@ -45,6 +46,7 @@ const EntryPlayer = ({
       setModalText("권한이 없습니다.");
     } else {
       if (userData.status === "확정") {
+        console.log("여기 확정인 아이들만");
         axios
           .post(endpoint, { userId }, { headers: { Authorization } })
           .then((res) => {
@@ -59,7 +61,7 @@ const EntryPlayer = ({
           });
       } else {
         axios
-          .delete(endpoint, { userId }, { headers: { Authorization } })
+          .delete(endpoint, { headers: { Authorization }, data: { userId } })
           .then((res) => {
             const fixed = res.data.data.filter((e) => {
               return e.status === "확정" ? true : false;
@@ -92,7 +94,7 @@ const EntryPlayer = ({
         {status === "대기" && userInfo.userId === hostId ? (
           <div onClick={fixPlayer}>확정</div>
         ) : null}
-        {status !== "호스트" ? <div onClick={deleteHandler}> 삭제 </div> : null}
+        <div onClick={deleteHandler}> 삭제 </div>
       </div>
     </li>
   );

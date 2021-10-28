@@ -1,7 +1,13 @@
 import { useHistory, useParams } from "react-router";
 import axios from "axios";
 
-const PostModal = ({ setIsModalActive, modalText, modalBtnType }) => {
+const PostModal = ({
+  setIsModalActive,
+  modalText,
+  modalBtnType,
+  setPostInfo,
+  status,
+}) => {
   return (
     <div className="modal--backdrop">
       <div className="modal--view">
@@ -18,6 +24,12 @@ const PostModal = ({ setIsModalActive, modalText, modalBtnType }) => {
               닫기
             </div>
           </div>
+        ) : modalBtnType === "status" ? (
+          <ChangeStatusBtn
+            setIsModalActive={setIsModalActive}
+            status={status}
+            setPostInfo={setPostInfo}
+          />
         ) : (
           <DeleteBtns setIsModalActive={setIsModalActive} />
         )}
@@ -52,6 +64,53 @@ const DeleteBtns = ({ setIsModalActive }) => {
       </div>
       <div className="btn" onClick={confirmDelete}>
         삭제
+      </div>
+    </div>
+  );
+};
+
+const ChangeStatusBtn = ({ setIsModalActive, status, setPostInfo }) => {
+  const { postId } = useParams();
+
+  const changeStatus = () => {
+    const Authorization = `Bearer ${localStorage.getItem("token")}`;
+    if (status === "대기") {
+      axios
+        .put(
+          `http://localhost:8080/doc/${postId}`,
+          { status: "완료" },
+          { headers: { Authorization } }
+        )
+        .then((res) => {
+          setPostInfo(res.data.data);
+          setIsModalActive(false);
+        });
+    } else {
+      axios
+        .put(
+          `http://localhost:8080/doc/${postId}`,
+          { status: "대기" },
+          { headers: { Authorization } }
+        )
+        .then((res) => {
+          setPostInfo(res.data.data);
+          setIsModalActive(false);
+        });
+    }
+  };
+
+  return (
+    <div className="modal--btns--container">
+      <div
+        className="btn"
+        onClick={() => {
+          setIsModalActive(false);
+        }}
+      >
+        취소
+      </div>
+      <div className="btn" onClick={changeStatus}>
+        변경
       </div>
     </div>
   );

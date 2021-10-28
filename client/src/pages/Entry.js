@@ -25,6 +25,7 @@ const Entry = () => {
         headers: { Authorization },
       })
       .then((res) => {
+        console.log("데이터", res.data);
         const fixed = res.data.data.filter((e) => {
           return e.status === "확정" ? true : false;
         });
@@ -40,7 +41,6 @@ const Entry = () => {
         setApplied(applied);
       });
   };
-
   useEffect(() => {
     getData();
   }, []);
@@ -49,16 +49,6 @@ const Entry = () => {
     <div className="entry--container">
       <div className="entry--nametag">참가 확정 인원</div>
       <ul className="entry--fixed--container">
-        {/* 호스트가 가장 상단 */}
-        <EntryPlayer
-          postId={postId}
-          userData={host}
-          setApplied={setApplied}
-          setFixed={setFixed}
-          setIsModalActive={setIsModalActive}
-          setModalText={setModalText}
-          setLoginModal={setLoginModal}
-        />
         {fixed.map((userData) => {
           return (
             <EntryPlayer
@@ -83,7 +73,7 @@ const Entry = () => {
               userData={userData}
               setApplied={setApplied}
               setFixed={setFixed}
-              hostId={host.userid}
+              hostId={host.userId}
               setIsModalActive={setIsModalActive}
               setModalText={setModalText}
               setLoginModal={setLoginModal}

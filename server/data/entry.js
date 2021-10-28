@@ -1,23 +1,23 @@
-import pkg from 'sequelize';
-import db from '../models/index.js';
-const {Op} = pkg;
+import pkg from "sequelize";
+import db from "../models/index.js";
+const { Op } = pkg;
 
 export async function findByDocId(docId, status) {
   let allEntries;
-  if (status === '진행') {
+  if (status === "진행") {
     allEntries = await db.Entries.findAll({
-      attributes: ['userId'],
+      attributes: ["userId"],
       where: {
         docId,
         status: {
-          [Op.ne]: '대기',
+          [Op.ne]: "대기",
         },
       },
     });
-  } else if (status === '대기') {
+  } else if (status === "대기") {
     allEntries = await db.Entries.findAll({
-      attributes: ['userId'],
-      where: {docId},
+      attributes: ["userId"],
+      where: { docId },
     });
   }
 
@@ -27,8 +27,8 @@ export async function findByDocId(docId, status) {
   const entryNickname = [];
   for (let i = 0; i < entryId.length; i++) {
     let nickname = await db.Users.findOne({
-      attributes: ['nickname'],
-      where: {id: entryId[i]},
+      attributes: ["nickname"],
+      where: { id: entryId[i] },
     }).then((data) => data.dataValues.nickname);
     entryNickname.push(nickname);
   }
@@ -42,9 +42,13 @@ export async function addPostEntry(userId, docId) {
     },
   }).catch((err) => console.log(err));
 
-  if (doc !== null && (doc.type === 'tounarment' || doc.type === 'match') && doc.status === '대기') {
+  if (
+    doc !== null &&
+    (doc.type === "tounarment" || doc.type === "match") &&
+    doc.status === "대기"
+  ) {
     const entry = await db.Entries.create({
-      status: '대기',
+      status: "대기",
       docId: docId,
       userId: userId,
     }).catch((err) => console.log(err));
@@ -52,15 +56,18 @@ export async function addPostEntry(userId, docId) {
     const entries = await db.Entries.findAll({
       where: {
         docId: docId,
-      }
+      },
     }).catch((err) => console.log(err));
-    return entries.map((el) => el.dataValues)
-  } else if (doc !== null && (doc.type === 'tounarment' || doc.type === 'match') && doc.status === '진행') {
-
+    return entries.map((el) => el.dataValues);
+  } else if (
+    doc !== null &&
+    (doc.type === "tounarment" || doc.type === "match") &&
+    doc.status === "진행"
+  ) {
     const playEntries = await db.Entries.findAll({
       where: {
         docId: docId,
-      }
+      },
     }).catch((err) => console.log(err));
     return playEntries.map((el) => el.dataValues);
   }
@@ -121,7 +128,7 @@ export async function deleteEntryPost(hostId, docId, userId) {
   const checkHostDoc = await db.Entries.findOne({
     where: {
       docId: docId,
-      status: '호스트',
+      status: "호스트",
     },
   })
     .then((res) => res.dataValues)
@@ -136,7 +143,7 @@ export async function deleteEntryPost(hostId, docId, userId) {
     })
       .then((res) => res.dataValues)
       .catch((err) => console.log(err));
-    if (entry !== undefined && entry.status === '대기') {
+    if (entry !== undefined && entry.status === "대기") {
       const deleteUser = await db.Entries.destroy({
         where: {
           id: entry.id,
@@ -146,7 +153,7 @@ export async function deleteEntryPost(hostId, docId, userId) {
       const playEntries = await db.Entries.findAll({
         where: {
           docId: docId,
-        }
+        },
       }).catch((err) => console.log(err));
       return playEntries.map((el) => el.dataValues);
     }
@@ -157,7 +164,7 @@ export async function changeEntryStatus(hostId, docId, userId) {
   const checkHostDoc = await db.Entries.findOne({
     where: {
       docId: docId,
-      status: '호스트',
+      status: "호스트",
     },
   })
     .then((res) => res.dataValues)
@@ -173,10 +180,10 @@ export async function changeEntryStatus(hostId, docId, userId) {
       .then((res) => res.dataValues)
       .catch((err) => console.log(err));
 
-    if (entry !== undefined && entry.status === '확정') {
+    if (entry !== undefined && entry.status === "확정") {
       const updateStatus = await db.Entries.update(
         {
-          status: '대기',
+          status: "대기",
         },
         {
           where: {
@@ -188,13 +195,13 @@ export async function changeEntryStatus(hostId, docId, userId) {
       const playEntries = await db.Entries.findAll({
         where: {
           docId: docId,
-        }
+        },
       }).catch((err) => console.log(err));
       return playEntries.map((el) => el.dataValues);
-    } else if (entry !== undefined && entry.status === '대기') {
+    } else if (entry !== undefined && entry.status === "대기") {
       const updateStatus2 = await db.Entries.update(
         {
-          status: '확정',
+          status: "확정",
         },
         {
           where: {
@@ -206,7 +213,7 @@ export async function changeEntryStatus(hostId, docId, userId) {
       const playEntries = await db.Entries.findAll({
         where: {
           docId: docId,
-        }
+        },
       }).catch((err) => console.log(err));
       return playEntries.map((el) => el.dataValues);
     }

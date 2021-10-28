@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 
 const FixBtn = ({ fixed, setIsModalActive, setModalText }) => {
   const postId = useParams();
+  const history = useHistory();
+
   const clickHandler = () => {
     if (fixed.length < 1) {
       setModalText("상대를 지정해주세요.");
@@ -15,6 +17,7 @@ const FixBtn = ({ fixed, setIsModalActive, setModalText }) => {
         { status: "진행" },
         { headers: { Authorization } }.then((res) => {
           console.log(res.data);
+          history.push(`/post/${postId}`);
         })
       );
     }
