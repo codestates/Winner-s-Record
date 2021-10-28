@@ -234,45 +234,25 @@ export async function editDoc(req, res) {
       },
     });
   } else {
-    if (editedDoc.status === '대기') {
-      return res.status(200).json({
-        data: {
-          userData: {
-            userId: hostUser.id,
-            nickname: hostUser.nickname,
-            img: hostUser.img,
-          },
-          type: editedDoc.type,
-          status: editedDoc.status,
-          title: editedDoc.title,
-          event: editedDoc.event,
-          place: editedDoc.place,
-          text: editedDoc.text,
-          img: docImgLink[docId.toString()],
-          like,
+    return res.status(200).json({
+      data: {
+        userData: {
+          userId: hostUser.id,
+          nickname: hostUser.nickname,
+          img: hostUser.img,
         },
-      });
-    } else if (editedDoc.status === '진행') {
-      return res.status(200).json({
-        data: {
-          userData: {
-            userId: hostUser.id,
-            nickname: hostUser.nickname,
-            img: hostUser.img,
-          },
-          type: editedDoc.type,
-          status: editedDoc.status,
-          title: editedDoc.title,
-          event: editedDoc.event,
-          place: editedDoc.place,
-          text: editedDoc.text,
-          img: docImgLink[docId.toString()],
-          like,
-          player,
-          board,
-        },
-      });
-    }
+        type: editedDoc.type,
+        status: editedDoc.status,
+        title: editedDoc.title,
+        event: editedDoc.event,
+        place: editedDoc.place,
+        text: editedDoc.text,
+        img: docImgLink[docId.toString()],
+        like,
+        player,
+        board,
+      },
+    });
   }
 }
 
