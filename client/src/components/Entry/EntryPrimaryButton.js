@@ -1,13 +1,22 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router";
 
 const FixBtn = ({ fixed, setIsModalActive, setModalText }) => {
+  const postId = useParams();
   const clickHandler = () => {
     if (fixed.length < 1) {
       setModalText("상대를 지정해주세요.");
       setIsModalActive(true);
     } else {
-      // 경기 확정 상태 변경 axios 요청
+      const Authorization = `Bearer ${localStorage.getItem("token")}`;
+      axios.post(
+        `http://localhost:8080/doc/${postId}`,
+        { status: "진행" },
+        { headers: { Authorization } }.then((res) => {
+          console.log(res.data);
+        })
+      );
     }
   };
   return (

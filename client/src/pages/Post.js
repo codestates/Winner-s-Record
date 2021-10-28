@@ -1,7 +1,6 @@
 import { useParams } from "react-router";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 import ImageCarousel from "../components/Post/ImageCarousel";
 import PostPrimaryButton from "../components/Post/PostPrimaryButton";
@@ -12,8 +11,10 @@ import PostMap from "../components/Post/PostMap";
 import PostComments from "../components/Post/PostComments";
 import PostUserInfo from "../components/Post/PostUserInfo";
 import PostEditBtns from "../components/Post/PostEditBtns";
+import { useSelector } from "react-redux";
 
 const Post = () => {
+  const userInfo = useSelector((state) => state.userInfo);
   const { postId } = useParams();
   const [postInfo, setPostInfo] = useState({
     userData: {
@@ -22,6 +23,10 @@ const Post = () => {
       img: { link: null },
     },
   });
+
+  useEffect(() => {
+    console.log(postInfo);
+  }, [postInfo]);
 
   const [isModalActive, setIsModalActive] = useState(false);
   const [modalText, setModalText] = useState("");
@@ -49,7 +54,17 @@ const Post = () => {
     getPostData();
   }, []);
 
-  let { userData, title, text, place, like, img, type, board = [] } = postInfo;
+  let {
+    userData,
+    title,
+    text,
+    place,
+    like,
+    img,
+    type,
+    board = [],
+    player = [],
+  } = postInfo;
 
   return (
     <div className="post--container">
@@ -66,10 +81,13 @@ const Post = () => {
       </div>
 
       <PostUserInfo userData={userData} />
+
       <div className="post--text">{text}</div>
       <PostMap place={place} />
 
-      <PostComments board={board} setPostInfo={setPostInfo} />
+      {player.includes(userInfo.nickname) ? (
+        <PostComments board={board} setPostInfo={setPostInfo} />
+      ) : null}
 
       <div className="post--btns">
         <PostPrimaryButton userId={userData.userId} type={type} />

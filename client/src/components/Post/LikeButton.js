@@ -15,31 +15,34 @@ const LikeButton = ({ like, setLoginModal, postInfo, setPostInfo, postId }) => {
     }
   };
   const changeStatus = () => {
-    const authorization = `Bearer ${userInfo.token}`;
-    if (like) {
+    const Authorization = `Bearer ${localStorage.getItem("token")}`;
+    console.log("온클릭 이벤트 시작");
+    if (!like) {
+      console.log("너 왜 안뜨니 ?");
+      // 좋아요 추가
       axios
         .post(
           "http://localhost:8080/like",
-          { postId },
-          { headers: { authorization } }
+          { docId: postId },
+          { headers: { Authorization } }
         )
         .then((res) => {
-          if (res.status !== 201) {
-            console.error("로그인 상태 확인 필요");
+          if (res.status !== 200) {
+            console.log("에러발생", res);
           } else {
             setPostInfo({ ...postInfo, like: true });
           }
         });
     } else {
+      // 좋아요 제거
       axios
-        .post(
-          "http://localhost:8080/like",
-          { postId },
-          { headers: { authorization } }
-        )
+        .delete("http://localhost:8080/like", {
+          headers: { Authorization },
+          data: { docId: postId },
+        })
         .then((res) => {
           if (res.status !== 204) {
-            console.error("로그인 상태 확인 필요");
+            console.log("에러발생", res);
           } else {
             setPostInfo({ ...postInfo, like: false });
           }

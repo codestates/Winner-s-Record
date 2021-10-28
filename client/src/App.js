@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { setUserInfo } from "./modules/userInfo";
 import { setLogin } from "./modules/isLogin";
 import axios from "axios";
+import Tournament from "./pages/Tournament";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,9 @@ function App() {
           </Route>
           <Route path="/main">
             <Main />
+          </Route>
+          <Route path="/tournament">
+            <Tournament />
           </Route>
           <Route path="/login">
             <Login />
