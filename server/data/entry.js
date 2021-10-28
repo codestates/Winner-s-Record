@@ -52,10 +52,7 @@ export async function addPostEntry(userId, docId) {
     const entries = await db.Entries.findAll({
       where: {
         docId: docId,
-        status: {
-          [Op.not]: '호스트',
-        },
-      },
+      }
     }).catch((err) => console.log(err));
     return entries.map((el) => el.dataValues)
   } else if (doc !== null && (doc.type === 'tounarment' || doc.type === 'match') && doc.status === '진행') {
@@ -63,10 +60,7 @@ export async function addPostEntry(userId, docId) {
     const playEntries = await db.Entries.findAll({
       where: {
         docId: docId,
-        status: {
-          [Op.not]: '호스트',
-        },
-      },
+      }
     }).catch((err) => console.log(err));
     return playEntries.map((el) => el.dataValues);
   }
@@ -152,10 +146,7 @@ export async function deleteEntryPost(hostId, docId, userId) {
       const playEntries = await db.Entries.findAll({
         where: {
           docId: docId,
-          status: {
-            [Op.not]: '호스트',
-          },
-        },
+        }
       }).catch((err) => console.log(err));
       return playEntries.map((el) => el.dataValues);
     }
@@ -197,10 +188,7 @@ export async function changeEntryStatus(hostId, docId, userId) {
       const playEntries = await db.Entries.findAll({
         where: {
           docId: docId,
-          status: {
-            [Op.not]: '호스트',
-          },
-        },
+        }
       }).catch((err) => console.log(err));
       return playEntries.map((el) => el.dataValues);
     } else if (entry !== undefined && entry.status === '대기') {
@@ -218,10 +206,7 @@ export async function changeEntryStatus(hostId, docId, userId) {
       const playEntries = await db.Entries.findAll({
         where: {
           docId: docId,
-          status: {
-            [Op.not]: '호스트',
-          },
-        },
+        }
       }).catch((err) => console.log(err));
       return playEntries.map((el) => el.dataValues);
     }
