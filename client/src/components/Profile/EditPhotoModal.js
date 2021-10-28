@@ -1,14 +1,18 @@
 import axios from "axios";
 import AWS from "aws-sdk";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "../../modules/userInfo";
 
-export default function EditPhotoModal({ isModalOpen, openModalHandler }) {
+export default function EditPhotoModal({
+  isModalOpen,
+  openModalHandler,
+  prevPhoto,
+}) {
   const dispatch = useDispatch();
   const [File, setFile] = useState(null);
   const [img, setImg] = useState(null);
-  const [preview, setPreview] = useState(null);
+  const [preview, setPreview] = useState(prevPhoto);
 
   const imgOnchange = (e) => {
     const imageFile = e.target.files[0];
@@ -42,21 +46,15 @@ export default function EditPhotoModal({ isModalOpen, openModalHandler }) {
       Key: file.name,
       ContentType: "image",
     };
-    myBucket
-      .putObject(params)
-      .on("success", (res) => {
-        const path = res.request.httpRequest.path;
-        setImg(`${bucketurl}${path}`);
-      })
-      .send((err) => {
-        if (err) {
-          console.log(err);
-        }
-      });
+    myBucket.putObject(params).on("success", (res) => {
+      console.log(res);
+      const path = res;
+      setImg(`${bucketurl}${path}`);
+      handleEdit();
+    });
   };
 
   const handleEdit = () => {
-    uploadFile(File);
     const oldToken = localStorage.getItem("token");
     axios
       .put(
@@ -86,7 +84,7 @@ export default function EditPhotoModal({ isModalOpen, openModalHandler }) {
                 type="file"
                 accept="image/*"
                 name="file"
-                onChange={imgOnchange}
+                onChange={(e) => imgOnchange(e)}
               />
               <div>
                 <img src={preview} />
@@ -94,7 +92,13 @@ export default function EditPhotoModal({ isModalOpen, openModalHandler }) {
             </div>
             <div className="modal--btnContainer">
               <button onClick={openModalHandler}>돌아가기</button>
-              <button onClick={handleEdit}>변경하기</button>
+              <button
+                onClick={() => {
+                  uploadFile(File);
+                }}
+              >
+                변경하기
+              </button>
             </div>
           </div>
         </div>
