@@ -1,13 +1,13 @@
-import pkg from 'sequelize';
-import db from '../models/index.js';
-const {Op} = pkg;
+import pkg from "sequelize";
+import db from "../models/index.js";
+const { Op } = pkg;
 
 export async function findByType(type) {
-  if (type === 'all') {
+  if (type === "all") {
     return db.Docs.findAll({
       where: {
         type: {
-          [Op.or]: ['trade', 'match'],
+          [Op.or]: ["trade", "match"],
         },
       },
     }).catch((err) => console.log(err));
@@ -22,21 +22,21 @@ export async function findByType(type) {
 }
 
 export async function findByEvent(data, event) {
-  if (event === 'all') {
+  if (event === "all") {
     return data;
   }
   return data.filter((post) => post.dataValues.event === event);
 }
 
 export async function findByTitle(data, title) {
-  if (title === 'all') {
+  if (title === "all") {
     return data;
   }
   return data.filter((post) => post.dataValues.title.includes(title));
 }
 
 export async function findByPlace(data, place) {
-  if (place === 'all') {
+  if (place === "all") {
     return data;
   }
   return data.filter((post) => post.dataValues.place.includes(place));
@@ -111,7 +111,7 @@ export async function findByGuest(guestId) {
   const participant = await db.Entries.findAll({
     where: {
       userId: guestId,
-      status: '확정',
+      status: "확정",
     },
   }).catch((err) => console.log(err));
 
@@ -138,7 +138,7 @@ export async function validUser(id) {
 export async function findById(id) {
   try {
     return db.Docs.findOne({
-      where: {id},
+      where: { id },
     }).then((data) => data.dataValues);
   } catch {
     return null;
@@ -147,20 +147,20 @@ export async function findById(id) {
 
 export async function validEvent(event) {
   return (
-    event === 'all' ||
-    event === 'tennis' ||
-    event === 'pingpong' ||
-    event === 'squash' ||
-    event === 'badminton'
+    event === "all" ||
+    event === "tennis" ||
+    event === "pingpong" ||
+    event === "squash" ||
+    event === "badminton"
   );
 }
 
 export async function validType(type) {
   return (
-    type === 'all' ||
-    type === 'trade' ||
-    type === 'match' ||
-    type === 'tounarment'
+    type === "all" ||
+    type === "trade" ||
+    type === "match" ||
+    type === "tounarment"
   );
 }
 
@@ -168,7 +168,7 @@ export async function editDoc(docId, data) {
   const img = data.img; //[string, string]
   if (img) {
     await db.Docs_Images.destroy({
-      where: {docId},
+      where: { docId },
     });
     for (let i = 0; i < img.length; i++) {
       const newImg = await db.Images.create({
@@ -182,36 +182,43 @@ export async function editDoc(docId, data) {
   }
 
   delete data.img;
-  const {type, status, title, event, place, price, text} = data;
+  const { type, status, title, event, place, price, text } = data;
 
-  if (status === '진행') {
+  if (status === "진행") {
     await db.Entries.destroy({
-      where: {docId, status: '대기'},
+      where: { docId, status: "대기" },
     });
-    await db.Docs.update({status}, {where: {id: docId}});
+    await db.Docs.update({ status }, { where: { id: docId } });
   }
 
-  type && (await db.Docs.update({type}, {where: {id: docId}}));
-  title && (await db.Docs.update({title}, {where: {id: docId}}));
-  event && (await db.Docs.update({event}, {where: {id: docId}}));
-  place && (await db.Docs.update({place}, {where: {id: docId}}));
-  price && (await db.Docs.update({price}, {where: {id: docId}}));
-  text && (await db.Docs.update({text}, {where: {id: docId}}));
+  if (status === "완료") {
+    console.log("완료라서 왔어");
+  }
+
+  type && (await db.Docs.update({ type }, { where: { id: docId } }));
+  title && (await db.Docs.update({ title }, { where: { id: docId } }));
+  status && (await db.Docs.update({ status }, { where: { id: docId } }));
+  event && (await db.Docs.update({ event }, { where: { id: docId } }));
+  place && (await db.Docs.update({ place }, { where: { id: docId } }));
+  price && (await db.Docs.update({ price }, { where: { id: docId } }));
+  text && (await db.Docs.update({ text }, { where: { id: docId } }));
 
   const editedDoc = await db.Docs.findOne({
-    where: {id: docId},
+    where: { id: docId },
   }).catch((err) => console.log(err));
+
+  console.log(editedDoc.dataValues.status);
   return editedDoc;
 }
 
 export async function create(userId, data) {
-  const {type, title, event, place, price, text, img} = data;
+  const { type, title, event, place, price, text, img } = data;
   let created;
-  if (type === 'trade') {
+  if (type === "trade") {
     created = await db.Docs.create({
       userId,
       type,
-      status: '대기',
+      status: "대기",
       event,
       title,
       text,
@@ -222,7 +229,7 @@ export async function create(userId, data) {
     created = await db.Docs.create({
       userId,
       type,
-      status: '대기',
+      status: "대기",
       event,
       title,
       text,
@@ -245,7 +252,7 @@ export async function create(userId, data) {
   // 보드에 호스트로 안녕하세요 생성, Docs_Boards 생성
   const firstBoard = await db.Boards.create({
     userId,
-    text: '안녕하세요',
+    text: "안녕하세요",
   });
   await db.Docs_Boards.create({
     docId: created.dataValues.id,
@@ -254,7 +261,7 @@ export async function create(userId, data) {
 
   //entry에 호스트 생성
   await db.Entries.create({
-    status: '호스트',
+    status: "호스트",
     docId: created.dataValues.id,
     userId,
   });
