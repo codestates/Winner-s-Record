@@ -7,9 +7,9 @@ export async function findByType(type) {
     return db.Docs.findAll({
       where: {
         type: {
-          [Op.or]: ['trade', 'match']
-        }
-      }
+          [Op.or]: ['trade', 'match'],
+        },
+      },
     }).catch((err) => console.log(err));
   }
   const result = await db.Docs.findAll({
@@ -184,8 +184,14 @@ export async function editDoc(docId, data) {
   delete data.img;
   const {type, status, title, event, place, price, text} = data;
 
+  if (status === '진행') {
+    await db.Entries.destroy({
+      where: {docId, status: '대기'},
+    });
+    await db.Docs.update({status}, {where: {id: docId}});
+  }
+
   type && (await db.Docs.update({type}, {where: {id: docId}}));
-  status && (await db.Docs.update({status}, {where: {id: docId}}));
   title && (await db.Docs.update({title}, {where: {id: docId}}));
   event && (await db.Docs.update({event}, {where: {id: docId}}));
   place && (await db.Docs.update({place}, {where: {id: docId}}));
