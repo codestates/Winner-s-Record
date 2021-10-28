@@ -33,7 +33,7 @@ export async function addPostEntry(userId, docId) {
     }
   }).catch((err) => console.log(err));
 
-  if (doc !== null && doc.type === 'tounarment' && doc.status === '대기') {
+  if (doc !== null && (doc.type === 'tounarment' || doc.type === 'match') && doc.status === '대기') {
     const entry = await db.Entries.create({
       status: '대기',
       docId: docId,
@@ -49,7 +49,7 @@ export async function addPostEntry(userId, docId) {
       }
     }).catch((err) => console.log(err));
     return entries.map((el) => el.dataValues)
-  } else if (doc !== null && doc.type === 'tounarment' && doc.status === '진행') {
+  } else if (doc !== null && (doc.type === 'tounarment' || doc.type === 'match') && doc.status === '진행') {
     const playEntries = await db.Entries.findAll({
       where: {
         docId: docId,
