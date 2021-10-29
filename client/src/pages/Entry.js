@@ -46,7 +46,7 @@ const Entry = () => {
         setHost(host[0]);
         setFixed(fixed);
         setApplied(applied);
-        setPostType(res.data.docType);
+        setPostType(res.data.doctype);
       });
   };
   useEffect(() => {

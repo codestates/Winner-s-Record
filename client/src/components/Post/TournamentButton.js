@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 
-const TournamentButton = ({ status, setLoginModal }) => {
+const TournamentButton = ({ status, setLoginModal, hostId }) => {
   const history = useHistory();
   const { postId } = useParams();
   const { isLogin, userInfo } = useSelector((state) => ({
@@ -14,7 +14,7 @@ const TournamentButton = ({ status, setLoginModal }) => {
   const clickHandler = () => {
     if (!isLogin) {
       setLoginModal(true);
-    } else if (buttonName === "참가하기") {
+    } else if (buttonName === "참가 신청" || buttonName === "신청자 목록") {
       history.push(`/post/${postId}/entry`);
     } else if (buttonName === "진행 확인") {
       // 토너먼트 페이지로 리디렉션
@@ -24,8 +24,10 @@ const TournamentButton = ({ status, setLoginModal }) => {
   };
 
   useEffect(() => {
-    if (status === "대기") {
-      setButtonName("참가하기");
+    if (status === "대기" && userInfo.userId === hostId) {
+      setButtonName("신청자 목록");
+    } else if (status === "대기") {
+      setButtonName("참가 신청");
     } else if (status === "진행") {
       setButtonName("토너먼트 확인");
     } else {
