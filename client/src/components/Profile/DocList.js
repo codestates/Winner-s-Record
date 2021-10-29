@@ -8,7 +8,6 @@ export default function DocList({ userId, isMypage }) {
     axios
       .get(`http://localhost:8080/doc?hostId=${userId}`)
       .then((res) => {
-        console.log(res.data);
         setList(res.data.data);
       })
       .catch((err) => {

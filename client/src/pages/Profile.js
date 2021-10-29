@@ -23,6 +23,10 @@ export default function Profile() {
   const isMypage = profileData.userId === userInfo.userId;
   const dispatch = useDispatch();
 
+  const editPhoto = (img) => {
+    setProfileData({ ...profileData, img });
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
@@ -50,7 +54,11 @@ export default function Profile() {
         <LoadingIndicator />
       ) : profileData.userId ? (
         <div>
-          <UserInfo isMypage={isMypage} profileData={profileData} />
+          <UserInfo
+            isMypage={isMypage}
+            profileData={profileData}
+            editPhoto={editPhoto}
+          />
           <Rank nickname={profileData.nickname} />
           <DocList userId={userId} isMypage={isMypage} />
         </div>
