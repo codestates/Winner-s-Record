@@ -44,7 +44,7 @@ export async function addPostEntry(userId, docId) {
 
   if (
     doc !== null &&
-    (doc.type === "tounarment" || doc.type === "match") &&
+    (doc.type === "tournament" || doc.type === "match") &&
     doc.status === "대기"
   ) {
     const checkEntry = await db.Entries.findOne({
@@ -131,7 +131,7 @@ export async function getEntryList(docId) {
 
   if (
     doc !== null &&
-    (doc.type === "tounarment" || doc.type === "match") &&
+    (doc.type === "tournament" || doc.type === "match") &&
     (doc.status === "진행" || doc.status === "대기")
   ) {
     const playEntries = await db.Entries.findAll({
