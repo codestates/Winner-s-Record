@@ -1,10 +1,10 @@
-import Sequelize from 'sequelize';
-import db from '../models/index.js';
+import Sequelize from "sequelize";
+import db from "../models/index.js";
 const Op = Sequelize.Op;
 
 export async function findByDocId(docId) {
   const allBoard = await db.Docs_Boards.findAll({
-    attributes: ['boardId'],
+    attributes: ["boardId"],
     where: {
       docId,
     },
@@ -16,8 +16,8 @@ export async function findByDocId(docId) {
   const board = [];
   for (let i = 0; i < boardId.length; i++) {
     let text = await db.Boards.findOne({
-      attributes: ['userId', 'text'],
-      where: {id: boardId[i]},
+      attributes: ["userId", "text"],
+      where: { id: boardId[i] },
     }).then((data) => data.dataValues);
     board.push(text);
   }
@@ -25,8 +25,8 @@ export async function findByDocId(docId) {
   const userData = [];
   for (let i = 0; i < users.length; i++) {
     let data = await db.Users.findOne({
-      attributes: ['nickname', 'img'],
-      where: {id: users[i]},
+      attributes: ["nickname", "img"],
+      where: { id: users[i] },
     }).then((data) => data.dataValues);
     userData.push(data);
   }
@@ -40,7 +40,7 @@ export async function findByDocId(docId) {
 
 export async function isEntry(docId, userId) {
   const user = await db.Entries.findOne({
-    where: {docId, userId},
+    where: { docId, userId },
   });
   let result;
   user ? (result = true) : (result = false);
@@ -49,7 +49,7 @@ export async function isEntry(docId, userId) {
 
 export async function isAuth(boardId, userId) {
   const board = await db.Boards.findOne({
-    where: {id: boardId, userId},
+    where: { id: boardId, userId },
   });
   let result;
   board ? (result = true) : (result = false);
@@ -61,7 +61,6 @@ export async function create(docId, userId, text) {
     userId,
     text,
   });
-  console.log(created.dataValues);
   await db.Docs_Boards.create({
     docId,
     boardId: created.dataValues.id,
@@ -71,6 +70,6 @@ export async function create(docId, userId, text) {
 
 export async function remove(boardId) {
   await db.Boards.destroy({
-    where: {id: boardId},
+    where: { id: boardId },
   });
 }

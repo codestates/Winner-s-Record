@@ -14,6 +14,8 @@ module.exports = (sequelize, DataTypes) => {
       Users.hasMany(models.Users_Docs)
       Users.hasMany(models.Entries)
       Users.hasMany(models.Docs)
+      Users.hasMany(models.Rooms)
+      Users.hasMany(models.Chattings)
     }
   };
   Users.init({

@@ -7,8 +7,8 @@ module.exports = {
         id: 1,
         type: "match", //"tounarment"
         event: "tennis", //"pingpong" "스쿼시" "badminton"
-        winnerId: 1,
-        loserId: 2,
+        winner: "성수동조코비치",
+        loser: "지리산신령님",
         player: "성수동조코비치vs지리산신령님",
         docId: 1,
         createdAt: new Date()
@@ -24,8 +24,8 @@ module.exports = {
         id: 2,
         type: "match",
         event: "pingpong",
-        winnerId: 7,
-        loserId: 8,
+        winner: "무지개가맑다",
+        loser: "밝은빛누리예",
         player: "무지개가맑다vs밝은빛누리예",
         docId: 4,
         createdAt: new Date()
@@ -41,8 +41,8 @@ module.exports = {
         id: 3,
         type: "tounarment",
         event: "badminton",
-        winnerId: 10,
-        loserId: 14,
+        winner: "고로쇠물달다",
+        loser: "내이름김탁구",
         player: "고로쇠물달다vs내이름김탁구",
         docId: 10,
         createdAt: new Date()
@@ -58,8 +58,8 @@ module.exports = {
         id: 4,
         type: "tounarment",
         event: "badminton",
-        winnerId: 11,
-        loserId: 15,
+        winner: "빛솔",
+        loser: "찬누리",
         player: "찬누리vs빛솔",
         docId: 10,
         createdAt: new Date()
@@ -75,8 +75,8 @@ module.exports = {
         id: 5,
         type: "tounarment",
         event: "badminton",
-        winnerId: 12,
-        loserId: 16,
+        winner: "이루리",
+        loser: "골톤",
         player: "이루리vs골톤",
         docId: 10,
         createdAt: new Date()
@@ -92,8 +92,8 @@ module.exports = {
         id: 6,
         type: "tounarment",
         event: "badminton",
-        winnerId: 13,
-        loserId: 19,
+        winner: "다산탁구왕",
+        loser: "다산동밥샙",
         player: "다산탁구왕vs다산동밥샙",
         docId: 10,
         createdAt: new Date()
@@ -109,8 +109,8 @@ module.exports = {
         id: 7,
         type: "tounarment",
         event: "badminton",
-        winnerId: 10,
-        loserId: 11,
+        winner: "고로쇠물달다",
+        loser: "빛솔",
         docId: 10,
         player: "빛솔vs고로쇠물달다",
         createdAt: new Date()
@@ -126,8 +126,8 @@ module.exports = {
         id: 8,
         type: "tounarment",
         event: "badminton",
-        winnerId: 12,
-        loserId: 13,
+        winner: "이루리",
+        loser: "다산탁구왕",
         player: "다산탁구왕vs이루리",
         docId: 10,
         createdAt: new Date()
@@ -143,8 +143,8 @@ module.exports = {
         id: 9,
         type: "tounarment",
         event: "badminton",
-        winnerId: 10,
-        loserId: 12,
+        winner: "고로쇠물달다",
+        loser: "이루리",
         player: "이루리vs고로쇠물달다",
         docId: 10,
         createdAt: new Date()
@@ -160,8 +160,8 @@ module.exports = {
         id: 10,
         type: "match",
         event: "pingpong",
-        winnerId: 7,
-        loserId: 8,
+        winner: "무지개가맑다",
+        loser: "밝은빛누리예",
         player: "무지개가맑다vs밝은빛누리예",
         docId: 4,
         createdAt: new Date()
