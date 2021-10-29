@@ -262,7 +262,6 @@ export async function create(req, res) {
 
   const docImgLink = await docData.findByImg([created]);
 
-  console.log(created);
   const player = await entryData.findByDocId(created.id, "대기");
   const board = await boardData.findByDocId(created.id);
 

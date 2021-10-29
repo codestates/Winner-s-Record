@@ -1,14 +1,21 @@
 import db from "../models/index.js";
+import * as userData from "../data/auth.js";
 
 export async function updateRecords(result) {
-  const { event, winnerId, loserId } = result;
+  const { event, winner, loser } = result;
+
+  const winnerData = await userData.findByNickname(winner);
+  const loserData = await userData.findByNickname(loser);
+
+  const winnerId = winnerData.id;
+  const loserId = loserData.id;
+
   const winnerRecord = await db.Records.findOne({
     where: { event, userId: winnerId },
   }).then((data) => data.dataValues);
   const loserRecord = await db.Records.findOne({
     where: { event, userId: loserId },
   }).then((data) => data.dataValues);
-  console.log("winner : ", winnerRecord, "\n", "looser : ", loserRecord);
 
   await db.Records.update(
     { win: `${winnerRecord.win + 1}` },
@@ -66,4 +73,20 @@ export async function create(userId) {
     point: 0,
     userId,
   });
+}
+
+export async function findWinner(matchId) {
+  let winners = [];
+  for (let i = 0; i < matchId.length; i++) {
+    const result = await db.Matches.findOne({
+      where: { id: matchId[i] },
+    }).then((data) => data.dataValues);
+    winners.push(result.winner);
+    await updateRecords({
+      event: result.event,
+      winner: result.winner,
+      loser: result.loser,
+    });
+  }
+  return winners;
 }

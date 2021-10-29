@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       type: DataTypes.STRING,
       event: DataTypes.STRING,
-      winnerId: DataTypes.INTEGER,
-      loserId: DataTypes.INTEGER,
+      winner: DataTypes.STRING,
+      loser: DataTypes.STRING,
       player: DataTypes.STRING,
       docId: DataTypes.INTEGER,
     },
