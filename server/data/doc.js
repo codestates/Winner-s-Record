@@ -160,7 +160,7 @@ export async function validType(type) {
     type === "all" ||
     type === "trade" ||
     type === "match" ||
-    type === "tounarment"
+    type === "tournament"
   );
 }
 
@@ -191,10 +191,6 @@ export async function editDoc(docId, data) {
     await db.Docs.update({ status }, { where: { id: docId } });
   }
 
-  if (status === "완료") {
-    console.log("완료라서 왔어");
-  }
-
   type && (await db.Docs.update({ type }, { where: { id: docId } }));
   title && (await db.Docs.update({ title }, { where: { id: docId } }));
   status && (await db.Docs.update({ status }, { where: { id: docId } }));
@@ -207,7 +203,6 @@ export async function editDoc(docId, data) {
     where: { id: docId },
   }).catch((err) => console.log(err));
 
-  console.log(editedDoc.dataValues.status);
   return editedDoc;
 }
 

@@ -30,8 +30,24 @@ export async function insertResult(req, res) {
       loserId: loserId.id,
     });
     await docData.editDoc(docId, { status: "완료" });
-    return res.status(200).json({ result });
-  } else if (doc.type === "tounarment") {
-    return res.status(200).json({ result });
+    return res.status(200).json({ ...result });
+  } else if (doc.type === "tournament") {
+    return res.status(200).json({ ...result });
   }
+}
+
+export async function editResult(req, res) {
+  const hostId = req.userId;
+  const matchId = req.body.matchId;
+  const docId = parseInt(req.params.docId);
+  const doc = await matchData.findDocById(docId);
+  if (hostId !== doc.userId) {
+    return res.status(403).json({ message: "권한이 없습니다" });
+  }
+  const { winner, loser } = req.body;
+  const winnerId = await userData.findByNickname(winner);
+  const loserId = await userData.findByNickname(loser);
+
+  const result = await matchData.eidtMatch(matchId, winnerId, loserId);
+  return res.status(200).json({ ...result });
 }
