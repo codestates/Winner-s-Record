@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 const PostUserInfo = ({ userData }) => {
-  console.log(userData);
   return (
     <div className="post--userinfo--container">
       <Link to={`/profile/${userData.userId}`}>
