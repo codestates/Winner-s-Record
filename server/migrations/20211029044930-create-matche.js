@@ -20,6 +20,9 @@ module.exports = {
       loserId: {
         type: Sequelize.INTEGER
       },
+      player: {
+        type: Sequelize.STRING
+      },
       docId: {
         type: Sequelize.INTEGER
       },

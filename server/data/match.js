@@ -32,3 +32,20 @@ export async function eidtMatch(matchId, winnerId, loserId) {
     loserId: editedMatch.loserId,
   };
 }
+
+export async function tournamentMatch(docId, event, players) {
+  players.sort(() => Math.random() - 0.5);
+  const binary = [];
+  for (let i = 0; i < players.length; i += 2) {
+    binary.push(`${players[i]}vs${players[i + 1]}`);
+  }
+  for (let i = 0; i < binary.length; i++) {
+    await db.Matches.create({
+      docId,
+      event,
+      type: "tournamentR1",
+      player: binary[i],
+    });
+  }
+  return binary;
+}
