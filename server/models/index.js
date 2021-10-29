@@ -25,5 +25,7 @@ db.Images = require('./images')(sequelize, Sequelize);
 db.Matches = require('./matches')(sequelize, Sequelize);
 db.Records = require('./records')(sequelize, Sequelize);
 db.Users_Docs = require('./users_docs')(sequelize, Sequelize);
+db.Rooms = require('./rooms')(sequelize, Sequelize);
+db.Chattings = require('./chattings')(sequelize, Sequelize);
 
 module.exports = db;
