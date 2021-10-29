@@ -232,3 +232,14 @@ export async function changeEntryStatus(hostId, docId, userId) {
     }
   }
 }
+
+export async function findDocStatus (docId) {
+  const checkDoc = await db.Docs.findOne({
+    where: {
+      id: docId,
+    },
+  }).then((res) => res.dataValues.type)
+    .catch((err) => console.log(err));
+    
+  return checkDoc
+}
