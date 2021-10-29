@@ -1,5 +1,7 @@
 import pkg from "sequelize";
 import db from "../models/index.js";
+import * as matchData from "./match.js";
+import * as entryData from "./entry.js";
 const { Op } = pkg;
 
 export async function findByType(type) {
@@ -188,7 +190,15 @@ export async function editDoc(docId, data) {
     await db.Entries.destroy({
       where: { docId, status: "대기" },
     });
-    await db.Docs.update({ status }, { where: { id: docId } });
+    if (type === "tournament") {
+      const players = await entryData.findByDocId(docId, "진행");
+      const matchedPlayer = await matchData.tournamentMatch(
+        docId,
+        event,
+        players
+      );
+      console.log(matchedPlayer);
+    }
   }
 
   type && (await db.Docs.update({ type }, { where: { id: docId } }));

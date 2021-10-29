@@ -14,26 +14,24 @@ export async function insertResult(req, res) {
   const { winner, loser } = req.body;
   const winnerId = await userData.findByNickname(winner);
   const loserId = await userData.findByNickname(loser);
-  const type = doc.type;
   const event = doc.event;
+
   const result = await matchData.createMatch({
-    type,
+    type: "match",
     event,
     winnerId: winnerId.id,
     loserId: loserId.id,
+    player: `${winner}vs${loser}`,
     docId,
   });
-  if (doc.type === "match") {
-    await recordData.createRecords({
-      event,
-      winnerId: winnerId.id,
-      loserId: loserId.id,
-    });
-    await docData.editDoc(docId, { status: "완료" });
-    return res.status(200).json({ ...result });
-  } else if (doc.type === "tournament") {
-    return res.status(200).json({ ...result });
-  }
+
+  await recordData.createRecords({
+    event,
+    winnerId: winnerId.id,
+    loserId: loserId.id,
+  });
+  await docData.editDoc(docId, { status: "완료" });
+  return res.status(200).json({ ...result });
 }
 
 export async function editResult(req, res) {

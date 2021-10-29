@@ -1,6 +1,6 @@
-import pkg from 'sequelize';
-import db from '../models/index.js';
-const {Op} = pkg;
+import pkg from "sequelize";
+import db from "../models/index.js";
+const { Op } = pkg;
 
 export async function findById(id) {
   const likes = await db.Users_Docs.findAll({
@@ -119,9 +119,9 @@ export async function deleteLikeDoc(userId, docId) {
         docId: docId,
       },
     }).catch((err) => console.log(err));
-    return 'ok';
+    return "ok";
   } else {
-    return 'cannot delete';
+    return "cannot delete";
   }
 }
 
@@ -136,10 +136,9 @@ export async function validId(id) {
 
 export async function findByUserId(userId) {
   const likeDoc = await db.Users_Docs.findAll({
-    attributes: ['docId'],
-    where: {userId},
+    attributes: ["docId"],
+    where: { userId },
   });
-  console.log('findAll 결과', likeDoc);
   return likeDoc.map((el) => {
     return el.dataValues.docId;
   });
