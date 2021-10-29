@@ -33,7 +33,11 @@ const PostPrimaryButton = ({
           setIsModalActive={setIsModalActive}
         />
       ) : (
-        <TournamentButton />
+        <TournamentButton
+          hostId={hostId}
+          status={status}
+          setLoginModal={setLoginModal}
+        />
       )}
     </>
   );
