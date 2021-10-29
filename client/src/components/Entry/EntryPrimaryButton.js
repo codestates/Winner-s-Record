@@ -19,7 +19,6 @@ const FixBtn = ({ fixed, setIsModalActive, setModalText }) => {
           { headers: { Authorization } }
         )
         .then((res) => {
-          console.log(res.data);
           history.push(`/post/${postId}`);
           setModalText("상대가 지정되었습니다.");
           setIsModalActive(true);
@@ -36,6 +35,7 @@ const FixBtn = ({ fixed, setIsModalActive, setModalText }) => {
 };
 
 const ApplyBtn = ({
+  hostId,
   postId,
   fixed,
   setApplied,
@@ -60,7 +60,7 @@ const ApplyBtn = ({
     } else {
       const Authorization = `Bearer ${localStorage.getItem("token")}`;
       axios
-        .put(
+        .post(
           `http://localhost:8080/entry/${postId}`,
           {
             userId: userInfo.userId,
@@ -71,7 +71,7 @@ const ApplyBtn = ({
         )
         .then((res) => {
           const applied = res.data.data.filter((e) => {
-            return e.status === "대기" ? true : false;
+            return e.status === "대기" && e.userId !== hostId ? true : false;
           });
           setApplied(applied);
         });

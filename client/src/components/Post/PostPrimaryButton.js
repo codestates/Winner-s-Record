@@ -69,7 +69,6 @@ const MatchButton = ({
       setModalText("승자를 선택해주세요!");
       setModalBtnType("choosewinner");
       setIsModalActive(true);
-      // 결과 입력
     }
   };
 

@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 const ImageCarousel = ({ images = [] }) => {
-  console.log(images);
   const [idxImg, setIdxImg] = useState(0);
 
   return (

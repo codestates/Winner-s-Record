@@ -59,6 +59,7 @@ const Entry = () => {
         {fixed.map((userData) => {
           return (
             <EntryPlayer
+              key={userData.userId}
               postId={postId}
               userData={userData}
               setApplied={setApplied}
@@ -77,6 +78,7 @@ const Entry = () => {
         {applied.map((userData) => {
           return (
             <EntryPlayer
+              key={userData.userId}
               postId={postId}
               userData={userData}
               setApplied={setApplied}
@@ -99,6 +101,7 @@ const Entry = () => {
         />
       ) : (
         <ApplyBtn
+          hostId={host.userId}
           postId={postId}
           fixed={fixed}
           setApplied={setApplied}
