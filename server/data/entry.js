@@ -14,7 +14,7 @@ export async function findByDocId(docId, status) {
         },
       },
     });
-  } else if (status === "대기") {
+  } else if (status === "대기" || status === "완료") {
     allEntries = await db.Entries.findAll({
       attributes: ["userId"],
       where: { docId },
