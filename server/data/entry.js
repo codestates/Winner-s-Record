@@ -54,7 +54,7 @@ export async function addPostEntry(userId, docId) {
       },
     }).catch((err) => console.log(err));
 
-    if (checkEntry !== null) {
+    if (checkEntry === null) {
       const entry = await db.Entries.create({
         status: "대기",
         docId: docId,
@@ -76,8 +76,7 @@ export async function entryList(docId, entries) {
     where: {
       id: docId,
     },
-  })
-    .then((res) => res.dataValues.event)
+  }).then((res) => res.dataValues.event)
     .catch((err) => console.log(err));
 
   const userId = entries.map((el) => el.userId);
@@ -96,9 +95,7 @@ export async function entryList(docId, entries) {
     },
   }).catch((err) => console.log(err));
 
-  const rankList = rank
-    .map((el) => el.dataValues)
-    .sort((a, b) => b.point - a.point);
+  const rankList = rank.map((el) => el.dataValues).sort((a, b) => b.point - a.point);
 
   for (let i = 0; i < entries.length; i++) {
     for (let j = 0; j < userList.length; j++) {
@@ -149,8 +146,7 @@ export async function deleteEntryPost(hostId, docId, userId) {
       docId: docId,
       status: "호스트",
     },
-  })
-    .then((res) => res.dataValues)
+  }).then((res) => res.dataValues)
     .catch((err) => console.log(err));
 
   if (checkHostDoc.userId === hostId || hostId === userId) {
@@ -185,8 +181,7 @@ export async function changeEntryStatus(hostId, docId, userId) {
       docId: docId,
       status: "호스트",
     },
-  })
-    .then((res) => res.dataValues)
+  }).then((res) => res.dataValues)
     .catch((err) => console.log(err));
 
   if (checkHostDoc.userId === hostId) {
@@ -195,8 +190,7 @@ export async function changeEntryStatus(hostId, docId, userId) {
         docId: docId,
         userId: userId,
       },
-    })
-      .then((res) => res.dataValues)
+    }).then((res) => res.dataValues)
       .catch((err) => console.log(err));
 
     if (entry !== undefined && entry.status === "확정") {
