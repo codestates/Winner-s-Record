@@ -47,7 +47,6 @@ export async function editResult(req, res) {
   const { winner, loser } = req.body;
   const winnerId = await userData.findByNickname(winner);
   const loserId = await userData.findByNickname(loser);
-
-  const result = await matchData.eidtMatch(matchId, winnerId, loserId);
+  const result = await matchData.eidtMatch(matchId, winnerId.id, loserId.id);
   return res.status(200).json({ ...result });
 }
