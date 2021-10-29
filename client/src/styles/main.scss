@@ -7,7 +7,7 @@ $sub-color: #eaa938;
 
 // components
 @import "./modal";
-@import "./TopButton";
+@import "./FixedButton";
 @import "./components/Post/ImageCarousel";
 @import "./components/Post/PostMap";
 
@@ -16,3 +16,4 @@ $sub-color: #eaa938;
 @import "./pages/Login";
 @import "./pages/Signup";
 @import "./pages/Main";
+@import "./pages/Entry";
