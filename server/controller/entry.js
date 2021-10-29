@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 import { config } from "../config.js";
 
 export async function addEntry(req, res) {
-  console.log("너 누구야");
   const docId = req.params.docId;
   const authorization = req.headers.authorization;
   if (!authorization) {
@@ -13,6 +12,7 @@ export async function addEntry(req, res) {
     const token = authorization.split(" ")[1];
     const user = await jwt.verify(token, String(config.jwt.secretKey));
     const entryPost = await entryData.addPostEntry(user.id, docId);
+    console.log(entryPost);
     if (entryPost && user) {
       const entryUser = await entryData.entryList(docId, entryPost);
       return res.status(200).send({ data: entryUser });

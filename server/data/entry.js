@@ -53,8 +53,7 @@ export async function addPostEntry(userId, docId) {
         userId: userId,
       },
     }).catch((err) => console.log(err));
-
-    if (checkEntry !== null) {
+    if (checkEntry === null) {
       const entry = await db.Entries.create({
         status: "대기",
         docId: docId,
