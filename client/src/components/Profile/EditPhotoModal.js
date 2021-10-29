@@ -1,65 +1,70 @@
 import axios from "axios";
 import AWS from "aws-sdk";
-import { useEffect, useState } from "react";
+import dotenv from "dotenv";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "../../modules/userInfo";
+dotenv.config();
 
 export default function EditPhotoModal({
+  File,
+  setFile,
   isModalOpen,
   openModalHandler,
   prevPhoto,
+  editPhoto,
 }) {
   const dispatch = useDispatch();
-  const [File, setFile] = useState(null);
-  const [img, setImg] = useState(null);
   const [preview, setPreview] = useState(prevPhoto);
 
   const imgOnchange = (e) => {
     const imageFile = e.target.files[0];
     setFile(imageFile);
-    const imageURL = URL.createObjectURL(imageFile);
+    const data = [];
+    data.push(imageFile);
+    const imageURL = window.URL.createObjectURL(
+      new Blob(data, { type: "image" })
+    );
+    console.log(imageURL);
     setPreview(imageURL);
   };
 
-  const ACCESS_KEY = "AKIA6LEUKF6HOQL5GBPL";
-  const SECRET_ACCESS_KEY = "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";
-  const REGION = "ap-northeast-2";
-  const S3_BUCKET = "winnersrecordimagestorage";
-  const bucketurl =
-    "https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com";
-
   AWS.config.update({
-    accessKeyId: ACCESS_KEY,
-    secretAccessKey: SECRET_ACCESS_KEY,
+    accessKeyId: process.env.REACT_APP_ACCESS_KEY,
+    secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
   });
 
   const myBucket = new AWS.S3({
-    params: { Bucket: S3_BUCKET },
-    region: REGION,
+    params: { Bucket: process.env.REACT_APP_S3_BUCKET },
+    region: process.env.REACT_APP_REGION,
   });
 
   const uploadFile = (file) => {
     const params = {
       ACL: "public-read",
       Body: file,
-      Bucket: S3_BUCKET,
+      Bucket: process.env.REACT_APP_S3_BUCKET,
       Key: file.name,
       ContentType: "image",
     };
-    myBucket.putObject(params).on("success", (res) => {
-      console.log(res);
-      const path = res;
-      setImg(`${bucketurl}${path}`);
-      handleEdit();
-    });
+    myBucket
+      .putObject(params)
+      .on("success", (res) => {
+        const path = `${process.env.REACT_APP_BUCKET_URL}${res.request.httpRequest.path}`;
+        editPhoto(path);
+        handleEdit(path);
+      })
+      .send((err) => {
+        if (err) console.log(err);
+      });
   };
 
-  const handleEdit = () => {
+  const handleEdit = (path) => {
     const oldToken = localStorage.getItem("token");
     axios
       .put(
         "http://localhost:8080/auth/img",
-        { img },
+        { img: path },
         { headers: { authorization: `Bearer ${oldToken}` } }
       )
       .then((res) => {
@@ -68,10 +73,15 @@ export default function EditPhotoModal({
         localStorage.setItem("token", token);
         dispatch(setUserInfo(userdata));
         setFile(null);
-        setImg(null);
         setPreview(null);
         openModalHandler();
       });
+  };
+
+  const handleCancle = () => {
+    setFile(null);
+    setPreview(prevPhoto);
+    openModalHandler();
   };
 
   return (
@@ -87,18 +97,23 @@ export default function EditPhotoModal({
                 onChange={(e) => imgOnchange(e)}
               />
               <div>
-                <img src={preview} />
+                <img style={{ width: "50%", height: "50%" }} src={preview} />
               </div>
             </div>
             <div className="modal--btnContainer">
-              <button onClick={openModalHandler}>돌아가기</button>
-              <button
-                onClick={() => {
-                  uploadFile(File);
-                }}
-              >
-                변경하기
-              </button>
+              <button onClick={handleCancle}>돌아가기</button>
+              {File ? (
+                <button
+                  style={{ color: "green" }}
+                  onClick={() => {
+                    uploadFile(File);
+                  }}
+                >
+                  변경하기
+                </button>
+              ) : (
+                <button>변경하기</button>
+              )}
             </div>
           </div>
         </div>

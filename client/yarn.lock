@@ -2676,10 +2676,10 @@
     "postcss" "^7.0.32"
     "postcss-value-parser" "^4.1.0"
 
-"aws-sdk@^2.1015.0":
-  "integrity" "sha512-jSM955n08r+kzCMMhOu1Dbua8SRZQKgGO1nAoUwBSlXjnLtN+F81P93h4yNBtWsxUg1mAMTP3DKJjXFFrRToPw=="
-  "resolved" "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.1015.0.tgz"
-  "version" "2.1015.0"
+"aws-sdk@^2.1017.0":
+  "integrity" "sha512-oS3KmMhzxK0HEy1AfHV8EjfvNlm8PpLSswbh+SF6MBP1Hy8vyQ/1dFhhWpEogpyIzV6MUdKnq++bTijXGIRqdA=="
+  "resolved" "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.1017.0.tgz"
+  "version" "2.1017.0"
   dependencies:
     "buffer" "4.9.2"
     "events" "1.1.1"
@@ -4617,6 +4617,11 @@
   "integrity" "sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA=="
   "resolved" "https://registry.npmjs.org/dotenv-expand/-/dotenv-expand-5.1.0.tgz"
   "version" "5.1.0"
+
+"dotenv@^10.0.0":
+  "integrity" "sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q=="
+  "resolved" "https://registry.npmjs.org/dotenv/-/dotenv-10.0.0.tgz"
+  "version" "10.0.0"
 
 "dotenv@8.2.0":
   "integrity" "sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw=="
@@ -12293,7 +12298,12 @@
   "resolved" "https://registry.npmjs.org/utils-merge/-/utils-merge-1.0.1.tgz"
   "version" "1.0.1"
 
-"uuid@^3.3.2", "uuid@^3.4.0":
+"uuid@^3.3.2":
+  "integrity" "sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A=="
+  "resolved" "https://registry.npmjs.org/uuid/-/uuid-3.4.0.tgz"
+  "version" "3.4.0"
+
+"uuid@^3.4.0":
   "integrity" "sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A=="
   "resolved" "https://registry.npmjs.org/uuid/-/uuid-3.4.0.tgz"
   "version" "3.4.0"
