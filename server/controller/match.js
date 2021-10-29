@@ -25,7 +25,7 @@ export async function insertResult(req, res) {
     docId,
   });
 
-  await recordData.createRecords({
+  await recordData.updateRecords({
     event,
     winnerId: winnerId.id,
     loserId: loserId.id,
