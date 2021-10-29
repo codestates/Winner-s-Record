@@ -13,9 +13,9 @@ const Entry = () => {
   const [fixed, setFixed] = useState([]);
   const [applied, setApplied] = useState([]);
   const [host, setHost] = useState({});
+  const [postType, setPostType] = useState("match");
 
   const [loginModal, setLoginModal] = useState(false);
-
   const [isModalActive, setIsModalActive] = useState(false);
   const [modalText, setModalText] = useState("권한이 없습니다.");
 
@@ -43,10 +43,10 @@ const Entry = () => {
             ? true
             : false;
         });
-
         setHost(host[0]);
         setFixed(fixed);
         setApplied(applied);
+        setPostType(res.data.docType);
       });
   };
   useEffect(() => {
@@ -70,6 +70,7 @@ const Entry = () => {
               setIsModalActive={setIsModalActive}
               setModalText={setModalText}
               setLoginModal={setLoginModal}
+              postType={postType}
             />
           );
         })}
@@ -89,6 +90,7 @@ const Entry = () => {
               setIsModalActive={setIsModalActive}
               setModalText={setModalText}
               setLoginModal={setLoginModal}
+              postType={postType}
             />
           );
         })}

@@ -12,6 +12,7 @@ const EntryPlayer = ({
   setIsModalActive,
   setModalText,
   setLoginModal,
+  postType,
 }) => {
   const { userInfo, isLogin } = useSelector((state) => ({
     userInfo: state.userInfo,
@@ -22,8 +23,11 @@ const EntryPlayer = ({
   const fixPlayer = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     const endpoint = `http://localhost:8080/entry/${postId}`;
-    if (fixed.length) {
+    if (fixed.length && postType === "match") {
       setModalText("다수의 상대를 지정할 수 없어요.");
+      setIsModalActive(true);
+    } else if (fixed.length > 7) {
+      setModalText("대회 참가 인원은 7명까지 지정할 수 있어요.");
       setIsModalActive(true);
     } else {
       axios
@@ -53,7 +57,6 @@ const EntryPlayer = ({
       setModalText("권한이 없습니다.");
     } else {
       if (userData.status === "확정") {
-        console.log("여기 확정인 아이들만");
         axios
           .put(endpoint, { userId }, { headers: { Authorization } })
           .then((res) => {

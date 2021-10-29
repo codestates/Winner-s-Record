@@ -10,14 +10,19 @@ const PostModal = ({
   setPostInfo,
   status,
 }) => {
-  console.log("여기 플레이어 입니다", player);
-
   const { postId } = useParams();
   return (
     <div className="modal--backdrop">
       <div className="modal--view">
         <div className="modal--text--container"></div>
-        <div className="text">{modalText}</div>
+        {modalBtnType === "result" ? (
+          <div>
+            <div className="winner">승자</div>
+            <div className="loser">패자</div>
+          </div>
+        ) : (
+          <div className="text">{modalText}</div>
+        )}
         {modalBtnType === "close" ? (
           <div className="modal--btns--container">
             <div
@@ -48,6 +53,8 @@ const PostModal = ({
     </div>
   );
 };
+
+const Result = () => {};
 
 const ChooseWinner = ({ postId, player, setIsModalActive }) => {
   const [isLoading, setIsLoading] = useState(true);

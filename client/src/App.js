@@ -19,7 +19,7 @@ import { useDispatch } from "react-redux";
 import { setUserInfo } from "./modules/userInfo";
 import { setLogin } from "./modules/isLogin";
 import axios from "axios";
-import Tournament from "./pages/Tournament";
+import TournamentMain from "./pages/TournamentMain";
 
 function App() {
   const dispatch = useDispatch();
@@ -51,11 +51,12 @@ function App() {
           <Route path="/post/:postId/entry">
             <Entry />
           </Route>
+          {/* <Route path="/post/:postId/tournament"><Tournament /></Route> */}
           <Route path="/main">
             <Main />
           </Route>
-          <Route path="/tournament">
-            <Tournament />
+          <Route exact path="/tournament">
+            <TournamentMain />
           </Route>
           <Route path="/login">
             <Login />

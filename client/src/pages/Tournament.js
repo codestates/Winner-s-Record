@@ -1,18 +1,30 @@
+import axios from "axios";
 import React, { useState } from "react";
-
-import TopButton from "../components/TopButton";
-import Search from "../components/Tournament/Search";
-
-import PostList from "../components/Tournament/PostList";
+import { useParams } from "react-router";
 
 const Tournament = () => {
-  const [postList, setPostList] = useState([]);
+  const [matches, setMatches] = useState([]);
+  const [editMatch, setEditMatch] = useState(0);
+  const { postId } = useParams();
+
+  const getData = () => {
+    const Authorization = `Bearer ${localStorage.getItem("token")}`;
+
+    axios.get(`http://localhost:8080/tournament/${postId}`).then((res) => {
+      setMatches(res.data.data);
+    });
+  };
 
   return (
     <div className="tournament--container">
-      <Search setPostList={setPostList} />
-      <PostList postList={postList} />
-      <TopButton />
+      <div className="title">토너먼트 페이지</div>
+      <div className="round">1 라운드</div>
+      <div className="player--container"></div>
+      <div className="round">2 라운드</div>
+      <div className="player--container"></div>
+      <div className="round">Final 라운드</div>
+      <div className="player--container"></div>
+      {/* 에딧 모달 만들어야함 */}
     </div>
   );
 };
