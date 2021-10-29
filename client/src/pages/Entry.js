@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
+import BackButton from "../components/BackButton";
 import EntryPlayer from "../components/Entry/EntryPlayer";
 import { ApplyBtn, FixBtn } from "../components/Entry/EntryPrimaryButton";
 import NeedLoginModal from "../components/NeedLoginModal";
@@ -12,9 +13,9 @@ const Entry = () => {
   const [fixed, setFixed] = useState([]);
   const [applied, setApplied] = useState([]);
   const [host, setHost] = useState({});
+  const [postType, setPostType] = useState("match");
 
   const [loginModal, setLoginModal] = useState(false);
-
   const [isModalActive, setIsModalActive] = useState(false);
   const [modalText, setModalText] = useState("권한이 없습니다.");
 
@@ -42,10 +43,10 @@ const Entry = () => {
             ? true
             : false;
         });
-
         setHost(host[0]);
         setFixed(fixed);
         setApplied(applied);
+        setPostType(res.data.docType);
       });
   };
   useEffect(() => {
@@ -69,6 +70,7 @@ const Entry = () => {
               setIsModalActive={setIsModalActive}
               setModalText={setModalText}
               setLoginModal={setLoginModal}
+              postType={postType}
             />
           );
         })}
@@ -88,6 +90,7 @@ const Entry = () => {
               setIsModalActive={setIsModalActive}
               setModalText={setModalText}
               setLoginModal={setLoginModal}
+              postType={postType}
             />
           );
         })}
@@ -111,6 +114,7 @@ const Entry = () => {
         />
       )}
 
+      <BackButton />
       {isModalActive ? (
         <div className={"modal--backdrop"}>
           <div className={"modal--view"}>

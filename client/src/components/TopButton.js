@@ -7,7 +7,7 @@ const TopButton = () => {
   };
 
   return (
-    <div className="topbtn" onClick={moveToTop}>
+    <div className="fixedBtn top" onClick={moveToTop}>
       Top
     </div>
   );

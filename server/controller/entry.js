@@ -12,6 +12,7 @@ export async function addEntry(req, res) {
     const token = authorization.split(" ")[1];
     const user = await jwt.verify(token, String(config.jwt.secretKey));
     const entryPost = await entryData.addPostEntry(user.id, docId);
+    console.log(entryPost);
     if (entryPost && user) {
       const entryUser = await entryData.entryList(docId, entryPost);
       return res.status(200).send({ data: entryUser });
