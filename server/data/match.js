@@ -22,10 +22,10 @@ export async function createMatch(result) {
 }
 
 export async function eidtMatch(matchId, winnerId, loserId) {
-  const editedMatch = await db.Matches.update(
-    { winnerId, loserId },
-    { where: { id: matchId } }
-  ).then((data) => data.dataValues);
+  await db.Matches.update({ winnerId, loserId }, { where: { id: matchId } });
+  const editedMatch = await db.Matches.findOne({
+    where: { id: matchId },
+  });
   return {
     matchId: editedMatch.id,
     winnerId: editedMatch.winnerId,
