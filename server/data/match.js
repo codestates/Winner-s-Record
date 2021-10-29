@@ -16,24 +16,28 @@ export async function createMatch(result) {
   );
   return {
     matchId: newMatch.id,
-    winnerId: newMatch.winnerId,
-    loserId: newMatch.loserId,
+    winner: newMatch.winner,
+    loser: newMatch.loser,
   };
 }
 
-export async function eidtMatch(matchId, winnerId, loserId) {
-  await db.Matches.update({ winnerId, loserId }, { where: { id: matchId } });
+export async function eidtMatch(matchId, winner, loser) {
+  await db.Matches.update({ winner, loser }, { where: { id: matchId } });
   const editedMatch = await db.Matches.findOne({
     where: { id: matchId },
   });
-  return {
-    matchId: editedMatch.id,
-    winnerId: editedMatch.winnerId,
-    loserId: editedMatch.loserId,
-  };
+  return editedMatch;
 }
 
 export async function tournamentMatch(docId, event, players) {
+  let type;
+  if (players.legnth === 8) {
+    type = "tournamentR1";
+  } else if (players.length === 4) {
+    type = "tournamentR2";
+  } else if (players.length === 2) {
+    type = "tournamentR3";
+  }
   players.sort(() => Math.random() - 0.5);
   const binary = [];
   for (let i = 0; i < players.length; i += 2) {
@@ -43,7 +47,7 @@ export async function tournamentMatch(docId, event, players) {
     await db.Matches.create({
       docId,
       event,
-      type: "tournamentR1",
+      type,
       player: binary[i],
     });
   }
