@@ -273,3 +273,9 @@ export async function create(userId, data) {
 
   return created.dataValues;
 }
+
+export async function remove(docId) {
+  await db.Docs.destroy({
+    where: { id: docId },
+  });
+}
