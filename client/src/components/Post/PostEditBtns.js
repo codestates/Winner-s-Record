@@ -1,29 +1,26 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { modalOn } from "../../modules/isModalOpen";
+import { setModalText } from "../../modules/modalText";
 
-const PostEditBtns = ({
-  hostId,
-  setModalText,
-  setIsModalActive,
-  setLoginModal,
-  setModalBtnType,
-}) => {
+const PostEditBtns = ({ hostId, setLoginModal, setModalBtnType }) => {
   const { isLogin, userInfo } = useSelector((state) => ({
     isLogin: state.isLogin,
     userInfo: state.userInfo,
   }));
+  const dispatch = useDispatch();
 
   const deleteHandler = () => {
     if (!isLogin) {
       setLoginModal(true);
     } else if (userInfo.userId !== hostId) {
-      setModalText("권한이 없습니다.");
+      dispatch(setModalText("권한이 없습니다."));
       setModalBtnType("close");
-      setIsModalActive(true);
+      dispatch(modalOn());
     } else {
-      setModalText("정말 삭제하시겠습니까 ?");
+      dispatch(setModalText("정말 삭제하시겠습니까 ?"));
       setModalBtnType("delete");
-      setIsModalActive(true);
+      dispatch(modalOn());
     }
   };
 
@@ -31,9 +28,9 @@ const PostEditBtns = ({
     if (!isLogin) {
       setLoginModal(true);
     } else if (userInfo.userId !== hostId) {
-      setModalText("권한이 없습니다.");
+      dispatch(setModalText("권한이 없습니다."));
       setModalBtnType("close");
-      setIsModalActive(true);
+      dispatch(modalOn());
     }
   };
 

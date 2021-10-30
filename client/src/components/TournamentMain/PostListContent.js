@@ -24,13 +24,7 @@ const PostListContent = ({ postInfo }) => {
         <div className="list--content--pic">
           <img src={img[0]} alt="사진" />
         </div>
-        <div
-          className={`list--content--type ${
-            type === "match" ? "match" : "trade"
-          } `}
-        >
-          {type === "match" ? "경기" : "거래"}
-        </div>
+
         <div className="list--content--game">{`#${gameNamer(event)}`}</div>
         <div className="list--content--title">{title}</div>
         <div className="list--content--place">{place}</div>

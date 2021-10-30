@@ -12,10 +12,14 @@ import PostComments from "../components/Post/PostComments";
 import PostUserInfo from "../components/Post/PostUserInfo";
 import PostEditBtns from "../components/Post/PostEditBtns";
 import { useSelector } from "react-redux";
+import TournamentButton from "../components/Post/TournamentButton";
 
 const Post = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const userInfo = useSelector((state) => state.userInfo);
+  const { userInfo, isModalOpen } = useSelector((state) => ({
+    userInfo: state.userInfo,
+    isModalOpen: state.isModalOpen,
+  }));
   const { postId } = useParams();
   const [postInfo, setPostInfo] = useState({
     userData: {
@@ -29,8 +33,6 @@ const Post = () => {
     console.log("포스트 인포 확인하세요", postInfo);
   }, [postInfo]);
 
-  const [isModalActive, setIsModalActive] = useState(false);
-  const [modalText, setModalText] = useState("");
   const [loginModal, setLoginModal] = useState(false);
   const [modalBtnType, setModalBtnType] = useState("close");
 
@@ -79,8 +81,6 @@ const Post = () => {
         <div className="post--title">{title}</div>
         <PostEditBtns
           hostId={userData.userId}
-          setModalText={setModalText}
-          setIsModalActive={setIsModalActive}
           setModalBtnType={setModalBtnType}
           setLoginModal={setLoginModal}
         />
@@ -96,14 +96,18 @@ const Post = () => {
       ) : null}
 
       <div className="post--btns">
-        {isLoading ? null : (
+        {isLoading ? null : postInfo.status === "tournament" ? (
+          <TournamentButton
+            status={status}
+            setLoginModal={setLoginModal}
+            hostId={userData.userId}
+          />
+        ) : (
           <PostPrimaryButton
             hostId={userData.userId}
             type={type}
             status={status}
             setLoginModal={setLoginModal}
-            setIsModalActive={setIsModalActive}
-            setModalText={setModalText}
             setModalBtnType={setModalBtnType}
             player={player}
           />
@@ -118,10 +122,8 @@ const Post = () => {
         />
       </div>
       <NeedLoginModal isModalOpen={loginModal} setIsModalOpen={setLoginModal} />
-      {isModalActive ? (
+      {isModalOpen ? (
         <PostModal
-          setIsModalActive={setIsModalActive}
-          modalText={modalText}
           modalBtnType={modalBtnType}
           status={status}
           setPostInfo={setPostInfo}

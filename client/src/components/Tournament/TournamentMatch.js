@@ -1,7 +1,7 @@
 import React from "react";
 
-const TournamentMatch = ({ matchInfo, setIsModalActive, setEditMatch }) => {
-  const { matchId, event, winnerId, loserId, docId, player } = matchInfo;
+const TournamentMatch = ({ matchData, setIsModalActive, setMatchToEdit }) => {
+  const { matchId, event, winnerId, loserId, docId, player } = matchData;
 
   return (
     <li className="tournament--match--container">
@@ -17,7 +17,8 @@ const TournamentMatch = ({ matchInfo, setIsModalActive, setEditMatch }) => {
           <div className="btn">
             <div
               onClick={() => {
-                setEditMatch(matchId);
+                setMatchToEdit([matchId, docId, player[0], player[1]]);
+                setIsModalActive(true);
               }}
             >
               수정
@@ -34,6 +35,7 @@ const TournamentMatch = ({ matchInfo, setIsModalActive, setEditMatch }) => {
           <div className="btn">
             <div
               onClick={() => {
+                setMatchToEdit([matchId, docId, player[0], player[1]]);
                 setIsModalActive(true);
               }}
             >

@@ -1,63 +1,60 @@
 import { useHistory, useParams } from "react-router";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { modalOff } from "../../modules/isModalOpen";
 
 const PostModal = ({
   player,
-  setIsModalActive,
-  modalText,
   modalBtnType,
   setPostInfo,
   status,
+  winner,
+  loser,
 }) => {
   const { postId } = useParams();
+  const modalText = useSelector((state) => state.modalText);
+  const dispatch = useDispatch();
+
   return (
     <div className="modal--backdrop">
       <div className="modal--view">
         <div className="modal--text--container"></div>
         {modalBtnType === "result" ? (
-          <div>
-            <div className="winner">승자</div>
-            <div className="loser">패자</div>
+          <div className="modal--btns--container">
+            <div className="winner">{`승자 ${winner}`}</div>
+            <div className="loser">{`패자 ${loser}`}</div>
           </div>
         ) : (
           <div className="text">{modalText}</div>
         )}
-        {modalBtnType === "close" ? (
+        {modalBtnType === "close" || modalBtnType === "result" ? (
           <div className="modal--btns--container">
             <div
               className="btn"
               onClick={() => {
-                setIsModalActive(false);
+                dispatch(modalOff());
               }}
             >
               닫기
             </div>
           </div>
         ) : modalBtnType === "status" ? (
-          <ChangeStatusBtn
-            setIsModalActive={setIsModalActive}
-            status={status}
-            setPostInfo={setPostInfo}
-          />
+          <ChangeStatusBtn status={status} setPostInfo={setPostInfo} />
         ) : modalBtnType === "choosewinner" ? (
-          <ChooseWinner
-            postId={postId}
-            player={player}
-            setIsModalActive={setIsModalActive}
-          />
+          <ChooseWinner postId={postId} player={player} />
         ) : (
-          <DeleteBtns setIsModalActive={setIsModalActive} />
+          <DeleteBtns />
         )}
       </div>
     </div>
   );
 };
 
-const Result = () => {};
-
-const ChooseWinner = ({ postId, player, setIsModalActive }) => {
+const ChooseWinner = ({ postId, player }) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [timer, setTimer] = useState(3);
+  const dispatch = useDispatch();
   const clickHandler = (winner, loser) => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
@@ -67,21 +64,28 @@ const ChooseWinner = ({ postId, player, setIsModalActive }) => {
         { headers: { Authorization } }
       )
       .then((res) => {
-        setIsModalActive(false);
+        dispatch(modalOff());
       });
   };
 
   useEffect(() => {
     setTimeout(() => {
-      setIsLoading(false);
-      console.log(player);
+      setTimer(2);
+    }, 1000);
+    setTimeout(() => {
+      setTimer(1);
     }, 2000);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
   }, []);
 
   return (
     <>
       <div className="modal--alert">되돌릴 수 없으니 주의하세요 !</div>
-      {isLoading ? null : (
+      {isLoading ? (
+        <div className="modal--timer">{timer}</div>
+      ) : (
         <div className="modal--btns--container">
           <div
             className="player"
@@ -105,9 +109,10 @@ const ChooseWinner = ({ postId, player, setIsModalActive }) => {
   );
 };
 
-const DeleteBtns = ({ setIsModalActive }) => {
+const DeleteBtns = () => {
   const postId = useParams();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const confirmDelete = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
@@ -124,7 +129,7 @@ const DeleteBtns = ({ setIsModalActive }) => {
       <div
         className="btn"
         onClick={() => {
-          setIsModalActive(false);
+          dispatch(modalOff());
         }}
       >
         취소
@@ -136,9 +141,9 @@ const DeleteBtns = ({ setIsModalActive }) => {
   );
 };
 
-const ChangeStatusBtn = ({ setIsModalActive, status, setPostInfo }) => {
+const ChangeStatusBtn = ({ status, setPostInfo }) => {
   const { postId } = useParams();
-
+  const dispatch = useDispatch();
   const changeStatus = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     if (status === "대기") {
@@ -150,7 +155,7 @@ const ChangeStatusBtn = ({ setIsModalActive, status, setPostInfo }) => {
         )
         .then((res) => {
           setPostInfo(res.data.data);
-          setIsModalActive(false);
+          dispatch(modalOff());
         });
     } else {
       axios
@@ -161,7 +166,7 @@ const ChangeStatusBtn = ({ setIsModalActive, status, setPostInfo }) => {
         )
         .then((res) => {
           setPostInfo(res.data.data);
-          setIsModalActive(false);
+          dispatch(modalOff());
         });
     }
   };
@@ -171,7 +176,7 @@ const ChangeStatusBtn = ({ setIsModalActive, status, setPostInfo }) => {
       <div
         className="btn"
         onClick={() => {
-          setIsModalActive(false);
+          dispatch(modalOff());
         }}
       >
         취소
