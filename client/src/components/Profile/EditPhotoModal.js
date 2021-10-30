@@ -1,5 +1,5 @@
 import axios from "axios";
-import AWS from "aws-sdk";
+import AWS, { S3 } from "aws-sdk";
 import dotenv from "dotenv";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -25,7 +25,6 @@ export default function EditPhotoModal({
     const imageURL = window.URL.createObjectURL(
       new Blob(data, { type: "image" })
     );
-    console.log(imageURL);
     setPreview(imageURL);
   };
 

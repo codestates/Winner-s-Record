@@ -1,19 +1,29 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
+import Search from "../components/Ranking/Search";
+import EventTap from "../components/Ranking/EventTap";
+import RankList from "../components/Ranking/RankList";
 
 export default function Ranking() {
-  const [rank, SetRank] = useState({});
-  const handleRank = (event) => {
-    axios
-      .get(`http://localhost:8080/rank?event=${event}&nickname=${nickname}`)
-      .then((res) => {
-        console.log(res.data);
-        setRank();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const [list, setList] = useState([]);
+  const [event, setEvent] = useState("");
 
-  return;
+  useEffect(() => {
+    console.log(list);
+  }, [list]);
+  return (
+    <>
+      <Search event={event} setList={setList} />
+      <EventTap setList={setList} setEvent={setEvent} />
+      <div>{event.toUpperCase()}Ranking</div>
+      <ul>
+        {list.length ? (
+          list.map((e, index) => {
+            return <RankList key={index} content={e} index={index} />;
+          })
+        ) : (
+          <div>존재하지 않는 유저입니다.</div>
+        )}
+      </ul>
+    </>
+  );
 }

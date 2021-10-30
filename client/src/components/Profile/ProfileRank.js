@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function Ranking({ nickname }) {
+export default function ProfileRank({ nickname }) {
   const [rank, setRank] = useState({
     win: "",
     lose: "",
