@@ -20,6 +20,8 @@ import { setUserInfo } from "./modules/userInfo";
 import { setLogin } from "./modules/isLogin";
 import axios from "axios";
 import TournamentMain from "./pages/TournamentMain";
+import Tournament from "./pages/Tournament";
+import Result from "./pages/TournamentResult";
 
 function App() {
   const dispatch = useDispatch();
@@ -51,7 +53,12 @@ function App() {
           <Route path="/post/:postId/entry">
             <Entry />
           </Route>
-          {/* <Route path="/post/:postId/tournament"><Tournament /></Route> */}
+          <Route path="/post/:postId/tournament">
+            <Tournament />
+          </Route>
+          <Route path="/post/:postId/result">
+            <Result />
+          </Route>
           <Route path="/main">
             <Main />
           </Route>
