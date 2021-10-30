@@ -8,21 +8,19 @@ import Edit from "./pages/Edit";
 import Error from "./pages/Error";
 import Main from "./pages/Main";
 import Post from "./pages/Post";
+import CreateDoc from "./pages/CreateDoc";
 import Ranking from "./pages/Ranking";
+import TournamentMain from "./pages/TournamentMain";
+import Entry from "./pages/Entry";
 
 // styles
 import "./reset.css";
 import "./styles/main.scss";
-import Entry from "./pages/Entry";
 import { useEffect } from "react";
-
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "./modules/userInfo";
 import { setLogin } from "./modules/isLogin";
 import axios from "axios";
-import TournamentMain from "./pages/TournamentMain";
-import Tournament from "./pages/Tournament";
-import Result from "./pages/TournamentResult";
 
 function App() {
   const dispatch = useDispatch();
@@ -80,6 +78,9 @@ function App() {
           </Route>
           <Route path={"/profile/:userId"}>
             <Profile />
+          </Route>
+          <Route path="/doc">
+            <CreateDoc />
           </Route>
           <Route path="/ranking">
             <Ranking />

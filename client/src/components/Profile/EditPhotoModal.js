@@ -1,5 +1,5 @@
 import axios from "axios";
-import AWS, { S3 } from "aws-sdk";
+import AWS from "aws-sdk";
 import dotenv from "dotenv";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -38,7 +38,7 @@ export default function EditPhotoModal({
     region: process.env.REACT_APP_REGION,
   });
 
-  const uploadFile = (file) => {
+  const uploadFile = async (file) => {
     const params = {
       ACL: "public-read",
       Body: file,
@@ -46,15 +46,13 @@ export default function EditPhotoModal({
       Key: file.name,
       ContentType: "image",
     };
-    myBucket
+    await myBucket
       .putObject(params)
-      .on("success", (res) => {
-        const path = `${process.env.REACT_APP_BUCKET_URL}${res.request.httpRequest.path}`;
+      .promise()
+      .then((res) => {
+        const path = `${process.env.REACT_APP_BUCKET_URL}${res.$response.request.httpRequest.path}`;
         editPhoto(path);
         handleEdit(path);
-      })
-      .send((err) => {
-        if (err) console.log(err);
       });
   };
 
