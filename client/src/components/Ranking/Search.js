@@ -1,19 +1,31 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-export default function Search() {
-  const [nickname, setNickname] = useState("");
+export default function Search({ setList, event }) {
+  const [nickname, setNickname] = useState("all");
   const handleInputValue = (e) => {
     setNickname(e.target.value);
   };
 
-  const handleSearch = () => {
-    axios.get("");
+  const handleList = () => {
+    axios
+      .get(`http://localhost:8080/rank?event=${event}&nickname=${nickname}`)
+      .then((res) => {
+        setList(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        setList([]);
+      });
   };
+
   return (
     <div>
-      <input onChange={(e) => handleInputValue(e)}>search</input>
-      <button onClick={handleInputValue()}></button>
+      <input
+        onChange={(e) => handleInputValue(e)}
+        placeholder="랭킹을 검색하실 닉네임을 입력해주세요"
+      />
+      <button onClick={handleList}>검색</button>
     </div>
   );
 }
