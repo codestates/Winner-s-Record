@@ -8,6 +8,7 @@ import Edit from "./pages/Edit";
 import Error from "./pages/Error";
 import Main from "./pages/Main";
 import Post from "./pages/Post";
+import Ranking from "./pages/Ranking";
 
 // styles
 import "./reset.css";
@@ -79,6 +80,9 @@ function App() {
           </Route>
           <Route path={"/profile/:userId"}>
             <Profile />
+          </Route>
+          <Route path="/ranking">
+            <Ranking />
           </Route>
           <Route path="/">
             <Error />
