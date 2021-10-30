@@ -1,6 +1,8 @@
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { setModalText } from "../../modules/modalText";
+import { modalOn } from "../../modules/isModalOpen";
 
 const EntryPlayer = ({
   postType,
@@ -10,8 +12,6 @@ const EntryPlayer = ({
   fixed,
   setFixed,
   hostId,
-  setIsModalActive,
-  setModalText,
   setLoginModal,
 }) => {
   const { userInfo, isLogin } = useSelector((state) => ({
@@ -19,17 +19,18 @@ const EntryPlayer = ({
     isLogin: state.isLogin,
   }));
   const { userId, nickname, img, status, win, lose, point, rank } = userData;
+  const dispatch = useDispatch();
 
   const fixPlayer = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     const endpoint = `http://localhost:8080/entry/${postId}`;
     console.log(fixed.length, postType);
     if (fixed.length && postType === "match") {
-      setModalText("다수의 상대를 지정할 수 없어요.");
-      setIsModalActive(true);
+      dispatch(setModalText("다수의 상대를 지정할 수 없어요."));
+      dispatch(modalOn());
     } else if (fixed.length > 7) {
-      setModalText("대회 참가 인원은 7명까지 지정할 수 있어요.");
-      setIsModalActive(true);
+      dispatch(setModalText("대회 참가 인원은 7명까지 지정할 수 있어요."));
+      dispatch(modalOn());
     } else {
       axios
         .put(endpoint, { userId }, { headers: { Authorization } })
@@ -54,8 +55,8 @@ const EntryPlayer = ({
     if (!isLogin) {
       setLoginModal(true);
     } else if (hostId !== userInfo.userId && userId !== userInfo.userId) {
-      setIsModalActive(true);
-      setModalText("권한이 없습니다.");
+      dispatch(modalOn());
+      dispatch(setModalText("권한이 없습니다."));
     } else {
       if (userData.status === "확정") {
         axios

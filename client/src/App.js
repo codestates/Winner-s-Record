@@ -52,7 +52,12 @@ function App() {
           <Route path="/post/:postId/entry">
             <Entry />
           </Route>
-          {/* <Route path="/post/:postId/tournament"><Tournament /></Route> */}
+          <Route path="/post/:postId/tournament">
+            <Tournament />
+          </Route>
+          <Route path="/post/:postId/result">
+            <Result />
+          </Route>
           <Route path="/main">
             <Main />
           </Route>

@@ -1,23 +1,28 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import BackButton from "../components/BackButton";
 import EntryPlayer from "../components/Entry/EntryPlayer";
 import { ApplyBtn, FixBtn } from "../components/Entry/EntryPrimaryButton";
 import NeedLoginModal from "../components/NeedLoginModal";
+import { modalOff } from "../modules/isModalOpen";
 
 const Entry = () => {
   const { postId } = useParams();
-  const userInfo = useSelector((state) => state.userInfo);
+  const dispatch = useDispatch();
+
+  const { userInfo, modalText, isModalOpen } = useSelector((state) => ({
+    userInfo: state.userInfo,
+    modalText: state.modalText,
+    isModalOpen: state.isModalOpen,
+  }));
   const [fixed, setFixed] = useState([]);
   const [applied, setApplied] = useState([]);
   const [host, setHost] = useState({});
   const [postType, setPostType] = useState("match");
 
   const [loginModal, setLoginModal] = useState(false);
-  const [isModalActive, setIsModalActive] = useState(false);
-  const [modalText, setModalText] = useState("권한이 없습니다.");
 
   const getData = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
@@ -67,8 +72,6 @@ const Entry = () => {
               fixed={fixed}
               setFixed={setFixed}
               hostId={host.userId}
-              setIsModalActive={setIsModalActive}
-              setModalText={setModalText}
               setLoginModal={setLoginModal}
               postType={postType}
             />
@@ -87,8 +90,6 @@ const Entry = () => {
               fixed={fixed}
               setFixed={setFixed}
               hostId={host.userId}
-              setIsModalActive={setIsModalActive}
-              setModalText={setModalText}
               setLoginModal={setLoginModal}
               postType={postType}
             />
@@ -97,11 +98,7 @@ const Entry = () => {
       </ul>
 
       {userInfo.userId === host.userId ? (
-        <FixBtn
-          fixed={fixed}
-          setIsModalActive={setIsModalActive}
-          setModalText={setModalText}
-        />
+        <FixBtn fixed={fixed} postType={postType} />
       ) : (
         <ApplyBtn
           hostId={host.userId}
@@ -109,20 +106,18 @@ const Entry = () => {
           fixed={fixed}
           setApplied={setApplied}
           setLoginModal={setLoginModal}
-          setIsModalActive={setIsModalActive}
-          setModalText={setModalText}
         />
       )}
 
       <BackButton />
-      {isModalActive ? (
+      {isModalOpen ? (
         <div className={"modal--backdrop"}>
           <div className={"modal--view"}>
             <div className="modal--text">{modalText}</div>
             <div
               className="modal--btn"
               onClick={() => {
-                setIsModalActive(false);
+                dispatch(modalOff());
               }}
             >
               닫기
