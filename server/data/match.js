@@ -31,13 +31,14 @@ export async function eidtMatch(matchId, winner, loser) {
 
 export async function tournamentMatch(docId, event, players) {
   let type;
-  if (players.legnth === 8) {
+  if (players.length === 8) {
     type = "tournamentR1";
   } else if (players.length === 4) {
     type = "tournamentR2";
   } else if (players.length === 2) {
     type = "tournamentR3";
   }
+  console.log(type);
   players.sort(() => Math.random() - 0.5);
   const binary = [];
   for (let i = 0; i < players.length; i += 2) {
