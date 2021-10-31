@@ -143,7 +143,7 @@ export async function getOne(req, res) {
     }
   }
 
-  const player = await entryData.findByDocId(docId, doc.status);
+  const player = await entryData.findByDocId(docId);
   const board = await boardData.findByDocId(docId);
 
   if (doc.type === "trade") {
@@ -209,7 +209,7 @@ export async function editDoc(req, res) {
     likeList.length === 0 ? (like = false) : (like = true);
   }
 
-  const player = await entryData.findByDocId(docId, editedDoc.status);
+  const player = await entryData.findByDocId(docId);
   const board = await boardData.findByDocId(docId);
 
   if (editedDoc.type === "trade") {
@@ -262,7 +262,7 @@ export async function create(req, res) {
 
   const docImgLink = await docData.findByImg([created]);
 
-  const player = await entryData.findByDocId(created.id, "대기");
+  const player = await entryData.findByDocId(created.id);
   const board = await boardData.findByDocId(created.id);
 
   return res.status(200).json({

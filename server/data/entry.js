@@ -2,24 +2,11 @@ import pkg from "sequelize";
 import db from "../models/index.js";
 const { Op } = pkg;
 
-export async function findByDocId(docId, status) {
-  let allEntries;
-  if (status === "진행") {
-    allEntries = await db.Entries.findAll({
-      attributes: ["userId"],
-      where: {
-        docId,
-        status: {
-          [Op.ne]: "대기",
-        },
-      },
-    });
-  } else if (status === "대기" || status === "완료") {
-    allEntries = await db.Entries.findAll({
-      attributes: ["userId"],
-      where: { docId },
-    });
-  }
+export async function findByDocId(docId) {
+  const allEntries = await db.Entries.findAll({
+    attributes: ["userId"],
+    where: { docId },
+  });
 
   const entryId = allEntries.map((el) => {
     return el.dataValues.userId;
