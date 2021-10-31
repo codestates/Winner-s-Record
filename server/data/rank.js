@@ -147,7 +147,7 @@ export async function validEvent(event) {
   return (
     event === 'tennis' ||
     event === 'pingpong' ||
-    event === 'sresultuash' ||
+    event === 'squash' ||
     event === 'badminton'
   );
 }
