@@ -29,6 +29,8 @@ const Post = () => {
     },
   });
 
+  const isMypost = postInfo.userData.userId === userInfo.userId;
+
   useEffect(() => {
     console.log("포스트 인포 확인하세요", postInfo);
   }, [postInfo]);
@@ -79,11 +81,13 @@ const Post = () => {
       <ImageCarousel images={img} />
       <div className="post--header">
         <div className="post--title">{title}</div>
-        <PostEditBtns
-          hostId={userData.userId}
-          setModalBtnType={setModalBtnType}
-          setLoginModal={setLoginModal}
-        />
+        {isMypost ? (
+          <PostEditBtns
+            hostId={userData.userId}
+            setModalBtnType={setModalBtnType}
+            setLoginModal={setLoginModal}
+          />
+        ) : null}
       </div>
 
       <PostUserInfo userData={userData} />

@@ -20,7 +20,7 @@ export default function EventSelector({ setEvent }) {
             onClick={(e) => {
               setIsDropOpen(false);
               setSelected(e.target.textContent);
-              setEvent("badminton");
+              setEvent("tennis");
             }}
           >
             테니스

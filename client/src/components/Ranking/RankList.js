@@ -1,10 +1,10 @@
 import { useHistory } from "react-router";
 
-export default function RankList({ index, content }) {
+export default function RankList({ content }) {
   const history = useHistory();
   return (
     <li>
-      <span>{content.rank ? content.rank : index + 1}등</span>
+      <span>{content.rank}등</span>
       <span
         onClick={() => {
           history.push(`profile/${content.userId}`);

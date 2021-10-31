@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo } from "../modules/userInfo";
 import { setLogin } from "../modules/isLogin";
-
+import EditUserInfo from "./EditUserInfo";
 import LoadingIndicator from "../components/LoadingIndicator";
 import UserInfo from "../components/Profile/UserInfo";
 import ProfileRank from "../components/Profile/ProfileRank";
@@ -13,6 +13,7 @@ import Error from "./Error";
 
 export default function Profile() {
   const { userId } = useParams();
+  const [edit, setEdit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [profileData, setProfileData] = useState({
     id: "",
@@ -22,6 +23,10 @@ export default function Profile() {
   const userInfo = useSelector((state) => state.userInfo);
   const isMypage = profileData.userId === userInfo.userId;
   const dispatch = useDispatch();
+
+  const editHandler = () => {
+    setEdit(!edit);
+  };
 
   const editPhoto = (img) => {
     setProfileData({ ...profileData, img });
@@ -53,15 +58,20 @@ export default function Profile() {
       {isLoading ? (
         <LoadingIndicator />
       ) : profileData.userId ? (
-        <div>
-          <UserInfo
-            isMypage={isMypage}
-            profileData={profileData}
-            editPhoto={editPhoto}
-          />
-          <ProfileRank nickname={profileData.nickname} />
-          <DocList userId={userId} isMypage={isMypage} />
-        </div>
+        edit ? (
+          <EditUserInfo editHandler={editHandler} />
+        ) : (
+          <div>
+            <UserInfo
+              editHandler={editHandler}
+              isMypage={isMypage}
+              profileData={profileData}
+              editPhoto={editPhoto}
+            />
+            <ProfileRank nickname={profileData.nickname} />
+            <DocList userId={userId} isMypage={isMypage} />
+          </div>
+        )
       ) : (
         <Error />
       )}

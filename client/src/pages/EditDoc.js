@@ -4,11 +4,12 @@ import AWS from "aws-sdk";
 import dotenv from "dotenv";
 import axios from "axios";
 import CreateCompleteModal from "../components/CreateDoc/CreateCompleteModal";
+
 import TypeSelector from "../components/CreateDoc/TypeSelector";
 import EventSelector from "../components/CreateDoc/EventSelector";
 dotenv.config();
 
-export default function CreateDoc() {
+export default function EditDoc() {
   const history = useHistory();
   const [preview, setPreview] = useState([]);
   const [files, setFiles] = useState([]);
@@ -106,6 +107,10 @@ export default function CreateDoc() {
         event && type && inputValue.title && inputValue.text && inputValue.price
       );
   };
+
+  useEffect(() => {
+    axios.get();
+  }, []);
 
   return (
     <div>
