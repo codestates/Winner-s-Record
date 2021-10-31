@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router";
+import { modalOn } from "../modules/isModalOpen";
+import { setModalText } from "../modules/modalText";
 import TournamentEditModal from "../components/Tournament/TournamentEditModal";
 import TournamentMatch from "../components/Tournament/TournamentMatch";
+import TournamentModal from "../components/Tournament/TournamentModal";
 
 const Tournament = () => {
   const { userInfo, isModalOpen } = useSelector((state) => ({
@@ -12,14 +15,35 @@ const Tournament = () => {
   }));
   const history = useHistory();
   const [matches, setMatches] = useState([]);
-  const [event, setEvent] = useState("");
+  const dispatch = useDispatch();
+
+  const [canEdit, setCanEdit] = useState([true, true, true]);
 
   // [ 매치id, postId, player1, player2 ]
   const [matchToEdit, setMatchToEdit] = useState([]);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   useEffect(() => {
     console.log("토너먼트 매치 데이터", matches);
     console.log("유저정보 확인", userInfo);
+
+    const r2 = matches.filter((match) => {
+      return match.type === "tournamentR2";
+    });
+    const r3 = matches.filter((match) => {
+      return match.type === "tournamentR3";
+    });
+
+    const winner = r3.filter((match) => {
+      return match.winner;
+    });
+    if (r2.length) {
+      setCanEdit([false, true, true]);
+    } else if (r3.length) {
+      setCanEdit([false, false, true]);
+    } else if (winner.length) {
+      setCanEdit([false, false, false]);
+    }
   }, [matches]);
 
   useEffect(() => {
@@ -37,7 +61,6 @@ const Tournament = () => {
       })
       .then((res) => {
         setMatches(res.data.data);
-        // setEvent(res.data.data[0].event);
       });
   };
 
@@ -49,57 +72,65 @@ const Tournament = () => {
     if (round === 1) {
       matchId = matches
         .filter((match) => {
-          if (match.type !== "tournamentR1" && !match.winner) {
-            return false;
-          } else {
-            return true;
-          }
+          return match.type === "tournamentR1" && match.winner;
+
+          // if (match.type !== "tournamentR1" || !match.winner) {
+          //   return false;
+          // } else {
+          //   return true;
+          // }
         })
         .map((match) => {
-          return match.matchId;
+          return match.id;
         });
     } else if (round === 2) {
       matchId = matches
         .filter((match) => {
-          if (match.type !== "tournamentR2" && !match.winner) {
-            return false;
-          } else {
-            return true;
-          }
+          return match.type === "tournamentR1" && match.winner;
+
+          // if (match.type !== "tournamentR2" || !match.winner) {
+          //   return false;
+          // } else {
+          //   return true;
+          // }
         })
         .map((match) => {
-          return match.matchId;
+          return match.id;
         });
     } else {
       matchId = matches
         .filter((match) => {
-          if (match.type !== "tournamentR3" && !match.winner) {
-            return false;
-          } else {
-            return true;
-          }
+          return match.type === "tournamentR1" && match.winner;
+
+          // if (match.type !== "tournamentR3" || !match.winner) {
+          //   return false;
+          // } else {
+          //   return true;
+          // }
         })
         .map((match) => {
-          return match.matchId;
+          return match.id;
         });
     }
 
+    const event = matches[0].event;
+    console.log(matches);
+    console.log("매치 아이디", matchId);
+
     if (round === 1 && matchId.length !== 4) {
-      console.log("진행중인 경기가 있습니다.");
-      // 선택 완료하라는 모달
+      dispatch(setModalText("진행중인 경기가 있습니다."));
+      dispatch(modalOn());
     } else if (round === 2 && matchId.length !== 2) {
-      console.log("진행중인 경기가 있습니다.");
-
-      // 선택 완료하라는 모달
+      dispatch(setModalText("진행중인 경기가 있습니다."));
+      dispatch(modalOn());
     } else if (round === 3 && matchId.length !== 1) {
-      console.log("진행중인 경기가 있습니다.");
-
-      // 선택 완료하라는 모달
-    } else {
+      dispatch(setModalText("진행중인 경기가 있습니다."));
+      dispatch(modalOn());
+    } else if (round === 3) {
       axios
         .post(
           `http://localhost:8080/record/${postId}`,
-          { matchId },
+          { event, matchId },
           {
             headers: {
               Authorization,
@@ -107,7 +138,24 @@ const Tournament = () => {
           }
         )
         .then((res) => {
-          console.log(res);
+          setMatches(res.data.data);
+          history.push(`/post/${postId}`);
+          dispatch(modalOn());
+          dispatch(setModalText("대회가 종료되었습니다 !"));
+        });
+    } else {
+      axios
+        .post(
+          `http://localhost:8080/record/${postId}`,
+          { event, matchId },
+          {
+            headers: {
+              Authorization,
+            },
+          }
+        )
+        .then((res) => {
+          setMatches(res.data.data);
         });
     }
   };
@@ -140,6 +188,8 @@ const Tournament = () => {
               <TournamentMatch
                 matchData={matchData}
                 setMatchToEdit={setMatchToEdit}
+                canEdit={canEdit[0]}
+                setIsEditModalOpen={setIsEditModalOpen}
               />
             );
           })}
@@ -169,6 +219,8 @@ const Tournament = () => {
               <TournamentMatch
                 matchData={matchData}
                 setMatchToEdit={setMatchToEdit}
+                canEdit={canEdit[1]}
+                setIsEditModalOpen={setIsEditModalOpen}
               />
             );
           })}
@@ -190,6 +242,8 @@ const Tournament = () => {
               <TournamentMatch
                 matchData={matchData}
                 setMatchToEdit={setMatchToEdit}
+                canEdit={canEdit[2]}
+                setIsEditModalOpen={setIsEditModalOpen}
               />
             );
           })}
@@ -202,20 +256,15 @@ const Tournament = () => {
         >
           대회 종료
         </div>
-        <div
-          onClick={() => {
-            history.go(-1);
-          }}
-        >
-          돌아가기
-        </div>
       </div>
-      {isModalOpen ? (
+      {isEditModalOpen ? (
         <TournamentEditModal
           matchToEdit={matchToEdit}
           setMatches={setMatches}
+          setIsEditModalOpen={setIsEditModalOpen}
         />
       ) : null}
+      {isModalOpen ? <TournamentModal /> : null}
     </div>
   );
 };

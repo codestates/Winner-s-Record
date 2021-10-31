@@ -39,7 +39,14 @@ const FixBtn = ({ fixed, postType, eventType }) => {
   );
 };
 
-const ApplyBtn = ({ hostId, postId, fixed, setApplied, setLoginModal }) => {
+const ApplyBtn = ({
+  hostId,
+  postId,
+  applied,
+  fixed,
+  setApplied,
+  setLoginModal,
+}) => {
   const dispatch = useDispatch();
   const { isLogin, userInfo } = useSelector((state) => ({
     isLogin: state.isLogin,
@@ -51,11 +58,15 @@ const ApplyBtn = ({ hostId, postId, fixed, setApplied, setLoginModal }) => {
     } else if (
       fixed.filter((userData) => {
         return userData.userId === userInfo.userId;
+      }).length ||
+      applied.filter((userData) => {
+        return userData.userId === userInfo.userId;
       }).length
     ) {
       dispatch(setModalText("신청자 목록을 확인해주세요."));
       dispatch(modalOn());
     } else {
+      console.log(fixed);
       const Authorization = `Bearer ${localStorage.getItem("token")}`;
       axios
         .post(

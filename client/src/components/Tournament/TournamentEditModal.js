@@ -1,12 +1,14 @@
 import axios from "axios";
 import React from "react";
-import { useDispatch } from "react-redux";
-import { modalOff } from "../../modules/isModalOpen";
 
-const TournamentEditModal = ({ matchToEdit, setMatches }) => {
-  const dispatch = useDispatch();
+const TournamentEditModal = ({
+  matchToEdit,
+  setMatches,
+  setIsEditModalOpen,
+}) => {
   const clickHandler = (winner, loser) => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
+    console.log(matchToEdit);
     axios
       .put(
         `http://localhost:8080/tournament/${matchToEdit[1]}`,
@@ -19,7 +21,7 @@ const TournamentEditModal = ({ matchToEdit, setMatches }) => {
       )
       .then((res) => {
         setMatches(res.data.data);
-        dispatch(modalOff());
+        setIsEditModalOpen(false);
       })
       .catch((err) => {
         console.error(err);
@@ -30,8 +32,7 @@ const TournamentEditModal = ({ matchToEdit, setMatches }) => {
     <div
       className="modal--backdrop"
       onClick={() => {
-        console.log("뭐야 왜 안꺼져");
-        dispatch(modalOff());
+        setIsEditModalOpen(false);
       }}
     >
       <div className="modal--view">
@@ -40,7 +41,7 @@ const TournamentEditModal = ({ matchToEdit, setMatches }) => {
           <div
             className="btn"
             onClick={() => {
-              dispatch(modalOff());
+              setIsEditModalOpen(false);
               clickHandler(matchToEdit[2], matchToEdit[3]);
             }}
           >
@@ -49,7 +50,7 @@ const TournamentEditModal = ({ matchToEdit, setMatches }) => {
           <div
             className="btn"
             onClick={() => {
-              dispatch(modalOff());
+              setIsEditModalOpen(false);
               clickHandler(matchToEdit[3], matchToEdit[2]);
             }}
           >

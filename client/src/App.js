@@ -48,9 +48,7 @@ function App() {
           <Route exact path="/">
             <Landing />
           </Route>
-          <Route exact path="/post/:postId">
-            <Post />
-          </Route>
+          <Route exact path="/post/:postId" component={Post} />
           <Route path="/post/:postId/entry">
             <Entry />
           </Route>

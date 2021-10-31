@@ -2,10 +2,14 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { modalOn } from "../../modules/isModalOpen";
 
-const TournamentMatch = ({ matchData, setMatchToEdit }) => {
+const TournamentMatch = ({
+  matchData,
+  setMatchToEdit,
+  setIsEditModalOpen,
+  canEdit,
+}) => {
   const dispatch = useDispatch();
-  const { matchId, event, winner, loser, docId, player = "" } = matchData;
-  console.log(matchData);
+  const { id, event, winner, loser, docId, player = "" } = matchData;
   const players = player.split("vs");
 
   return (
@@ -20,14 +24,16 @@ const TournamentMatch = ({ matchData, setMatchToEdit }) => {
             <div className="lose">패</div>
           </div>
           <div className="btn">
-            <div
-              onClick={() => {
-                setMatchToEdit([matchId, docId, players[0], players[1]]);
-                dispatch(modalOn());
-              }}
-            >
-              수정
-            </div>
+            {canEdit ? (
+              <div
+                onClick={() => {
+                  setMatchToEdit([id, docId, players[0], players[1]]);
+                  setIsEditModalOpen(true);
+                }}
+              >
+                수정
+              </div>
+            ) : null}
           </div>
         </>
       ) : (
@@ -40,8 +46,8 @@ const TournamentMatch = ({ matchData, setMatchToEdit }) => {
           <div className="btn">
             <div
               onClick={() => {
-                setMatchToEdit([matchId, docId, players[0], players[1]]);
-                dispatch(modalOn());
+                setMatchToEdit([id, docId, players[0], players[1]]);
+                setIsEditModalOpen(true);
               }}
             >
               결과 입력

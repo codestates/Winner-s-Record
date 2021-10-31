@@ -39,7 +39,6 @@ const Entry = () => {
         });
 
         const fixed = res.data.data.filter((e) => {
-          console.log("inner", host[0].userId);
           return e.status === "확정" && e.userId !== host[0].userId
             ? true
             : false;
@@ -106,6 +105,7 @@ const Entry = () => {
           hostId={host.userId}
           postId={postId}
           fixed={fixed}
+          applied={applied}
           setApplied={setApplied}
           setLoginModal={setLoginModal}
         />
@@ -113,16 +113,20 @@ const Entry = () => {
 
       <BackButton />
       {isModalOpen ? (
-        <div className={"modal--backdrop"}>
-          <div className={"modal--view"}>
-            <div className="modal--text">{modalText}</div>
-            <div
-              className="modal--btn"
-              onClick={() => {
-                dispatch(modalOff());
-              }}
-            >
-              닫기
+        <div className="modal--backdrop">
+          <div className="modal--view">
+            <div className="modal--text--container">
+              <div className="text">{modalText}</div>
+            </div>
+            <div className="modal--btn--container">
+              <div
+                className="btn"
+                onClick={() => {
+                  dispatch(modalOff());
+                }}
+              >
+                닫기
+              </div>
             </div>
           </div>
         </div>
