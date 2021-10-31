@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router";
 import { setModalText } from "../../modules/modalText";
 import { modalOn } from "../../modules/isModalOpen";
 
-const FixBtn = ({ fixed, postType }) => {
+const FixBtn = ({ fixed, postType, eventType }) => {
   const { postId } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -13,7 +13,8 @@ const FixBtn = ({ fixed, postType }) => {
     if (fixed.length < 1) {
       dispatch(setModalText("상대를 지정해주세요."));
       dispatch(modalOn());
-    } else if (fixed.length < 8 && postType === "tournament") {
+    } else if (fixed.length < 7 && postType === "tournament") {
+      console.log(fixed);
       dispatch(setModalText("토너먼트는 7명의 참가자가 필요합니다."));
       dispatch(modalOn());
     } else {
@@ -21,7 +22,7 @@ const FixBtn = ({ fixed, postType }) => {
       axios
         .put(
           `http://localhost:8080/doc/${postId}`,
-          { status: "진행" },
+          { status: "진행", type: postType, event: eventType },
           { headers: { Authorization } }
         )
         .then((res) => {
@@ -38,7 +39,14 @@ const FixBtn = ({ fixed, postType }) => {
   );
 };
 
-const ApplyBtn = ({ hostId, postId, fixed, setApplied, setLoginModal }) => {
+const ApplyBtn = ({
+  hostId,
+  postId,
+  applied,
+  fixed,
+  setApplied,
+  setLoginModal,
+}) => {
   const dispatch = useDispatch();
   const { isLogin, userInfo } = useSelector((state) => ({
     isLogin: state.isLogin,
@@ -50,11 +58,15 @@ const ApplyBtn = ({ hostId, postId, fixed, setApplied, setLoginModal }) => {
     } else if (
       fixed.filter((userData) => {
         return userData.userId === userInfo.userId;
+      }).length ||
+      applied.filter((userData) => {
+        return userData.userId === userInfo.userId;
       }).length
     ) {
       dispatch(setModalText("신청자 목록을 확인해주세요."));
       dispatch(modalOn());
     } else {
+      console.log(fixed);
       const Authorization = `Bearer ${localStorage.getItem("token")}`;
       axios
         .post(

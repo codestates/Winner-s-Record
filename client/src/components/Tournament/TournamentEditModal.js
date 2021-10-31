@@ -1,10 +1,14 @@
 import axios from "axios";
 import React from "react";
-import { useParams } from "react-router";
 
-const TournamentEditModal = ({ matchToEdit, setMatches, setIsModalActive }) => {
+const TournamentEditModal = ({
+  matchToEdit,
+  setMatches,
+  setIsEditModalOpen,
+}) => {
   const clickHandler = (winner, loser) => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
+    console.log(matchToEdit);
     axios
       .put(
         `http://localhost:8080/tournament/${matchToEdit[1]}`,
@@ -17,7 +21,7 @@ const TournamentEditModal = ({ matchToEdit, setMatches, setIsModalActive }) => {
       )
       .then((res) => {
         setMatches(res.data.data);
-        setIsModalActive(false);
+        setIsEditModalOpen(false);
       })
       .catch((err) => {
         console.error(err);
@@ -25,13 +29,19 @@ const TournamentEditModal = ({ matchToEdit, setMatches, setIsModalActive }) => {
       });
   };
   return (
-    <div className="modal--backdrop">
+    <div
+      className="modal--backdrop"
+      onClick={() => {
+        setIsEditModalOpen(false);
+      }}
+    >
       <div className="modal--view">
         <div className="text">승자를 선택하세요 !</div>
         <div className="modal--btns--container">
           <div
             className="btn"
             onClick={() => {
+              setIsEditModalOpen(false);
               clickHandler(matchToEdit[2], matchToEdit[3]);
             }}
           >
@@ -40,6 +50,7 @@ const TournamentEditModal = ({ matchToEdit, setMatches, setIsModalActive }) => {
           <div
             className="btn"
             onClick={() => {
+              setIsEditModalOpen(false);
               clickHandler(matchToEdit[3], matchToEdit[2]);
             }}
           >

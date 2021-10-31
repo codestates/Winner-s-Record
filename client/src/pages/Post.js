@@ -14,7 +14,7 @@ import PostEditBtns from "../components/Post/PostEditBtns";
 import { useSelector } from "react-redux";
 import TournamentButton from "../components/Post/TournamentButton";
 
-const Post = () => {
+const Post = ({ match }) => {
   const [isLoading, setIsLoading] = useState(true);
   const { userInfo, isModalOpen } = useSelector((state) => ({
     userInfo: state.userInfo,
@@ -61,7 +61,7 @@ const Post = () => {
     setTimeout(() => {
       setIsLoading(false);
     }, 300);
-  }, []);
+  }, [match.url]);
 
   let {
     userData,
