@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 
 const Result = () => {
   const { postId } = useParams();
@@ -8,6 +8,7 @@ const Result = () => {
   const [firstplace, setFirstplace] = useState("");
   const [secondplace, setSecondplace] = useState("");
   const [others, setOthers] = useState(["대회 진행중 입니다."]);
+  const history = useHistory();
 
   const getData = () => {
     axios.get(`http://localhost:8080/tournament/${postId}`).then((res) => {
@@ -76,6 +77,14 @@ const Result = () => {
           </div>
         </>
       )}
+      <div
+        className="tournament--result--btn"
+        onClick={() => {
+          history.go(-1);
+        }}
+      >
+        돌아가기
+      </div>
     </div>
   );
 };

@@ -1,6 +1,4 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { modalOn } from "../../modules/isModalOpen";
 
 const TournamentMatch = ({
   matchData,
@@ -8,7 +6,6 @@ const TournamentMatch = ({
   setIsEditModalOpen,
   canEdit,
 }) => {
-  const dispatch = useDispatch();
   const { id, event, winner, loser, docId, player = "" } = matchData;
   const players = player.split("vs");
 
