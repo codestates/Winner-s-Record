@@ -18,7 +18,7 @@ export default function Ranking() {
       <ul>
         {list.length ? (
           list.map((e, index) => {
-            return <RankList key={index} content={e} index={index} />;
+            return <RankList key={index} content={e} />;
           })
         ) : (
           <div>존재하지 않는 유저입니다.</div>

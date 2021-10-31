@@ -91,6 +91,7 @@ export default function Doc() {
         }
       )
       .then((res) => {
+        console.log(res.data);
         openModalHandler();
       })
       .catch((err) => {
