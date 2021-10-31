@@ -6,7 +6,7 @@ import EditCompleteModal from "../components/Profile/EditCompleteModal";
 import DeleteUserModal from "../components/Profile/DeleteUserModal";
 import axios from "axios";
 
-export default function Edit() {
+export default function EditUserInfo({ editHandler }) {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -279,7 +279,7 @@ export default function Edit() {
         </div>
       </div>
       <div className="btnContainer">
-        <button onClick={() => history.push("/mypage")}>돌아가기</button>
+        <button onClick={editHandler}>돌아가기</button>
         <button onClick={openDeleteModalHandler}>탈퇴하기</button>
         <EditCompleteModal
           isModalOpen={isEditModalOpen}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Search from "../components/Ranking/Search";
 import EventTap from "../components/Ranking/EventTap";
 import RankList from "../components/Ranking/RankList";
@@ -7,9 +7,6 @@ export default function Ranking() {
   const [list, setList] = useState([]);
   const [event, setEvent] = useState("");
 
-  useEffect(() => {
-    console.log(list);
-  }, [list]);
   return (
     <>
       <Search event={event} setList={setList} />

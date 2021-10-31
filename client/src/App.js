@@ -4,7 +4,7 @@ import Redirect from "./pages/Redirect";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import Landing from "./pages/Landing";
-import Edit from "./pages/Edit";
+import EditUserInfo from "./pages/EditUserInfo";
 import Error from "./pages/Error";
 import Main from "./pages/Main";
 import Post from "./pages/Post";
@@ -68,9 +68,6 @@ function App() {
           </Route>
           <Route path="/signup">
             <Signup />
-          </Route>
-          <Route path="/profile/edit">
-            <Edit />
           </Route>
           <Route path={"/profile/:userId"}>
             <Profile />

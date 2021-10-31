@@ -2,7 +2,12 @@ import { useHistory } from "react-router";
 import { useState, useEffect } from "react";
 import EditPhotoModal from "./EditPhotoModal";
 
-export default function UserInfo({ isMypage, profileData, editPhoto }) {
+export default function UserInfo({
+  editHandler,
+  isMypage,
+  profileData,
+  editPhoto,
+}) {
   const history = useHistory();
   const [File, setFile] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,10 +23,7 @@ export default function UserInfo({ isMypage, profileData, editPhoto }) {
       </div>
       <span className="profile--username">{profileData.nickname}</span>
       {isMypage ? (
-        <span
-          className="profile--edit"
-          onClick={() => history.push("/profile/edit")}
-        >
+        <span className="profile--edit" onClick={editHandler}>
           수정
         </span>
       ) : null}
