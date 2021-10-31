@@ -1,24 +1,29 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { modalOn } from "../../modules/isModalOpen";
 
-const TournamentMatch = ({ matchData, setIsModalActive, setMatchToEdit }) => {
-  const { matchId, event, winnerId, loserId, docId, player } = matchData;
+const TournamentMatch = ({ matchData, setMatchToEdit }) => {
+  const dispatch = useDispatch();
+  const { matchId, event, winner, loser, docId, player = "" } = matchData;
+  console.log(matchData);
+  const players = player.split("vs");
 
   return (
     <li className="tournament--match--container">
-      {winnerId ? (
+      {winner ? (
         <>
           <div className="content">
             <div className="win">승</div>
-            <div className="player">{winnerId}</div>
+            <div className="player">{winner}</div>
             <div className="vs">vs</div>
-            <div className="player">{loserId}</div>
+            <div className="player">{loser}</div>
             <div className="lose">패</div>
           </div>
           <div className="btn">
             <div
               onClick={() => {
-                setMatchToEdit([matchId, docId, player[0], player[1]]);
-                setIsModalActive(true);
+                setMatchToEdit([matchId, docId, players[0], players[1]]);
+                dispatch(modalOn());
               }}
             >
               수정
@@ -28,15 +33,15 @@ const TournamentMatch = ({ matchData, setIsModalActive, setMatchToEdit }) => {
       ) : (
         <>
           <div className="content">
-            <div className="player">{player[0]}</div>
+            <div className="player">{players[0]}</div>
             <div className="vs">vs</div>
-            <div className="player">{player[1]}</div>
+            <div className="player">{players[1]}</div>
           </div>
           <div className="btn">
             <div
               onClick={() => {
-                setMatchToEdit([matchId, docId, player[0], player[1]]);
-                setIsModalActive(true);
+                setMatchToEdit([matchId, docId, players[0], players[1]]);
+                dispatch(modalOn());
               }}
             >
               결과 입력

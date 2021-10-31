@@ -21,6 +21,7 @@ const Entry = () => {
   const [applied, setApplied] = useState([]);
   const [host, setHost] = useState({});
   const [postType, setPostType] = useState("match");
+  const [eventType, setEventType] = useState("");
 
   const [loginModal, setLoginModal] = useState(false);
 
@@ -52,6 +53,7 @@ const Entry = () => {
         setFixed(fixed);
         setApplied(applied);
         setPostType(res.data.doctype);
+        setEventType(res.data.docevent);
       });
   };
   useEffect(() => {
@@ -98,7 +100,7 @@ const Entry = () => {
       </ul>
 
       {userInfo.userId === host.userId ? (
-        <FixBtn fixed={fixed} postType={postType} />
+        <FixBtn fixed={fixed} postType={postType} eventType={eventType} />
       ) : (
         <ApplyBtn
           hostId={host.userId}

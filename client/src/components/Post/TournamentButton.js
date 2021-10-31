@@ -31,7 +31,7 @@ const TournamentButton = ({ status, setLoginModal, hostId }) => {
     } else if (status === "대기") {
       setButtonName("참가 신청");
     } else if (status === "진행") {
-      setButtonName("토너먼트 확인");
+      setButtonName("진행 확인");
     } else {
       setButtonName("결과 조회");
     }

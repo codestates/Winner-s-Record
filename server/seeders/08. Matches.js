@@ -5,7 +5,7 @@ module.exports = {
     const Matches = [
       {
         id: 1,
-        type: "match", //"tounarment"
+        type: "match", //"tournament"
         event: "tennis", //"pingpong" "스쿼시" "badminton"
         winner: "성수동조코비치",
         loser: "지리산신령님",
@@ -39,7 +39,7 @@ module.exports = {
       },
       {
         id: 3,
-        type: "tounarmentR1",
+        type: "tournamentR1",
         event: "badminton",
         winner: "고로쇠물달다",
         loser: "내이름김탁구",
@@ -56,7 +56,7 @@ module.exports = {
       },
       {
         id: 4,
-        type: "tounarmentR1",
+        type: "tournamentR1",
         event: "badminton",
         winner: "빛솔",
         loser: "찬누리",
@@ -73,7 +73,7 @@ module.exports = {
       },
       {
         id: 5,
-        type: "tounarmentR1",
+        type: "tournamentR1",
         event: "badminton",
         winner: "이루리",
         loser: "골톤",
@@ -90,7 +90,7 @@ module.exports = {
       },
       {
         id: 6,
-        type: "tounarmentR1",
+        type: "tournamentR1",
         event: "badminton",
         winner: "다산탁구왕",
         loser: "다산동밥샙",
@@ -107,7 +107,7 @@ module.exports = {
       },
       {
         id: 7,
-        type: "tounarmentR2",
+        type: "tournamentR2",
         event: "badminton",
         winner: "고로쇠물달다",
         loser: "빛솔",
@@ -124,7 +124,7 @@ module.exports = {
       },
       {
         id: 8,
-        type: "tounarmentR2",
+        type: "tournamentR2",
         event: "badminton",
         winner: "이루리",
         loser: "다산탁구왕",
@@ -141,7 +141,7 @@ module.exports = {
       },
       {
         id: 9,
-        type: "tounarmentR3",
+        type: "tournamentR3",
         event: "badminton",
         winner: "고로쇠물달다",
         loser: "이루리",

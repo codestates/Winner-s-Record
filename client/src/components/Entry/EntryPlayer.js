@@ -28,20 +28,21 @@ const EntryPlayer = ({
     if (fixed.length && postType === "match") {
       dispatch(setModalText("다수의 상대를 지정할 수 없어요."));
       dispatch(modalOn());
-    } else if (fixed.length > 7) {
+    } else if (fixed.length > 6) {
       dispatch(setModalText("대회 참가 인원은 7명까지 지정할 수 있어요."));
       dispatch(modalOn());
     } else {
       axios
         .put(endpoint, { userId }, { headers: { Authorization } })
         .then((res) => {
-          console.log(res);
+          console.log("이거 응답 데이터", res.data);
           const fixed = res.data.data.filter((e) => {
             return e.status === "확정" && e.userId !== hostId ? true : false;
           });
           const applied = res.data.data.filter((e) => {
             return e.status === "대기" && e.userId !== hostId ? true : false;
           });
+          console.log(fixed);
           setFixed(fixed);
           setApplied(applied);
         });
