@@ -37,7 +37,25 @@ export async function findAllRank(event) {
   for(let i = 0; i < recordList.length; i++) {
     recordList[i].rank = i+1
   }
-  return recordList
+
+  const ranking = []
+  let result = []
+  recordList.map((el) => {
+    if (result.length === 0) {
+      result.push(el);
+    } else {
+      if (result[result.length - 1].point !== el.point) {
+        ranking.push(...result);
+        result = [];
+        result.push(el);
+      } else {
+        result.push(el);
+        result.map((el2) => (el2.rank = result[0].rank));
+      }
+    }
+  });
+  ranking.push(...result)
+  return ranking
 }
 
 export async function findNicknameRank(event, nickname) {
@@ -74,6 +92,25 @@ export async function findNicknameRank(event, nickname) {
   for(let i = 0; i < recordRankList.length; i++) {
     recordRankList[i].rank = i+1
   }
+
+  const ranking = []
+  let result = []
+  recordRankList.map((el) => {
+    if (result.length === 0) {
+      result.push(el);
+    } else {
+      if (result[result.length - 1].point !== el.point) {
+        ranking.push(...result);
+        result = [];
+        result.push(el);
+      } else {
+        result.push(el);
+        result.map((el2) => (el2.rank = result[0].rank));
+      }
+    }
+  });
+  ranking.push(...result)
+
   const user = await db.Users.findOne({
     where: {
       nickname: nickname
@@ -84,11 +121,11 @@ export async function findNicknameRank(event, nickname) {
   const index = recordRankList.map((el) => el.userId).indexOf(user.id)
   let rankList
   if(index === 0 || index === 1 || index === 2) {
-    rankList = recordRankList.slice(0, 5)
-  } else if (index >= recordRankList.length-2) {
-    rankList = recordRankList.slice(recordRankList.length - 5, recordRankList.length)
+    rankList = ranking.slice(0, 5)
+  } else if (index >= ranking.length-2) {
+    rankList = ranking.slice(ranking.length - 5, ranking.length)
   } else {
-    rankList = recordRankList.slice(index-2, index+3)
+    rankList = ranking.slice(index-2, index+3)
   }
   return rankList
 }
@@ -110,7 +147,7 @@ export async function validEvent(event) {
   return (
     event === 'tennis' ||
     event === 'pingpong' ||
-    event === 'squash' ||
+    event === 'sresultuash' ||
     event === 'badminton'
   );
 }
