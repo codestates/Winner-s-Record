@@ -1,15 +1,21 @@
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
+import { setModalText } from "../../modules/modalText";
+import { modalOn } from "../../modules/isModalOpen";
 
-const FixBtn = ({ fixed, setIsModalActive, setModalText }) => {
+const FixBtn = ({ fixed, postType }) => {
   const { postId } = useParams();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const clickHandler = () => {
     if (fixed.length < 1) {
-      setModalText("상대를 지정해주세요.");
-      setIsModalActive(true);
+      dispatch(setModalText("상대를 지정해주세요."));
+      dispatch(modalOn());
+    } else if (fixed.length < 8 && postType === "tournament") {
+      dispatch(setModalText("토너먼트는 7명의 참가자가 필요합니다."));
+      dispatch(modalOn());
     } else {
       const Authorization = `Bearer ${localStorage.getItem("token")}`;
       axios
@@ -19,11 +25,9 @@ const FixBtn = ({ fixed, setIsModalActive, setModalText }) => {
           { headers: { Authorization } }
         )
         .then((res) => {
+          dispatch(setModalText("상대가 지정되었습니다."));
+          dispatch(modalOn());
           history.push(`/post/${postId}`);
-          setModalText("상대가 지정되었습니다.");
-          setIsModalActive(true);
-          // 상대가 확정되었습니다.
-          // 닫기 모달
         });
     }
   };
@@ -34,15 +38,8 @@ const FixBtn = ({ fixed, setIsModalActive, setModalText }) => {
   );
 };
 
-const ApplyBtn = ({
-  hostId,
-  postId,
-  fixed,
-  setApplied,
-  setLoginModal,
-  setIsModalActive,
-  setModalText,
-}) => {
+const ApplyBtn = ({ hostId, postId, fixed, setApplied, setLoginModal }) => {
+  const dispatch = useDispatch();
   const { isLogin, userInfo } = useSelector((state) => ({
     isLogin: state.isLogin,
     userInfo: state.userInfo,
@@ -55,8 +52,8 @@ const ApplyBtn = ({
         return userData.userId === userInfo.userId;
       }).length
     ) {
-      setModalText("신청자 목록을 확인해주세요.");
-      setIsModalActive(true);
+      dispatch(setModalText("신청자 목록을 확인해주세요."));
+      dispatch(modalOn());
     } else {
       const Authorization = `Bearer ${localStorage.getItem("token")}`;
       axios

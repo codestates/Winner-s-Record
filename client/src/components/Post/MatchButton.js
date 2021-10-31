@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
+import { modalOn } from "../../modules/isModalOpen";
+import { setModalText } from "../../modules/modalText";
 
 const MatchButton = ({
   hostId,
@@ -8,10 +10,9 @@ const MatchButton = ({
   status,
   player = [],
   setModalBtnType,
-  setModalText,
-  setIsModalActive,
 }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const { postId } = useParams();
   const [buttonName, setButtonName] = useState("신청자 목록");
   const { userInfo, isLogin } = useSelector((state) => ({
@@ -23,14 +24,14 @@ const MatchButton = ({
     if (!isLogin) {
       setLoginModal(true);
     } else if (buttonName === "결과 확인") {
-      // 결과 페이지로 리디렉션
+      // 결과 페이지 모달
       history.push(`/post`);
     } else if (buttonName === "참가 신청" || buttonName === "신청자 목록") {
       history.push(`/post/${postId}/entry`);
     } else {
-      setModalText("승자를 선택해주세요!");
+      dispatch(setModalText("승자를 선택해주세요!"));
       setModalBtnType("choosewinner");
-      setIsModalActive(true);
+      dispatch(modalOn());
     }
   };
 

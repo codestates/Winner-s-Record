@@ -7,8 +7,6 @@ const PostPrimaryButton = ({
   type,
   status,
   setLoginModal,
-  setIsModalActive,
-  setModalText,
   setModalBtnType,
   player,
 }) => {
@@ -18,8 +16,6 @@ const PostPrimaryButton = ({
         <TradeButton
           hostId={hostId}
           status={status}
-          setIsModalActive={setIsModalActive}
-          setModalText={setModalText}
           setModalBtnType={setModalBtnType}
         />
       ) : type === "match" ? (
@@ -29,8 +25,6 @@ const PostPrimaryButton = ({
           status={status}
           player={player}
           setModalBtnType={setModalBtnType}
-          setModalText={setModalText}
-          setIsModalActive={setIsModalActive}
         />
       ) : (
         <TournamentButton

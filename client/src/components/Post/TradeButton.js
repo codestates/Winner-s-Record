@@ -1,26 +1,23 @@
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
+import { modalOn } from "../../modules/isModalOpen";
+import { setModalText } from "../../modules/modalText";
 
-const TradeButton = ({
-  hostId,
-  status,
-  setIsModalActive,
-  setModalBtnType,
-  setModalText,
-}) => {
+const TradeButton = ({ hostId, status, setModalBtnType }) => {
   const { postId } = useParams();
   const userInfo = useSelector((state) => state.userInfo);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const changeStatus = () => {
     if (status === "대기") {
-      setModalText("완료 상태로 변경하시겠습니까?");
+      dispatch(setModalText("완료 상태로 변경하시겠습니까?"));
     } else {
-      setModalText("대기 상태로 변경하시겠습니까?");
+      dispatch(setModalText("대기 상태로 변경하시겠습니까?"));
     }
     setModalBtnType("status");
-    setIsModalActive(true);
+    dispatch(modalOn());
   };
 
   const startChat = () => {
