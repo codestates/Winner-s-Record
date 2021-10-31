@@ -5,8 +5,8 @@ import dotenv from "dotenv";
 import axios from "axios";
 import CreateCompleteModal from "../components/CreateDoc/CreateCompleteModal";
 
-// import TypeSelector from "../components/CreateDoc/TypeSelector";
-// import EventSelector from "../components/CreateDoc/EventSelector";
+import TypeSelector from "../components/CreateDoc/TypeSelector";
+import EventSelector from "../components/CreateDoc/EventSelector";
 dotenv.config();
 
 export default function Doc() {
@@ -37,9 +37,7 @@ export default function Doc() {
   };
 
   const [inputValue, setInputValue] = useState({
-    type: "",
     title: "",
-    event: "",
     place: "",
     price: "",
     text: "",
@@ -82,7 +80,7 @@ export default function Doc() {
   };
 
   const handleSubmit = (arr) => {
-    const { type, title, event, place, price, text } = inputValue;
+    const { title, place, price, text } = inputValue;
     const token = localStorage.getItem("token");
     axios
       .post(
@@ -100,16 +98,27 @@ export default function Doc() {
       });
   };
 
+  const isValid = (type) => {
+    if (type === "match")
+      return event && type && inputValue.title && inputValue.text;
+    if (type === "trade")
+      return (
+        event && type && inputValue.title && inputValue.text && inputValue.price
+      );
+  };
+
   return (
     <div>
       <div>
-        {/* <EventSelector inputValue={inputValue} setInputValue={setInputValue} />
-        <TypeSelector inputValue={inputValue} setInputValue={setInputValue} /> */}
-        <input
-          type="price"
-          onChange={handleInputValue("price")}
-          placeholder="가격"
-        />
+        <EventSelector setEvent={setEvent} />
+        <TypeSelector setType={setType} />
+        {type === "trade" ? (
+          <input
+            type="price"
+            onChange={handleInputValue("price")}
+            placeholder="가격"
+          />
+        ) : null}
       </div>
       <div>
         <input
@@ -138,13 +147,18 @@ export default function Doc() {
       >
         돌아가기
       </button>
-      <button
-        onClick={() => {
-          uploadFiles(files);
-        }}
-      >
-        작성하기
-      </button>
+      {isValid(type) ? (
+        <button
+          style={{ color: "green" }}
+          onClick={() => {
+            uploadFiles(files);
+          }}
+        >
+          작성하기
+        </button>
+      ) : (
+        <button> 작성하기</button>
+      )}
       <CreateCompleteModal
         isModalOpen={isModalOpen}
         openModalHandler={openModalHandler}
