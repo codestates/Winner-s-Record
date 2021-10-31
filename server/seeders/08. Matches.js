@@ -39,7 +39,7 @@ module.exports = {
       },
       {
         id: 3,
-        type: "tounarment",
+        type: "tounarmentR1",
         event: "badminton",
         winner: "고로쇠물달다",
         loser: "내이름김탁구",
@@ -56,7 +56,7 @@ module.exports = {
       },
       {
         id: 4,
-        type: "tounarment",
+        type: "tounarmentR1",
         event: "badminton",
         winner: "빛솔",
         loser: "찬누리",
@@ -73,7 +73,7 @@ module.exports = {
       },
       {
         id: 5,
-        type: "tounarment",
+        type: "tounarmentR1",
         event: "badminton",
         winner: "이루리",
         loser: "골톤",
@@ -90,7 +90,7 @@ module.exports = {
       },
       {
         id: 6,
-        type: "tounarment",
+        type: "tounarmentR1",
         event: "badminton",
         winner: "다산탁구왕",
         loser: "다산동밥샙",
@@ -107,7 +107,7 @@ module.exports = {
       },
       {
         id: 7,
-        type: "tounarment",
+        type: "tounarmentR2",
         event: "badminton",
         winner: "고로쇠물달다",
         loser: "빛솔",
@@ -124,7 +124,7 @@ module.exports = {
       },
       {
         id: 8,
-        type: "tounarment",
+        type: "tounarmentR2",
         event: "badminton",
         winner: "이루리",
         loser: "다산탁구왕",
@@ -141,7 +141,7 @@ module.exports = {
       },
       {
         id: 9,
-        type: "tounarment",
+        type: "tounarmentR3",
         event: "badminton",
         winner: "고로쇠물달다",
         loser: "이루리",
