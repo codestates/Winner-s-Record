@@ -242,7 +242,7 @@ export async function create(userId, data) {
     });
   }
   // 사진추가 후 Doc_Images 생성
-  if (!img) {
+  if (!img.length) {
     if (event === "tennis") {
       await db.Docs_Images.create({
         docId: created.dataValues.id,
