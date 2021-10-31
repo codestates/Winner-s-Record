@@ -242,7 +242,29 @@ export async function create(userId, data) {
     });
   }
   // 사진추가 후 Doc_Images 생성
-  if (img) {
+  if (!img) {
+    if (event === "tennis") {
+      await db.Docs_Images.create({
+        docId: created.dataValues.id,
+        imgId: 61,
+      });
+    } else if (event === "pingpong") {
+      await db.Docs_Images.create({
+        docId: created.dataValues.id,
+        imgId: 60,
+      });
+    } else if (event === "squash") {
+      await db.Docs_Images.create({
+        docId: created.dataValues.id,
+        imgId: 59,
+      });
+    } else if (event === "badminton") {
+      await db.Docs_Images.create({
+        docId: created.dataValues.id,
+        imgId: 58,
+      });
+    }
+  } else {
     for (let i = 0; i < img.length; i++) {
       const newImg = await db.Images.create({
         link: img[i],
