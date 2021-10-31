@@ -14,10 +14,11 @@ const Tournament = () => {
     isModalOpen: state.isModalOpen,
   }));
   const history = useHistory();
-  const [matches, setMatches] = useState([]);
   const dispatch = useDispatch();
 
+  const [matches, setMatches] = useState([]);
   const [canEdit, setCanEdit] = useState([true, true, true]);
+  const [host, setHost] = useState("");
 
   // [ 매치id, postId, player1, player2 ]
   const [matchToEdit, setMatchToEdit] = useState([]);
@@ -37,14 +38,20 @@ const Tournament = () => {
     const winner = r3.filter((match) => {
       return match.winner;
     });
-    if (r2.length) {
-      setCanEdit([false, true, true]);
+    console.log("r2", r2);
+    console.log("r3", r3);
+    if (winner.length) {
+      setCanEdit([false, false, false]);
     } else if (r3.length) {
       setCanEdit([false, false, true]);
-    } else if (winner.length) {
-      setCanEdit([false, false, false]);
+    } else if (r2.length) {
+      setCanEdit([false, true, true]);
     }
   }, [matches]);
+
+  useEffect(() => {
+    console.log(canEdit);
+  }, [canEdit]);
 
   useEffect(() => {
     getData();
@@ -86,7 +93,7 @@ const Tournament = () => {
     } else if (round === 2) {
       matchId = matches
         .filter((match) => {
-          return match.type === "tournamentR1" && match.winner;
+          return match.type === "tournamentR2" && match.winner;
 
           // if (match.type !== "tournamentR2" || !match.winner) {
           //   return false;
@@ -100,7 +107,7 @@ const Tournament = () => {
     } else {
       matchId = matches
         .filter((match) => {
-          return match.type === "tournamentR1" && match.winner;
+          return match.type === "tournamentR3" && match.winner;
 
           // if (match.type !== "tournamentR3" || !match.winner) {
           //   return false;
