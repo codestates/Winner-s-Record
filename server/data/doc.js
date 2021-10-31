@@ -191,13 +191,8 @@ export async function editDoc(docId, data) {
       where: { docId, status: "대기" },
     });
     if (type === "tournament") {
-      const players = await entryData.findByDocId(docId, "진행");
-      const matchedPlayer = await matchData.tournamentMatch(
-        docId,
-        event,
-        players
-      );
-      console.log(matchedPlayer);
+      const players = await entryData.findByDocId(docId);
+      await matchData.tournamentMatch(docId, event, players);
     }
   }
 

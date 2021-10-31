@@ -107,6 +107,9 @@ export async function signup(req, res) {
     type,
     img: imgLink,
   });
+  if (userId === "not web signup") {
+    return res.status(400).json({ message: "잘못된 접근입니다" });
+  }
 
   await recordData.create(userId);
 
@@ -173,14 +176,14 @@ export async function kakaoUserinfo(req, res) {
   res.status(200).send(req.user);
 }
 
-export async function logout(req, res) {
-  const user = await userData.findById(req.userId);
-  if (user) {
-    res.status(200).json({ message: "로그아웃 성공" });
-  } else {
-    res.status(401).json({ message: "로그아웃 실패" });
-  }
-}
+// export async function logout(req, res) {
+//   const user = await userData.findById(req.userId);
+//   if (user) {
+//     res.status(200).json({ message: "로그아웃 성공" });
+//   } else {
+//     res.status(401).json({ message: "로그아웃 실패" });
+//   }
+// }
 
 export async function edit(req, res) {
   const { nickname, password } = req.body;
