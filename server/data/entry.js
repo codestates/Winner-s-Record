@@ -249,3 +249,14 @@ export async function findDocStatus(docId) {
 
   return checkDoc;
 }
+
+export async function findDocEvent(docId) {
+  const checkDoc = await db.Docs.findOne({
+    where: {
+      id: docId
+    }
+  }).then((res) => res.dataValues.event)
+    .catch((err) => console.log(err))
+
+  return checkDoc
+}

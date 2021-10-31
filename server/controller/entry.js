@@ -34,7 +34,8 @@ export async function entryList(req, res) {
     if (entryList && user) {
       const entryUser = await entryData.entryList(docId, entryList);
       const docType = await entryData.findDocStatus(docId)
-      return res.status(200).send({doctype: docType, data: entryUser });
+      const docEvent = await entryData.findDocEvent(docId)
+      return res.status(200).send({doctype: docType, docevent: docEvent, data: entryUser });
     } else {
       return res.status(403).send({ message: "권한이 없습니다" });
     }
