@@ -25,6 +25,8 @@ import axios from "axios";
 import Result from "./pages/TournamentResult";
 import Tournament from "./pages/Tournament";
 import EditMap from "./components/Post/EditMap";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,12 +47,12 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="app--container">
       <Router>
+        <Header />
         <Switch>
           <Route path="/maptest" component={EditMap} />
           <Route path="/chattest" component={Chat} />
-
           <Route exact path="/">
             <Landing />
           </Route>
@@ -95,8 +97,9 @@ function App() {
             <Error />
           </Route>
         </Switch>
+        <Footer />
       </Router>
-    </>
+    </div>
   );
 }
 

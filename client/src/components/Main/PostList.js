@@ -6,12 +6,13 @@ import uuid from "react-uuid";
 
 const PostList = ({ postList, setPostList, searchOption, setSearchOption }) => {
   const [fetching, setFetching] = useState(false);
-  const [offset, setOffset] = useState(10);
+  const [page, setPage] = useState(1);
 
   const handleScroll = () => {
     const scrollHeight = document.documentElement.scrollHeight;
     const scrollTop = document.documentElement.scrollTop;
     const clientHeight = document.documentElement.clientHeight;
+
     if (clientHeight + scrollTop > scrollHeight - 100 && !fetching) {
       infiniteScroll();
     }
@@ -22,7 +23,7 @@ const PostList = ({ postList, setPostList, searchOption, setSearchOption }) => {
     setFetching(true);
     axios
       .get(
-        `http://localhost:8080/doc?type=${postType}&event=${game}&${option}=${input}&offset=${offset}&limit=10`
+        `http://localhost:8080/doc?type=${postType}&event=${game}&${option}=${input}&page=${page}`
       )
       .then((res) => {
         if (res.status === 404) {
@@ -37,13 +38,14 @@ const PostList = ({ postList, setPostList, searchOption, setSearchOption }) => {
             }
           });
           setPostList(sorted);
-          setOffset(offset + 10);
+          setPage(page + 1);
         }
       })
       .then((e) => {
         setFetching(false);
       });
   };
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
