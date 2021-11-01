@@ -102,7 +102,7 @@ module.exports = {
         id: 6,
         userId: 11,
         type: "trade",
-        status: "완료",
+        status: "대기",
         event: "pingpong",
         title: "탁구 세트 팝니다",
         text: "몇번 안쓰고 이제 필요없어서 팝니다. 연락 주세요~~~~~~",
