@@ -185,6 +185,9 @@ export async function socialSignUp(req, res) {
     return res.status(400).json({ message: "회원가입 실패" });
   }
   const user = await userData.createSocialUser(id, nickname, type);
+
+  await recordData.create(user.id);
+
   const token = jwtFunc.createToken(user);
   return res.status(200).json({
     token,
