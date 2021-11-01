@@ -115,7 +115,6 @@ export default function EditUserInfo({ setProfileData, editHandler }) {
         const { token, userdata } = res.data;
         localStorage.removeItem("token", oldToken);
         localStorage.setItem("token", token);
-        setProfileData(userdata);
         setEditInfo({ ...editInfo, nickname: "" });
         dispatch(setUserInfo(userdata));
         openEditModalHandler();
