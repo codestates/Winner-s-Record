@@ -59,7 +59,10 @@ export default function Profile() {
         <LoadingIndicator />
       ) : profileData.userId ? (
         edit ? (
-          <EditUserInfo editHandler={editHandler} />
+          <EditUserInfo
+            setProfileData={setProfileData}
+            editHandler={editHandler}
+          />
         ) : (
           <div>
             <UserInfo
