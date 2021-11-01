@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { useParams } from "react-router";
 import AWS from "aws-sdk";
 import dotenv from "dotenv";
 import axios from "axios";
 import CreateCompleteModal from "../components/CreateDoc/CreateCompleteModal";
-
+import Error from "./Error";
 import TypeSelector from "../components/CreateDoc/TypeSelector";
 import EventSelector from "../components/CreateDoc/EventSelector";
 dotenv.config();
 
 export default function EditDoc() {
+  const { docId } = useParams();
   const history = useHistory();
   const [preview, setPreview] = useState([]);
   const [files, setFiles] = useState([]);
@@ -76,22 +78,21 @@ export default function EditDoc() {
           pathArr.push(path);
         });
     }
-    handleSubmit(pathArr);
+    handleEdit(pathArr);
   };
 
-  const handleSubmit = (arr) => {
+  const handleEdit = (arr) => {
     const { title, place, price, text } = inputValue;
     const token = localStorage.getItem("token");
     axios
-      .post(
-        "http://localhost:8080/doc",
+      .put(
+        `http://localhost:8080/doc/${docId}`,
         { type, title, event, place, price, text, img: arr },
         {
           headers: { authorization: `Bearer ${token}` },
         }
       )
       .then((res) => {
-        console.log(res.data);
         openModalHandler();
       })
       .catch((err) => {
@@ -109,7 +110,22 @@ export default function EditDoc() {
   };
 
   useEffect(() => {
-    axios.get();
+    const token = localStorage.getItem("token");
+    axios
+      .get(`http://localhost:8080/doc/${docId}`, {
+        headers: { authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        const { type, title, event, place, price, text, img } = res.data.data;
+        setPreview(img);
+        setEvent(event);
+        setType(type);
+        setInputValue({ title, place, price, text });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -122,6 +138,7 @@ export default function EditDoc() {
             type="price"
             onChange={handleInputValue("price")}
             placeholder="가격"
+            value={inputValue.price}
           />
         ) : null}
       </div>
@@ -130,11 +147,13 @@ export default function EditDoc() {
           type="title"
           onChange={handleInputValue("title")}
           placeholder="제목"
+          value={inputValue.title}
         />
         <input
           type="text"
           onChange={handleInputValue("text")}
           placeholder="본문"
+          value={inputValue.text}
         />
         <input type="file" multiple="true" onChange={imgOnchange} />
         <div>
