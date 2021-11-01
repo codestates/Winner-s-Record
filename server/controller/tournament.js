@@ -7,7 +7,7 @@ export async function getAll(req, res) {
   const doc = await matchData.findDocById(docId);
   const hostId = doc.userId;
   const result = await tournamentData.findByDocId(docId);
-  return res.status(200).json({ data: { ...result, hostId } });
+  return res.status(200).json({ data: result, hostId });
 }
 
 export async function editResult(req, res) {
@@ -22,5 +22,5 @@ export async function editResult(req, res) {
 
   await matchData.eidtMatch(matchId, winner, loser);
   const result = await tournamentData.findByDocId(docId);
-  return res.status(200).json({ data: { ...result, hostId: doc.userId } });
+  return res.status(200).json({ data: result, hostId: doc.userId });
 }
