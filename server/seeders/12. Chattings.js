@@ -158,7 +158,7 @@ module.exports = {
           .replace(/\..+/, ''), 
       },
       {
-        id: 11,
+        id: 12,
         userId: 11,
         roomId: 5,
         content: '엄청 싸게 파는거에요~ 상태도 괜찮고요.',
@@ -173,7 +173,6 @@ module.exports = {
       },
     ]
     await queryInterface.bulkInsert('Chattings', Chattings, {})
-
   },
 
   down: async (queryInterface, Sequelize) => {
