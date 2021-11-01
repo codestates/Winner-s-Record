@@ -53,6 +53,12 @@ export default function Profile() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (isMypage) {
+      setProfileData(userInfo);
+    }
+  }, [userInfo]);
+
   return (
     <>
       {isLoading ? (
