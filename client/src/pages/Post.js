@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+import Error from "./Error";
 import ImageCarousel from "../components/Post/ImageCarousel";
 import PostPrimaryButton from "../components/Post/PostPrimaryButton";
 import LikeButton from "../components/Post/LikeButton";
@@ -77,64 +78,77 @@ const Post = ({ match }) => {
   } = postInfo;
 
   return (
-    <div className="post--container">
-      <ImageCarousel images={img} />
-      <div className="post--header">
-        <div className="post--title">{title}</div>
-        {isMypost ? (
-          <PostEditBtns
-            hostId={userData.userId}
-            setModalBtnType={setModalBtnType}
-            setLoginModal={setLoginModal}
+    <>
+      {postInfo.title ? (
+        <div className="post--container">
+          <ImageCarousel images={img} />
+          <div className="post--header">
+            <div className="post--title">{title}</div>
+            {isMypost ? (
+              <PostEditBtns
+                hostId={userData.userId}
+                setModalBtnType={setModalBtnType}
+                setLoginModal={setLoginModal}
+              />
+            ) : null}
+          </div>
+
+          <PostUserInfo userData={userData} />
+
+          <div className="post--text">{text}</div>
+          <PostMap place={place} />
+
+          {status !== "대기" && player.includes(userInfo.nickname) ? (
+            <PostComments
+              board={board}
+              postInfo={postInfo}
+              setPostInfo={setPostInfo}
+            />
+          ) : null}
+
+          <div className="post--btns">
+            {isLoading ? null : postInfo.status === "tournament" ? (
+              <TournamentButton
+                status={status}
+                setLoginModal={setLoginModal}
+                hostId={userData.userId}
+              />
+            ) : (
+              <PostPrimaryButton
+                hostId={userData.userId}
+                type={type}
+                status={status}
+                setLoginModal={setLoginModal}
+                setModalBtnType={setModalBtnType}
+                player={player}
+              />
+            )}
+
+            <LikeButton
+              like={like}
+              setLoginModal={setLoginModal}
+              postInfo={postInfo}
+              setPostInfo={setPostInfo}
+              postId={postId}
+            />
+          </div>
+          <NeedLoginModal
+            isModalOpen={loginModal}
+            setIsModalOpen={setLoginModal}
           />
-        ) : null}
-      </div>
-
-      <PostUserInfo userData={userData} />
-
-      <div className="post--text">{text}</div>
-      <PostMap place={place} />
-
-      {status !== "대기" && player.includes(userInfo.nickname) ? (
-        <PostComments board={board} setPostInfo={setPostInfo} />
-      ) : null}
-
-      <div className="post--btns">
-        {isLoading ? null : postInfo.status === "tournament" ? (
-          <TournamentButton
-            status={status}
-            setLoginModal={setLoginModal}
-            hostId={userData.userId}
-          />
-        ) : (
-          <PostPrimaryButton
-            hostId={userData.userId}
-            type={type}
-            status={status}
-            setLoginModal={setLoginModal}
-            setModalBtnType={setModalBtnType}
-            player={player}
-          />
-        )}
-
-        <LikeButton
-          like={like}
-          setLoginModal={setLoginModal}
-          postInfo={postInfo}
-          setPostInfo={setPostInfo}
-          postId={postId}
-        />
-      </div>
-      <NeedLoginModal isModalOpen={loginModal} setIsModalOpen={setLoginModal} />
-      {isModalOpen ? (
-        <PostModal
-          modalBtnType={modalBtnType}
-          status={status}
-          setPostInfo={setPostInfo}
-          player={player}
-        />
-      ) : null}
-    </div>
+          {isModalOpen ? (
+            <PostModal
+              modalBtnType={modalBtnType}
+              status={status}
+              setPostInfo={setPostInfo}
+              player={player}
+            />
+          ) : null}
+        </div>
+      ) : (
+        <Error />
+      )}
+    </>
   );
 };
 

@@ -161,10 +161,22 @@ export async function kakaoCallback(req, res) {
         Authorization: `Bearer ${result.data.access_token}`,
       },
     });
-    console.log(userInfo.data.id);
-    res.send(
-      "이제 받은 유저정보 유저테이블에 해당 id가 없으면 해당 id로 유저테이블에 유저생성, 쿠키주기, 있으면 있는걸로 꺼내서 쿠키주기"
-    );
+    console.log(userInfo.data.id); // 카카오 고유 아이디
+    //"이제 받은 유저정보 유저테이블에 해당 id가 없으면 해당 id로 유저테이블에 유저생성, 쿠키주기, 있으면 있는걸로 꺼내서 쿠키주기"
+
+    let user = await userData.findByKakaoId(userInfo.data.id);
+    if (!user) {
+      user = await userData.createSocialUser(userInfo.data.id, "kakao");
+    }
+    const token = jwtFunc.createToken(user);
+    res.status(200).json({
+      token,
+      userdata: {
+        userId: user.id,
+        nickname: user.nickname,
+        img: user.img,
+      },
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).send({ message: "서버에러" });

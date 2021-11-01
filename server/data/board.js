@@ -16,7 +16,7 @@ export async function findByDocId(docId) {
   const board = [];
   for (let i = 0; i < boardId.length; i++) {
     let text = await db.Boards.findOne({
-      attributes: ["userId", "text"],
+      attributes: ["id", "userId", "text"],
       where: { id: boardId[i] },
     }).then((data) => data.dataValues);
     board.push(text);
@@ -65,7 +65,8 @@ export async function create(docId, userId, text) {
     docId,
     boardId: created.dataValues.id,
   });
-  return created.dataValues.id;
+  const all = await findByDocId(docId);
+  return all;
 }
 
 export async function remove(boardId) {

@@ -1,3 +1,4 @@
+import { userInfo } from "../controller/auth.js";
 import db from "../models/index.js";
 
 export async function randomUserImg(list) {
@@ -54,6 +55,29 @@ export async function findById(id) {
     return user;
   } catch {
     return null;
+  }
+}
+
+export async function findByKakaoId(id) {
+  try {
+    const user = await db.Users.findOne({
+      where: { kakao: id },
+    }).then((data) => data.dataValues);
+    return user;
+  } catch {
+    return null;
+  }
+}
+
+export async function createSocialUser(id, type) {
+  if (type === "kakao") {
+    const newUser = await db.Users.create({
+      type,
+      kakao: id,
+      nickname: `K${id}`,
+      img: "https://mblogthumb-phinf.pstatic.net/20150807_176/e2voo_1438935101901YtpDh_PNG/%25EB%25AC%25B4%25EC%25A0%259C-1.png?type=w800",
+    }).then((data) => data.dataValues);
+    return newUser;
   }
 }
 
