@@ -5,7 +5,7 @@ import AWS from "aws-sdk";
 import dotenv from "dotenv";
 import axios from "axios";
 import CreateCompleteModal from "../components/CreateDoc/CreateCompleteModal";
-import Error from "./Error";
+// import Error from "./Error";
 import TypeSelector from "../components/CreateDoc/TypeSelector";
 import EventSelector from "../components/CreateDoc/EventSelector";
 dotenv.config();
@@ -158,7 +158,7 @@ export default function EditDoc() {
         <input type="file" multiple="true" onChange={imgOnchange} />
         <div>
           {preview.map((e, index) => {
-            return <img key={index} src={e} />;
+            return <img key={index} src={e} alt="preview" />;
           })}
         </div>
       </div>

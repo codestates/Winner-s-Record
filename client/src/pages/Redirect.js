@@ -90,32 +90,36 @@ export default function Redirect() {
 
   const isValid = validation.nickname && validation.checkNickname;
 
-  useEffect(async () => {
-    const url = new URL(window.location.href);
-    const authorizationCode = url.searchParams.get("code");
-    const result = await axios.post(
-      `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=42184b4ebbf71c527914d5cf6269aae0&redirect_uri=http://localhost:3000/redirect&code=${authorizationCode}`
-    );
-    const token = result.data.access_token;
-    axios
-      .get(`http://localhost:8080/auth/kakao/callback?token=${token}`)
-      .then((res) => {
-        const { id, type } = res.data;
-        if (!id) {
-          const { token, userdata } = res.data;
-          localStorage.setItem("token", token);
-          const accessToken = localStorage.getItem("token");
-          if (accessToken) {
-            dispatch(setLogin()); // 로그인 상태 변경
-            dispatch(setUserInfo(userdata)); // 유저 정보 입력
-            history.replace("/main");
+  useEffect(() => {
+    async function login() {
+      const url = new URL(window.location.href);
+      const authorizationCode = url.searchParams.get("code");
+      const result = await axios.post(
+        `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=42184b4ebbf71c527914d5cf6269aae0&redirect_uri=http://localhost:3000/redirect&code=${authorizationCode}`
+      );
+      const token = result.data.access_token;
+      axios
+        .get(`http://localhost:8080/auth/kakao/callback?token=${token}`)
+        .then((res) => {
+          const { id, type } = res.data;
+          if (!id) {
+            const { token, userdata } = res.data;
+            localStorage.setItem("token", token);
+            const accessToken = localStorage.getItem("token");
+            if (accessToken) {
+              dispatch(setLogin()); // 로그인 상태 변경
+              dispatch(setUserInfo(userdata)); // 유저 정보 입력
+              history.replace("/main");
+            }
+          } else {
+            setId(id);
+            setType(type);
+            setIsLoading(false);
           }
-        } else {
-          setId(id);
-          setType(type);
-          setIsLoading(false);
-        }
-      });
+        });
+    }
+    login();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
