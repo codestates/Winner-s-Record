@@ -171,8 +171,8 @@ module.exports = {
           .replace(/T/, " ")
           .replace(/\..+/, ""),
       },
-    ];
-    await queryInterface.bulkInsert("Chattings", Chattings, {});
+    ]
+    await queryInterface.bulkInsert('Chattings', Chattings, {})
   },
 
   down: async (queryInterface, Sequelize) => {
