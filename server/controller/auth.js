@@ -143,69 +143,59 @@ export async function login(req, res) {
   });
 }
 
-export async function kakaoLogin(req, res) {
-  console.log("카카오로그인 요청");
-  // 로그인 버튼
-  //`https://kauth.kakao.com/oauth/authorize?client_id=${config.kakao.clientId}&redirect_uri=${config.kakao.redirectUrl}&&response_type=code`
-  return res.redirect(
-    `https://kauth.kakao.com/oauth/authorize?client_id=42184b4ebbf71c527914d5cf6269aae0&redirect_uri=http://localhost:8080/auth/kakao/callback&&response_type=code`
-  );
-}
+// export async function kakaoLogin(req, res) {
+//   console.log("카카오로그인 요청");
+//   // 로그인 버튼
+//   //`https://kauth.kakao.com/oauth/authorize?client_id=${config.kakao.clientId}&redirect_uri=${config.kakao.redirectUrl}&&response_type=code`
+//   return res.redirect(
+//     `https://kauth.kakao.com/oauth/authorize?client_id=42184b4ebbf71c527914d5cf6269aae0&redirect_uri=http://localhost:8080/auth/kakao/callback&&response_type=code`
+//   );
+// }
 
 export async function kakaoCallback(req, res) {
   const token1 = req.query.token;
-  console.log("token : ", token1);
-  // const code = req.query.code;
-  // console.log("코드 : ", code);
-
-  // const result = await axios.post(
-  //   `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${config.kakao.clientId}&redirect_uri=${config.kakao.redirectUrl}callback&code=${code}`
-  // );
   const userInfo = await axios.get(`https://kapi.kakao.com/v2/user/me`, {
     headers: {
       Authorization: `Bearer ${token1}`,
     },
   });
-  console.log(userInfo.data.id); // 카카오 고유 아이디
-  console.log(userInfo.data.properties.nickname); // 카카오 닉네임
-  //"이제 받은 유저정보 유저테이블에 해당 id가 없으면 해당 id로 유저테이블에 유저생성, 쿠키주기, 있으면 있는걸로 꺼내서 쿠키주기"
 
   let user = await userData.findByKakaoId(userInfo.data.id);
   if (!user) {
-    // user = await userData.createSocialUser(userInfo.data.id, "kakao");
     res.status(200).json({
       type: "kakao",
       id: userInfo.data.id,
     });
   }
   const token = jwtFunc.createToken(user);
-  res.status(200).json({
+  return res.status(200).json({
     token,
     userdata: {
       userId: user.id,
       nickname: user.nickname,
       img: user.img,
+      type: user.type,
     },
   });
-  // } catch (error) {
-  //   console.error(error);
-  //   return res.status(500).send({ message: "서버에러" });
-  // }
 }
 
-export async function kakaoUserinfo(req, res) {
-  console.log(req.user);
-  res.status(200).send(req.user);
+export async function socialSignUp(req, res) {
+  const { id, type, nickname } = req.body;
+  if (id === undefined || type === undefined || nickname === undefined) {
+    return res.status(400).json({ message: "회원가입 실패" });
+  }
+  const user = await userData.createSocialUser(id, nickname, type);
+  const token = jwtFunc.createToken(user);
+  return res.status(200).json({
+    token,
+    userdata: {
+      userId: user.id,
+      nickname: user.nickname,
+      img: user.img,
+      type: user.type,
+    },
+  });
 }
-
-// export async function logout(req, res) {
-//   const user = await userData.findById(req.userId);
-//   if (user) {
-//     res.status(200).json({ message: "로그아웃 성공" });
-//   } else {
-//     res.status(401).json({ message: "로그아웃 실패" });
-//   }
-// }
 
 export async function edit(req, res) {
   const { nickname, password } = req.body;
