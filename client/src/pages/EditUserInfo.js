@@ -5,7 +5,7 @@ import EditCompleteModal from "../components/Profile/EditCompleteModal";
 import DeleteUserModal from "../components/Profile/DeleteUserModal";
 import axios from "axios";
 
-export default function EditUserInfo({ editHandler }) {
+export default function EditUserInfo({ setProfileData, editHandler }) {
   const userInfo = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
 
@@ -115,6 +115,7 @@ export default function EditUserInfo({ editHandler }) {
         const { token, userdata } = res.data;
         localStorage.removeItem("token", oldToken);
         localStorage.setItem("token", token);
+        setProfileData(userdata);
         setEditInfo({ ...editInfo, nickname: "" });
         dispatch(setUserInfo(userdata));
         openEditModalHandler();
