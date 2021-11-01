@@ -12,6 +12,7 @@ import CreateDoc from "./pages/CreateDoc";
 import Ranking from "./pages/Ranking";
 import TournamentMain from "./pages/TournamentMain";
 import Entry from "./pages/Entry";
+import Chat from "./pages/Chat";
 
 // styles
 import "./reset.css";
@@ -47,6 +48,8 @@ function App() {
       <Router>
         <Switch>
           <Route path="/maptest" component={EditMap} />
+          <Route path="/chattest" component={Chat} />
+
           <Route exact path="/">
             <Landing />
           </Route>
