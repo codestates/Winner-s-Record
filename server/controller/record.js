@@ -24,5 +24,5 @@ export async function confirm(req, res) {
     await docData.editDoc(docId, { status: "완료" });
   }
   const result = await tournamentData.findByDocId(docId);
-  return res.status(200).json({ data: { ...result, hostId: doc.userId } });
+  return res.status(200).json({ data: result, hostId: doc.userId });
 }
