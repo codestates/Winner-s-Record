@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUserInfo } from "../modules/userInfo";
 import EditCompleteModal from "../components/Profile/EditCompleteModal";
 import DeleteUserModal from "../components/Profile/DeleteUserModal";
 import axios from "axios";
 
 export default function EditUserInfo({ editHandler }) {
+  const userInfo = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -55,7 +56,6 @@ export default function EditUserInfo({ editHandler }) {
   }
 
   const handleOnblurName = () => {
-    // 바꾸고 싶은 닉네임 적은다음에 칸 옮기면 서버에 중복확인해주는 요청
     const { nickname } = editInfo;
     if (!isNickname(nickname)) {
       setMessage({ ...message, nickname: "한글만 입력해주세요" });
@@ -230,53 +230,55 @@ export default function EditUserInfo({ editHandler }) {
             <button>수정하기</button>
           )}
         </div>
-        <div>
-          <input
-            type="password"
-            placeholder="현재 비밀번호"
-            onBlur={handleOnblurPassword}
-            onChange={handleInputValue("oldpassword")}
-            onKeyPress={handleKeyPress}
-            value={editInfo.oldpassword}
-          />
-          <div>{message.oldpassword}</div>
-          <input
-            type="password"
-            placeholder="새 비밀번호"
-            onChange={handleInputValue("password")}
-            onKeyPress={handleKeyPress}
-            value={editInfo.password}
-          />
-          {message.password ===
-          "비밀번호는 8자리 이상, 숫자, 문자, 특수문자가 포함되어야 합니다" ? (
-            <div>{message.password}</div>
-          ) : message.password === "사용할 수 있는 비밀번호 입니다" ? (
-            <div>{message.password}</div>
-          ) : (
-            <div>{message.password}</div>
-          )}
-          <input
-            type="password"
-            placeholder="새 비밀번호 확인"
-            onChange={handleInputValue("checkPW")}
-            onKeyPress={handleKeyPress}
-            value={editInfo.checkPW}
-          />
-          {message.checkPW === "비밀번호가 불일치합니다" ? (
-            <div>{message.checkPW}</div>
-          ) : (
-            <div>{message.checkPW}</div>
-          )}
-          {validation.oldpassword &&
-          validation.password &&
-          validation.checkPW ? (
-            <button style={{ color: "green" }} onClick={handleEditPW}>
-              수정하기
-            </button>
-          ) : (
-            <button>수정하기</button>
-          )}
-        </div>
+        {userInfo.type === "web" ? (
+          <div>
+            <input
+              type="password"
+              placeholder="현재 비밀번호"
+              onBlur={handleOnblurPassword}
+              onChange={handleInputValue("oldpassword")}
+              onKeyPress={handleKeyPress}
+              value={editInfo.oldpassword}
+            />
+            <div>{message.oldpassword}</div>
+            <input
+              type="password"
+              placeholder="새 비밀번호"
+              onChange={handleInputValue("password")}
+              onKeyPress={handleKeyPress}
+              value={editInfo.password}
+            />
+            {message.password ===
+            "비밀번호는 8자리 이상, 숫자, 문자, 특수문자가 포함되어야 합니다" ? (
+              <div>{message.password}</div>
+            ) : message.password === "사용할 수 있는 비밀번호 입니다" ? (
+              <div>{message.password}</div>
+            ) : (
+              <div>{message.password}</div>
+            )}
+            <input
+              type="password"
+              placeholder="새 비밀번호 확인"
+              onChange={handleInputValue("checkPW")}
+              onKeyPress={handleKeyPress}
+              value={editInfo.checkPW}
+            />
+            {message.checkPW === "비밀번호가 불일치합니다" ? (
+              <div>{message.checkPW}</div>
+            ) : (
+              <div>{message.checkPW}</div>
+            )}
+            {validation.oldpassword &&
+            validation.password &&
+            validation.checkPW ? (
+              <button style={{ color: "green" }} onClick={handleEditPW}>
+                수정하기
+              </button>
+            ) : (
+              <button>수정하기</button>
+            )}
+          </div>
+        ) : null}
       </div>
       <div className="btnContainer">
         <button onClick={editHandler}>돌아가기</button>
