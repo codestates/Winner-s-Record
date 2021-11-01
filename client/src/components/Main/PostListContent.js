@@ -1,6 +1,14 @@
+import { useEffect, useState } from "react";
+
 const PostListContent = ({ postInfo }) => {
   const { id, event, userId, type, place, price, status, title, img, like } =
     postInfo;
+  const [placeToDisplay, setPlaceToDisplay] = useState("");
+
+  useEffect(() => {
+    const data = place.split("|");
+    setPlaceToDisplay(data[4]);
+  }, []);
 
   const gameNamer = (game) => {
     if (game === "tennis") {
@@ -33,7 +41,7 @@ const PostListContent = ({ postInfo }) => {
         </div>
         <div className="list--content--game">{`#${gameNamer(event)}`}</div>
         <div className="list--content--title">{title}</div>
-        <div className="list--content--place">{place}</div>
+        <div className="list--content--place">{placeToDisplay}</div>
         {price ? <div className="list--content--price">{price}</div> : null}
         <div className="list--content--like">{`좋아요 ${like}`}</div>
       </div>
