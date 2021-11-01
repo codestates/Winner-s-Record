@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router";
 import AWS from "aws-sdk";
 import dotenv from "dotenv";
@@ -134,7 +134,7 @@ export default function CreateDoc() {
         <input type="file" multiple="true" onChange={imgOnchange} />
         <div>
           {preview.map((e, index) => {
-            return <img key={index} src={e} />;
+            return <img key={index} src={e} alt="preview" />;
           })}
         </div>
       </div>

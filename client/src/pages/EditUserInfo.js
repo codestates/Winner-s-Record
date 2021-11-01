@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserInfo } from "../modules/userInfo";
 import EditCompleteModal from "../components/Profile/EditCompleteModal";
@@ -9,7 +8,6 @@ import axios from "axios";
 export default function EditUserInfo({ editHandler }) {
   const userInfo = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
