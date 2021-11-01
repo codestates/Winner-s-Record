@@ -9,7 +9,8 @@ import TournamentMatch from "../components/Tournament/TournamentMatch";
 import TournamentModal from "../components/Tournament/TournamentModal";
 
 const Tournament = () => {
-  const { userInfo, isModalOpen } = useSelector((state) => ({
+  const { isLogin, userInfo, isModalOpen } = useSelector((state) => ({
+    isLogin: state.isLogin,
     userInfo: state.userInfo,
     isModalOpen: state.isModalOpen,
   }));
@@ -80,12 +81,6 @@ const Tournament = () => {
       matchId = matches
         .filter((match) => {
           return match.type === "tournamentR1" && match.winner;
-
-          // if (match.type !== "tournamentR1" || !match.winner) {
-          //   return false;
-          // } else {
-          //   return true;
-          // }
         })
         .map((match) => {
           return match.id;
@@ -94,12 +89,6 @@ const Tournament = () => {
       matchId = matches
         .filter((match) => {
           return match.type === "tournamentR2" && match.winner;
-
-          // if (match.type !== "tournamentR2" || !match.winner) {
-          //   return false;
-          // } else {
-          //   return true;
-          // }
         })
         .map((match) => {
           return match.id;
@@ -108,12 +97,6 @@ const Tournament = () => {
       matchId = matches
         .filter((match) => {
           return match.type === "tournamentR3" && match.winner;
-
-          // if (match.type !== "tournamentR3" || !match.winner) {
-          //   return false;
-          // } else {
-          //   return true;
-          // }
         })
         .map((match) => {
           return match.id;
@@ -123,8 +106,10 @@ const Tournament = () => {
     const event = matches[0].event;
     console.log(matches);
     console.log("매치 아이디", matchId);
-
-    if (round === 1 && matchId.length !== 4) {
+    if (userInfo.userId !== host) {
+      dispatch(setModalText("해당 조작은 주최자만 할 수 있어요."));
+      dispatch(modalOn());
+    } else if (round === 1 && matchId.length !== 4) {
       dispatch(setModalText("진행중인 경기가 있습니다."));
       dispatch(modalOn());
     } else if (round === 2 && matchId.length !== 2) {
@@ -163,6 +148,7 @@ const Tournament = () => {
         )
         .then((res) => {
           setMatches(res.data.data);
+          setHost(res.data.hostId);
         });
     }
   };

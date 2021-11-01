@@ -23,6 +23,7 @@ import { setLogin } from "./modules/isLogin";
 import axios from "axios";
 import Result from "./pages/TournamentResult";
 import Tournament from "./pages/Tournament";
+import EditMap from "./components/Post/EditMap";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ function App() {
     <>
       <Router>
         <Switch>
+          <Route path="/maptest" component={EditMap} />
           <Route exact path="/">
             <Landing />
           </Route>
