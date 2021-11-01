@@ -12,7 +12,7 @@ export async function create(req, res) {
 
   const result = await boardData.create(docId, userId, text);
   if (result) {
-    return res.status(201).json({ boardId: result });
+    return res.status(201).json({ board: result });
   } else {
     return res.status(400).json({ message: "잘못된 요청입니다" });
   }
