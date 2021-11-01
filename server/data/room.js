@@ -3,17 +3,23 @@ import db from '../models/index.js';
 const { Op } = pkg;
 
 export async function chatList(userId) {
-  const list = await db.Rooms.findAll({
+  const list = await db.Users_Rooms.findAll({
     where: {
-      [Op.or]: {
-        hostId: userId,
-        guestId: userId
-      }
+      userId: userId
     }
   }).catch((err) => console.log(err))
   const chatList = list.map((el) => el.dataValues)
-  const hostId = list.map((el) => el.hostId).filter((ele) => ele !== userId)
-  const guestId = list.map((el) => el.guestId).filter((ele) => ele !== userId)
+  const roomsId = chatList.map((el) => el.roomId)
+  const roomList = await db.Rooms.findAll({
+    where: {
+      id: {
+        [Op.in]: roomsId
+      }
+    }
+  }).catch((err) => console.log(err))
+  const roomsList = roomList.map((el) => el.dataValues)
+  const hostId = roomsList.map((el) => el.hostId).filter((ele) => ele !== userId)
+  const guestId = roomsList.map((el) => el.guestId).filter((ele) => ele !== userId)
   const hostUser = await db.Users.findAll({
     where: {
       id: {
@@ -29,25 +35,27 @@ export async function chatList(userId) {
       }
     }
   }).catch((err) => console.log(err))
+
   const hostUserList = hostUser.map((el) => el.dataValues)
   const guestUserList = guestUser.map((el) => el.dataValues)
-  for(let i = 0; i < chatList.length; i++) {
+
+  for(let i = 0; i < roomsList.length; i++) {
     for(let j = 0; j < hostUserList.length; j++) {
-      if(chatList[i].hostId === hostUserList[j].id) {
-        chatList[i].nickname = hostUserList[j].nickname
-        chatList[i].img = hostUserList[j].img
+      if(roomsList[i].hostId === hostUserList[j].id) {
+        roomsList[i].nickname = hostUserList[j].nickname
+        roomsList[i].img = hostUserList[j].img
       }
     }
   }
-  for(let i = 0; i < chatList.length; i++) {
+  for(let i = 0; i < roomsList.length; i++) {
     for(let j = 0; j < guestUserList.length; j++) {
-      if(chatList[i].guestId === guestUserList[j].id) {
-        chatList[i].nickname = guestUserList[j].nickname
-        chatList[i].img = guestUserList[j].img
+      if(roomsList[i].guestId === guestUserList[j].id) {
+        roomsList[i].nickname = guestUserList[j].nickname
+        roomsList[i].img = guestUserList[j].img
       }
     }
   }
-  const roomId = chatList.map((el) => el.id)
+  const roomId = roomsList.map((el) => el.id)
   
   const chatting = await db.Chattings.findAll({
     where:{
@@ -58,24 +66,47 @@ export async function chatList(userId) {
   }).catch((err) => console.log(err))
   const chattings = chatting.map((el) => el.dataValues)
   const chattingsMatch = {}
-  for(let i = 0; i < chatList.length; i++) {
+  for(let i = 0; i < roomsList.length; i++) {
     for(let j = 0; j < chattings.length; j++) {
-      if (chattingsMatch[chatList[i].id] === undefined && chatList[i].id === chattings[j].roomId) {
-        chattingsMatch[chatList[i].id] = [chattings[j].id]
-      } else if (chatList[i].id === chattings[j].roomId) {
-        chattingsMatch[chatList[i].id].push(chattings[j].id)
+      if (chattingsMatch[roomsList[i].id] === undefined && roomsList[i].id === chattings[j].roomId) {
+        chattingsMatch[roomsList[i].id] = [chattings[j].id]
+      } else if (roomsList[i].id === chattings[j].roomId) {
+        chattingsMatch[roomsList[i].id].push(chattings[j].id)
       }
     }
   }
-  for(let i = 0; i < chatList.length; i++) {
+  for(let i = 0; i < roomsList.length; i++) {
     for(let j = 0; j < chattings.length; j++) {
       for(let key in chattingsMatch) {
-        if(chatList[i].id === chattings[j].roomId && chattings[j].id === Math.max(...chattingsMatch[key])) {
-          chatList[i].content = chattings[j].content
-          chatList[i].date = chattings[j].updatedAt
+        if(roomsList[i].id === chattings[j].roomId && chattings[j].id === Math.max(...chattingsMatch[key])) {
+          roomsList[i].content = chattings[j].content
+          roomsList[i].date = chattings[j].updatedAt
         }
       }
     }
   }
-  return chatList
+  return roomsList
 }
+
+export async function validUser(roomId, userId) {
+  const validRoom = await db.Rooms.findOne({
+    where: {
+      id : roomId
+    }
+  }).catch((err) => console.log(err))
+  if(validRoom === null) {
+    return
+  } else if (validRoom.dataValues.hostId === userId || validRoom.dataValues.guestId === userId) {
+    return validRoom.dataValues
+  } 
+}
+
+export async function deleteRoom(roomId, userId) {
+  const deleteRoom = await db.Users_Rooms.destroy({
+    where : {
+      roomId: roomId,
+      userId: userId
+    }
+  }).catch((err) => console.log(err));
+  return "ok";
+} 

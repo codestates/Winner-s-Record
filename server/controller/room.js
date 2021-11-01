@@ -8,7 +8,23 @@ export async function createRoom(req, res) {
 }
 
 export async function deleteRoom(req, res) {
-  res.status(200).send('bd')
+  const roomId = req.params.roomId
+  const authorization = req.headers.authorization;
+  if (!authorization) {
+    return res.status(401).send({message: "권한이 없습니다"})
+  } else {
+    const token = authorization.split(" ")[1];
+    const user = await jwt.verify(token, String(config.jwt.secretKey));
+    const validUser = await roomData.validUser(roomId, user.id)
+    if(validUser) {
+      const deleteRoom = await roomData.deleteRoom(roomId, user.id)
+      if(deleteRoom === 'ok') {
+        res.sendStatus(204)
+      } else {
+        res.status(403).send({ message: "권한이 없습니다"})
+      }
+    }
+  }
 }
 
 export async function chattingList(req, res) {
