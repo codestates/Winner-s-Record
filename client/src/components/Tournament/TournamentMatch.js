@@ -1,11 +1,17 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { modalOn } from "../../modules/isModalOpen";
+import { setModalText } from "../../modules/modalText";
 
 const TournamentMatch = ({
+  host,
   matchData,
   setMatchToEdit,
   setIsEditModalOpen,
   canEdit,
 }) => {
+  const dispatch = useDispatch();
+  const userInfo = useSelector((state) => state.userInfo);
   const { id, event, winner, loser, docId, player = "" } = matchData;
   const players = player.split("vs");
 
@@ -24,8 +30,15 @@ const TournamentMatch = ({
             {canEdit ? (
               <div
                 onClick={() => {
-                  setMatchToEdit([id, docId, players[0], players[1]]);
-                  setIsEditModalOpen(true);
+                  if (userInfo.userId !== host) {
+                    dispatch(
+                      setModalText("해당 조작은 주최자만 할 수 있어요.")
+                    );
+                    dispatch(modalOn());
+                  } else {
+                    setMatchToEdit([id, docId, players[0], players[1]]);
+                    setIsEditModalOpen(true);
+                  }
                 }}
               >
                 수정
@@ -43,8 +56,13 @@ const TournamentMatch = ({
           <div className="btn">
             <div
               onClick={() => {
-                setMatchToEdit([id, docId, players[0], players[1]]);
-                setIsEditModalOpen(true);
+                if (userInfo.userId !== host) {
+                  dispatch(setModalText("해당 조작은 주최자만 할 수 있어요."));
+                  dispatch(modalOn());
+                } else {
+                  setMatchToEdit([id, docId, players[0], players[1]]);
+                  setIsEditModalOpen(true);
+                }
               }}
             >
               결과 입력
