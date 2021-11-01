@@ -94,7 +94,11 @@ export default function EditPhotoModal({
                 onChange={(e) => imgOnchange(e)}
               />
               <div>
-                <img style={{ width: "50%", height: "50%" }} src={preview} />
+                <img
+                  style={{ width: "50%", height: "50%" }}
+                  src={preview}
+                  alt="profile"
+                />
               </div>
             </div>
             <div className="modal--btnContainer">

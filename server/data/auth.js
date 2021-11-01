@@ -69,12 +69,12 @@ export async function findByKakaoId(id) {
   }
 }
 
-export async function createSocialUser(id, type) {
+export async function createSocialUser(id, nickname, type) {
   if (type === "kakao") {
     const newUser = await db.Users.create({
       type,
       kakao: id,
-      nickname: `K${id}`,
+      nickname,
       img: "https://mblogthumb-phinf.pstatic.net/20150807_176/e2voo_1438935101901YtpDh_PNG/%25EB%25AC%25B4%25EC%25A0%259C-1.png?type=w800",
     }).then((data) => data.dataValues);
     return newUser;

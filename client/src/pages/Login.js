@@ -40,16 +40,23 @@ export default function Login() {
       });
   };
 
-  const handleKakao = () => {
-    axios
-      .get("http://localhost:8080/auth/kakao/login")
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const handleKakao = (e) => {
+    e.preventDefault();
+    window.location.assign(
+      "https://kauth.kakao.com/oauth/authorize?client_id=42184b4ebbf71c527914d5cf6269aae0&redirect_uri=http://localhost:3000/redirect&&response_type=code"
+    );
   };
+
+  // const handleKakao = () => {
+  //   axios
+  //     .get("http://localhost:8080/auth/kakao/login")
+  //     .then((res) => {
+  //       console.log(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   const handleNaver = () => {
     axios

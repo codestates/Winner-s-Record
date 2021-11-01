@@ -10,7 +10,11 @@ export default function RankList({ content }) {
           history.push(`profile/${content.userId}`);
         }}
       >
-        <img style={{ width: "100px", height: "100px" }} src={content.img} />
+        <img
+          style={{ width: "100px", height: "100px" }}
+          src={content.img}
+          alt="profile"
+        />
         {content.nickname}
       </span>
       <span>{content.win}승</span>

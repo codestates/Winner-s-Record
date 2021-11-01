@@ -53,13 +53,22 @@ export default function Profile() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (isMypage) {
+      setProfileData(userInfo);
+    }
+  }, [userInfo]);
+
   return (
     <>
       {isLoading ? (
         <LoadingIndicator />
       ) : profileData.userId ? (
         edit ? (
-          <EditUserInfo editHandler={editHandler} />
+          <EditUserInfo
+            setProfileData={setProfileData}
+            editHandler={editHandler}
+          />
         ) : (
           <div>
             <UserInfo
