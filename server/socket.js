@@ -7,13 +7,13 @@
 
 import http from "http";
 import express from "express"
-import {io} from "socket.io-client"
+const io = require("socket.io")();
 
 const app = express()
 
-const httpServer = http.createServer(app).listen(8080, () => {
-  console.log('asgdasdgasdg')
-})
+// const httpServer = http.createServer(app).listen(8080, () => {
+//   console.log('asgdasdgasdg')
+// })
 
 const socketServer = io("httpServer")
 socketServer.on("connection", (socket) => {
