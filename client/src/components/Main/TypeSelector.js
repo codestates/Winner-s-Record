@@ -1,13 +1,15 @@
-const TypeSelector = ({ postType, setPostType }) => {
+const TypeSelector = ({ searchOption, setSearchOption }) => {
+  const { postType } = searchOption;
+
   return (
     <div className="search--type--container">
       <div
         className="search--type--match"
         onClick={() => {
           if (postType === "match") {
-            setPostType("all");
+            setSearchOption({ ...searchOption, postType: "all" });
           } else {
-            setPostType("match");
+            setSearchOption({ ...searchOption, postType: "match" });
           }
         }}
       >
@@ -17,9 +19,9 @@ const TypeSelector = ({ postType, setPostType }) => {
         className="search--type--trade"
         onClick={() => {
           if (postType === "trade") {
-            setPostType("all");
+            setSearchOption({ ...searchOption, postType: "all" });
           } else {
-            setPostType("trade");
+            setSearchOption({ ...searchOption, postType: "trade" });
           }
         }}
       >

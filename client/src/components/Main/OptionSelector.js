@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const OptionSelector = ({ setOption }) => {
+const OptionSelector = ({ searchOption, setSearchOption }) => {
   const [selected, setSelected] = useState("글 제목");
   const [isClicked, setIsClicked] = useState(false);
 
@@ -19,7 +19,7 @@ const OptionSelector = ({ setOption }) => {
           <li
             className="search--dropdown--item"
             onClick={(e) => {
-              setOption("title");
+              setSearchOption({ ...searchOption, option: "title" });
               setIsClicked(false);
               setSelected(e.target.textContent);
             }}
@@ -29,7 +29,7 @@ const OptionSelector = ({ setOption }) => {
           <li
             className="search--dropdown--item"
             onClick={(e) => {
-              setOption("place");
+              setSearchOption({ ...searchOption, option: "place" });
               setIsClicked(false);
               setSelected(e.target.textContent);
             }}
