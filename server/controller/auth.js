@@ -10,9 +10,12 @@ import { config } from "../config.js";
 export async function me(req, res) {
   const userId = req.userId;
   const user = await userData.findById(userId);
-  return res
-    .status(200)
-    .json({ userId: user.id, nickname: user.nickname, img: user.img });
+  return res.status(200).json({
+    userId: user.id,
+    nickname: user.nickname,
+    img: user.img,
+    type: user.type,
+  });
 }
 
 export async function userInfo(req, res) {
@@ -150,37 +153,44 @@ export async function kakaoLogin(req, res) {
 }
 
 export async function kakaoCallback(req, res) {
-  const code = req.query.code;
-  console.log("코드 : ", code);
-  try {
-    const result = await axios.post(
-      `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${config.kakao.clientId}&redirect_uri=${config.kakao.redirectUrl}callback&code=${code}`
-    );
-    const userInfo = await axios.get(`https://kapi.kakao.com/v2/user/me`, {
-      headers: {
-        Authorization: `Bearer ${result.data.access_token}`,
-      },
-    });
-    console.log(userInfo.data.id); // 카카오 고유 아이디
-    //"이제 받은 유저정보 유저테이블에 해당 id가 없으면 해당 id로 유저테이블에 유저생성, 쿠키주기, 있으면 있는걸로 꺼내서 쿠키주기"
+  const token1 = req.query.token;
+  console.log("token : ", token1);
+  // const code = req.query.code;
+  // console.log("코드 : ", code);
 
-    let user = await userData.findByKakaoId(userInfo.data.id);
-    if (!user) {
-      user = await userData.createSocialUser(userInfo.data.id, "kakao");
-    }
-    const token = jwtFunc.createToken(user);
+  // const result = await axios.post(
+  //   `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${config.kakao.clientId}&redirect_uri=${config.kakao.redirectUrl}callback&code=${code}`
+  // );
+  const userInfo = await axios.get(`https://kapi.kakao.com/v2/user/me`, {
+    headers: {
+      Authorization: `Bearer ${token1}`,
+    },
+  });
+  console.log(userInfo.data.id); // 카카오 고유 아이디
+  console.log(userInfo.data.properties.nickname); // 카카오 닉네임
+  //"이제 받은 유저정보 유저테이블에 해당 id가 없으면 해당 id로 유저테이블에 유저생성, 쿠키주기, 있으면 있는걸로 꺼내서 쿠키주기"
+
+  let user = await userData.findByKakaoId(userInfo.data.id);
+  if (!user) {
+    // user = await userData.createSocialUser(userInfo.data.id, "kakao");
     res.status(200).json({
-      token,
-      userdata: {
-        userId: user.id,
-        nickname: user.nickname,
-        img: user.img,
-      },
+      type: "kakao",
+      id: userInfo.data.id,
     });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).send({ message: "서버에러" });
   }
+  const token = jwtFunc.createToken(user);
+  res.status(200).json({
+    token,
+    userdata: {
+      userId: user.id,
+      nickname: user.nickname,
+      img: user.img,
+    },
+  });
+  // } catch (error) {
+  //   console.error(error);
+  //   return res.status(500).send({ message: "서버에러" });
+  // }
 }
 
 export async function kakaoUserinfo(req, res) {
