@@ -4,7 +4,7 @@ import Redirect from "./pages/Redirect";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import Landing from "./pages/Landing";
-import EditUserInfo from "./pages/EditUserInfo";
+import EditDoc from "./pages/EditDoc";
 import Error from "./pages/Error";
 import Main from "./pages/Main";
 import Post from "./pages/Post";
@@ -80,6 +80,9 @@ function App() {
           </Route>
           <Route path="/doc">
             <CreateDoc />
+          </Route>
+          <Route path="/edit/:docId">
+            <EditDoc />
           </Route>
           <Route path="/ranking">
             <Ranking />

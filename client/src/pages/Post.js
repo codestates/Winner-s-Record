@@ -30,6 +30,7 @@ const Post = ({ match }) => {
     },
   });
 
+  const [edit, setEdit] = useState(false);
   const isMypost = postInfo.userData.userId === userInfo.userId;
 
   useEffect(() => {
