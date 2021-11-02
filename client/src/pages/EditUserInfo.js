@@ -36,7 +36,7 @@ export default function EditUserInfo({ setProfileData, editHandler }) {
   });
 
   const [message, setMessage] = useState({
-    nickname: "닉네임은 2~7자리 한글로 입력해주세요",
+    nickname: "닉네임은 2~7 자리 한글로 입력해주세요",
     oldpassword: "현재 비밀번호를 입력해주세요",
     password: "비밀번호는 8자리 이상, 숫자, 문자, 특수문자가 포함되어야 합니다",
     checkPW: "비밀번호를 확인해주세요",
@@ -60,7 +60,7 @@ export default function EditUserInfo({ setProfileData, editHandler }) {
       return;
     }
     if (editInfo.nickname.length > 7 || editInfo.nickname.length < 2) {
-      setMessage({ ...message, nickname: "2~7자로 입력해주세요" });
+      setMessage({ ...message, nickname: "2~7 자로 입력해주세요" });
       return;
     }
     axios
@@ -116,6 +116,10 @@ export default function EditUserInfo({ setProfileData, editHandler }) {
         localStorage.removeItem("token", oldToken);
         localStorage.setItem("token", token);
         setEditInfo({ ...editInfo, nickname: "" });
+        setMessage({
+          ...message,
+          nickname: "닉네임은 2~7 자리 한글로 입력해주세요",
+        });
         dispatch(setUserInfo(userdata));
         openEditModalHandler();
       })
@@ -204,83 +208,103 @@ export default function EditUserInfo({ setProfileData, editHandler }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editInfo]);
   return (
-    <div>
-      <div className="inputContainer">
-        <div>
-          <input
-            type="nickname"
-            placeholder="새 닉네임"
-            onBlur={handleOnblurName}
-            onChange={handleInputValue("nickname")}
-            onKeyPress={handleKeyPress}
-            value={editInfo.nickname}
-          />
-          {message.nickname === "한글만 입력해주세요" ? (
-            <div>{message.nickname}</div>
-          ) : (
-            <div>{message.nickname}</div>
-          )}
+    <div className="signup--container">
+      <div className="signup--inputcontainer">
+        <input
+          className="edit--input"
+          type="nickname"
+          placeholder="새 닉네임"
+          onBlur={handleOnblurName}
+          onChange={handleInputValue("nickname")}
+          onKeyPress={handleKeyPress}
+          value={editInfo.nickname}
+        />
+        {message.nickname === "닉네임은 2~7 자리 한글로 입력해주세요" ? (
+          <div className="signup--default-message">{message.nickname}</div>
+        ) : message.nickname === "사용 가능한 닉네임입니다" ? (
+          <div className="signup--ok-message">{message.nickname}</div>
+        ) : (
+          <div className="signup--error-message">{message.nickname}</div>
+        )}
+        <div className="edit--btncontainer">
           {validation.nickname && validation.checkNickname ? (
-            <button style={{ color: "green" }} onClick={handleEditName}>
+            <button className="signup--btn-ok" onClick={handleEditName}>
               수정하기
             </button>
           ) : (
-            <button>수정하기</button>
+            <button className="signup--btn">수정하기</button>
           )}
         </div>
-        {userInfo.type === "web" ? (
-          <div>
-            <input
-              type="password"
-              placeholder="현재 비밀번호"
-              onBlur={handleOnblurPassword}
-              onChange={handleInputValue("oldpassword")}
-              onKeyPress={handleKeyPress}
-              value={editInfo.oldpassword}
-            />
-            <div>{message.oldpassword}</div>
-            <input
-              type="password"
-              placeholder="새 비밀번호"
-              onChange={handleInputValue("password")}
-              onKeyPress={handleKeyPress}
-              value={editInfo.password}
-            />
-            {message.password ===
-            "비밀번호는 8자리 이상, 숫자, 문자, 특수문자가 포함되어야 합니다" ? (
-              <div>{message.password}</div>
-            ) : message.password === "사용할 수 있는 비밀번호 입니다" ? (
-              <div>{message.password}</div>
-            ) : (
-              <div>{message.password}</div>
-            )}
-            <input
-              type="password"
-              placeholder="새 비밀번호 확인"
-              onChange={handleInputValue("checkPW")}
-              onKeyPress={handleKeyPress}
-              value={editInfo.checkPW}
-            />
-            {message.checkPW === "비밀번호가 불일치합니다" ? (
-              <div>{message.checkPW}</div>
-            ) : (
-              <div>{message.checkPW}</div>
-            )}
+      </div>
+      {userInfo.type === "web" ? (
+        <div className="signup--inputcontainer">
+          <input
+            className="edit--input"
+            type="password"
+            placeholder="현재 비밀번호"
+            onBlur={handleOnblurPassword}
+            onChange={handleInputValue("oldpassword")}
+            onKeyPress={handleKeyPress}
+            value={editInfo.oldpassword}
+          />
+          {message.oldpassword === "현재 비밀번호를 입력해주세요" ? (
+            <div className="signup--default-message">{message.oldpassword}</div>
+          ) : message.oldpassword === "새 비밀번호를 입력해주세요" ? (
+            <div className="signup--ok-message">{message.oldpassword}</div>
+          ) : (
+            <div className="signup--error-message">{message.oldpassword}</div>
+          )}
+          <input
+            className="edit--input"
+            type="password"
+            placeholder="새 비밀번호"
+            onChange={handleInputValue("password")}
+            onKeyPress={handleKeyPress}
+            value={editInfo.password}
+          />
+          {message.password ===
+          "비밀번호는 8자리 이상, 숫자, 문자, 특수문자가 포함되어야 합니다" ? (
+            <div className="signup--default-message">{message.password}</div>
+          ) : message.password === "사용할 수 있는 비밀번호 입니다" ? (
+            <div className="signup--ok-message">{message.password}</div>
+          ) : (
+            <div className="signup--error-message">{message.password}</div>
+          )}
+          <input
+            className="edit--input"
+            type="password"
+            placeholder="새 비밀번호 확인"
+            onChange={handleInputValue("checkPW")}
+            onKeyPress={handleKeyPress}
+            value={editInfo.checkPW}
+          />
+          {message.checkPW === "비밀번호를 확인해주세요" ? (
+            <div className="signup--default-message">{message.checkPW}</div>
+          ) : message.checkPW === "비밀번호가 일치합니다" ? (
+            <div className="signup--ok-message">{message.checkPW}</div>
+          ) : (
+            <div className="signup--error-message">{message.checkPW}</div>
+          )}
+          <div className="edit--btncontainer">
             {validation.oldpassword &&
             validation.password &&
             validation.checkPW ? (
-              <button style={{ color: "green" }} onClick={handleEditPW}>
+              <button className="signup--btn-ok" onClick={handleEditPW}>
                 수정하기
               </button>
             ) : (
-              <button>수정하기</button>
+              <button className="signup--btn">수정하기</button>
             )}
           </div>
-        ) : null}
-      </div>
-      <div className="btnContainer">
-        <button onClick={editHandler}>돌아가기</button>
-        <button onClick={openDeleteModalHandler}>탈퇴하기</button>
+        </div>
+      ) : null}
+      <div className="edit--btncontainer">
+        <button className="signup--btn" onClick={editHandler}>
+          돌아가기
+        </button>
+        <button className="edit--btn-delete" onClick={openDeleteModalHandler}>
+          탈퇴하기
+        </button>
         <EditCompleteModal
           isModalOpen={isEditModalOpen}
           openModalHandler={openEditModalHandler}
