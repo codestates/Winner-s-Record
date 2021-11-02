@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { useParams } from "react-router";
+import { useSelector } from "react-redux";
 import AWS from "aws-sdk";
 import dotenv from "dotenv";
 import axios from "axios";
-import CreateCompleteModal from "../components/CreateDoc/CreateCompleteModal";
-// import Error from "./Error";
+import EditCompleteModal from "../components/EditDoc/EditCompleteModal";
+import Error from "./Error";
 import EventSelector from "../components/EditDoc/EventSelector";
 import TypeSelector from "../components/EditDoc/TypeSelector";
 dotenv.config();
@@ -19,7 +20,16 @@ export default function EditDoc() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [event, setEvent] = useState(null);
   const [type, setType] = useState(null);
+  const [postInfo, setPostInfo] = useState({
+    userData: {
+      userId: null,
+      nickname: null,
+      img: { link: null },
+    },
+  });
+  const userInfo = useSelector((state) => state.userInfo);
 
+  const isMypost = postInfo.userData.userId === userInfo.userId;
   const openModalHandler = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -80,7 +90,6 @@ export default function EditDoc() {
         });
     }
     const EditArr = [...previous, ...pathArr];
-    console.log(EditArr);
     handleEdit(EditArr);
   };
 
@@ -119,6 +128,8 @@ export default function EditDoc() {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {
+        console.log(res.data.data);
+        setPostInfo(res.data.data);
         const { type, title, event, place, price, text, img } = res.data.data;
         setPrevious(img);
         setEvent(event);
@@ -132,103 +143,110 @@ export default function EditDoc() {
   }, []);
 
   return (
-    <div>
-      <div>
-        <EventSelector setEvent={setEvent} event={event} />
-        <TypeSelector setType={setType} type={type} />
-        {type === "trade" ? (
-          <input
-            type="price"
-            onChange={handleInputValue("price")}
-            placeholder="가격"
-            value={inputValue.price}
-          />
-        ) : null}
-      </div>
-      <div>
-        <input
-          type="title"
-          onChange={handleInputValue("title")}
-          placeholder="제목"
-          value={inputValue.title}
-        />
-        <input
-          type="text"
-          onChange={handleInputValue("text")}
-          placeholder="본문"
-          value={inputValue.text}
-        />
-        <input type="file" multiple="true" onChange={imgOnchange} />
-        <ul>
-          {previous.length
-            ? previous.map((e, index) => {
-                return (
-                  <li key={index}>
-                    <img src={e} alt="previous" />
-                    <div
-                      onClick={() => {
-                        setPrevious(
-                          previous.filter((e) => previous.indexOf(e) !== index)
-                        );
-                      }}
-                    >
-                      삭제
-                    </div>
-                  </li>
-                );
-              })
-            : null}
-          {preview.length
-            ? preview.map((e, index) => {
-                return (
-                  <li key={index}>
-                    <img src={e} alt="preview" />
-                    <div
-                      onClick={() => {
-                        setPreview(
-                          preview.filter((e) => preview.indexOf(e) !== index)
-                        );
-                        setFiles(
-                          files.filter((e) => files.indexOf(e) !== index)
-                        );
-                      }}
-                    >
-                      삭제
-                    </div>
-                  </li>
-                );
-              })
-            : null}
-          {/* {previous.length && preview.length ? null : (
+    <>
+      {!isMypost ? (
+        <Error />
+      ) : (
+        <div>
+          <div>
+            <EventSelector setEvent={setEvent} event={event} />
+            <TypeSelector setType={setType} type={type} />
+            {type === "trade" ? (
+              <input
+                type="price"
+                onChange={handleInputValue("price")}
+                placeholder="가격"
+                value={inputValue.price}
+              />
+            ) : null}
+          </div>
+          <div>
+            <input
+              type="title"
+              onChange={handleInputValue("title")}
+              placeholder="제목"
+              value={inputValue.title}
+            />
+            <input
+              type="text"
+              onChange={handleInputValue("text")}
+              placeholder="본문"
+              value={inputValue.text}
+            />
+            <input type="file" multiple onChange={imgOnchange} />
+            <ul>
+              {previous.length
+                ? previous.map((e, index) => {
+                    return (
+                      <li key={index}>
+                        <img src={e} alt="previous" />
+                        <div
+                          onClick={() => {
+                            setPrevious(
+                              previous.filter(
+                                (e) => previous.indexOf(e) !== index
+                              )
+                            );
+                          }}
+                        >
+                          삭제
+                        </div>
+                      </li>
+                    );
+                  })
+                : null}
+              {preview.length
+                ? preview.map((e, index) => {
+                    return (
+                      <li key={index}>
+                        <img src={e} alt="preview" />
+                        <div
+                          onClick={() => {
+                            setPreview(
+                              preview.filter(
+                                (e) => preview.indexOf(e) !== index
+                              )
+                            );
+                            setFiles(
+                              files.filter((e) => files.indexOf(e) !== index)
+                            );
+                          }}
+                        >
+                          삭제
+                        </div>
+                      </li>
+                    );
+                  })
+                : null}
+              {/* {previous.length && preview.length ? null : (
             <div>미리보기가 없습니다.</div>
           )} */}
-        </ul>
-      </div>
+            </ul>
+          </div>
 
-      {/* 지도 */}
-      <button
-        onClick={() => {
-          history.push("/main");
-        }}
-      >
-        돌아가기
-      </button>
-      {isValid(type) ? (
-        <button
-          style={{ color: "green" }}
-          onClick={() => {
-            uploadFiles(files);
-          }}
-        >
-          작성하기
-        </button>
-      ) : (
-        <button> 작성하기</button>
+          {/* 지도 */}
+          <button
+            onClick={() => {
+              history.push("/main");
+            }}
+          >
+            돌아가기
+          </button>
+          {isValid(type) ? (
+            <button
+              style={{ color: "green" }}
+              onClick={() => {
+                uploadFiles(files);
+              }}
+            >
+              작성하기
+            </button>
+          ) : (
+            <button> 작성하기</button>
+          )}
+          <EditCompleteModal isModalOpen={isModalOpen} docId={docId} />
+        </div>
       )}
-      <CreateCompleteModal
-        isModalOpen={isModalOpen}
-        openModalHandler={openModalHandler}
-      />
-    </div>
+    </>
   );
 }

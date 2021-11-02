@@ -1,17 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-export default function TypeSelector({ type, setType }) {
+export default function TypeSelector({ setType }) {
   const [isDropOpen, setIsDropOpen] = useState(false);
-  const [selected, setSelected] = useState("종류");
-
-  useEffect(() => {
-    if (type === "match") {
-      setSelected("매치");
-    }
-    if (type === "trade") {
-      setSelected("거래");
-    }
-  }, []);
+  const [selected, setSelected] = useState("분류");
 
   return (
     <ul>
