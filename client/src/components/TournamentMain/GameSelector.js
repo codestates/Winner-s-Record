@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const GameSelector = ({ setGame }) => {
+const GameSelector = ({ searchOption, setSearchOption }) => {
   const [displayGame, setDisplayGame] = useState("전체");
   const [isClicked, setIsClicked] = useState(false);
 
@@ -19,7 +19,7 @@ const GameSelector = ({ setGame }) => {
           <li
             className="search--dropdown--item"
             onClick={(e) => {
-              setGame("all");
+              setSearchOption({ ...searchOption, game: "all" });
               setIsClicked(false);
               setDisplayGame(e.target.textContent);
             }}
@@ -29,7 +29,7 @@ const GameSelector = ({ setGame }) => {
           <li
             className="search--dropdown--item"
             onClick={(e) => {
-              setGame("tennis");
+              setSearchOption({ ...searchOption, game: "tennis" });
               setIsClicked(false);
               setDisplayGame(e.target.textContent);
             }}
@@ -39,7 +39,7 @@ const GameSelector = ({ setGame }) => {
           <li
             className="search--dropdown--item"
             onClick={(e) => {
-              setGame("pingpong");
+              setSearchOption({ ...searchOption, game: "pingpong" });
               setIsClicked(false);
               setDisplayGame(e.target.textContent);
             }}
@@ -49,7 +49,7 @@ const GameSelector = ({ setGame }) => {
           <li
             className="search--dropdown--item"
             onClick={(e) => {
-              setGame("badminton");
+              setSearchOption({ ...searchOption, game: "badminton" });
               setIsClicked(false);
               setDisplayGame(e.target.textContent);
             }}
@@ -59,7 +59,7 @@ const GameSelector = ({ setGame }) => {
           <li
             className="search--dropdown--item"
             onClick={(e) => {
-              setGame("squash");
+              setSearchOption({ ...searchOption, game: "squash" });
               setIsClicked(false);
               setDisplayGame(e.target.textContent);
             }}
