@@ -8,7 +8,7 @@ import * as boardData from "../data/board.js";
 import { config } from "../config.js";
 
 export async function searchDoc(req, res) {
-  const { type, event, title, place, hostId, guestId } = req.query;
+  const { type, event, title, place, hostId, guestId, page} = req.query;
 
   if (type && event && title) {
     const types = await docData.validType(type);
@@ -31,7 +31,8 @@ export async function searchDoc(req, res) {
             }
           }
         }
-        return res.status(200).send({ data: docList });
+        const sliceDoc = await docData.slicePage(docList, page)
+        return res.status(200).send({ data: sliceDoc });
       }
     } else {
       return res.status(404).send({ message: "해당 포스트가 없습니다" });
@@ -57,7 +58,8 @@ export async function searchDoc(req, res) {
             }
           }
         }
-        return res.status(200).send({ data: docList });
+        const sliceDoc = await docData.slicePage(docList, page)
+        return res.status(200).send({ data: sliceDoc });
       }
     } else {
       return res.status(404).send({ message: "해당 포스트가 없습니다" });

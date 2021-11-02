@@ -318,3 +318,7 @@ export async function remove(docId) {
     where: { id: docId },
   });
 }
+
+export async function slicePage(docList, page) {
+  return docList.slice(page*10, (page*10)+10)
+}
