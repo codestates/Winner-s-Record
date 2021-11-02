@@ -1,8 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function EventSelector({ setEvent }) {
+export default function EventSelector({ event, setEvent }) {
   const [isDropOpen, setIsDropOpen] = useState(false);
   const [selected, setSelected] = useState("종목");
+
+  useEffect(() => {
+    if (event === "tennis") {
+      setSelected("테니스");
+    }
+    if (event === "squash") {
+      setSelected("스쿼시");
+    }
+    if (event === "badminton") {
+      setSelected("배드민턴");
+    }
+    if (event === "pingpong") {
+      setSelected("탁구");
+    }
+  }, [event]);
 
   return (
     <ul>

@@ -15,6 +15,7 @@ export default function CreateDoc() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [event, setEvent] = useState(null);
   const [type, setType] = useState(null);
+  const [docId, setDocId] = useState(null);
 
   const openModalHandler = () => {
     setIsModalOpen(!isModalOpen);
@@ -90,7 +91,7 @@ export default function CreateDoc() {
         }
       )
       .then((res) => {
-        console.log(res.data);
+        setDocId(res.data.data.docId);
         openModalHandler();
       })
       .catch((err) => {
@@ -177,10 +178,7 @@ export default function CreateDoc() {
       ) : (
         <button> 작성하기</button>
       )}
-      <CreateCompleteModal
-        isModalOpen={isModalOpen}
-        openModalHandler={openModalHandler}
-      />
+      <CreateCompleteModal isModalOpen={isModalOpen} docId={docId} />
     </div>
   );
 }
