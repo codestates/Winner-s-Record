@@ -168,7 +168,29 @@ export async function validType(type) {
 
 export async function editDoc(docId, data) {
   const img = data.img; //[string, string]
-  if (img) {
+  if (!img.length) {
+    if (data.event === "tennis") {
+      await db.Docs_Images.create({
+        docId,
+        imgId: 61,
+      });
+    } else if (data.event === "pingpong") {
+      await db.Docs_Images.create({
+        docId,
+        imgId: 60,
+      });
+    } else if (data.event === "squash") {
+      await db.Docs_Images.create({
+        docId,
+        imgId: 59,
+      });
+    } else if (data.event === "badminton") {
+      await db.Docs_Images.create({
+        docId,
+        imgId: 58,
+      });
+    }
+  } else {
     await db.Docs_Images.destroy({
       where: { docId },
     });
