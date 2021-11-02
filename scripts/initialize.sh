@@ -1,5 +1,8 @@
 #!/bin/bash
 cd /home/ubuntu/Winner-s-Record/server
+
+export ININITIALIZE=ininitialize
+
 npm install
 npm install pm2@latest -g
 sudo apt-get update
