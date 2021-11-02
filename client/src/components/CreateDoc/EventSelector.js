@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-export default function EventSelector({ setEvent }) {
+export default function EventSelector({ event, setEvent }) {
   const [isDropOpen, setIsDropOpen] = useState(false);
-  const [selected, setSelected] = useState("종목");
+  const [selected, setSelected] = useState(event);
 
   return (
     <ul>

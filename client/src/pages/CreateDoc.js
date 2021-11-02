@@ -21,10 +21,10 @@ export default function CreateDoc() {
   };
 
   const imgOnchange = (e) => {
-    const imageFileArr = e.target.files;
-    setFiles(imageFileArr);
+    const imageFiles = Array.from(e.target.files);
+    setFiles(imageFiles);
     const previewArr = [];
-    for (let imageFile of imageFileArr) {
+    for (let imageFile of imageFiles) {
       const data = [];
       data.push(imageFile);
       const imageURL = window.URL.createObjectURL(
@@ -131,12 +131,30 @@ export default function CreateDoc() {
           onChange={handleInputValue("text")}
           placeholder="본문"
         />
-        <input type="file" multiple="true" onChange={imgOnchange} />
-        <div>
-          {preview.map((e, index) => {
-            return <img key={index} src={e} alt="preview" />;
-          })}
-        </div>
+        <input type="file" multiple onChange={imgOnchange} />
+        <ul>
+          {preview.length ? (
+            preview.map((e, index) => {
+              return (
+                <li key={index}>
+                  <img src={e} alt="preview" />
+                  <div
+                    onClick={() => {
+                      setPreview(
+                        preview.filter((e) => preview.indexOf(e) !== index)
+                      );
+                      setFiles(files.filter((e) => files.indexOf(e) !== index));
+                    }}
+                  >
+                    삭제
+                  </div>
+                </li>
+              );
+            })
+          ) : (
+            <div>미리보기가 없습니다.</div>
+          )}
+        </ul>
       </div>
 
       {/* 지도 */}
