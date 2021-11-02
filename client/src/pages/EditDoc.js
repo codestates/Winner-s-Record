@@ -131,8 +131,8 @@ export default function EditDoc() {
   return (
     <div>
       <div>
-        <EventSelector setEvent={setEvent} />
-        <TypeSelector setType={setType} />
+        <EventSelector setEvent={setEvent} event={event} />
+        <TypeSelector setType={setType} type={type} />
         {type === "trade" ? (
           <input
             type="price"
@@ -156,11 +156,29 @@ export default function EditDoc() {
           value={inputValue.text}
         />
         <input type="file" multiple="true" onChange={imgOnchange} />
-        <div>
-          {preview.map((e, index) => {
-            return <img key={index} src={e} alt="preview" />;
-          })}
-        </div>
+        <ul>
+          {preview.length ? (
+            preview.map((e, index) => {
+              return (
+                <li key={index}>
+                  <img src={e} alt="preview" />
+                  <div
+                    onClick={() => {
+                      setPreview(
+                        preview.filter((e) => preview.indexOf(e) !== index)
+                      );
+                      setFiles(files.filter((e) => files.indexOf(e) !== index));
+                    }}
+                  >
+                    삭제
+                  </div>
+                </li>
+              );
+            })
+          ) : (
+            <div>미리보기가 없습니다.</div>
+          )}
+        </ul>
       </div>
 
       {/* 지도 */}

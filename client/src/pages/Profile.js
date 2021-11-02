@@ -57,6 +57,7 @@ export default function Profile() {
     if (isMypage) {
       setProfileData(userInfo);
     }
+    // eslint-disable-next-line
   }, [userInfo]);
 
   return (
