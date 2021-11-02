@@ -1,9 +1,12 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory, useParams } from "react-router";
 import { modalOn } from "../../modules/isModalOpen";
 import { setModalText } from "../../modules/modalText";
 
 const PostEditBtns = ({ hostId, setLoginModal, setModalBtnType }) => {
+  const history = useHistory();
+  const { postId } = useParams();
   const { isLogin, userInfo } = useSelector((state) => ({
     isLogin: state.isLogin,
     userInfo: state.userInfo,
@@ -31,6 +34,8 @@ const PostEditBtns = ({ hostId, setLoginModal, setModalBtnType }) => {
       dispatch(setModalText("권한이 없습니다."));
       setModalBtnType("close");
       dispatch(modalOn());
+    } else {
+      history.push(`/edit/${postId}`);
     }
   };
 

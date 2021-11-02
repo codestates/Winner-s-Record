@@ -6,6 +6,7 @@ import axios from "axios";
 import CreateCompleteModal from "../components/CreateDoc/CreateCompleteModal";
 import TypeSelector from "../components/CreateDoc/TypeSelector";
 import EventSelector from "../components/CreateDoc/EventSelector";
+import ChooseMap from "../components/CreateDoc/ChooseMap";
 dotenv.config();
 
 export default function CreateDoc() {
@@ -38,7 +39,8 @@ export default function CreateDoc() {
 
   const [inputValue, setInputValue] = useState({
     title: "",
-    place: "",
+    place:
+      "37.5161996814031|127.075939572603|서울 송파구 올림픽로 25|서울종합운동장|서울 송파구 잠실동",
     price: "",
     text: "",
     img: [],
@@ -159,6 +161,7 @@ export default function CreateDoc() {
       </div>
 
       {/* 지도 */}
+      <ChooseMap inputValue={inputValue} setInputValue={setInputValue} />
       <button
         onClick={() => {
           history.push("/main");

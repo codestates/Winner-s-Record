@@ -17,7 +17,7 @@ const Chatroom = ({ match }) => {
   }));
 
   const [payload, setPayload] = useState({
-    message: "",
+    content: "",
     userId: userInfo.userId,
     roomId,
     time: new Date(Date.now()),
@@ -31,7 +31,9 @@ const Chatroom = ({ match }) => {
       setPayload({ ...payload, userId: userInfo.userId });
       socket.emit("join", { roomId, nickname: userInfo.nickname });
     }
+  }, [userInfo]);
 
+  useEffect(() => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
       .post(
@@ -42,16 +44,10 @@ const Chatroom = ({ match }) => {
         }
       )
       .then((res) => {
+        setChatData(res.data.data);
         // console.log(res);
       });
-
-    return () => {
-      socket.emit("socketDisconnect", {
-        roomId,
-        nickname: userInfo.nickname,
-      });
-    };
-  }, [userInfo]);
+  }, []);
 
   useEffect(() => {
     socket.on("receiveMessage", (data) => {
@@ -69,14 +65,12 @@ const Chatroom = ({ match }) => {
 
   const sendMessage = async () => {
     setPayload({ ...payload, time: new Date(Date.now()) });
-    if (payload.message === "") {
+    if (payload.content === "") {
       // do nothing
     } else {
       await socket.emit("sendMessage", payload);
     }
   };
-
-  useEffect(() => {}, [payload.message]);
 
   return (
     <div className="chatroom--container">
@@ -96,7 +90,8 @@ const Chatroom = ({ match }) => {
       <div className="chatroom--chat--container">
         {chatData.map((chat) => {
           return chat.userId ? (
-            <div key={uuid()}>{chat.message}</div>
+            // 이거 구분해주기 나중에 생각 ㄱ
+            <div key={uuid()}>{chat.content}</div>
           ) : (
             <div key={uuid()}>{chat.content}</div>
           );
@@ -110,11 +105,11 @@ const Chatroom = ({ match }) => {
           onChange={(e) => {
             setPayload({
               ...payload,
-              message: e.target.value,
+              content: e.target.value,
               time: new Date(Date.now()),
             });
           }}
-          value={payload.message}
+          value={payload.content}
         />
         <button onClick={sendMessage}>입력</button>
       </div>
