@@ -218,5 +218,7 @@ export async function checkRoom(docId, userId) {
       userId: hostId
     }).catch((err) => console.log(err))
     return findRoomId
+  } else {
+    return findRoomId
   }
 }
