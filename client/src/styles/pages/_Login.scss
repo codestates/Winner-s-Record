@@ -1,0 +1,95 @@
+.login--container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // background-color: #f2f2f2;
+}
+
+.login--logo {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.login--inputcontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login--input {
+  font-size: 1rem;
+  height: 3rem;
+  width: 500px;
+  border: none;
+  border-bottom: solid 1px $gray;
+  transition: 0.4s;
+  margin: 1rem;
+  &:focus {
+    transition: 0.2s;
+    outline: none;
+    border-bottom: solid 1px $main-color;
+  }
+
+  &::placeholder {
+    color: gray;
+    font-size: 0.9rem;
+  }
+}
+
+.login--error {
+  font-size: 0.9rem;
+  height: 1.5rem;
+  color: red;
+}
+
+.login--btncontainer {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+}
+
+.login--btn {
+  color: $main-color;
+  border: 1px solid #d9d9d9;
+  background-color: white;
+  border-radius: 3px;
+  height: 50px;
+  width: 300px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.login--btn-ok {
+  color: white;
+  border: none;
+  background-color: $main-color;
+  border-radius: 3px;
+  height: 50px;
+  width: 300px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.login--socialcontainer {
+  margin: 20px;
+}
+.login--socialbtn {
+  width: 60px;
+  height: 60px;
+  margin: 15px;
+  cursor: pointer;
+  border-radius: 1.8rem;
+}
+
+.login--copyright {
+  margin-top: 100px;
+  font-size: 0.8rem;
+  color: gray;
+}

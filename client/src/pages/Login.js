@@ -30,8 +30,8 @@ export default function Login() {
         localStorage.setItem("token", token);
         const accessToken = localStorage.getItem("token");
         if (accessToken) {
-          dispatch(setLogin()); // 로그인 상태 변경
-          dispatch(setUserInfo(userdata)); // 유저 정보 입력
+          dispatch(setLogin());
+          dispatch(setUserInfo(userdata));
           history.push(prevPage);
         }
       })
@@ -46,17 +46,6 @@ export default function Login() {
       "https://kauth.kakao.com/oauth/authorize?client_id=42184b4ebbf71c527914d5cf6269aae0&redirect_uri=http://localhost:3000/redirect&&response_type=code"
     );
   };
-
-  // const handleKakao = () => {
-  //   axios
-  //     .get("http://localhost:8080/auth/kakao/login")
-  //     .then((res) => {
-  //       console.log(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
 
   const handleNaver = () => {
     axios
@@ -89,41 +78,59 @@ export default function Login() {
   const isValid = loginInfo.email && loginInfo.password;
 
   return (
-    <>
-      <div onClick={() => history.push("/main")}>로고</div>
-      <div className="login--inputContainer">
+    <div className="login--container">
+      <div className="login--logo" onClick={() => history.push("/main")}>
+        로고
+      </div>
+      <div className="login--inputcontainer">
         <input
+          className="login--input"
           type="email"
           placeholder="E-mail"
           onChange={handleInputValue("email")}
           onKeyPress={handleKeyPress}
         />
         <input
+          className="login--input"
           type="password"
           placeholder="비밀번호"
           onChange={handleInputValue("password")}
           onKeyPress={handleKeyPress}
         />
-        <div>{errorMessage}</div>
+        <div className="login--error">{errorMessage}</div>
       </div>
-      <div className="login--btnContainer">
+      <div className="login--btncontainer">
         {isValid ? (
-          <button style={{ color: "green" }} onClick={handleLogin}>
+          <button className="login--btn-ok" onClick={handleLogin}>
             로그인
           </button>
         ) : (
-          <button>로그인</button>
+          <button className="login--btn">로그인</button>
         )}
-        <button onClick={() => history.push("/signup")}>회원가입</button>
+        <button className="login--btn" onClick={() => history.push("/signup")}>
+          회원가입
+        </button>
       </div>
-      <div className="login--socialContainer">
-        <button onClick={handleKakao}>카카오</button>
-        <button onClick={handleNaver}>네이버</button>
-        <button onClick={handleGoogle}>구글</button>
+      <div className="login--socialcontainer">
+        <img
+          className="login--socialbtn"
+          src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%86%8C%EC%85%9C%EC%95%84%EC%9D%B4%EC%BD%98/btn_kakao.png"
+          onClick={handleKakao}
+        />
+        <img
+          className="login--socialbtn"
+          src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%86%8C%EC%85%9C%EC%95%84%EC%9D%B4%EC%BD%98/naver.png"
+          onClick={handleNaver}
+        />
+        <img
+          className="login--socialbtn"
+          src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%86%8C%EC%85%9C%EC%95%84%EC%9D%B4%EC%BD%98/google-icon-styl.png"
+          onClick={handleGoogle}
+        />
       </div>
       <div className="login--copyright">
         © Copyright 2021 Team MeltingBrain. All rights reserved.
       </div>
-    </>
+    </div>
   );
 }
