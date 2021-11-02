@@ -36,7 +36,7 @@ const TournamentMain = () => {
       ) : (
         <NoPost setLoginModal={setLoginModal} />
       )}
-      <TopButton />
+      <TopButton isMain />
       <NeedLoginModal isModalOpen={loginModal} setIsModalOpen={setLoginModal} />
     </div>
   );

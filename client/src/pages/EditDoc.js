@@ -9,6 +9,7 @@ import EditCompleteModal from "../components/EditDoc/EditCompleteModal";
 import Error from "./Error";
 import EventSelector from "../components/EditDoc/EventSelector";
 import TypeSelector from "../components/EditDoc/TypeSelector";
+import EditMap from "../components/EditDoc/EditMap";
 dotenv.config();
 
 export default function EditDoc() {
@@ -51,7 +52,8 @@ export default function EditDoc() {
 
   const [inputValue, setInputValue] = useState({
     title: "",
-    place: "",
+    place:
+      "37.5161996814031|127.075939572603|서울 송파구 올림픽로 25|서울종합운동장|서울 송파구 잠실동",
     price: "",
     text: "",
     img: [],
@@ -223,7 +225,7 @@ export default function EditDoc() {
           )} */}
             </ul>
           </div>
-
+          <EditMap inputValue={inputValue} setInputValue={setInputValue} />
           {/* 지도 */}
           <button
             onClick={() => {

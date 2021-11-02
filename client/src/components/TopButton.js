@@ -1,4 +1,4 @@
-const TopButton = () => {
+const TopButton = ({ isMain }) => {
   const moveToTop = () => {
     window.scrollTo({
       top: 0,
@@ -7,7 +7,7 @@ const TopButton = () => {
   };
 
   return (
-    <div className="fixedBtn top" onClick={moveToTop}>
+    <div className={`fixedBtn top${isMain ? " main" : ""}`} onClick={moveToTop}>
       Top
     </div>
   );

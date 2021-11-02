@@ -1,4 +1,4 @@
-import PostList from "../Main/PostList";
+import ProfilePostList from "../Profile/MypagePostList";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -53,7 +53,7 @@ export default function DocList({ userId, isMypage }) {
         {isMypage ? <li onClick={handleLikeList}>관심글</li> : null}
       </ul>
       {list.length ? (
-        <PostList postList={list} />
+        <ProfilePostList postList={list} />
       ) : (
         "게시글이 존재하지 않습니다"
       )}

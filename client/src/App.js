@@ -24,7 +24,6 @@ import { setLogin } from "./modules/isLogin";
 import axios from "axios";
 import Result from "./pages/TournamentResult";
 import Tournament from "./pages/Tournament";
-import EditMap from "./components/Post/EditMap";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Chatroom from "./pages/Chatroom";
@@ -52,7 +51,6 @@ function App() {
       <Router>
         {/* <Header /> */}
         <Switch>
-          <Route path="/maptest" component={EditMap} />
           <Route exact path="/chat" component={Chat} />
           <Route path="/chat/:roomId" component={Chatroom} />
           <Route exact path="/">

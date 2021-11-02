@@ -3,18 +3,14 @@ import Postcode from "react-daum-postcode";
 
 const { kakao } = window;
 
-const EditMap = () => {
+const ChooseMap = ({ inputValue, setInputValue }) => {
   const container = useRef(null);
   const addr = useRef(null);
 
-  const [coordinateData, setCoordinateData] = useState(
-    "37.5161996814031|127.075939572603|서울 송파구 올림픽로 25|서울종합운동장|서울 송파구 잠실동"
-  );
   const [isOn, setIsOn] = useState(false);
 
   useEffect(() => {
-    let data = coordinateData.split("|");
-    console.log(coordinateData);
+    let data = inputValue.place.split("|");
     const location = new kakao.maps.LatLng(data[0], data[1]);
     let map = new kakao.maps.Map(container.current, {
         center: location,
@@ -31,7 +27,7 @@ const EditMap = () => {
         }</div>`,
         removable: true,
       });
-  }, [coordinateData]);
+  }, [inputValue.place]);
 
   // '위도|경도|주소|빌딩이름|리스트에서 보일 주소'
   const addrFinder = (data) => {
@@ -46,7 +42,10 @@ const EditMap = () => {
         const place = result[0].road_address.address_name;
         const building = result[0].road_address.building_name || "null";
         const region = `${result[0].road_address.region_1depth_name} ${result[0].road_address.region_2depth_name} ${result[0].road_address.region_3depth_name}`;
-        setCoordinateData(`${lat}|${lng}|${place}|${building}|${region}`);
+        setInputValue({
+          ...inputValue,
+          place: `${lat}|${lng}|${place}|${building}|${region}`,
+        });
       }
     });
   };
@@ -87,4 +86,4 @@ const EditMap = () => {
   );
 };
 
-export default EditMap;
+export default ChooseMap;
