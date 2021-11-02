@@ -1,0 +1,16 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/Winner-s-Record
+
+hooks:
+  ApplicationStop:
+    - location: 
+      runas: root
+  AfterInstall:
+    - location: 
+      runas: root
+  ApplicationStart:
+    - location: 
+      runas: root
