@@ -168,6 +168,9 @@ export async function validType(type) {
 
 export async function editDoc(docId, data) {
   const img = data.img; //[string, string]
+  await db.Docs_Images.destroy({
+    where: { docId },
+  });
   if (!img.length) {
     if (data.event === "tennis") {
       await db.Docs_Images.create({
@@ -191,9 +194,6 @@ export async function editDoc(docId, data) {
       });
     }
   } else {
-    await db.Docs_Images.destroy({
-      where: { docId },
-    });
     for (let i = 0; i < img.length; i++) {
       const newImg = await db.Images.create({
         link: img[i],
@@ -320,5 +320,5 @@ export async function remove(docId) {
 }
 
 export async function slicePage(docList, page) {
-  return docList.slice(page*10, (page*10)+10)
+  return docList.slice(page * 10, page * 10 + 10);
 }
