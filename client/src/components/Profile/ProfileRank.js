@@ -56,7 +56,7 @@ export default function ProfileRank({ nickname }) {
         {events.map((e, index) => {
           return (
             <li
-              key={e}
+              key={index}
               onClick={() => {
                 handleRank(e.name);
                 selectTabHandler(index);

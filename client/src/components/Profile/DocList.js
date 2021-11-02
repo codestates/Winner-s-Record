@@ -49,11 +49,16 @@ export default function DocList({ userId, isMypage }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const docTap = [
-    { content: "작성글", onclick: { handleCreatedList } },
-    { content: "진행중", onclick: { handleProgressList } },
-    { content: "관심글", onclick: { handleLikeList } },
-  ];
+  const docTap = isMypage
+    ? [
+        { content: "작성글", func: handleCreatedList },
+        { content: "진행중", func: handleProgressList },
+        { content: "관심글", func: handleLikeList },
+      ]
+    : [
+        { content: "작성글", func: handleCreatedList },
+        { content: "진행중", func: handleProgressList },
+      ];
 
   return (
     <>
@@ -62,9 +67,9 @@ export default function DocList({ userId, isMypage }) {
           return (
             <li
               key={index}
-              onClick={e.onclick}
               onClick={() => {
                 selectTabHandler(index);
+                e.func();
               }}
               className={
                 currentTab === index
@@ -77,11 +82,13 @@ export default function DocList({ userId, isMypage }) {
           );
         })}
       </ul>
-      {list.length ? (
-        <ProfilePostList postList={list} />
-      ) : (
-        <div className="profile--nopost">게시글이 존재하지 않습니다</div>
-      )}
+      <div className="profile--postcontainer">
+        {list.length ? (
+          <ProfilePostList postList={list} />
+        ) : (
+          <div className="profile--nopost">목록이 비었습니다.</div>
+        )}
+      </div>
     </>
   );
 }
