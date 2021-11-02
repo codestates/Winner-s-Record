@@ -110,3 +110,113 @@ export async function deleteRoom(roomId, userId) {
   }).catch((err) => console.log(err));
   return "ok";
 } 
+
+export async function validRoom(docId, userId) {
+  const checkDoc = await db.Docs.findOne({
+    where: {
+      id: docId
+    }
+  }).catch((err) => console.log(err))
+
+  if(checkDoc === null) {
+    return 'cannot find doc'
+  } else {
+    const hostId = checkDoc.dataValues.userId
+    const checkRoom = await db.Rooms.findOne({
+      where: {
+        hostId: hostId,
+        guestId: userId
+      }
+    }).catch((err) => console.log(err))
+    return checkRoom
+  }
+}
+
+export async function createRoom(docId, userId) {
+  const hostId = await db.Docs.findOne({
+    where: {
+      id: docId
+    }
+  }).then((res) => res.dataValues.userId)
+    .catch((err) => console.log(err))
+
+  const room = await db.Rooms.create({
+    hostId: hostId,
+    guestId: userId
+  }).then((res) => res.dataValues.id)
+    .catch((err) => console.log(err))
+
+  const guestRoom = await db.Users_Rooms.create({
+    roomId: room,
+    userId: userId
+  }).catch((err) => console.log(err))
+
+  const hostRoom = await db.Users_Rooms.create({
+    roomId: room,
+    userId: hostId
+  }).catch((err) => console.log(err))
+
+  return room
+}
+
+export async function checkRoom(docId, userId) {
+  const hostId = await db.Docs.findOne({
+    where: {
+      id: docId
+    }
+  }).then((res) => res.dataValues.userId)
+    .catch((err) => console.log(err))
+
+  const findRoomId = await db.Rooms.findOne({
+    where: {
+      hostId: hostId,
+      guestId: userId
+    }
+  }).then((res) => res.dataValues.id)
+    .catch((err) => console.log(err))
+  
+  const checkGuestRoom = await db.Users_Rooms.findOne({
+    where: {
+      roomId: findRoomId,
+      userId: userId
+    }
+  }).catch((err) => console.log(err))
+
+  const checkHostRoom = await db.Users_Rooms.findOne({
+    where: {
+      roomId: findRoomId,
+      userId: hostId
+    }
+  })
+
+  if(checkGuestRoom === null && checkHostRoom === null) {
+    const room = await db.Rooms.create({
+      hostId: hostId,
+      guestId: userId
+    }).then((res) => res.dataValues.id)
+      .catch((err) => console.log(err))
+  
+    const guestRoom = await db.Users_Rooms.create({
+      roomId: room,
+      userId: userId
+    }).catch((err) => console.log(err))
+  
+    const hostRoom = await db.Users_Rooms.create({
+      roomId: room,
+      userId: hostId
+    }).catch((err) => console.log(err))
+    return room
+  } else if(checkGuestRoom === null) {
+    const guestRoom = await db.Users_Rooms.create({
+      roomId: findRoomId,
+      userId: userId
+    }).catch((err) => console.log(err))
+    return findRoomId
+  } else if(checkHostRoom === null) {
+    const hostRoom = await db.Users_Rooms.create({
+      roomId: findRoomId,
+      userId: hostId
+    }).catch((err) => console.log(err))
+    return findRoomId
+  }
+}
