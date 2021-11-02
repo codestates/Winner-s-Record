@@ -49,7 +49,7 @@ function App() {
   return (
     <div className="app--container">
       <Router>
-        <Header />
+        {/* <Header /> */}
         <Switch>
           <Route exact path="/chat" component={Chat} />
           <Route path="/chat/:roomId" component={Chatroom} />
