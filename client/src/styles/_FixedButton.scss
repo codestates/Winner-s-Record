@@ -8,10 +8,26 @@
   &.top {
     bottom: 50px;
     right: 50px;
+    &.main {
+      bottom: 110px;
+    }
   }
 
   &.back {
     left: 50px;
     top: 50px;
+  }
+
+  &.create {
+    right: 50px;
+    bottom: 50px;
+    a {
+      width: 100%;
+      height: 100%;
+      div {
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 }
