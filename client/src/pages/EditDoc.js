@@ -6,14 +6,15 @@ import dotenv from "dotenv";
 import axios from "axios";
 import CreateCompleteModal from "../components/CreateDoc/CreateCompleteModal";
 // import Error from "./Error";
-import TypeSelector from "../components/CreateDoc/TypeSelector";
-import EventSelector from "../components/CreateDoc/EventSelector";
+import EventSelector from "../components/EditDoc/EventSelector";
+import TypeSelector from "../components/EditDoc/TypeSelector";
 dotenv.config();
 
 export default function EditDoc() {
-  const { docId } = useParams();
   const history = useHistory();
+  const { docId } = useParams();
   const [preview, setPreview] = useState([]);
+  const [previous, setPrevious] = useState([]);
   const [files, setFiles] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [event, setEvent] = useState(null);
@@ -24,10 +25,10 @@ export default function EditDoc() {
   };
 
   const imgOnchange = (e) => {
-    const imageFileArr = e.target.files;
-    setFiles(imageFileArr);
+    const imageFiles = Array.from(e.target.files);
+    setFiles(imageFiles);
     const previewArr = [];
-    for (let imageFile of imageFileArr) {
+    for (let imageFile of imageFiles) {
       const data = [];
       data.push(imageFile);
       const imageURL = window.URL.createObjectURL(
@@ -78,7 +79,9 @@ export default function EditDoc() {
           pathArr.push(path);
         });
     }
-    handleEdit(pathArr);
+    const EditArr = [...previous, ...pathArr];
+    console.log(EditArr);
+    handleEdit(EditArr);
   };
 
   const handleEdit = (arr) => {
@@ -117,7 +120,7 @@ export default function EditDoc() {
       })
       .then((res) => {
         const { type, title, event, place, price, text, img } = res.data.data;
-        setPreview(img);
+        setPrevious(img);
         setEvent(event);
         setType(type);
         setInputValue({ title, place, price, text });
@@ -157,27 +160,48 @@ export default function EditDoc() {
         />
         <input type="file" multiple="true" onChange={imgOnchange} />
         <ul>
-          {preview.length ? (
-            preview.map((e, index) => {
-              return (
-                <li key={index}>
-                  <img src={e} alt="preview" />
-                  <div
-                    onClick={() => {
-                      setPreview(
-                        preview.filter((e) => preview.indexOf(e) !== index)
-                      );
-                      setFiles(files.filter((e) => files.indexOf(e) !== index));
-                    }}
-                  >
-                    삭제
-                  </div>
-                </li>
-              );
-            })
-          ) : (
+          {previous.length
+            ? previous.map((e, index) => {
+                return (
+                  <li key={index}>
+                    <img src={e} alt="previous" />
+                    <div
+                      onClick={() => {
+                        setPrevious(
+                          previous.filter((e) => previous.indexOf(e) !== index)
+                        );
+                      }}
+                    >
+                      삭제
+                    </div>
+                  </li>
+                );
+              })
+            : null}
+          {preview.length
+            ? preview.map((e, index) => {
+                return (
+                  <li key={index}>
+                    <img src={e} alt="preview" />
+                    <div
+                      onClick={() => {
+                        setPreview(
+                          preview.filter((e) => preview.indexOf(e) !== index)
+                        );
+                        setFiles(
+                          files.filter((e) => files.indexOf(e) !== index)
+                        );
+                      }}
+                    >
+                      삭제
+                    </div>
+                  </li>
+                );
+              })
+            : null}
+          {/* {previous.length && preview.length ? null : (
             <div>미리보기가 없습니다.</div>
-          )}
+          )} */}
         </ul>
       </div>
 

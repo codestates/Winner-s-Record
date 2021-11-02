@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export default function TypeSelector({ type, setType }) {
   const [isDropOpen, setIsDropOpen] = useState(false);
-  const [selected, setSelected] = useState("종류");
+  const [selected, setSelected] = useState("분류");
 
   useEffect(() => {
     if (type === "match") {
@@ -11,7 +11,7 @@ export default function TypeSelector({ type, setType }) {
     if (type === "trade") {
       setSelected("거래");
     }
-  }, []);
+  }, [type]);
 
   return (
     <ul>
