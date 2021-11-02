@@ -24,7 +24,9 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.3.2",
     "sequelize": "^6.7.0",
-    "sequelize-cli": "^6.2.0"
+    "sequelize-cli": "^6.2.0",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
     "babel-register": "^6.26.0",
