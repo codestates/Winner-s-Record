@@ -4,6 +4,10 @@ import axios from "axios";
 
 export default function DocList({ userId, isMypage }) {
   const [list, setList] = useState([]);
+  const [currentTab, setCurrentTab] = useState(0);
+  const selectTabHandler = (index) => {
+    setCurrentTab(index);
+  };
   const handleCreatedList = () => {
     axios
       .get(`http://localhost:8080/doc?hostId=${userId}`)
@@ -45,18 +49,39 @@ export default function DocList({ userId, isMypage }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const docTap = [
+    { content: "작성글", onclick: { handleCreatedList } },
+    { content: "진행중", onclick: { handleProgressList } },
+    { content: "관심글", onclick: { handleLikeList } },
+  ];
+
   return (
-    <div className="doclist">
-      <ul>
-        <li onClick={handleCreatedList}>작성글</li>
-        <li onClick={handleProgressList}>진행중</li>
-        {isMypage ? <li onClick={handleLikeList}>관심글</li> : null}
+    <>
+      <ul className="profile--doclist">
+        {docTap.map((e, index) => {
+          return (
+            <li
+              key={index}
+              onClick={e.onclick}
+              onClick={() => {
+                selectTabHandler(index);
+              }}
+              className={
+                currentTab === index
+                  ? "profile--doctap-selected"
+                  : "profile--doctap"
+              }
+            >
+              {e.content}
+            </li>
+          );
+        })}
       </ul>
       {list.length ? (
         <ProfilePostList postList={list} />
       ) : (
-        "게시글이 존재하지 않습니다"
+        <div className="profile--nopost">게시글이 존재하지 않습니다</div>
       )}
-    </div>
+    </>
   );
 }

@@ -12,6 +12,11 @@ export default function Login() {
   const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
 
+  const [currentTab, setCurrentTab] = useState(0);
+  const selectTabHandler = (index) => {
+    setCurrentTab(index);
+  };
+
   const handleInputValue = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value.toLowerCase() });
     setErrorMessage("");

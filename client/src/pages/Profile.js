@@ -71,7 +71,7 @@ export default function Profile() {
             editHandler={editHandler}
           />
         ) : (
-          <div>
+          <div className="profile">
             <UserInfo
               editHandler={editHandler}
               isMypage={isMypage}
