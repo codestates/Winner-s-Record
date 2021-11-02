@@ -17,7 +17,8 @@ const io = new Server(server, {
 })
 
 io.on("connection", (socket) => {
-  console.log('asdgdasggsdasagddsga')
+  console.log(socket)
+  console.log('asdgdasggsdsdsssdasagddsga')
 })
 
 server.listen(process.env.HOST_PORT, () => {
