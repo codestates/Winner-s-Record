@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ListRoom from "../components/Chat/ListRoom";
+import uuid from "react-uuid";
 
 const Chat = () => {
   const [roomList, setRoomList] = useState([]);
@@ -10,7 +11,6 @@ const Chat = () => {
     axios
       .get("http://localhost:8080/room", { headers: { Authorization } })
       .then((res) => {
-        console.log(res.data);
         setRoomList(res.data.data);
       });
   };
@@ -23,7 +23,7 @@ const Chat = () => {
     <div className="chatroomlist--container">
       <ul className="room--container">
         {roomList.map((roomData) => {
-          return <ListRoom roomData={roomData} key={roomData.id} />;
+          return <ListRoom roomData={roomData} key={uuid()} />;
         })}
       </ul>
     </div>
