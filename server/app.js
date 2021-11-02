@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use(morgan("tiny"));
 
 app.use("/wr", (req, res, next) => {
-  res.send(`Winner's Record`);
+  res.send(`Winner's Record!!`);
 });
 
 app.use("/auth", authRouter);
