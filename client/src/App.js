@@ -49,7 +49,7 @@ function App() {
   return (
     <div className="app--container">
       <Router>
-        <Header />
+        {/* <Header /> */}
         <Switch>
           <Route path="/maptest" component={EditMap} />
           <Route path="/chattest" component={Chat} />

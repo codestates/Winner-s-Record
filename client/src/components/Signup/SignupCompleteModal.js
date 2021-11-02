@@ -7,9 +7,15 @@ export default function SignupCompleteModal({ isModalOpen, openModalHandler }) {
       {isModalOpen ? (
         <div className="modal--backdrop">
           <div className="modal--view">
-            <div>회원가입을 ㅊㅋ</div>
-            <div className="modal--btnContainer">
-              <button onClick={() => history.replace("/login")}>로그인</button>
+            <div className="modal--top"></div>
+            <div className="modal--content">회원가입을 ㅊㅋ</div>
+            <div className="modal--btncontainer">
+              <button
+                className="modal--btn-ok"
+                onClick={() => history.replace("/login")}
+              >
+                로그인
+              </button>
             </div>
           </div>
         </div>
