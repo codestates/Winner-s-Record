@@ -222,3 +222,61 @@ export async function checkRoom(docId, userId) {
     return findRoomId
   }
 }
+
+export async function chatUser(userId , roomId, docId) {
+  const validDoc = await db.Docs.findOne({
+    where: {
+      id: docId
+    }
+  }).then((res) => res.dataValues)
+  .catch((err) => console.log(err))
+
+  if(validDoc) {
+    const validRoom = await db.Rooms.findOne({
+      where: {
+        id: roomId
+      }
+    }).then((res) => res.dataValues)
+    .catch((err) => console.log(err))
+    if(validRoom !== undefined && validDoc.userId === validRoom.hostId && (validRoom.hostId === userId || validRoom.guestId === userId)) {
+      const imgs = await db.Docs_Images.findOne({
+        where: {
+          docId: docId
+        }
+      }).then((res) => res.dataValues.imgId)
+        .catch((err) => console.log(err))
+      const img = await db.Images.findOne({
+        where: {
+          id: imgs
+        }
+      }).then((res) => res.dataValues.link)
+        .catch((err) => console.log(err))
+      validDoc.img = img
+      return validDoc
+    } else {
+      return
+    } 
+  }
+}
+
+export async function chattings(roomId, userId) {
+  const chat = await db.Chattings.findAll({
+    where: {
+      roomId: roomId
+    }
+  }).catch((err) => console.log(err))
+  const chatList = chat.map((el) => el.dataValues)
+  const chattingUserId = chatList.map((el) => el.userId).filter((ele) => ele !== userId)
+
+  const users = await db.Users.findOne({
+    where: {
+      id: chattingUserId[0]
+    }
+  }).then((res) => res.dataValues)
+  .catch((err) => console.log(err))
+  const result = {}
+  result.id = users.id
+  result.nickname = users.nickname
+  result.img = users.img
+  return {data: chatList, userData: result}
+}
