@@ -5,8 +5,8 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
 import io from "socket.io-client";
-import ChatAlert from "../components/Chat/ChatAlert";
 import Message from "../components/Chat/Message";
+import ChatPost from "../components/Chat/ChatPost";
 
 const socket = io.connect("http://localhost:8081");
 
@@ -18,8 +18,9 @@ const Chatroom = () => {
   }));
 
   const [chatroomInfo, setChatroomInfo] = useState({
-    userId: null,
+    id: null,
     nickname: null,
+    img: null,
   });
 
   const [payload, setPayload] = useState({
@@ -41,6 +42,7 @@ const Chatroom = () => {
 
   useEffect(() => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
+
     axios
       .post(
         `http://localhost:8080/room/${roomId}`,
@@ -50,13 +52,22 @@ const Chatroom = () => {
         }
       )
       .then((res) => {
-        if (!res.data.docData) {
+        if (res.data.docData) {
           socket.emit("sendDocData", { ...res.data.docData, roomId });
         }
-        setChatData(res.data.data);
-        setChatroomInfo(res.data.room);
+        const data = res.data.data.map((e) => {
+          if (e.content.split("tlstjdgnsdbeoguddlwjdgnsdjagPwls|")[1]) {
+            return JSON.parse(
+              e.content.split("tlstjdgnsdbeoguddlwjdgnsdjagPwls|")[1]
+            );
+          } else {
+            return e;
+          }
+        });
+        setChatData(data);
+        setChatroomInfo(res.data.userData);
       });
-  }, []);
+  }, [chatPost]);
 
   useEffect(() => {
     socket.on("receiveMessage", (data) => {
@@ -64,21 +75,7 @@ const Chatroom = () => {
       setChatData((chats) => [...chats, data]);
     });
 
-    socket.on("onConnect", (data) => {
-      console.log("onconnect", data);
-      setChatData((chats) => [...chats, data]);
-    });
-
     socket.on("receiveDocData", (data) => {
-      setChatData((chats) => [...chats, data]);
-    });
-
-    socket.on("receiveDocData", (data) => {
-      setChatData((chats) => [...chats, data]);
-    });
-
-    socket.on("onDisconnect", (data) => {
-      console.log("data", data);
       setChatData((chats) => [...chats, data]);
     });
   }, [socket]);
@@ -100,7 +97,7 @@ const Chatroom = () => {
         </div>
         <div className="otherUser">
           <div classname="title">
-            <Link to={`/profile/${chatroomInfo.userId}`}>
+            <Link to={`/profile/${chatroomInfo.id}`}>
               {chatroomInfo.nickname}
             </Link>
           </div>
@@ -115,7 +112,7 @@ const Chatroom = () => {
           return chatData.userId ? (
             <Message key={uuid()} chatData={chatData} />
           ) : (
-            <ChatAlert key={uuid()} chatData={chatData} />
+            <ChatPost chatData={chatData} />
           );
         })}
       </div>
@@ -129,6 +126,12 @@ const Chatroom = () => {
               content: e.target.value,
               updatedAt: new Date(Date.now()),
             });
+          }}
+          onKeyUp={(e) => {
+            // 여기 수정
+            if (e.Key === "Enter") {
+              sendMessage();
+            }
           }}
           value={payload.content}
         />

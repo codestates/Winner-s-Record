@@ -2,37 +2,36 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  position: relative;
 }
 
 .profile--container {
   display: flex;
   justify-content: center;
   position: relative; // 기준점
-  width: 100%;
 }
 
 .profile--top {
-  width: 50%;
-  height: 150px;
+  width: 70rem;
+  height: 10rem;
   background: $main-color;
   position: absolute;
   z-index: -1;
 }
 
 .profile--photocontainer {
-  align-items: center;
+  display: flex;
+  justify-content: center;
   position: relative;
-  height: 200px;
-  width: 150px;
+  height: 12rem;
+  width: 10rem;
 }
 
 .profile--photo {
   position: absolute;
-  top: 70px;
-  width: 150px;
-  height: 150px;
+  top: 4rem;
+  width: 10rem;
+  height: 10rem;
   border-radius: 50%;
 }
 
@@ -58,8 +57,10 @@
   margin-left: 10px;
   cursor: pointer;
   color: $gray;
+  transition: 0.4s;
   &:hover {
     color: $main-color;
+    transition: 0.2s;
   }
 }
 
@@ -71,10 +72,12 @@
 }
 
 .profile--rankingcontainer {
+  position: absolute;
   border-radius: 3px;
+  top: 300px;
   box-shadow: 2px 2px 5px 1px $gray;
-  margin-top: 100px;
   width: 500px;
+  min-width: 300px;
   height: 180px;
   display: flex;
   justify-content: center;
@@ -103,6 +106,10 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  &:hover {
+    background-color: $main-color;
+    transition: 0.2s;
+  }
 }
 
 .profile--rankingbtn-selected {
@@ -138,10 +145,9 @@
 //
 .profile--doclist {
   position: absolute;
-  bottom: 350px;
+  top: 550px;
   display: flex;
-  align-items: left;
-  justify-content: left;
+  justify-content: center;
   width: 500px;
 }
 
@@ -169,13 +175,45 @@
   margin: 0.5rem;
   width: 100px;
   height: 1.5rem;
+  &:hover {
+    color: $main-color;
+    border-bottom: 2px solid $main-color;
+    transition: 0.2s;
+  }
 }
 
 .profile--postcontainer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: start;
   position: relative;
-  bottom: -150px;
+  top: 400px;
+  width: 900px;
+  display: flex;
+  justify-content: center;
+  border: 1px solid red;
+  flex-wrap: wrap;
+}
+
+.list--container {
+  border: 1px solid blue;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-auto-rows: 300px;
+  grid-gap: 10px;
+  word-break: break-all;
+  justify-items: center;
+  width: 900px;
+  min-width: 300px;
+}
+
+.list--content--container {
+  // box-shadow: 2px 2px 5px 1px $gray;
+  border: 1px solid green;
+  width: 200px;
+  height: 300px;
+}
+
+.list--content--pic {
+  img {
+    height: 200px;
+    width: 200px;
+  }
 }

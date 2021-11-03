@@ -141,7 +141,7 @@ export async function findById(id) {
   try {
     return db.Docs.findOne({
       where: { id },
-    }).then((data) => data.dataValues);
+    })
   } catch {
     return null;
   }
@@ -239,7 +239,13 @@ export async function editDoc(docId, data) {
 export async function create(userId, data) {
   const { type, title, event, place, price, text, img } = data;
   let created;
+  if(!(type && title && event && place && text)) {
+    return "cannot create"
+  }
   if (type === "trade") {
+    if(!price) {
+      return "cannot create"
+    }
     created = await db.Docs.create({
       userId,
       type,

@@ -266,17 +266,58 @@ export async function chattings(roomId, userId) {
     }
   }).catch((err) => console.log(err))
   const chatList = chat.map((el) => el.dataValues)
-  const chattingUserId = chatList.map((el) => el.userId).filter((ele) => ele !== userId)
-
-  const users = await db.Users.findOne({
-    where: {
-      id: chattingUserId[0]
+  if(chatList.length === 0) {
+    const userData = await db.Rooms.findOne({
+      where: {
+        id: roomId
+      }
+    }).then((res) => res.dataValues)
+      .catch((err) => console.log(err))
+    const id = (userData.hostId === userId ? userData.guestId : userData.hostId)
+    const users1 = await db.Users.findOne({
+      where:{
+        id: id
+      }
+    }).then((res) => res.dataValues)
+      .catch((err) => console.log(err))
+      const result = {}
+      result.id = users1.id
+      result.nickname = users1.nickname
+      result.img = users1.img
+    return {data: [], userData: result}
+  } else {
+    const chattingUserId = chatList.map((el) => el.userId).filter((ele) => ele !== userId)
+    const users2 = await db.Users.findOne({
+      where: {
+        id: chattingUserId[0]
+      }
+    }).then((res) => res.dataValues)
+    .catch((err) => console.log(err))
+    if(users2 === undefined) {
+      const userData = await db.Rooms.findOne({
+        where: {
+          id: roomId
+        }
+      }).then((res) => res.dataValues)
+        .catch((err) => console.log(err))
+      const id = (userData.hostId === userId ? userData.guestId : userData.hostId)
+      const users3 = await db.Users.findOne({
+        where:{
+          id: id
+        }
+      }).then((res) => res.dataValues)
+        .catch((err) => console.log(err))
+        const result = {}
+        result.id = users3.id
+        result.nickname = users3.nickname
+        result.img = users3.img
+      return {data: chatList, userData: result}
+    } else {
+      const result = {}
+      result.id = users2.id
+      result.nickname = users2.nickname
+      result.img = users2.img
+      return {data: chatList, userData: result}
     }
-  }).then((res) => res.dataValues)
-  .catch((err) => console.log(err))
-  const result = {}
-  result.id = users.id
-  result.nickname = users.nickname
-  result.img = users.img
-  return {data: chatList, userData: result}
+  }
 }
