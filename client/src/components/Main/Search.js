@@ -25,19 +25,12 @@ const Search = ({ setPostList, searchOption, setSearchOption }) => {
       .then((res) => {
         if (res.status === 404) {
         } else {
-          const sorted = res.data.data.sort((a, b) => {
-            if (a.status === "대기" && b.status !== "대기") {
-              return -1;
-            } else if (a.status !== "대기" && b.status === "대기") {
-              return 1;
-            } else {
-              return 0;
-            }
-          });
+          const sorted = res.data.data;
           setPostList(sorted);
         }
       })
-      .catch((res) => {
+      .catch((err) => {
+        console.error("에러 발생", err);
         setPostList([]);
       });
   };

@@ -35,15 +35,7 @@ const PostList = ({ postList, setPostList, searchOption, setSearchOption }) => {
           if (!res.data.data.length) {
             setNoMoreData(true);
           } else {
-            const sorted = [...postList, ...res.data.data].sort((a, b) => {
-              if (a.status === "대기" && b.status !== "대기") {
-                return -1;
-              } else if (a.status !== "대기" && b.status === "대기") {
-                return 1;
-              } else {
-                return 0;
-              }
-            });
+            const sorted = [...postList, ...res.data.data];
             setPostList(sorted);
             setPage(page + 1);
             setFetching(false);

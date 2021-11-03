@@ -14,7 +14,6 @@ const FixBtn = ({ fixed, postType, eventType }) => {
       dispatch(setModalText("상대를 지정해주세요."));
       dispatch(modalOn());
     } else if (fixed.length < 7 && postType === "tournament") {
-      console.log(fixed);
       dispatch(setModalText("토너먼트는 7명의 참가자가 필요합니다."));
       dispatch(modalOn());
     } else {
@@ -29,6 +28,9 @@ const FixBtn = ({ fixed, postType, eventType }) => {
           dispatch(setModalText("상대가 지정되었습니다."));
           dispatch(modalOn());
           history.push(`/post/${postId}`);
+        })
+        .catch((err) => {
+          console.error("에러 발생", err);
         });
     }
   };

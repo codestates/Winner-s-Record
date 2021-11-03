@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import uuid from "react-uuid";
 import io from "socket.io-client";
 import Message from "../components/Chat/Message";
-import ChatPost from '../components/Chat/ChatPost';
+import ChatPost from "../components/Chat/ChatPost";
 
 const socket = io.connect("http://localhost:8081");
 
@@ -32,7 +32,6 @@ const Chatroom = () => {
 
   const [chatData, setChatData] = useState([]);
 
-
   useEffect(() => {
     if (!userInfo.userId) {
     } else {
@@ -44,7 +43,7 @@ const Chatroom = () => {
   useEffect(() => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
 
-      axios
+    axios
       .post(
         `http://localhost:8080/room/${roomId}`,
         { docId: chatPost },
@@ -56,17 +55,18 @@ const Chatroom = () => {
         if (res.data.docData) {
           socket.emit("sendDocData", { ...res.data.docData, roomId });
         }
-        const data = res.data.data.map(e=>{
-          if(e.content.split('tlstjdgnsdbeoguddlwjdgnsdjagPwls|')[1]){
-            return JSON.parse(e.content.split('tlstjdgnsdbeoguddlwjdgnsdjagPwls|')[1])
+        const data = res.data.data.map((e) => {
+          if (e.content.split("tlstjdgnsdbeoguddlwjdgnsdjagPwls|")[1]) {
+            return JSON.parse(
+              e.content.split("tlstjdgnsdbeoguddlwjdgnsdjagPwls|")[1]
+            );
           } else {
-            return e
+            return e;
           }
-        })
+        });
         setChatData(data);
         setChatroomInfo(res.data.userData);
       });
-    
   }, [chatPost]);
 
   useEffect(() => {
@@ -78,7 +78,6 @@ const Chatroom = () => {
     socket.on("receiveDocData", (data) => {
       setChatData((chats) => [...chats, data]);
     });
-
   }, [socket]);
 
   const sendMessage = async () => {
@@ -112,7 +111,9 @@ const Chatroom = () => {
         {chatData.map((chatData) => {
           return chatData.userId ? (
             <Message key={uuid()} chatData={chatData} />
-          ) : (<ChatPost chatData={chatData} /> )
+          ) : (
+            <ChatPost chatData={chatData} />
+          );
         })}
       </div>
       {/* 입력창 */}
@@ -126,11 +127,11 @@ const Chatroom = () => {
               updatedAt: new Date(Date.now()),
             });
           }}
-          onKeyUp={(e)=>{
+          onKeyUp={(e) => {
             // 여기 수정
-            if(e.Key === 'Enter'){
+            if (e.Key === "Enter") {
               sendMessage();
-            } 
+            }
           }}
           value={payload.content}
         />
