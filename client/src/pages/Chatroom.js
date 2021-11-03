@@ -2,25 +2,31 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import uuid from "react-uuid";
 import io from "socket.io-client";
+import ChatAlert from "../components/Chat/ChatAlert";
+import Message from "../components/Chat/Message";
 
 const socket = io.connect("http://localhost:8081");
 
-// const socket = () => {};
-
-const Chatroom = ({ match }) => {
+const Chatroom = () => {
   const { roomId } = useParams();
   const { userInfo, chatPost } = useSelector((state) => ({
     userInfo: state.userInfo,
     chatPost: state.chatPost,
   }));
 
+  const [chatroomInfo, setChatroomInfo] = useState({
+    userId: null,
+    nickname: null,
+  });
+
   const [payload, setPayload] = useState({
     content: "",
     userId: userInfo.userId,
     roomId,
-    time: new Date(Date.now()),
+    updatedAt: new Date(Date.now()),
   });
 
   const [chatData, setChatData] = useState([]);
@@ -44,8 +50,9 @@ const Chatroom = ({ match }) => {
         }
       )
       .then((res) => {
+        console.log(res.data);
         setChatData(res.data.data);
-        // console.log(res);
+        setChatroomInfo(res.data.room);
       });
   }, []);
 
@@ -64,7 +71,6 @@ const Chatroom = ({ match }) => {
   }, [socket]);
 
   const sendMessage = async () => {
-    setPayload({ ...payload, time: new Date(Date.now()) });
     if (payload.content === "") {
       // do nothing
     } else {
@@ -80,7 +86,11 @@ const Chatroom = ({ match }) => {
           <div className="btn">룸으로 리디렉션</div>
         </div>
         <div className="otherUser">
-          <div classname="title">유저이름</div>
+          <div classname="title">
+            <Link to={`/profile/${chatroomInfo.userId}`}>
+              {chatroomInfo.nickname}
+            </Link>
+          </div>
         </div>
         <div className="otherBtn">
           <div className="btn">채팅방 나가기</div>
@@ -88,15 +98,13 @@ const Chatroom = ({ match }) => {
       </div>
       {/* 채팅방 */}
       <div className="chatroom--chat--container">
-        {chatData.map((chat) => {
-          return chat.userId ? (
-            // 이거 구분해주기 나중에 생각 ㄱ
-            <div key={uuid()}>{chat.content}</div>
+        {chatData.map((chatData) => {
+          return chatData.userId ? (
+            <Message key={uuid()} chatData={chatData} />
           ) : (
-            <div key={uuid()}>{chat.content}</div>
+            <ChatAlert key={uuid()} chatData={chatData} />
           );
         })}
-        <div>chatcontext</div>
       </div>
       {/* 입력창 */}
       <div className="chatroom--input--container">
