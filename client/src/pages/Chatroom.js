@@ -50,6 +50,9 @@ const Chatroom = () => {
         }
       )
       .then((res) => {
+        if (!res.data.docData) {
+          socket.emit("sendDocData", res.data.docData);
+        }
         console.log(res.data);
         setChatData(res.data.data);
         setChatroomInfo(res.data.room);
@@ -65,7 +68,12 @@ const Chatroom = () => {
       console.log("onconnect", data);
       setChatData((chats) => [...chats, data]);
     });
-    socket.on("onDisconnect", (data) => {
+    socket.on("receiveDocData", (data) => {
+      console.log(data);
+
+      // setChatData(chat=>[...chats, docData])
+    });
+    socket.on("disconnect", (data) => {
       setChatData((chats) => [...chats, data]);
     });
   }, [socket]);
