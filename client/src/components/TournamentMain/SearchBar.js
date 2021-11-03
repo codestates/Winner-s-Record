@@ -1,12 +1,12 @@
-const SearchBar = ({ searchHandler, setInput }) => {
+const SearchBar = ({ searchHandler, searchOption, setSearchOption }) => {
   const inputHandler = (e) => {
     if (e.key === "Enter") {
       searchHandler();
     }
     if (e.target.value === "") {
-      setInput("all");
+      setSearchOption({ ...searchOption, input: "all" });
     } else {
-      setInput(e.target.value);
+      setSearchOption({ ...searchOption, input: e.target.value });
     }
   };
 

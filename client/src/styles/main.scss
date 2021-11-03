@@ -1,6 +1,8 @@
 // variables
 $main-color: #4e894b;
 $sub-color: #eaa938;
+$white: #f2f2f2;
+$gray: #d9d9d9;
 
 //mixin
 @import "./mixin";
@@ -17,3 +19,5 @@ $sub-color: #eaa938;
 @import "./pages/Signup";
 @import "./pages/Main";
 @import "./pages/Entry";
+@import "./pages/Profile";
+@import "./pages/EditUserInfo";

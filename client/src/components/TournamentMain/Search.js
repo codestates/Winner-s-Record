@@ -5,22 +5,21 @@ import GameSelector from "./GameSelector";
 import OptionSelector from "./OptionSelector";
 import SearchBar from "./SearchBar";
 
-const Search = ({ setPostList }) => {
-  const [game, setGame] = useState("all");
-  const [option, setOption] = useState("title");
-  const [input, setInput] = useState("all");
-
+const Search = ({ setPostList, searchOption, setSearchOption }) => {
   useEffect(() => {
     searchHandler();
   }, []);
 
   const searchHandler = () => {
-    if (!input) {
-      setInput("all");
+    if (!searchOption.input) {
+      setSearchOption({ ...searchOption, input: "all" });
     }
+
+    const { game, option, input } = searchOption;
+
     axios
       .get(
-        `http://localhost:8080/doc?type=tournament&event=${game}&${option}=${input}`
+        `http://localhost:8080/doc?type=tournament&event=${game}&${option}=${input}&page=0`
       )
       .then((res) => {
         if (res.status === 404) {
@@ -44,9 +43,19 @@ const Search = ({ setPostList }) => {
 
   return (
     <div>
-      <GameSelector setGame={setGame} />
-      <OptionSelector setOption={setOption} />
-      <SearchBar searchHandler={searchHandler} setInput={setInput} />
+      <GameSelector
+        setSearchOption={setSearchOption}
+        searchOption={searchOption}
+      />
+      <OptionSelector
+        setSearchOption={setSearchOption}
+        searchOption={searchOption}
+      />
+      <SearchBar
+        searchHandler={searchHandler}
+        setSearchOption={setSearchOption}
+        searchOption={searchOption}
+      />
     </div>
   );
 };

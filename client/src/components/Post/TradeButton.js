@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { modalOn } from "../../modules/isModalOpen";
 import { setModalText } from "../../modules/modalText";
+import { setChatPost } from "../../modules/chatPost";
 
 const TradeButton = ({ hostId, status, setModalBtnType }) => {
   const { postId } = useParams();
@@ -29,7 +30,9 @@ const TradeButton = ({ hostId, status, setModalBtnType }) => {
         { headers: { Authorization } }
       )
       .then((res) => {
-        history.push(`/room/${res.data.data.id}`);
+        // console.log(res.data.id);
+        dispatch(setChatPost(Number(postId)));
+        history.push(`/chat/${res.data.id}`);
       });
   };
 

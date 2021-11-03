@@ -28,8 +28,10 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(morgan("tiny"));
 
-app.use("/wr", (req, res, next) => {
-  res.send(`Winner's Record!!3`);
+
+app.get("/wr", (req, res, next) => {
+  res.send(`Winner's Record`);
+
 });
 
 app.use("/auth", authRouter);

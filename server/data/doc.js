@@ -168,7 +168,33 @@ export async function validType(type) {
 
 export async function editDoc(docId, data) {
   const img = data.img; //[string, string]
-  if (img) {
+
+  if (Array.isArray(img) && !img.length) {
+    await db.Docs_Images.destroy({
+      where: { docId },
+    });
+    if (data.event === "tennis") {
+      await db.Docs_Images.create({
+        docId,
+        imgId: 61,
+      });
+    } else if (data.event === "pingpong") {
+      await db.Docs_Images.create({
+        docId,
+        imgId: 60,
+      });
+    } else if (data.event === "squash") {
+      await db.Docs_Images.create({
+        docId,
+        imgId: 59,
+      });
+    } else if (data.event === "badminton") {
+      await db.Docs_Images.create({
+        docId,
+        imgId: 58,
+      });
+    }
+  } else if (Array.isArray(img)) {
     await db.Docs_Images.destroy({
       where: { docId },
     });
@@ -207,7 +233,6 @@ export async function editDoc(docId, data) {
   const editedDoc = await db.Docs.findOne({
     where: { id: docId },
   }).catch((err) => console.log(err));
-
   return editedDoc;
 }
 
@@ -295,4 +320,8 @@ export async function remove(docId) {
   await db.Docs.destroy({
     where: { id: docId },
   });
+}
+
+export async function slicePage(docList, page) {
+  return docList.slice(page * 10, page * 10 + 10);
 }

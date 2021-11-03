@@ -11,16 +11,32 @@ const TournamentMain = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [postList, setPostList] = useState([]);
 
+  const [searchOption, setSearchOption] = useState({
+    game: "tournament",
+    option: "title",
+    input: "all",
+    postType: "all",
+  });
+
   return (
     <div className="tournament--container">
-      <Search setPostList={setPostList} />
+      <Search
+        setPostList={setPostList}
+        searchOption={searchOption}
+        setSearchOption={setSearchOption}
+      />
       Tournament Page
       {postList.length ? (
-        <PostList postList={postList} />
+        <PostList
+          postList={postList}
+          setPostList={setPostList}
+          searchOption={searchOption}
+          setSearchOption={setSearchOption}
+        />
       ) : (
         <NoPost setLoginModal={setLoginModal} />
       )}
-      <TopButton />
+      <TopButton isMain />
       <NeedLoginModal isModalOpen={loginModal} setIsModalOpen={setLoginModal} />
     </div>
   );

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const GameSelector = ({ setGame, searchOption, setSearchOption }) => {
+const GameSelector = ({ searchOption, setSearchOption }) => {
   const [displayGame, setDisplayGame] = useState("전체");
   const [isClicked, setIsClicked] = useState(false);
 
@@ -40,8 +40,6 @@ const GameSelector = ({ setGame, searchOption, setSearchOption }) => {
             className="search--dropdown--item"
             onClick={(e) => {
               setSearchOption({ ...searchOption, game: "pingpong" });
-
-              setGame("pingpong");
               setIsClicked(false);
               setDisplayGame(e.target.textContent);
             }}

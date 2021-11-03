@@ -1,7 +1,12 @@
+import { current } from "@reduxjs/toolkit";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function ProfileRank({ nickname }) {
+  const [currentTab, setCurrentTab] = useState(0);
+  const selectTabHandler = (index) => {
+    setCurrentTab(index);
+  };
   const [rank, setRank] = useState({
     win: "",
     lose: "",
@@ -21,6 +26,25 @@ export default function ProfileRank({ nickname }) {
       });
   };
 
+  const events = [
+    {
+      name: "tennis",
+      content: "테니스",
+    },
+    {
+      name: "squash",
+      content: "스쿼시",
+    },
+    {
+      name: "badminton",
+      content: "배드민턴",
+    },
+    {
+      name: "pingpong",
+      content: "탁구",
+    },
+  ];
+
   useEffect(() => {
     handleRank("tennis");
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -28,14 +52,26 @@ export default function ProfileRank({ nickname }) {
 
   return (
     <div className="profile--rankingcontainer">
-      <div className="profile--rankingtap">
-        <ul>
-          <li onClick={() => handleRank("tennis")}>테니스</li>
-          <li onClick={() => handleRank("squash")}>스쿼시</li>
-          <li onClick={() => handleRank("badminton")}>배드민턴</li>
-          <li onClick={() => handleRank("pingpong")}>탁구</li>
-        </ul>
-      </div>
+      <ul className="profile--rankingtap">
+        {events.map((e, index) => {
+          return (
+            <li
+              key={index}
+              onClick={() => {
+                handleRank(e.name);
+                selectTabHandler(index);
+              }}
+              className={
+                currentTab === index
+                  ? "profile--rankingbtn-selected"
+                  : "profile--rankingbtn"
+              }
+            >
+              {e.content}
+            </li>
+          );
+        })}
+      </ul>
       <div className="profile--ranking">{rank.rank}위</div>
       <div className="profile--score">
         {rank.win}승 {rank.lose}패 {rank.point}점

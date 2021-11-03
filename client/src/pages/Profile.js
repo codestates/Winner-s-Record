@@ -57,6 +57,7 @@ export default function Profile() {
     if (isMypage) {
       setProfileData(userInfo);
     }
+    // eslint-disable-next-line
   }, [userInfo]);
 
   return (
@@ -70,7 +71,7 @@ export default function Profile() {
             editHandler={editHandler}
           />
         ) : (
-          <div>
+          <div className="profile">
             <UserInfo
               editHandler={editHandler}
               isMypage={isMypage}

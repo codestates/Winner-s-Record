@@ -5,6 +5,7 @@ import PostList from "../components/Main/PostList";
 import TopButton from "../components/TopButton";
 import NoPost from "../components/Main/NoPost";
 import NeedLoginModal from "../components/NeedLoginModal";
+import CreatePostBtn from "../components/CreatePostBtn";
 
 const Main = () => {
   const [loginModal, setLoginModal] = useState(false);
@@ -35,7 +36,8 @@ const Main = () => {
       ) : (
         <NoPost setLoginModal={setLoginModal} />
       )}
-      <TopButton />
+      <CreatePostBtn />
+      <TopButton isMain />
       <NeedLoginModal isModalOpen={loginModal} setIsModalOpen={setLoginModal} />
     </div>
   );

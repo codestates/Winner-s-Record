@@ -15,16 +15,19 @@ export default function UserInfo({
 
   return (
     <div className="profile--container">
-      <div className="profile--photo">
-        <img src={profileData.img} alt="profile" />
-        {isMypage ? <div onClick={openModalHandler}>사진 변경</div> : null}
+      <div className="profile--top" />
+      <div className="profile--photocontainer">
+        <img className="profile--photo" src={profileData.img} alt="profile" />
+        {isMypage ? (
+          <i className="fas fa-camera fa-2x" onClick={openModalHandler}></i>
+        ) : null}
       </div>
-      <span className="profile--username">{profileData.nickname}</span>
-      {isMypage ? (
-        <span className="profile--edit" onClick={editHandler}>
-          수정
-        </span>
-      ) : null}
+      <div className="profile--namecontainer">
+        <span className="profile--username">{profileData.nickname}</span>
+        {isMypage ? (
+          <i className="fas fa-pencil-alt" onClick={editHandler}></i>
+        ) : null}
+      </div>
       <EditPhotoModal
         File={File}
         setFile={setFile}

@@ -7,6 +7,7 @@ import uuid from "react-uuid";
 const PostList = ({ postList, setPostList, searchOption, setSearchOption }) => {
   const [fetching, setFetching] = useState(false);
   const [page, setPage] = useState(1);
+  const [noMoreData, setNoMoreData] = useState(false);
 
   const handleScroll = () => {
     const scrollHeight = document.documentElement.scrollHeight;
@@ -21,29 +22,34 @@ const PostList = ({ postList, setPostList, searchOption, setSearchOption }) => {
   const infiniteScroll = () => {
     const { postType, game, option, input } = searchOption;
     setFetching(true);
-    axios
-      .get(
-        `http://localhost:8080/doc?type=${postType}&event=${game}&${option}=${input}&page=${page}`
-      )
-      .then((res) => {
-        if (res.status === 404) {
-        } else {
-          const sorted = [...postList, ...res.data.data].sort((a, b) => {
-            if (a.status === "대기" && b.status !== "대기") {
-              return -1;
-            } else if (a.status !== "대기" && b.status === "대기") {
-              return 1;
-            } else {
-              return 0;
-            }
-          });
-          setPostList(sorted);
-          setPage(page + 1);
-        }
-      })
-      .then((e) => {
-        setFetching(false);
-      });
+    if (noMoreData) {
+      console.log("데이터 없어요~~");
+      // 받아올 데이터가 없음
+    } else {
+      axios
+        .get(
+          `http://localhost:8080/doc?type=${postType}&event=${game}&${option}=${input}&page=${page}`
+        )
+        .then((res) => {
+          console.log(res.data.data);
+          if (!res.data.data.length) {
+            setNoMoreData(true);
+          } else {
+            const sorted = [...postList, ...res.data.data].sort((a, b) => {
+              if (a.status === "대기" && b.status !== "대기") {
+                return -1;
+              } else if (a.status !== "대기" && b.status === "대기") {
+                return 1;
+              } else {
+                return 0;
+              }
+            });
+            setPostList(sorted);
+            setPage(page + 1);
+            setFetching(false);
+          }
+        });
+    }
   };
 
   useEffect(() => {

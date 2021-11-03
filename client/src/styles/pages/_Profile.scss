@@ -1,0 +1,181 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.profile--container {
+  display: flex;
+  justify-content: center;
+  position: relative; // 기준점
+  width: 100%;
+}
+
+.profile--top {
+  width: 50%;
+  height: 150px;
+  background: $main-color;
+  position: absolute;
+  z-index: -1;
+}
+
+.profile--photocontainer {
+  align-items: center;
+  position: relative;
+  height: 200px;
+  width: 150px;
+}
+
+.profile--photo {
+  position: absolute;
+  top: 70px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.fa-camera {
+  font-size: 1.5rem;
+  position: absolute;
+  color: white;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  background: $main-color;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  bottom: -25px;
+  right: 0;
+}
+
+.fa-pencil-alt {
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  cursor: pointer;
+  color: $gray;
+  &:hover {
+    color: $main-color;
+  }
+}
+
+.profile--namecontainer {
+  position: absolute;
+  bottom: -70px;
+  display: flex;
+  font-size: 1.3rem;
+}
+
+.profile--rankingcontainer {
+  border-radius: 3px;
+  box-shadow: 2px 2px 5px 1px $gray;
+  margin-top: 100px;
+  width: 500px;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.profile--rankingtap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.profile--rankingbtn {
+  font-size: 0.8rem;
+  transition: 0.4s;
+  background: $gray;
+  border-radius: 3px;
+  color: white;
+  margin: 5px;
+  margin-top: 0;
+  width: 5rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profile--rankingbtn-selected {
+  font-size: 0.8rem;
+  transition: 0.4s;
+  background: $main-color;
+  border-radius: 3px;
+  color: white;
+  margin: 5px;
+  margin-top: 0;
+  width: 5rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profile--ranking {
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  margin: 1rem;
+}
+
+.profile--score {
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  color: gray;
+}
+
+//
+.profile--doclist {
+  position: absolute;
+  bottom: 350px;
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  width: 500px;
+}
+
+.profile--doctap-selected {
+  transition: 0.4s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid $main-color;
+  color: $main-color;
+  cursor: pointer;
+  margin: 0.5rem;
+  width: 100px;
+  height: 1.5rem;
+}
+
+.profile--doctap {
+  transition: 0.4s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid $gray;
+  color: $gray;
+  cursor: pointer;
+  margin: 0.5rem;
+  width: 100px;
+  height: 1.5rem;
+}
+
+.profile--postcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: start;
+  position: relative;
+  bottom: -150px;
+}
