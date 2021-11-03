@@ -61,5 +61,27 @@ export async function chattingList(req, res) {
 }
 
 export async function chatSomeone(req, res) {
-  res.status(200).send('sd')
+  const docId = req.body.docId
+  const roomId = req.params.roomId
+  const authorization = req.headers.authorization
+  if(!authorization) {
+    return res.status(403).send({message: "권한이 없습니다"})
+  } else {
+    const token = authorization.split(" ")[1];
+    const user = await jwt.verify(token, String(config.jwt.secretKey));
+    if(docId !== null && user) {
+      const validUser = await roomData.chatUser(user.id, roomId, docId)
+      const chatting = await roomData.chattings(roomId, user.id)
+      if(validUser !== undefined && chatting !== undefined) {
+        return res.status(200).send({data: chatting.data, userData:chatting.userData, docData: validUser})
+      } else {
+        return res.status(403).send({message: "권한이 없습니다"})
+      }
+    } else if(docId === null && user) {
+      const chattings = await roomData.chattings(roomId, user.id)
+      return res.status(200).send({data: chattings.data, userData:chattings.userData})
+    } else {
+      return res.status(403).send({message: "권한이 없습니다"})
+    }
+  }
 }
