@@ -27,6 +27,8 @@
 }
 
 .login--input {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
   font-size: 1rem;
   height: 3rem;
   width: 25rem;
