@@ -82,13 +82,11 @@ export default function DocList({ userId, isMypage }) {
           );
         })}
       </ul>
-      <div className="profile--postcontainer">
-        {list.length ? (
-          <ProfilePostList postList={list} />
-        ) : (
-          <div className="profile--nopost">목록이 비었습니다.</div>
-        )}
-      </div>
+      {list.length ? (
+        <ProfilePostList postList={list} />
+      ) : (
+        <div className="profile--nopost">목록이 비었습니다.</div>
+      )}
     </>
   );
 }
