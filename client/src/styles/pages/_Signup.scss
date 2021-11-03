@@ -26,6 +26,8 @@
 }
 
 .signup--input {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
   font-size: 1rem;
   height: 3rem;
   width: 25rem;
@@ -104,7 +106,7 @@
   @media screen and (max-width: 768px) {
     width: 15rem;
     height: 3rem;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 }
 
@@ -120,6 +122,6 @@
   @media screen and (max-width: 768px) {
     width: 15rem;
     height: 3rem;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 }
