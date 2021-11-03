@@ -3,8 +3,6 @@ import "express-async-errors";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
-import swaggerUi from "swagger-ui-express";
-import swaggerJSDoc from "swagger-jsdoc";
 import authRouter from "./router/auth.js";
 import docRouter from "./router/doc.js";
 import rankRouter from "./router/rank.js";
@@ -24,41 +22,13 @@ const corsOptions = {
   allowedHeaders: ["Content-type", "Authorization"],
   credentials: true,
 };
-const swaggerDefinition = {
-  info: {
-    title: "Winner's Record API",
-    version: "1.0.0",
-    description: "API description",
-  },
-  host: "locahost:8080",
-  basePath: "/",
-  securityDefinitions: {
-    bearerAuth: {
-      type: "apiKey",
-      name: "Authorization",
-      scheme: "bearer",
-      in: "header",
-    },
-  },
-};
-const options = {
-  swaggerDefinition,
-  apis: ["./router/*.js"],
-};
-
-const swaggerSpec = swaggerJSDoc(options);
-app.get("/swagger.json", (req, res) => {
-  res.setHeader("Content-Type", "application/json");
-  res.send(swaggerSpec);
-});
 
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(morgan("tiny"));
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use("/wr", (req, res, next) => {
+app.get("/wr", (req, res, next) => {
   res.send(`Winner's Record`);
 });
 
