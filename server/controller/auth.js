@@ -26,6 +26,9 @@ export async function userInfo(req, res) {
     token = authorization.split(" ")[1];
   }
   const profile = await userData.findById(userId);
+  if(profile === null) {
+    return res.status(400).json({message: "잘못된 요청입니다"})
+  }
   if (!authorization || token === "null") {
     if (profile) {
       return res.status(200).json({
@@ -82,7 +85,7 @@ export async function passwordValidator(req, res) {
   }
   const passwordCheck = await bcrypt.compare(password, user.password);
   if (!passwordCheck) {
-    return res.status(400).json({ message: "이메일이나 비밀번호가 틀립니다" });
+    return res.status(400).json({ message: "비밀번호가 일치하지 않습니다" });
   }
   return res.status(200).json({ userId: user.id });
 }
@@ -97,7 +100,11 @@ export async function signup(req, res) {
   ) {
     return res.status(400).json({ message: "회원가입 실패" });
   }
-
+  const emailCheck = await userData.findByEmail(email)
+  const nicknameCheck = await userData.findByNickname(nickname)
+  if(emailCheck || nicknameCheck) {
+    return res.status(400).json({ message: "회원가입 실패" });
+  }
   const imgLink = await userData.randomUserImg([1, 2, 3, 4, 5, 6, 7, 8]);
   const hashedPassword = await bcrypt.hash(
     password,
@@ -111,7 +118,7 @@ export async function signup(req, res) {
     img: imgLink,
   });
   if (userId === "not web signup") {
-    return res.status(400).json({ message: "잘못된 접근입니다" });
+    return res.status(400).json({ message: "회원가입 실패" });
   }
 
   await recordData.create(userId);
@@ -245,6 +252,9 @@ export async function editImg(req, res) {
   const img = req.body.img;
   const userId = req.userId;
   const user = await userData.findById(userId);
+  if(!img) {
+    return res.status(400).json({message: "회원정보 수정 실패"})
+  }
   if (!user) {
     return res.status(400).json({ message: "회원정보 수정 실패" });
   }
@@ -266,9 +276,6 @@ export async function editImg(req, res) {
 
 export async function remove(req, res) {
   const userId = req.userId;
-  if (!userId) {
-    return res.status(400).json({ message: "회원탈퇴 실패" });
-  }
   userData.remove(userId);
   return res.sendStatus(204);
 }
