@@ -6,12 +6,17 @@
 }
 
 .signup--logo {
-  width: 300px;
-  height: 300px;
+  width: 20rem;
+  height: 20rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  @media screen and (max-width: 768px) {
+    width: 15rem;
+    height: 15rem;
+  }
 }
 
 .signup--inputcontainer {
@@ -23,7 +28,7 @@
 .signup--input {
   font-size: 1rem;
   height: 3rem;
-  width: 500px;
+  width: 25rem;
   border: none;
   border-bottom: solid 1px $gray;
   transition: 0.4s;
@@ -38,31 +43,50 @@
     color: $gray;
     font-size: 0.9rem;
   }
+  @media screen and (max-width: 768px) {
+    width: 18rem;
+    height: 2rem;
+    font-size: 0.7rem;
+
+    &::placeholder {
+      color: gray;
+      font-size: 0.7rem;
+    }
+  }
 }
 
 .signup--default-message {
   font-size: 0.8rem;
   height: 1.5rem;
-  margin-left: 20px;
+  margin-left: 1rem;
   color: gray;
+  @media screen and (max-width: 768px) {
+    font-size: 0.6rem;
+  }
 }
 
 .signup--ok-message {
   font-size: 0.8rem;
   height: 1.5rem;
-  margin-left: 20px;
+  margin-left: 1rem;
   color: $main-color;
+  @media screen and (max-width: 768px) {
+    font-size: 0.6rem;
+  }
 }
 
 .signup--error-message {
   font-size: 0.8rem;
   height: 1.5rem;
-  margin-left: 20px;
+  margin-left: 1rem;
   color: red;
+  @media screen and (max-width: 768px) {
+    font-size: 0.6rem;
+  }
 }
 
 .signup--btncontainer {
-  margin: 50px;
+  margin: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,6 +101,11 @@
   width: 300px;
   margin: 5px;
   cursor: pointer;
+  @media screen and (max-width: 768px) {
+    width: 15rem;
+    height: 3rem;
+    font-size: 0.8rem;
+  }
 }
 
 .signup--btn {
@@ -88,4 +117,9 @@
   width: 300px;
   margin: 5px;
   cursor: pointer;
+  @media screen and (max-width: 768px) {
+    width: 15rem;
+    height: 3rem;
+    font-size: 0.8rem;
+  }
 }
