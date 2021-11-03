@@ -14,7 +14,7 @@ export default function UserInfo({
   };
 
   return (
-    <div className="profile--container">
+    <>
       <div className="profile--top" />
       <div className="profile--photocontainer">
         <img className="profile--photo" src={profileData.img} alt="profile" />
@@ -23,7 +23,7 @@ export default function UserInfo({
         ) : null}
       </div>
       <div className="profile--namecontainer">
-        <span className="profile--username">{profileData.nickname}</span>
+        <span>{profileData.nickname}</span>
         {isMypage ? (
           <i className="fas fa-pencil-alt" onClick={editHandler}></i>
         ) : null}
@@ -36,6 +36,6 @@ export default function UserInfo({
         openModalHandler={openModalHandler}
         isModalOpen={isModalOpen}
       />
-    </div>
+    </>
   );
 }
