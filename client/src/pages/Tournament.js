@@ -69,6 +69,7 @@ const Tournament = () => {
       })
       .then((res) => {
         setMatches(res.data.data);
+        setHost(res.data.hostId);
       });
   };
 
@@ -106,6 +107,7 @@ const Tournament = () => {
     const event = matches[0].event;
     console.log(matches);
     console.log("매치 아이디", matchId);
+    console.log(userInfo.userId, host);
     if (userInfo.userId !== host) {
       dispatch(setModalText("해당 조작은 주최자만 할 수 있어요."));
       dispatch(modalOn());
@@ -148,7 +150,6 @@ const Tournament = () => {
         )
         .then((res) => {
           setMatches(res.data.data);
-          setHost(res.data.hostId);
         });
     }
   };
@@ -179,6 +180,7 @@ const Tournament = () => {
           .map((matchData) => {
             return (
               <TournamentMatch
+                host={host}
                 matchData={matchData}
                 setMatchToEdit={setMatchToEdit}
                 canEdit={canEdit[0]}
@@ -210,6 +212,7 @@ const Tournament = () => {
           .map((matchData) => {
             return (
               <TournamentMatch
+                host={host}
                 matchData={matchData}
                 setMatchToEdit={setMatchToEdit}
                 canEdit={canEdit[1]}
@@ -233,6 +236,7 @@ const Tournament = () => {
           .map((matchData) => {
             return (
               <TournamentMatch
+                host={host}
                 matchData={matchData}
                 setMatchToEdit={setMatchToEdit}
                 canEdit={canEdit[2]}

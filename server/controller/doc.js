@@ -92,6 +92,7 @@ export async function searchDoc(req, res) {
     if (user && docList.length !== 0) {
       const like = await docData.countLike(docList);
       const img = await docData.findByImg(docList);
+      console.log(img);
       const key = Object.keys(img);
 
       for (let i = 0; i < docList.length; i++) {

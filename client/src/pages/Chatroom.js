@@ -51,9 +51,8 @@ const Chatroom = () => {
       )
       .then((res) => {
         if (!res.data.docData) {
-          socket.emit("sendDocData", res.data.docData);
+          socket.emit("sendDocData", { ...res.data.docData, roomId });
         }
-        console.log(res.data);
         setChatData(res.data.data);
         setChatroomInfo(res.data.room);
       });
@@ -64,16 +63,22 @@ const Chatroom = () => {
       console.log("receive", data);
       setChatData((chats) => [...chats, data]);
     });
+
     socket.on("onConnect", (data) => {
       console.log("onconnect", data);
       setChatData((chats) => [...chats, data]);
     });
-    socket.on("receiveDocData", (data) => {
-      console.log(data);
 
-      // setChatData(chat=>[...chats, docData])
+    socket.on("receiveDocData", (data) => {
+      setChatData((chats) => [...chats, data]);
     });
-    socket.on("disconnect", (data) => {
+
+    socket.on("receiveDocData", (data) => {
+      setChatData((chats) => [...chats, data]);
+    });
+
+    socket.on("onDisconnect", (data) => {
+      console.log("data", data);
       setChatData((chats) => [...chats, data]);
     });
   }, [socket]);
@@ -122,7 +127,7 @@ const Chatroom = () => {
             setPayload({
               ...payload,
               content: e.target.value,
-              time: new Date(Date.now()),
+              updatedAt: new Date(Date.now()),
             });
           }}
           value={payload.content}
