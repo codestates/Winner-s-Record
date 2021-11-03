@@ -168,10 +168,11 @@ export async function validType(type) {
 
 export async function editDoc(docId, data) {
   const img = data.img; //[string, string]
-  await db.Docs_Images.destroy({
-    where: { docId },
-  });
-  if (!img.length) {
+
+  if (Array.isArray(img) && !img.length) {
+    await db.Docs_Images.destroy({
+      where: { docId },
+    });
     if (data.event === "tennis") {
       await db.Docs_Images.create({
         docId,
@@ -193,7 +194,10 @@ export async function editDoc(docId, data) {
         imgId: 58,
       });
     }
-  } else {
+  } else if (Array.isArray(img)) {
+    await db.Docs_Images.destroy({
+      where: { docId },
+    });
     for (let i = 0; i < img.length; i++) {
       const newImg = await db.Images.create({
         link: img[i],
@@ -229,7 +233,6 @@ export async function editDoc(docId, data) {
   const editedDoc = await db.Docs.findOne({
     where: { id: docId },
   }).catch((err) => console.log(err));
-
   return editedDoc;
 }
 
