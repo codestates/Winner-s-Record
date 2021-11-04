@@ -17,10 +17,11 @@
 
 ### BACK
 ![](https://img.shields.io/badge/BACK-Javascript-F7DF1E?style=for-the-badge&logo=javascript)
-![](https://img.shields.io/badge/BACK-Node-4FC08D?style=for-the-badge&logo=Node.js)
+![](https://img.shields.io/badge/BACK-Node.js-4FC08D?style=for-the-badge&logo=Node.js)
 ![](https://img.shields.io/badge/BACK-Express-0769AD?style=for-the-badge)
 ![](https://img.shields.io/badge/BACK-bcrypt-D50000?style=for-the-badge&logo=bcrypt)
 ![](https://img.shields.io/badge/BACK-mysql-F9A825?style=for-the-badge&logo=mysql)
+![](https://img.shields.io/badge/BACK-socket.io-607d8b?style=for-the-badge&logo=socket.io)
 ![](https://img.shields.io/badge/BACK-Sequelize-007396?style=for-the-badge&logo=Sequelize)
 ![](https://img.shields.io/badge/BACK-JSON%20Web%20Tokens-003545?style=for-the-badge&logo=JSON%20Web%20Tokens)
 ![](https://img.shields.io/badge/BACK-Amazon%20AWS-6DB33F?style=for-the-badge&logo=Amazon%20AWS)
