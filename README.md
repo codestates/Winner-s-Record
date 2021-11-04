@@ -1,4 +1,4 @@
-## :wrench: Technique
+## :wrench: Techniques
 
 ### FRONT
 ![](https://img.shields.io/badge/FRONT-Javascript-F7DF1E?style=for-the-badge&logo=javascript)
@@ -23,7 +23,7 @@
 <img width="1781" alt="TechStack" src="https://github.com/glen15/gitFlowTest/blob/master/stack.png?raw=true">
 <br/>
 
-## 🗣 Contributor
+## 🗣 Contributors
 
 <table>
   <tbody>
