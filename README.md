@@ -25,6 +25,7 @@
 ![](https://img.shields.io/badge/FRONT-Javascript-F7DF1E?style=for-the-badge&logo=javascript)
 ![](https://img.shields.io/badge/FRONT-react-61DAFB?style=for-the-badge&logo=react)
 ![](https://img.shields.io/badge/FRONT-Sass-E91E63?style=for-the-badge&logo=Sass)
+![](https://img.shields.io/badge/BACK-socket.io-607d8b?style=for-the-badge&logo=socket.io)
 ![](https://img.shields.io/badge/FRONT-axios-7952B3?style=for-the-badge&logo=axios)
 ![](https://img.shields.io/badge/FRONT-React%20Router-E34F26?style=for-the-badge&logo=React%20Router)
 ![](https://img.shields.io/badge/FRONT-Amazon%20AWS-6DB33F?style=for-the-badge&logo=Amazon%20AWS)
@@ -43,7 +44,7 @@
 
 <br/>
 
-<img width="1781" alt="TechStack" src="https://github.com/glen15/gitFlowTest/blob/master/stack.png?raw=true">
+<img width="1781" alt="TechStack" src="https://github.com/glen15/final-img/blob/master/stackIMG.png?raw=true">
 <br/>
 
 ## :computer: Preview
