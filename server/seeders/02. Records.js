@@ -6,9 +6,9 @@ module.exports = {
       {
         id: 1,
         event: 'tennis',
-        win: 1,
+        win: 3,
         lose: 0,
-        point: 3,
+        point: 9,
         userId: 1,
         createdAt: new Date()
           .toISOString()
@@ -39,8 +39,8 @@ module.exports = {
         id: 3,
         event: 'squash',
         win: 2,
-        lose: 0,
-        point: 6,
+        lose: 1,
+        point: 7,
         userId: 1,
         createdAt: new Date()
           .toISOString()
@@ -247,8 +247,8 @@ module.exports = {
         id: 16,
         event: 'pingpong',
         win: 2,
-        lose: 2,
-        point: 8,
+        lose: 4,
+        point: 10,
         userId: 4,
         createdAt: new Date()
           .toISOString()
@@ -854,9 +854,9 @@ module.exports = {
       {
         id: 54,
         event: 'badminton',
-        win: 0,
+        win: 3,
         lose: 1,
-        point: 1,
+        point: 10,
         userId: 14,
         createdAt: new Date()
           .toISOString()
@@ -1014,9 +1014,9 @@ module.exports = {
       {
         id: 64,
         event: 'pingpong',
-        win: 11,
+        win: 14,
         lose: 0,
-        point: 33,
+        point: 42,
         userId: 16,
         createdAt: new Date()
           .toISOString()
@@ -1046,9 +1046,9 @@ module.exports = {
       {
         id: 66,
         event: 'badminton',
-        win: 0,
+        win: 2,
         lose: 7,
-        point: 7,
+        point: 13,
         userId: 17,
         createdAt: new Date()
           .toISOString()
@@ -1302,9 +1302,9 @@ module.exports = {
       {
         id: 82,
         event: 'badminton',
-        win: 0,
+        win: 4,
         lose: 2,
-        point: 2,
+        point: 14,
         userId: 21,
         createdAt: new Date()
           .toISOString()
@@ -1367,8 +1367,8 @@ module.exports = {
         id: 86,
         event: 'badminton',
         win: 1,
-        lose: 4,
-        point: 7,
+        lose: 7,
+        point: 10,
         userId: 22,
         createdAt: new Date()
           .toISOString()
@@ -1398,9 +1398,9 @@ module.exports = {
       {
         id: 88,
         event: 'pingpong',
-        win: 0,
+        win: 2,
         lose: 0,
-        point: 0,
+        point: 6,
         userId: 22,
         createdAt: new Date()
           .toISOString()
@@ -1431,8 +1431,8 @@ module.exports = {
         id: 90,
         event: 'badminton',
         win: 0,
-        lose: 0,
-        point: 0,
+        lose: 3,
+        point: 3,
         userId: 23,
         createdAt: new Date()
           .toISOString()
@@ -1479,8 +1479,8 @@ module.exports = {
         id: 93,
         event: 'tennis',
         win: 4,
-        lose: 0,
-        point: 12,
+        lose: 8,
+        point: 20,
         userId: 24,
         createdAt: new Date()
           .toISOString()
@@ -1495,8 +1495,8 @@ module.exports = {
         id: 94,
         event: 'badminton',
         win: 5,
-        lose: 0,
-        point: 15,
+        lose: 3,
+        point: 18,
         userId: 24,
         createdAt: new Date()
           .toISOString()
@@ -1526,9 +1526,9 @@ module.exports = {
       {
         id: 96,
         event: 'pingpong',
-        win: 0,
+        win: 2,
         lose: 2,
-        point: 2,
+        point: 8,
         userId: 24,
         createdAt: new Date()
           .toISOString()
