@@ -171,12 +171,12 @@
 
 <br/>
 
+## 🚦 Link
+
+<br/>
+
 ## 🧐 Need more information?
 
 [🔍️ checkout WIKI](https://github.com/codestates/Winner-s-Record/wiki)
 
 </br>
-
-## 🚦 Link
-
-<br/>
