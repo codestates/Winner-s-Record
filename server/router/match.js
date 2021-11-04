@@ -7,5 +7,6 @@ const router = express.Router();
 
 router.post("/:docId", jwtValidator, matchController.insertResult);
 router.get("/", jwtValidator, matchController.headToHead);
+router.get("/me", jwtValidator, matchController.myMatch);
 
 export default router;
