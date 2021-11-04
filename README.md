@@ -39,6 +39,9 @@
       <td>
         <strong>🚩 Frontend</strong>
       </td>
+      <td>
+        <strong>✨ sunghoonshin@kakao.com</strong>
+      </td>
     </tr>
      <tr>
       <td align="center">
@@ -52,6 +55,9 @@
       <td>
         <strong>🏁 Backend</strong>
       </td>
+      <td>
+        <strong>✨ hjin9902@naver.com</strong>
+      </td>
     </tr>
       <td align="center">
         <a href="https://github.com/ydh94">
@@ -63,6 +69,9 @@
       </td>
       <td>
         <strong>🚩 Frontend</strong>
+      </td>
+      <td>
+        <strong>✨ dbeogud9411@gmail.com</strong>
       </td>
     </tr>
     <tr>
@@ -76,6 +85,9 @@
       </td>
       <td>
         <strong>🏁 Backend</strong>
+      </td>
+        <td>
+        <strong>✨ glen15@naver.com</strong>
       </td>
     </tr>
     <tr>
