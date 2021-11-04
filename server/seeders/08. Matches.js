@@ -565,23 +565,6 @@ module.exports = {
           .replace(/\..+/, ""),
       },
       {
-        id: 33,
-        type: "match",
-        event: "badminton",
-        winner: "가온누리" ,
-        loser: "테니스한판",
-        player: "가온누리vs테니스한판",
-        docId: null,
-        createdAt: new Date()
-          .toISOString()
-          .replace(/T/, " ")
-          .replace(/\..+/, ""),
-        updatedAt: new Date()
-          .toISOString()
-          .replace(/T/, " ")
-          .replace(/\..+/, ""),
-      },
-      {
         id: 34,
         type: "match",
         event: "pingpong",
@@ -741,40 +724,6 @@ module.exports = {
         winner: "내이름김탁구" ,
         loser: "나봄",
         player: "나봄vs내이름김탁구",
-        docId: null,
-        createdAt: new Date()
-          .toISOString()
-          .replace(/T/, " ")
-          .replace(/\..+/, ""),
-        updatedAt: new Date()
-          .toISOString()
-          .replace(/T/, " ")
-          .replace(/\..+/, ""),
-      },
-      {
-        id: 43,
-        type: "match",
-        event: "badminton",
-        winner: "골톤" ,
-        loser: "나봄",
-        player: "나봄vs골톤",
-        docId: null,
-        createdAt: new Date()
-          .toISOString()
-          .replace(/T/, " ")
-          .replace(/\..+/, ""),
-        updatedAt: new Date()
-          .toISOString()
-          .replace(/T/, " ")
-          .replace(/\..+/, ""),
-      },
-      {
-        id: 43,
-        type: "match",
-        event: "badminton",
-        winner: "내이름김탁구" ,
-        loser: "나봄",
-        player: "나봄vs골톤",
         docId: null,
         createdAt: new Date()
           .toISOString()
@@ -1047,6 +996,57 @@ module.exports = {
         winner: "찬누리" ,
         loser: "이루리",
         player: "찬누리vs이루리",
+        docId: null,
+        createdAt: new Date()
+          .toISOString()
+          .replace(/T/, " ")
+          .replace(/\..+/, ""),
+        updatedAt: new Date()
+          .toISOString()
+          .replace(/T/, " ")
+          .replace(/\..+/, ""),
+      },
+      {
+        id: 60,
+        type: "match",
+        event: "badminton",
+        winner: "가온누리" ,
+        loser: "테니스한판",
+        player: "가온누리vs테니스한판",
+        docId: null,
+        createdAt: new Date()
+          .toISOString()
+          .replace(/T/, " ")
+          .replace(/\..+/, ""),
+        updatedAt: new Date()
+          .toISOString()
+          .replace(/T/, " ")
+          .replace(/\..+/, ""),
+      },
+      {
+        id: 61,
+        type: "match",
+        event: "badminton",
+        winner: "내이름김탁구" ,
+        loser: "나봄",
+        player: "나봄vs내이름김탁구",
+        docId: null,
+        createdAt: new Date()
+          .toISOString()
+          .replace(/T/, " ")
+          .replace(/\..+/, ""),
+        updatedAt: new Date()
+          .toISOString()
+          .replace(/T/, " ")
+          .replace(/\..+/, ""),
+      },
+      {
+        id: 62,
+        type: "match",
+        event: "badminton",
+        winner: "골톤" ,
+        loser: "나봄",
+        player: "나봄vs골톤",
         docId: null,
         createdAt: new Date()
           .toISOString()
