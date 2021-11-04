@@ -171,7 +171,7 @@
 
 <br/>
 
-## 🧐 Need extra information?
+## 🧐 Need more information?
 
 [🔍️ checkout WIKI](https://github.com/codestates/Winner-s-Record/wiki)
 
