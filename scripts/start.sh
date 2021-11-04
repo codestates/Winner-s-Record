@@ -5,3 +5,4 @@ export ISIN=$(aws ssm get-parameters --region ap-northeast-2 --names ISIN --quer
 export A=a
 
 authbind --deep pm2 start app.js
+sleep 10s && pm2 status
