@@ -39,3 +39,26 @@ export async function insertResult(req, res) {
   await docData.editDoc(docId, { status: "완료" });
   return res.status(200).json({ ...result });
 }
+
+export async function headToHead(req, res) {
+  const userId = req.userId;
+  const nickname = req.query.nickname;
+  const event = req.query.event;
+  const user = await userData.findById(userId);
+  const rival = await userData.findByNickname(nickname);
+  if (!rival) {
+    return res.status(404).json({ message: "해당사항을 찾을 수 없습니다" });
+  }
+
+  const data = await matchData.findHeadToHead(
+    event,
+    user.nickname,
+    rival.nickname
+  );
+  let winCount = 0;
+  let loseCount = 0;
+  data.forEach((el) => {
+    el.winner === user.nickname ? winCount++ : loseCount++;
+  });
+  return res.status(200).json({ data, winCount, loseCount });
+}
