@@ -27,8 +27,8 @@
 ![](https://img.shields.io/badge/BACK-socket.io-607d8b?style=for-the-badge&logo=socket.io)
 ![](https://img.shields.io/badge/FRONT-axios-7952B3?style=for-the-badge&logo=axios)
 ![](https://img.shields.io/badge/FRONT-React%20Router-E34F26?style=for-the-badge&logo=React%20Router)
-![](https://img.shields.io/badge/FRONT-Amazon%20AWS-6DB33F?style=for-the-badge&logo=Amazon%20AWS)
 ![](https://img.shields.io/badge/FRONT-redux-4266f5?style=for-the-badge&logo=redux)
+![](https://img.shields.io/badge/FRONT-Amazon%20AWS-6DB33F?style=for-the-badge&logo=Amazon%20AWS)
 
 ### BACK
 ![](https://img.shields.io/badge/BACK-Javascript-F7DF1E?style=for-the-badge&logo=javascript)
