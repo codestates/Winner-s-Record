@@ -65,7 +65,7 @@ export async function headToHead(req, res) {
 }
 
 export async function myMatch(req, res) {
-  const userId = req.userId;
+  const userId = req.query.userId;
   const user = await userData.findById(userId);
   const myMatch = await matchData.myMatch(user.nickname);
   return res.status(200).json({ myMatch });
