@@ -1,3 +1,10 @@
+## :memo: Intro
+
+
+<br/>
+
+
+
 ## :wrench: Techniques
 
 ### FRONT
@@ -22,6 +29,34 @@
 
 <img width="1781" alt="TechStack" src="https://github.com/glen15/gitFlowTest/blob/master/stack.png?raw=true">
 <br/>
+
+## :computer: Preview
+
+<details>
+<summary>랜딩 페이지</summary>
+
+</details>
+
+
+<details>
+<summary>메인 페이지</summary>
+
+</details>
+
+
+<details>
+<summary>토너먼트 진행</summary>
+
+</details>
+
+
+<details>
+<summary>1:1 채팅</summary>
+
+</details>
+
+</br>
+
 
 ## 🗣 Contributors
 
