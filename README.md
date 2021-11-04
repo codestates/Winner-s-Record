@@ -130,3 +130,10 @@
   </tbody>
 </table>
 
+<br/>
+
+## 🧐 Need extra information?
+
+[🔍️ checkout WIKI](https://github.com/codestates/Winner-s-Record/wiki)
+
+</br></br>
