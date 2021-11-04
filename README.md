@@ -80,6 +80,29 @@
   <tbody>
     <tr>
       <td align="center">
+          <sub>
+            <b>Name</b>
+          </sub>
+        </a>
+        <br>
+      </td>
+      <td align="center">
+          <sub>
+            <b>Position</b>
+          </sub>
+        </a>
+        <br>
+      </td>
+<td align="center">
+          <sub>
+            <b>E-mail</b>
+          </sub>
+        </a>
+        <br>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
         <a href="https://github.com/planethoon">
           <sub>
             <b>신성훈</b>
@@ -144,6 +167,7 @@
     <tr>
   </tbody>
 </table>
+
 
 <br/>
 
