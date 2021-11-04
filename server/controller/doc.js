@@ -31,7 +31,7 @@ export async function searchDoc(req, res) {
             }
           }
         }
-        docList.sort((a, b) => b.id - a.id)
+        docList.sort((a, b) => b.id - a.id);
         const sliceDoc = await docData.slicePage(docList, page);
         return res.status(200).send({ data: sliceDoc });
       }
@@ -59,7 +59,7 @@ export async function searchDoc(req, res) {
             }
           }
         }
-        docList.sort((a, b) => b.id - a.id)
+        docList.sort((a, b) => b.id - a.id);
         const sliceDoc = await docData.slicePage(docList, page);
         return res.status(200).send({ data: sliceDoc });
       }
@@ -83,7 +83,7 @@ export async function searchDoc(req, res) {
           }
         }
       }
-      docList.sort((a, b) => b.id - a.id)
+      docList.sort((a, b) => b.id - a.id);
       return res.status(200).send({ data: docList });
     } else {
       return res.status(404).send({ message: "해당 포스트가 없습니다" });
@@ -106,7 +106,7 @@ export async function searchDoc(req, res) {
           }
         }
       }
-      docList.sort((a, b) => b.id - a.id)
+      docList.sort((a, b) => b.id - a.id);
       return res.status(200).send({ data: docList });
     } else {
       return res.status(404).send({ message: "해당 포스트가 없습니다" });
@@ -122,7 +122,6 @@ export async function getOne(req, res) {
   } else {
     const token = authorization.split(" ")[1];
     if (token === "null") {
-      //null? or "null?"
       userId = "guest";
     } else {
       const user = await jwt.verify(token, String(config.jwt.secretKey));
@@ -135,7 +134,7 @@ export async function getOne(req, res) {
   if (!doc) {
     return res.status(404).json({ message: "해당 포스트가 없습니다" });
   }
-  doc = doc.dataValues
+  doc = doc.dataValues;
   const hostUser = await userData.findById(doc.userId);
   const docImgLink = await docData.findByImg([doc]);
 
@@ -173,7 +172,26 @@ export async function getOne(req, res) {
         like,
       },
     });
-  } else {
+  } else if (doc.type === "match") {
+    return res.status(200).json({
+      data: {
+        userData: {
+          userId: hostUser.id,
+          nickname: hostUser.nickname,
+          img: hostUser.img,
+        },
+        type: doc.type,
+        status: doc.status,
+        title: doc.title,
+        event: doc.event,
+        place: doc.place,
+        text: doc.text,
+        img: docImgLink[docId.toString()],
+        like,
+        player,
+      },
+    });
+  } else if (doc.type === "tournament") {
     return res.status(200).json({
       data: {
         userData: {
@@ -204,13 +222,13 @@ export async function editDoc(req, res) {
     return res.status(403).json({ message: "권한이 없습니다" });
   }
   const hostUser = await userData.findById(host.userId);
-  if(!req.body.type) {
-    const checkDoc = await docData.findById(docId) 
-    if(checkDoc.dataValues.type !== "trade" && req.body.price) {
-      return res.status(400).json({message: "잘못된 접근입니다"})
+  if (!req.body.type) {
+    const checkDoc = await docData.findById(docId);
+    if (checkDoc.dataValues.type !== "trade" && req.body.price) {
+      return res.status(400).json({ message: "잘못된 접근입니다" });
     }
-  } else if(req.body.type !== "trade" && req.body.price){
-    return res.status(400).json({message: "잘못된 접근입니다"})
+  } else if (req.body.type !== "trade" && req.body.price) {
+    return res.status(400).json({ message: "잘못된 접근입니다" });
   }
 
   const result = await docData.editDoc(docId, req.body);
@@ -218,12 +236,8 @@ export async function editDoc(req, res) {
   const docImgLink = await docData.findByImg([editedDoc]);
 
   let like;
-  if (userId === "guest") {
-    like = false;
-  } else {
-    const likeList = await likeData.findByUserId(userId);
-    likeList.length === 0 ? (like = false) : (like = true);
-  }
+  const likeList = await likeData.findByUserId(userId);
+  likeList.length === 0 ? (like = false) : (like = true);
 
   const player = await entryData.findByDocId(docId);
   const board = await boardData.findByDocId(docId);
@@ -248,7 +262,27 @@ export async function editDoc(req, res) {
         like,
       },
     });
-  } else {
+  } else if (editedDoc.type === "match") {
+    return res.status(200).json({
+      data: {
+        userData: {
+          userId: hostUser.id,
+          nickname: hostUser.nickname,
+          img: hostUser.img,
+        },
+        docId: editedDoc.id,
+        type: editedDoc.type,
+        status: editedDoc.status,
+        title: editedDoc.title,
+        event: editedDoc.event,
+        place: editedDoc.place,
+        text: editedDoc.text,
+        img: docImgLink[docId.toString()],
+        like,
+        player,
+      },
+    });
+  } else if (editedDoc.type === "tournament") {
     return res.status(200).json({
       data: {
         userData: {
@@ -277,14 +311,19 @@ export async function create(req, res) {
   const hostUser = await userData.findById(userId);
 
   const created = await docData.create(userId, req.body);
-  if(created === "cannot create") {
-    return res.status(400).json({message: "잘못된 접근입니다"})
+  if (created === "cannot create") {
+    return res.status(400).json({ message: "잘못된 접근입니다" });
   }
 
   const docImgLink = await docData.findByImg([created]);
-
-  const player = await entryData.findByDocId(created.id);
-  const board = await boardData.findByDocId(created.id);
+  let player;
+  if (created.type === "match" || created.type === "tournament") {
+    player = await entryData.findByDocId(created.id);
+  }
+  let board;
+  if (created.type === "tournament") {
+    board = await boardData.findByDocId(created.id);
+  }
 
   return res.status(200).json({
     data: {
@@ -299,6 +338,7 @@ export async function create(req, res) {
       title: created.title,
       event: created.event,
       place: created.place,
+      price: created.price,
       text: created.text,
       img: docImgLink[created.id.toString()],
       like: false,
