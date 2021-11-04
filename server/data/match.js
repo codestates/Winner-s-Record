@@ -1,4 +1,6 @@
+import pkg from "sequelize";
 import db from "../models/index.js";
+const { Op } = pkg;
 
 export async function createMatch(result) {
   const newMatch = await db.Matches.create(result).then(
@@ -73,4 +75,30 @@ export async function findHeadToHead(event, user, rival) {
   result.sort((a, b) => b.id - a.id);
 
   return result;
+}
+
+export async function myMatch(nickname) {
+  const matchData = await db.Matches.findAll({
+    where: {
+      [Op.or]: [
+        {
+          winner: nickname,
+        },
+        {
+          loser: nickname,
+        },
+      ],
+    },
+  });
+  const myMatch = matchData.map((el) => {
+    let date = el.dataValues.createdAt.toString();
+
+    return {
+      event: el.dataValues.event,
+      winner: el.dataValues.winner,
+      loser: el.dataValues.loser,
+      date,
+    };
+  });
+  return myMatch;
 }

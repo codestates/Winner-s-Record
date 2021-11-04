@@ -3,6 +3,7 @@ import * as matchData from "../data/match.js";
 import * as recordData from "../data/records.js";
 import * as docData from "../data/doc.js";
 import * as userData from "../data/auth.js";
+import db from "../models/index.js";
 
 export async function insertResult(req, res) {
   const hostId = req.userId;
@@ -55,10 +56,17 @@ export async function headToHead(req, res) {
     user.nickname,
     rival.nickname
   );
-  let winCount = 0;
-  let loseCount = 0;
+  let win = 0;
+  let lose = 0;
   data.forEach((el) => {
-    el.winner === user.nickname ? winCount++ : loseCount++;
+    el.winner === user.nickname ? win++ : lose++;
   });
-  return res.status(200).json({ data, winCount, loseCount });
+  return res.status(200).json({ win, lose });
+}
+
+export async function myMatch(req, res) {
+  const userId = req.userId;
+  const user = await userData.findById(userId);
+  const myMatch = await matchData.myMatch(user.nickname);
+  return res.status(200).json({ myMatch });
 }
