@@ -62,6 +62,7 @@ export default function ProfileRank({ isMypage, nickname }) {
 
   useEffect(() => {
     handleRank("tennis");
+    handleHistory("tennis");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -92,7 +93,7 @@ export default function ProfileRank({ isMypage, nickname }) {
       <div className="profile--score">
         {rank.win}승 {rank.lose}패 {rank.point}점
       </div>
-      {isMypage ? (
+      {!isMypage ? (
         <div className="profile--history">
           <span>나와의 전적</span>
           <span>
