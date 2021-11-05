@@ -1,6 +1,5 @@
 .search--option--container {
   width: 100px;
-  // border: 1px solid black;
   flex-direction: column;
   font-size: 1.1rem;
   color: $font-gray;
@@ -32,7 +31,6 @@
 }
 
 .search--dropdown--container {
-  // box-sizing: border-box;
   position: absolute;
   width: 100px;
   background-color: white;
