@@ -8,7 +8,7 @@ const TopButton = ({ isMain }) => {
 
   return (
     <div className={`fixedBtn top${isMain ? " main" : ""}`} onClick={moveToTop}>
-      Top
+      <i className="fas fa-angle-double-up" />
     </div>
   );
 };

@@ -1,0 +1,130 @@
+.footer--container {
+  background-color: $white;
+  margin-top: 10px;
+  width: 100%;
+  height: 250px;
+
+  @include flexbox();
+  flex-direction: column;
+
+  border-image: linear-gradient(to right, $white, $main-color, $white);
+  border-image-slice: 1;
+  border-top: 1px solid;
+
+  .footer--inner {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+    .logo--container {
+      flex: 1 0 0;
+      @include flexbox();
+      // .logo {
+      //   height: 100%;
+      //   img {
+      //     max-height: 100%;
+      //   }
+      // }
+    }
+    .content--outer {
+      flex: 2 0 0;
+      display: flex;
+
+      .content--container {
+        flex: 1 0 0;
+        @include flexbox();
+        flex-direction: column;
+        position: relative;
+
+        .title {
+          position: absolute;
+          top: 30px;
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+        > a {
+          margin-top: 40px;
+          font-size: 1.1rem;
+          color: $font-gray;
+          transition: 0.2s;
+
+          &:hover {
+            transition: 0.1s;
+            color: $main-color;
+            font-weight: bold;
+          }
+        }
+        .container {
+          @include flexbox();
+          flex-direction: column;
+          margin-top: 30px;
+
+          .wrapper {
+            font-size: 1.1rem;
+            margin-top: 10px;
+            width: 200px;
+            @include flexbox();
+            justify-content: space-between;
+            a {
+              transition: 0.2s;
+              color: $font-gray;
+              &:hover {
+                transition: 0.1s;
+                color: $main-color;
+                font-weight: bold;
+              }
+              i {
+                margin-left: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .copyright {
+    width: 100%;
+
+    margin-top: 5px;
+
+    text-align: center;
+    padding-top: 10px;
+
+    color: $font-gray;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and #{$large} {
+  .footer--container {
+    .footer--inner {
+      width: 1600px;
+    }
+  }
+}
+
+@media screen and #{$small} {
+  .footer--container {
+    height: 400px;
+    .footer--inner {
+      flex-direction: column;
+      .logo--container {
+        .logo {
+          width: 100%;
+          @include flexbox();
+
+          img {
+            max-width: 100%;
+          }
+        }
+      }
+
+      .content--outer {
+        .content--container {
+          height: 200px;
+        }
+      }
+    }
+  }
+}

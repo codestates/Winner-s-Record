@@ -15,9 +15,9 @@ const OptionSelector = ({ searchOption, setSearchOption }) => {
         <span>
           {selected}
           {isClicked ? (
-            <i className="fas fa-chevron-up" />
+            <i className="fas fa-angle-up" />
           ) : (
-            <i className="fas fa-chevron-down" />
+            <i className="fas fa-angle-down" />
           )}
         </span>
       </div>

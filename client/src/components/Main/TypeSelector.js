@@ -1,6 +1,22 @@
-const TypeSelector = ({ searchOption, setSearchOption }) => {
-  const { postType } = searchOption;
+import axios from "axios";
 
+const TypeSelector = ({ searchOption, setSearchOption, setPostList }) => {
+  const { postType } = searchOption;
+  const getData = (type) => {
+    const { game, option, input } = searchOption;
+
+    axios
+      .get(
+        `http://localhost:8080/doc?type=${type}&event=${game}&${option}=${input}&page=0`
+      )
+      .then((res) => {
+        setPostList(res.data.data);
+      })
+      .catch((err) => {
+        console.error("에러 발생", err);
+        setPostList([]);
+      });
+  };
   return (
     <div className="search--type--container">
       <div
@@ -10,8 +26,10 @@ const TypeSelector = ({ searchOption, setSearchOption }) => {
         onClick={() => {
           if (postType === "match") {
             setSearchOption({ ...searchOption, postType: "all" });
+            getData("all");
           } else {
             setSearchOption({ ...searchOption, postType: "match" });
+            getData("match");
           }
         }}
       >
@@ -25,8 +43,10 @@ const TypeSelector = ({ searchOption, setSearchOption }) => {
         onClick={() => {
           if (postType === "trade") {
             setSearchOption({ ...searchOption, postType: "all" });
+            getData("all");
           } else {
             setSearchOption({ ...searchOption, postType: "trade" });
+            getData("trade");
           }
         }}
       >

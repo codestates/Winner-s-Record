@@ -4,6 +4,11 @@
   background-color: $main-color;
   position: fixed;
   transform: translate(-50%, -50%);
+  @include flexbox();
+  font-size: 1.8rem;
+  color: $white;
+  border-radius: 50%;
+  border: 1px solid $white;
 
   &.top {
     bottom: 50px;
@@ -24,10 +29,44 @@
     a {
       width: 100%;
       height: 100%;
-      div {
-        width: 100%;
-        height: 100%;
+      @include flexbox();
+      color: $white;
+    }
+  }
+}
+
+@media screen and #{$small} {
+  .fixedBtn {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    &.top {
+      bottom: 10px;
+      right: 10px;
+      &.main {
+        bottom: 60px;
       }
+    }
+
+    &.create {
+      bottom: 10px;
+      right: 10px;
+    }
+  }
+}
+
+@media screen and #{$medium} {
+  .fixedBtn {
+    &.top {
+      bottom: 30px;
+      right: 25px;
+      &.main {
+        bottom: 80px;
+      }
+    }
+    &.create {
+      bottom: 20px;
+      right: 25px;
     }
   }
 }
