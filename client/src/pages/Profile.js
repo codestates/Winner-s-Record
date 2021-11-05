@@ -78,7 +78,7 @@ export default function Profile() {
               profileData={profileData}
               editPhoto={editPhoto}
             />
-            <ProfileRank nickname={profileData.nickname} />
+            <ProfileRank isMypage={isMypage} nickname={profileData.nickname} />
             <DocList userId={userId} isMypage={isMypage} />
           </div>
         )
