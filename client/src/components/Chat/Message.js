@@ -16,8 +16,8 @@ const Message = ({ chatData }) => {
 
   return (
     <div className={`chat--container${isMine ? " mine" : ""}`}>
-      <div className="content--box">{content}</div>
-      <div className="time">{`${new Date(updatedAt).getMonth()}-${new Date(
+      <div className="content--box">{`${content}`}</div>
+      <div className="time">{`${new Date(updatedAt).getMonth()+1}-${new Date(
         updatedAt
       ).getDate()} ${new Date(updatedAt).getHours()}:${new Date(
         updatedAt

@@ -1,14 +1,6 @@
+import pkg from "sequelize";
 import db from "../models/index.js";
-
-export async function findDocById(id) {
-  try {
-    return db.Docs.findOne({
-      where: { id },
-    }).then((data) => data.dataValues);
-  } catch {
-    return null;
-  }
-}
+const { Op } = pkg;
 
 export async function createMatch(result) {
   const newMatch = await db.Matches.create(result).then(
@@ -53,4 +45,60 @@ export async function tournamentMatch(docId, event, players) {
     });
   }
   return binary;
+}
+
+export async function findHeadToHead(event, user, rival) {
+  const matchData1 = await db.Matches.findAll({
+    where: { event, winner: user, loser: rival },
+  });
+  const matchData2 = await db.Matches.findAll({
+    where: { event, winner: rival, loser: user },
+  });
+  const result = [];
+
+  for (let i = 0; i < matchData1.length; i++) {
+    const match = {
+      id: matchData1[i].dataValues.id,
+      winner: matchData1[i].dataValues.winner,
+      loser: matchData1[i].dataValues.loser,
+    };
+    result.push(match);
+  }
+  for (let i = 0; i < matchData2.length; i++) {
+    const match = {
+      id: matchData2[i].dataValues.id,
+      winner: matchData2[i].dataValues.winner,
+      loser: matchData2[i].dataValues.loser,
+    };
+    result.push(match);
+  }
+  result.sort((a, b) => b.id - a.id);
+
+  return result;
+}
+
+export async function myMatch(nickname) {
+  const matchData = await db.Matches.findAll({
+    where: {
+      [Op.or]: [
+        {
+          winner: nickname,
+        },
+        {
+          loser: nickname,
+        },
+      ],
+    },
+  });
+  const myMatch = matchData.map((el) => {
+    let date = el.dataValues.createdAt.toString();
+
+    return {
+      event: el.dataValues.event,
+      winner: el.dataValues.winner,
+      loser: el.dataValues.loser,
+      date,
+    };
+  });
+  return myMatch;
 }

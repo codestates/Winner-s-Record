@@ -99,7 +99,9 @@ const Post = ({ match }) => {
           <div className="post--text">{text}</div>
           <PostMap place={place} />
 
-          {status !== "대기" && player.includes(userInfo.nickname) ? (
+          {status !== "대기" &&
+          player.includes(userInfo.nickname) &&
+          type === "tournament" ? (
             <PostComments
               board={board}
               postInfo={postInfo}

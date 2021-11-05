@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { modalOn } from "../../modules/isModalOpen";
 import { setModalText } from "../../modules/modalText";
+import { setChatPost } from "../../modules/chatPost";
+import axios from "axios";
 
 const MatchButton = ({
   hostId,
@@ -23,9 +25,8 @@ const MatchButton = ({
   const clickHandler = () => {
     if (!isLogin) {
       setLoginModal(true);
-    } else if (buttonName === "결과 확인") {
-      // 결과 페이지 모달
-      history.push(`/post`);
+    } else if (buttonName === "종료된 경기입니다.") {
+      // 아무것도 하지마~~
     } else if (buttonName === "참가 신청" || buttonName === "신청자 목록") {
       history.push(`/post/${postId}/entry`);
     } else {
@@ -35,9 +36,35 @@ const MatchButton = ({
     }
   };
 
+  const startChat = () => {
+    if (!isLogin) {
+      setLoginModal(true);
+    } else if (status === "진행") {
+      dispatch(setModalText("이미 진행중인 경기입니다."));
+      setModalBtnType("close");
+      dispatch(modalOn());
+    } else if (status === "완료") {
+      dispatch(setModalText("이미 종료된 경기입니다."));
+      setModalBtnType("close");
+      dispatch(modalOn());
+    } else {
+      const Authorization = `Bearer ${localStorage.getItem("token")}`;
+      axios
+        .post(
+          `http://localhost:8080/room`,
+          { docId: postId },
+          { headers: { Authorization } }
+        )
+        .then((res) => {
+          dispatch(setChatPost(Number(postId)));
+          history.push(`/chat/${res.data.id}`);
+        });
+    }
+  };
+
   useEffect(() => {
     if (status === "완료") {
-      setButtonName("결과 확인");
+      setButtonName("종료된 경기입니다.");
     } else if (
       hostId !== userInfo.userId &&
       !player.includes(userInfo.nickname)
@@ -51,13 +78,17 @@ const MatchButton = ({
       setButtonName("신청자 목록");
     }
 
-    // 여기하는 중
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="post--primarybtn" onClick={clickHandler}>
-      {buttonName}
+    <div className="post--primarybtn--container">
+      <div className="btn two colored" onClick={clickHandler}>
+        {buttonName}
+      </div>
+      <div classname="btn two" onClick={startChat}>
+        채팅 보내기
+      </div>
     </div>
   );
 };

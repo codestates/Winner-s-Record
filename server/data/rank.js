@@ -7,62 +7,6 @@ export async function findAllRank(event) {
     where: {
       event: event,
     },
-    order: [['point', 'DESC']],
-    limit: 20
-  }).catch((err) => console.log(err))
-
-  const userId = recordRank.map((el) => el.dataValues.userId)
-  const users = await db.Users.findAll({
-    where: {
-      id: {
-        [Op.in]: userId
-      }
-    }
-  }).catch((err) => console.log(err))
-
-  const recordList = recordRank.map((el) => el.dataValues)
-  const userList = users.map((el) => el.dataValues)
-  
-  for(let i = 0; i < recordList.length; i++) {
-    for(let j = 0; j < userList.length; j++) {
-      if(recordList[i].userId === userList[j].id) {
-        recordList[i].nickname = userList[j].nickname
-        recordList[i].img = userList[j].img
-      }
-    }
-  }
-  recordList.sort((a, b) => a.nickname < b.nickname ? -1 : a.nickname > b.nickname ? 1 : 0)
-  .sort((a, b) => b.point - a.point);
-  
-  for(let i = 0; i < recordList.length; i++) {
-    recordList[i].rank = i+1
-  }
-
-  const ranking = []
-  let result = []
-  recordList.map((el) => {
-    if (result.length === 0) {
-      result.push(el);
-    } else {
-      if (result[result.length - 1].point !== el.point) {
-        ranking.push(...result);
-        result = [];
-        result.push(el);
-      } else {
-        result.push(el);
-        result.map((el2) => (el2.rank = result[0].rank));
-      }
-    }
-  });
-  ranking.push(...result)
-  return ranking
-}
-
-export async function findNicknameRank(event, nickname) {
-  const recordRank = await db.Records.findAll({
-    where: {
-      event: event,
-    },
     order: [['point', 'DESC']]
   }).catch((err) => console.log(err))
   const userIdList = recordRank.map((el) => el.dataValues.userId)
@@ -110,7 +54,20 @@ export async function findNicknameRank(event, nickname) {
     }
   });
   ranking.push(...result)
+  return ranking
+}
 
+export async function findTopRank(data) {
+  const result = data.slice(0, 20)
+  for(let i = 0; i < result.length; i++) {
+    if(result[i].point === 0) {
+      result[i].rank = '-'
+    }
+  }
+  return result
+}
+
+export async function findNicknameRank(data, nickname) {
   const user = await db.Users.findOne({
     where: {
       nickname: nickname
@@ -118,14 +75,19 @@ export async function findNicknameRank(event, nickname) {
   }).then((res) => res.dataValues)
   .catch((err) => console.log(err))
 
-  const index = recordRankList.map((el) => el.userId).indexOf(user.id)
+  const index = data.map((el) => el.userId).indexOf(user.id)
   let rankList
   if(index === 0 || index === 1 || index === 2) {
-    rankList = ranking.slice(0, 5)
-  } else if (index >= ranking.length-2) {
-    rankList = ranking.slice(ranking.length - 5, ranking.length)
+    rankList = data.slice(0, 5)
+  } else if (index >= data.length-2) {
+    rankList = data.slice(data.length - 5, data.length)
   } else {
-    rankList = ranking.slice(index-2, index+3)
+    rankList = data.slice(index-2, index+3)
+  }
+  for(let i = 0; i < rankList.length; i++) {
+    if(rankList[i].point === 0) {
+      rankList[i].rank='-'
+    }
   }
   return rankList
 }

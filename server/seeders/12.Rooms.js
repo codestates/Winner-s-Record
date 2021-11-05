@@ -68,19 +68,6 @@ module.exports = {
           .replace(/T/, ' ')
           .replace(/\..+/, ''), 
       },
-      {
-        id: 6,
-        hostId: 11,
-        guestId:23,
-        createdAt: new Date()
-          .toISOString()
-          .replace(/T/, ' ')
-          .replace(/\..+/, ''),
-        updatedAt: new Date()
-          .toISOString()
-          .replace(/T/, ' ')
-          .replace(/\..+/, ''), 
-      },
     ]
     await queryInterface.bulkInsert('Rooms', Rooms, {})
   },

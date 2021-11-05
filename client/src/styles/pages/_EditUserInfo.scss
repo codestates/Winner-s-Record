@@ -1,7 +1,7 @@
 .edit--input {
   font-size: 1rem;
   height: 3rem;
-  width: 500px;
+  width: 25rem;
   border: none;
   border-bottom: solid 1px $gray;
   transition: 0.4s;
@@ -16,6 +16,16 @@
     color: $gray;
     font-size: 0.9rem;
   }
+  @media screen and (max-width: 768px) {
+    width: 18rem;
+    height: 2rem;
+    font-size: 0.7rem;
+
+    &::placeholder {
+      color: gray;
+      font-size: 0.7rem;
+    }
+  }
 }
 
 .edit--btncontainer {
@@ -24,6 +34,9 @@
   align-items: center;
   flex-direction: column;
   margin: 40px;
+  @media screen and (max-width: 768px) {
+    margin: 10px;
+  }
 }
 
 .edit--btn-delete {
@@ -35,4 +48,10 @@
   width: 300px;
   margin: 10px;
   cursor: pointer;
+  @media screen and (max-width: 768px) {
+    width: 15rem;
+    height: 3rem;
+    font-size: 0.7rem;
+    margin: 5px;
+  }
 }

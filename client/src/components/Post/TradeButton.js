@@ -37,17 +37,17 @@ const TradeButton = ({ hostId, status, setModalBtnType }) => {
   };
 
   return (
-    <>
+    <div className="post--primarybtn--container">
       {hostId === userInfo.userId ? (
-        <div className="post--primarybtn" onClick={changeStatus}>
+        <div className="btn one" onClick={changeStatus}>
           판매 상태 변경
         </div>
       ) : (
-        <div className="post--primarybtn" onClick={startChat}>
+        <div className="btn one" onClick={startChat}>
           채팅 보내기
         </div>
       )}
-    </>
+    </div>
   );
 };
 

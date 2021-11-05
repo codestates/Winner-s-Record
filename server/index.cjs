@@ -8,7 +8,6 @@ app.use(cors());
 const db = require("./models/index.js")
 
 const server = http.createServer(app);
-console.log(db.Chattings)
 const io = new Server(server, {
   cors: {
     origin: true,
@@ -18,36 +17,43 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
+  
   socket.on("join", (data) => {
-    const { roomId, nickname } = data
+    const { roomId } = data
     socket.join(roomId);
-    io.to(roomId).emit("onConnect", {
-      content: `${nickname} 님이 입장했습니다.`,
-    });
   });
 
+  socket.on("sendDocData", async (data) => {
+    const {roomId, id, img, title, updatedAt, place} = data;
+    const payload = {
+      docId: id,
+      img,
+      title, 
+      updatedAt,
+      place
+    }
+    io.to(roomId).emit("receiveDocData", payload) 
+    const docStringfy = JSON.stringify(payload);
+    const chatting = await db.Chattings.create({
+      roomId,
+      content: `tlstjdgnsdbeoguddlwjdgnsdjagPwls|${docStringfy}`
+    }).catch((err) => console.log(err))
+  })
+
   socket.on("sendMessage", async (data) => {
-    const { message, userId, roomId, time } = data;
+    const { content, userId, roomId, updatedAt } = data;
     io.to(roomId).emit("receiveMessage", {
       userId,
-      message,
+      content,
       roomId,
-      time,
+      updatedAt,
     });
 
     const chatting = await db.Chattings.create({
       userId: userId,
       roomId: roomId,
-      content: message
+      content: content
     }).catch((err) => console.log(err))
-  });
-
-  socket.on("socketDisconnect", (data) => {
-    const { roomId, nickname } = data;
-    io.to(roomId).emit("onDisconnect", {
-      content: `${nickname} 님이 퇴장하셨습니다.`,
-    });
-    socket.leave(roomId);
   });
 });
 

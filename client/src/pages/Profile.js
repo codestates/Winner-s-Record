@@ -71,14 +71,14 @@ export default function Profile() {
             editHandler={editHandler}
           />
         ) : (
-          <div className="profile">
+          <div className="profile--background">
             <UserInfo
               editHandler={editHandler}
               isMypage={isMypage}
               profileData={profileData}
               editPhoto={editPhoto}
             />
-            <ProfileRank nickname={profileData.nickname} />
+            <ProfileRank isMypage={isMypage} nickname={profileData.nickname} />
             <DocList userId={userId} isMypage={isMypage} />
           </div>
         )

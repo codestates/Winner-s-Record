@@ -1,92 +1,92 @@
-.profile {
+.profile--background {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: auto;
+  text-align: center;
   width: 100%;
-  height: 100%;
-}
-
-.profile--container {
-  display: flex;
-  justify-content: center;
-  position: relative; // 기준점
-  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .profile--top {
-  width: 50%;
-  height: 150px;
+  width: 70rem;
+  height: 10rem;
   background: $main-color;
-  position: absolute;
   z-index: -1;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
 }
 
 .profile--photocontainer {
-  align-items: center;
-  position: relative;
-  height: 200px;
-  width: 150px;
+  height: 12rem;
+  width: 10rem;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .profile--photo {
   position: absolute;
-  top: 70px;
-  width: 150px;
-  height: 150px;
+  width: 10rem;
+  height: 10rem;
   border-radius: 50%;
+  top: 5rem;
 }
 
 .fa-camera {
-  font-size: 1.5rem;
   position: absolute;
+  top: 12rem;
+  font-size: 1.5rem;
   color: white;
   cursor: pointer;
-  width: 50px;
-  height: 50px;
+  width: 3rem;
+  height: 3rem;
   background: $main-color;
   border-radius: 50%;
   justify-content: center;
   align-items: center;
   display: flex;
-  bottom: -25px;
-  right: 0;
+}
+
+.profile--namecontainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-size: 1.3rem;
+  height: 6rem;
 }
 
 .fa-pencil-alt {
   justify-content: center;
   align-items: center;
-  margin-left: 10px;
+  margin-left: 0.5rem;
   cursor: pointer;
   color: $gray;
+  transition: 0.4s;
   &:hover {
     color: $main-color;
+    transition: 0.2s;
   }
-}
-
-.profile--namecontainer {
-  position: absolute;
-  bottom: -70px;
-  display: flex;
-  font-size: 1.3rem;
 }
 
 .profile--rankingcontainer {
   border-radius: 3px;
   box-shadow: 2px 2px 5px 1px $gray;
-  margin-top: 100px;
-  width: 500px;
-  height: 180px;
+  width: 30rem;
+  height: 10rem;
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
+  padding-bottom: 0.5rem;
+  margin: 2rem;
 }
 
 .profile--rankingtap {
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin: 10px;
+  height: 2rem;
+  margin: 0.5rem;
 }
 
 .profile--rankingbtn {
@@ -95,7 +95,7 @@
   background: $gray;
   border-radius: 3px;
   color: white;
-  margin: 5px;
+  margin: 0.3rem;
   margin-top: 0;
   width: 5rem;
   height: 2rem;
@@ -103,6 +103,10 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  &:hover {
+    background-color: $main-color;
+    transition: 0.2s;
+  }
 }
 
 .profile--rankingbtn-selected {
@@ -111,7 +115,7 @@
   background: $main-color;
   border-radius: 3px;
   color: white;
-  margin: 5px;
+  margin: 0.3rem;
   margin-top: 0;
   width: 5rem;
   height: 2rem;
@@ -122,27 +126,28 @@
 }
 
 .profile--ranking {
+  display: flex;
   justify-content: center;
   align-items: center;
   font-size: 2rem;
-  margin: 1rem;
+  height: 4rem;
 }
 
 .profile--score {
+  display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+  height: 1.5rem;
   color: gray;
 }
 
-//
 .profile--doclist {
-  position: absolute;
-  bottom: 350px;
   display: flex;
-  align-items: left;
-  justify-content: left;
-  width: 500px;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
+  width: 30rem;
 }
 
 .profile--doctap-selected {
@@ -154,7 +159,7 @@
   color: $main-color;
   cursor: pointer;
   margin: 0.5rem;
-  width: 100px;
+  width: 7rem;
   height: 1.5rem;
 }
 
@@ -167,15 +172,33 @@
   color: $gray;
   cursor: pointer;
   margin: 0.5rem;
-  width: 100px;
+  width: 7rem;
   height: 1.5rem;
+  &:hover {
+    color: $main-color;
+    border-bottom: 2px solid $main-color;
+    transition: 0.2s;
+  }
 }
 
-.profile--postcontainer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: start;
-  position: relative;
-  bottom: -150px;
+.list--container {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  grid-auto-rows: 25rem;
+  height: auto;
+  justify-items: center;
+}
+
+.list--content--container {
+  border: 1px solid red;
+  width: 100%;
+  height: 100%;
+}
+
+.list--content--pic {
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }
