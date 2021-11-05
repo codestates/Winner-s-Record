@@ -39,8 +39,8 @@ const Main = () => {
       ) : (
         <NoPost setLoginModal={setLoginModal} />
       )}
-      {/* <CreatePostBtn /> */}
-      {/* <TopButton isMain /> */}
+      <CreatePostBtn />
+      <TopButton isMain />
       <NeedLoginModal isModalOpen={loginModal} setIsModalOpen={setLoginModal} />
       <Footer />
     </div>
