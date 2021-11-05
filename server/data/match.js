@@ -79,6 +79,7 @@ export async function findHeadToHead(event, user, rival) {
 
 export async function myMatch(nickname) {
   const matchData = await db.Matches.findAll({
+    limit: 10,
     where: {
       [Op.or]: [
         {
