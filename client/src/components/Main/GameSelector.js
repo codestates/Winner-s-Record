@@ -15,9 +15,9 @@ const GameSelector = ({ searchOption, setSearchOption }) => {
         <span>
           {displayGame}
           {isClicked ? (
-            <i className="fas fa-chevron-up" />
+            <i className="fas fa-angle-up" />
           ) : (
-            <i className="fas fa-chevron-down" />
+            <i className="fas fa-angle-down" />
           )}
         </span>
       </div>

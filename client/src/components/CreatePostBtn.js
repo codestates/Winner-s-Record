@@ -5,7 +5,7 @@ const CreatePostBtn = () => {
   return (
     <div className="fixedBtn create">
       <Link to="/doc">
-        <div>생성</div>
+        <i class="fas fa-plus"></i>
       </Link>
     </div>
   );

@@ -40,3 +40,9 @@
     }
   }
 }
+
+@media screen and #{$small} {
+  .search--type--container {
+    height: 40px;
+  }
+}

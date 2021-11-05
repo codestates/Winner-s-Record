@@ -56,6 +56,7 @@ const Search = ({ setPostList, searchOption, setSearchOption }) => {
       <TypeSelector
         setSearchOption={setSearchOption}
         searchOption={searchOption}
+        setPostList={setPostList}
       />
     </div>
   );
