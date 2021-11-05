@@ -5,14 +5,21 @@ const GameSelector = ({ searchOption, setSearchOption }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   return (
-    <div className="search--game--container">
+    <div className="search--option--container">
       <div
-        className="search--dropdown--selector"
+        className={`search--dropdown--selector${isClicked ? " active" : ""}`}
         onClick={() => {
           setIsClicked(!isClicked);
         }}
       >
-        {displayGame}
+        <span>
+          {displayGame}
+          {isClicked ? (
+            <i className="fas fa-chevron-up" />
+          ) : (
+            <i className="fas fa-chevron-down" />
+          )}
+        </span>
       </div>
       {isClicked ? (
         <ul className="search--dropdown--container">

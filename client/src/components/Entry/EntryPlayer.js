@@ -107,7 +107,9 @@ const EntryPlayer = ({
         {status === "대기" && userInfo.userId === hostId ? (
           <div onClick={fixPlayer}>확정</div>
         ) : null}
-        <div onClick={deleteHandler}> 삭제 </div>
+        {userInfo.userId === hostId || userInfo.userId === userId ? (
+          <div onClick={deleteHandler}> 삭제 </div>
+        ) : null}
       </div>
     </li>
   );

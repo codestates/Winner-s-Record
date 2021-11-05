@@ -1,0 +1,45 @@
+.search--bar--container {
+  height: 35px;
+  display: flex;
+  margin-bottom: 5px;
+  box-sizing: content-box;
+
+  input {
+    height: 100%;
+    width: 500px;
+    border: none;
+    // border: 1px solid black;
+    border-bottom: 2px solid $gray;
+    transition: 0.15s;
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 0;
+
+    &:focus {
+      transition: 0.1s;
+      outline: none;
+      border-bottom: 2px solid $main-color;
+    }
+  }
+  .search--input--btn {
+    width: 30px;
+    height: 30px;
+    @include flexbox();
+    font-size: 1.3rem;
+    margin-top: 3px;
+    padding-bottom: 2px;
+    color: $main-color;
+    cursor: pointer;
+    border-bottom: 2px solid $gray;
+  }
+}
+
+@media screen and #{$small} {
+  .search--bar--container {
+    flex: 9 0 0;
+    input {
+      width: 100%;
+      font-size: 1rem;
+    }
+  }
+}
