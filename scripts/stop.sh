@@ -1,7 +1,4 @@
 #!/bin/bash
-cd /home/ubuntu/Winner-s-Record/server
-export INSTOP=instop
-pm2 status
-pm2 stop app 
-pm2 delete app 
-pm2 status
+cd /home/ubuntu/im-sprint-practice-deploy/server
+pm2 stop app.js 2> /dev/null || true
+pm2 delete app.js 2> /dev/null || true
