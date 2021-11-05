@@ -1,0 +1,19 @@
+@import "./TypeSelector";
+@import "./SearchSelector";
+@import "./SearchBar";
+
+.search--container {
+  margin: 10px 0;
+  width: 1000px;
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and #{$small} {
+  .search--container {
+    width: 100%;
+  }
+}

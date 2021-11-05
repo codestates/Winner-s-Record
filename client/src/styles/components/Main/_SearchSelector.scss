@@ -1,0 +1,58 @@
+.search--option--container {
+  width: 100px;
+  // border: 1px solid black;
+  flex-direction: column;
+  font-size: 1.1rem;
+  color: $font-gray;
+
+  .search--dropdown--selector {
+    cursor: pointer;
+
+    position: relative;
+    @include flexbox;
+    border-bottom: 2px solid $gray;
+
+    width: 100px;
+    height: 35px;
+    transition: 0.2s;
+    &.active {
+      transition: 0.1s;
+      border-bottom: 2px solid $main-color;
+    }
+
+    span {
+      margin-top: 4px;
+      margin-right: 10px;
+    }
+    i {
+      right: 10px;
+      position: absolute;
+    }
+  }
+}
+
+.search--dropdown--container {
+  // box-sizing: border-box;
+  position: absolute;
+  width: 100px;
+  background-color: white;
+  border: 1px solid $gray;
+  border-top: 0px;
+  li {
+    cursor: pointer;
+
+    padding: 10px 0;
+    text-align: center;
+    &:hover {
+      background-color: $light-main-color;
+      color: white;
+    }
+  }
+}
+
+@media screen and #{$small} {
+  .search--option--container {
+    flex: 1 0 0;
+    font-size: 1rem;
+  }
+}

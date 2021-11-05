@@ -6,6 +6,7 @@ import TopButton from "../components/TopButton";
 import NoPost from "../components/Main/NoPost";
 import NeedLoginModal from "../components/NeedLoginModal";
 import CreatePostBtn from "../components/CreatePostBtn";
+import Header from "../components/Header";
 
 const Main = () => {
   const [loginModal, setLoginModal] = useState(false);
@@ -20,6 +21,7 @@ const Main = () => {
 
   return (
     <div className={"main--container"}>
+      <Header />
       <Search
         setPostList={setPostList}
         searchOption={searchOption}

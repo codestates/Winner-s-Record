@@ -15,7 +15,6 @@ import Entry from "./pages/Entry";
 import Chat from "./pages/Chat";
 
 // styles
-import "./reset.css";
 import "./styles/main.scss";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -24,8 +23,6 @@ import { setLogin } from "./modules/isLogin";
 import axios from "axios";
 import Result from "./pages/TournamentResult";
 import Tournament from "./pages/Tournament";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 import Chatroom from "./pages/Chatroom";
 
 function App() {
@@ -49,7 +46,6 @@ function App() {
   return (
     <div className="app--container">
       <Router>
-        {/* <Header /> */}
         <Switch>
           <Route exact path="/chat" component={Chat} />
           <Route path="/chat/:roomId" component={Chatroom} />
@@ -97,7 +93,6 @@ function App() {
             <Error />
           </Route>
         </Switch>
-        {/* <Footer /> */}
       </Router>
     </div>
   );
