@@ -30,7 +30,7 @@ app.use(morgan("tiny"));
 
 
 app.get("/wr", (req, res, next) => {
-  res.send(`Winner's Record-성공해라 제발`);
+  res.send(`Winner's Record-파이프라인`);
 
 });
 
