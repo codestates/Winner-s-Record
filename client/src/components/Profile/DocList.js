@@ -10,6 +10,7 @@ export default function DocList({ userId, isMypage }) {
   const selectTabHandler = (index) => {
     setCurrentTab(index);
   };
+
   const handleCreatedList = () => {
     axios
       .get(`http://localhost:8080/doc?hostId=${userId}`)
@@ -50,7 +51,7 @@ export default function DocList({ userId, isMypage }) {
     axios
       .get(`http://localhost:8080/match/history?userId=${userId}`)
       .then((res) => {
-        setList(res.data.data);
+        setHistory(res.data.myMatch);
       })
       .catch((err) => {
         console.log(err);
