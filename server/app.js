@@ -28,8 +28,10 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(morgan("tiny"));
 
+
 app.get("/wr", (req, res, next) => {
-  res.send(`Winner's Record`);
+  res.send(`Winner's Record-파이프라인-4`);
+
 });
 
 app.use("/auth", authRouter);
