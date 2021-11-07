@@ -1,28 +1,63 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
+import { setLogout } from "../modules/isLogin";
+import { deleteUserInfo } from "../modules/userInfo";
 
 const Header = () => {
-  const userInfo = useSelector((state) => state.userInfo);
-
+  const { userInfo, isLogin } = useSelector((state) => ({
+    userInfo: state.userInfo,
+    isLogin: state.isLogin,
+  }));
+  const history = useHistory();
+  const dispatch = useDispatch();
   return (
-    <div className="header--contaienr">
-      <div className="logo--container"></div>
-      <div className="btn--container">
-        <div className="btn--outer">
-          <Link to="/tournament">대회</Link>
+    <div className="header--container">
+      <div className="header--inner">
+        <div className="logo--container">
+          <Link to="/main">
+            <div className="img">
+              <img src="https://via.placeholder.com/350x150" alt="logo" />
+            </div>
+          </Link>
         </div>
-        <div className="btn">
-          <Link to="/rank">랭킹</Link>
-        </div>
-        <div className="btn">
-          <Link to="/chat">메세지</Link>
-        </div>
-        <div className="btn">
-          <Link to={`/profile/${userInfo.userId}`}>프로필</Link>
-        </div>
-        <div className="btn">
-          <Link to="/login">로그인</Link>
+
+        <div className="btn--container">
+          <Link to="/tournament">
+            <div className="btn">
+              <span>대회</span>
+            </div>
+          </Link>
+          <Link to="/ranking">
+            <div className="btn">랭킹</div>
+          </Link>
+          <Link to="/chat">
+            <div className="btn">메세지</div>
+          </Link>
+          {!isLogin ? null : (
+            <Link to={`/profile/${userInfo.userId}`}>
+              <div className="btn">프로필</div>
+            </Link>
+          )}
+
+          {!isLogin ? (
+            <Link to="/login">
+              <div className="btn">로그인</div>
+            </Link>
+          ) : (
+            <Link
+              to="/main"
+              onClick={() => {
+                localStorage.removeItem("token");
+                dispatch(setLogout());
+                dispatch(deleteUserInfo());
+                history.push("/main");
+              }}
+            >
+              <div className="btn">로그아웃</div>
+            </Link>
+          )}
         </div>
       </div>
     </div>

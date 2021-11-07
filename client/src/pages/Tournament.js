@@ -159,14 +159,16 @@ const Tournament = () => {
       <div className="title">토너먼트 페이지</div>
       <div className="round">
         <div className="text">예선</div>
-        <div
-          className="btn"
-          onClick={() => {
-            endRound(1);
-          }}
-        >
-          라운드 종료
-        </div>
+        {userInfo.userId === host ? (
+          <div
+            className="btn"
+            onClick={() => {
+              endRound(1);
+            }}
+          >
+            라운드 종료
+          </div>
+        ) : null}
       </div>
       <ul className="player--container">
         {matches
@@ -191,14 +193,16 @@ const Tournament = () => {
       </ul>
       <div className="round">
         <div className="text">준결승</div>
-        <div
-          className="btn"
-          onClick={() => {
-            endRound(2);
-          }}
-        >
-          라운드 종료
-        </div>
+        {userInfo.userId === host ? (
+          <div
+            className="btn"
+            onClick={() => {
+              endRound(2);
+            }}
+          >
+            라운드 종료
+          </div>
+        ) : null}
       </div>
       <ul className="player--container">
         {matches
@@ -245,15 +249,18 @@ const Tournament = () => {
             );
           })}
       </ul>
-      <div className="tournament--btn--container">
-        <div
-          onClick={() => {
-            endRound(3);
-          }}
-        >
-          대회 종료
+      {userInfo.userId === host ? (
+        <div className="tournament--btn--container">
+          <div
+            onClick={() => {
+              endRound(3);
+            }}
+          >
+            대회 종료
+          </div>
         </div>
-      </div>
+      ) : null}
+
       {isEditModalOpen ? (
         <TournamentEditModal
           matchToEdit={matchToEdit}

@@ -1,31 +1,58 @@
-const TypeSelector = ({ searchOption, setSearchOption }) => {
-  const { postType } = searchOption;
+import axios from "axios";
 
+const TypeSelector = ({ searchOption, setSearchOption, setPostList }) => {
+  const { postType } = searchOption;
+  const getData = (type) => {
+    const { game, option, input } = searchOption;
+
+    axios
+      .get(
+        `http://localhost:8080/doc?type=${type}&event=${game}&${option}=${input}&page=0`
+      )
+      .then((res) => {
+        setPostList(res.data.data);
+      })
+      .catch((err) => {
+        console.error("에러 발생", err);
+        setPostList([]);
+      });
+  };
   return (
     <div className="search--type--container">
       <div
-        className="search--type--match"
+        className={`search--type--btn match ${
+          postType === "match" ? " active" : ""
+        }`}
         onClick={() => {
           if (postType === "match") {
             setSearchOption({ ...searchOption, postType: "all" });
+            getData("all");
           } else {
             setSearchOption({ ...searchOption, postType: "match" });
+            getData("match");
           }
         }}
       >
-        경기
+        <i class="fas fa-running"></i>
+        <span>경기</span>
       </div>
       <div
-        className="search--type--trade"
+        className={`search--type--btn trade ${
+          postType === "trade" ? " active" : ""
+        }`}
         onClick={() => {
           if (postType === "trade") {
             setSearchOption({ ...searchOption, postType: "all" });
+            getData("all");
           } else {
             setSearchOption({ ...searchOption, postType: "trade" });
+            getData("trade");
           }
         }}
       >
-        거래
+        <i class="fas fa-shopping-basket"></i>
+
+        <span>거래</span>
       </div>
     </div>
   );

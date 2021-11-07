@@ -36,23 +36,27 @@ const Search = ({ setPostList, searchOption, setSearchOption }) => {
   };
 
   return (
-    <div>
+    <div className="search--container">
+      <div className="wrapper">
+        <GameSelector
+          setSearchOption={setSearchOption}
+          searchOption={searchOption}
+        />
+        <OptionSelector
+          setSearchOption={setSearchOption}
+          searchOption={searchOption}
+        />
+        <SearchBar
+          searchHandler={searchHandler}
+          setSearchOption={setSearchOption}
+          searchOption={searchOption}
+        />
+      </div>
+
       <TypeSelector
         setSearchOption={setSearchOption}
         searchOption={searchOption}
-      />
-      <GameSelector
-        setSearchOption={setSearchOption}
-        searchOption={searchOption}
-      />
-      <OptionSelector
-        setSearchOption={setSearchOption}
-        searchOption={searchOption}
-      />
-      <SearchBar
-        searchHandler={searchHandler}
-        setSearchOption={setSearchOption}
-        searchOption={searchOption}
+        setPostList={setPostList}
       />
     </div>
   );

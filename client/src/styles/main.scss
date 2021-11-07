@@ -1,20 +1,18 @@
 // variables
 $main-color: #4e894b;
+$light-main-color: #4e894ba1;
 $sub-color: #eaa938;
 $white: #f2f2f2;
 $gray: #d9d9d9;
+$font-gray: #666666;
 
 //media variables
-$mobile: (
-  max-width: 768px,
-);
-$tablet: (
-    min-width: 768px,
-  )
-  and
-  (
-    max-width: 1200px,
-  );
+$small: unquote("(max-width: 768px)");
+$medium: unquote("(min-width: 768px) and (max-width: 1200px)");
+$large: unquote("(min-width: 1600px)");
+
+// reset
+@import "./reset";
 
 //mixin
 @import "./mixin";
@@ -22,8 +20,11 @@ $tablet: (
 // components
 @import "./modal";
 @import "./FixedButton";
+@import "./components/Header";
+@import "./components/Footer";
 @import "./components/Post/ImageCarousel";
 @import "./components/Post/PostMap";
+@import "./components/Main/Search";
 
 // pages
 @import "./pages/Landing";
