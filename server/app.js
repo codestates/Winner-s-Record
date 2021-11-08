@@ -15,6 +15,10 @@ import tournamentRouter from "./router/tournament.js";
 import roomRouter from "./router/room.js";
 import { config } from "./config.js";
 
+import http from "http";
+import { Server } from "socket.io";
+import db from "./models/index.js";
+
 const app = express();
 const corsOptions = {
   origin: true,
@@ -28,10 +32,8 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(morgan("tiny"));
 
-
 app.get("/wr", (req, res, next) => {
   res.send(`Winner's Record-파이프라인 성공!`);
-
 });
 
 app.use("/auth", authRouter);
@@ -52,6 +54,58 @@ app.use((req, res, next) => {
 app.use((error, req, res, next) => {
   console.error(error);
   res.sendStatus(500);
+});
+
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: true,
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
+});
+
+io.on("connection", (socket) => {
+  socket.on("join", async (data) => {
+    const { roomId } = data;
+    socket.join(roomId);
+  });
+
+  socket.on("sendDocData", async (data) => {
+    const { roomId, id, img, title, updatedAt, place } = data;
+    const payload = {
+      docId: id,
+      img,
+      title,
+      updatedAt,
+      place,
+    };
+    io.to(roomId).emit("receiveDocData", payload);
+    const docStringfy = JSON.stringify(payload);
+    const chatting = await db.Chattings.create({
+      roomId,
+      content: `tlstjdgnsdbeoguddlwjdgnsdjagPwls|${docStringfy}`,
+    }).catch((err) => console.log(err));
+  });
+
+  socket.on("sendMessage", async (data) => {
+    const { content, userId, roomId, updatedAt } = data;
+    io.to(roomId).emit("receiveMessage", {
+      userId,
+      content,
+      roomId,
+      updatedAt,
+    });
+    const chatting = await db.Chattings.create({
+      userId: userId,
+      roomId: roomId,
+      content: content,
+    }).catch((err) => console.log(err));
+  });
+});
+
+server.listen(process.env.SOCKET_PORT, () => {
+  console.log(`${process.env.SOCKET_PORT} 서버 실행`);
 });
 
 app.listen(config.host.port);
