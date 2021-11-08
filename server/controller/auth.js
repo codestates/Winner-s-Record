@@ -26,8 +26,8 @@ export async function userInfo(req, res) {
     token = authorization.split(" ")[1];
   }
   const profile = await userData.findById(userId);
-  if(profile === null) {
-    return res.status(400).json({message: "잘못된 요청입니다"})
+  if (profile === null) {
+    return res.status(400).json({ message: "잘못된 요청입니다" });
   }
   if (!authorization || token === "null") {
     if (profile) {
@@ -100,9 +100,9 @@ export async function signup(req, res) {
   ) {
     return res.status(400).json({ message: "회원가입 실패" });
   }
-  const emailCheck = await userData.findByEmail(email)
-  const nicknameCheck = await userData.findByNickname(nickname)
-  if(emailCheck || nicknameCheck) {
+  const emailCheck = await userData.findByEmail(email);
+  const nicknameCheck = await userData.findByNickname(nickname);
+  if (emailCheck || nicknameCheck) {
     return res.status(400).json({ message: "회원가입 실패" });
   }
   const imgLink = await userData.randomUserImg([1, 2, 3, 4, 5, 6, 7, 8]);
@@ -149,15 +149,6 @@ export async function login(req, res) {
     },
   });
 }
-
-// export async function kakaoLogin(req, res) {
-//   console.log("카카오로그인 요청");
-//   // 로그인 버튼
-//   //`https://kauth.kakao.com/oauth/authorize?client_id=${config.kakao.clientId}&redirect_uri=${config.kakao.redirectUrl}&&response_type=code`
-//   return res.redirect(
-//     `https://kauth.kakao.com/oauth/authorize?client_id=42184b4ebbf71c527914d5cf6269aae0&redirect_uri=http://localhost:8080/auth/kakao/callback&&response_type=code`
-//   );
-// }
 
 export async function kakaoCallback(req, res) {
   const token1 = req.query.token;
@@ -252,8 +243,8 @@ export async function editImg(req, res) {
   const img = req.body.img;
   const userId = req.userId;
   const user = await userData.findById(userId);
-  if(!img) {
-    return res.status(400).json({message: "회원정보 수정 실패"})
+  if (!img) {
+    return res.status(400).json({ message: "회원정보 수정 실패" });
   }
   if (!user) {
     return res.status(400).json({ message: "회원정보 수정 실패" });
