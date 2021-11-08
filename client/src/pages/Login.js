@@ -45,7 +45,7 @@ export default function Login() {
   const handleKakao = (e) => {
     e.preventDefault();
     window.location.assign(
-      `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_ID}&redirect_uri=http://localhost:3000/redirect&&response_type=code`
+      `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_ID}&redirect_uri=http://winner-s-record.click/redirect&&response_type=code`
     );
   };
 

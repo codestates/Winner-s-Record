@@ -178,6 +178,7 @@ export async function kakaoCallback(req, res) {
 }
 
 export async function socialSignUp(req, res) {
+  console.log("서버에 들어온 : ", req.body);
   const { id, type, nickname } = req.body;
   if (id === undefined || type === undefined || nickname === undefined) {
     return res.status(400).json({ message: "회원가입 실패" });

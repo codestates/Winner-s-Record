@@ -13,7 +13,7 @@ export default function Redirect() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const openModalHandler = () => {
     setIsModalOpen(!isModalOpen);
@@ -70,6 +70,7 @@ export default function Redirect() {
       )
       .then((res) => {
         const { token, userdata } = res.data;
+        console.log(res.data);
         localStorage.setItem("token", token);
         const accessToken = localStorage.getItem("token");
         if (accessToken) {
@@ -97,13 +98,14 @@ export default function Redirect() {
       const url = new URL(window.location.href);
       const authorizationCode = url.searchParams.get("code");
       const result = await axios.post(
-        `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.REACT_APP_KAKAO_ID}&redirect_uri=http://localhost:3000/redirect&code=${authorizationCode}`
+        `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.REACT_APP_KAKAO_ID}&redirect_uri=http://winner-s-record.click/redirect&code=${authorizationCode}`
       );
       const token = result.data.access_token;
       axios
         .get(`http://3.36.30.63/auth/kakao/callback?token=${token}`)
         .then((res) => {
           const { id, type } = res.data;
+          console.log("aaaaaaa", id, type);
           if (!id) {
             const { token, userdata } = res.data;
             localStorage.setItem("token", token);
