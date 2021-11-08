@@ -104,6 +104,7 @@ export default function Redirect() {
         .get(`http://3.36.30.63/auth/kakao/callback?token=${token}`)
         .then((res) => {
           const { id, type } = res.data;
+          console.log("aaaaaaa", id, type);
           if (!id) {
             const { token, userdata } = res.data;
             localStorage.setItem("token", token);
