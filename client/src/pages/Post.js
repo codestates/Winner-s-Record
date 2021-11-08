@@ -3,6 +3,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 import Error from "./Error";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import ImageCarousel from "../components/Post/ImageCarousel";
 import PostPrimaryButton from "../components/Post/PostPrimaryButton";
 import LikeButton from "../components/Post/LikeButton";
@@ -79,9 +81,10 @@ const Post = ({ match }) => {
   } = postInfo;
 
   return (
-    <>
+    <div className="post--container">
+      <Header />
       {postInfo.title ? (
-        <div className="post--container">
+        <div className="post--inner">
           <ImageCarousel images={img} />
           <div className="post--header">
             <div className="post--title">{title}</div>
@@ -151,7 +154,9 @@ const Post = ({ match }) => {
       ) : (
         <Error />
       )}
-    </>
+
+      <Footer />
+    </div>
   );
 };
 

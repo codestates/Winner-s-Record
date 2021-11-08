@@ -6,20 +6,22 @@ import Search from "../components/TournamentMain/Search";
 import PostList from "../components/TournamentMain/PostList";
 import NoPost from "../components/TournamentMain/NoPost";
 import NeedLoginModal from "../components/NeedLoginModal";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const TournamentMain = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [postList, setPostList] = useState([]);
 
   const [searchOption, setSearchOption] = useState({
-    game: "tournament",
+    game: "all",
     option: "title",
     input: "all",
-    postType: "all",
   });
 
   return (
-    <div className="tournament--container">
+    <div className="main--container">
+      <Header />
       <Search
         setPostList={setPostList}
         searchOption={searchOption}
@@ -38,6 +40,7 @@ const TournamentMain = () => {
       )}
       <TopButton isMain />
       <NeedLoginModal isModalOpen={loginModal} setIsModalOpen={setLoginModal} />
+      <Footer />
     </div>
   );
 };

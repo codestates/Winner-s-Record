@@ -31,7 +31,6 @@ const PostList = ({ postList, setPostList, searchOption, setSearchOption }) => {
           `http://3.36.30.63/doc?type=${postType}&event=${game}&${option}=${input}&page=${page}`
         )
         .then((res) => {
-          console.log(res.data.data);
           if (!res.data.data.length) {
             setNoMoreData(true);
           } else {

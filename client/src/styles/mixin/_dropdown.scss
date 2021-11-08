@@ -1,10 +1,9 @@
-@mixin dropdown--selector() {
+@mixin dropdown--selector {
   cursor: pointer;
 
   position: relative;
   @include flexbox;
   border-bottom: 2px solid $gray;
-
   width: 100px;
   height: 35px;
   transition: 0.2s;
@@ -14,7 +13,7 @@
   }
 }
 
-@mixin dropdown--container() {
+@mixin dropdown--container {
   .dropdown--container {
     position: absolute;
     width: 100px;
