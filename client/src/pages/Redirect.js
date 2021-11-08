@@ -6,6 +6,8 @@ import { setLogin } from "../modules/isLogin";
 import axios from "axios";
 import SetNicknameCompleteModal from "../components/Login/SetNicknameCompleteModal";
 import LoadingIndicator from "../components/LoadingIndicator";
+import dotenv from "dotenv";
+dotenv.config();
 
 export default function Redirect() {
   const dispatch = useDispatch();
@@ -95,7 +97,7 @@ export default function Redirect() {
       const url = new URL(window.location.href);
       const authorizationCode = url.searchParams.get("code");
       const result = await axios.post(
-        `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=42184b4ebbf71c527914d5cf6269aae0&redirect_uri=http://localhost:3000/redirect&code=${authorizationCode}`
+        `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.REACT_APP_KAKAO_ID}&redirect_uri=http://localhost:3000/redirect&code=${authorizationCode}`
       );
       const token = result.data.access_token;
       axios

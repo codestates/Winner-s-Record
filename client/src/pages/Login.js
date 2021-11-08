@@ -4,6 +4,8 @@ import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserInfo } from "../modules/userInfo";
 import { setLogin } from "../modules/isLogin";
+import dotenv from "dotenv";
+dotenv.config();
 
 export default function Login() {
   const history = useHistory();
@@ -43,7 +45,7 @@ export default function Login() {
   const handleKakao = (e) => {
     e.preventDefault();
     window.location.assign(
-      "https://kauth.kakao.com/oauth/authorize?client_id=42184b4ebbf71c527914d5cf6269aae0&redirect_uri=http://localhost:3000/redirect&&response_type=code"
+      `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_ID}&redirect_uri=http://localhost:3000/redirect&&response_type=code`
     );
   };
 
