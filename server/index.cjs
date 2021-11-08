@@ -56,7 +56,6 @@ io.on("connection", (socket) => {
   });
 });
 
-const hostname = "http://3.36.30.63";
-server.listen(process.env.SOCKET_PORT, hostname, () => {
+server.listen(process.env.SOCKET_PORT, () => {
   console.log(`${process.env.SOCKET_PORT} 서버 실행`);
 });
