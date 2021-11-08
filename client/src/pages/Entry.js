@@ -28,7 +28,7 @@ const Entry = () => {
   const getData = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
-      .get(`http://localhost:8080/entry/${postId}`, {
+      .get(`http://3.36.30.63/entry/${postId}`, {
         headers: { Authorization },
       })
       .then((res) => {

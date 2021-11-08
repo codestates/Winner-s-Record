@@ -5,10 +5,11 @@ export default function TypeSelector({ setType }) {
   const [selected, setSelected] = useState("분류");
 
   return (
-    <ul>
+    <ul className="search--type--container">
       <li
+        className="search--type--btn"
         onClick={() => {
-          setIsDropOpen(true);
+          setIsDropOpen(!isDropOpen);
           setSelected("분류");
         }}
       >

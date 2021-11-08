@@ -5,10 +5,11 @@ export default function EventSelector({ setEvent }) {
   const [selected, setSelected] = useState("종목");
 
   return (
-    <ul>
+    <ul className="dropdown--container">
       <li
+        className="search--type--btn"
         onClick={() => {
-          setIsDropOpen(true);
+          setIsDropOpen(!isDropOpen);
           setSelected("종목");
         }}
       >

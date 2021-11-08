@@ -28,7 +28,7 @@ const PostList = ({ postList, setPostList, searchOption, setSearchOption }) => {
     } else {
       axios
         .get(
-          `http://localhost:8080/doc?type=${postType}&event=${game}&${option}=${input}&page=${page}`
+          `http://3.36.30.63/doc?type=${postType}&event=${game}&${option}=${input}&page=${page}`
         )
         .then((res) => {
           if (!res.data.data.length) {
