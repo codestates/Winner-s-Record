@@ -174,7 +174,9 @@ export default function EditUserInfo({ setProfileData, editHandler }) {
       }
     }
   };
-
+  useEffect(() => {
+    console.log(userInfo.type);
+  }, []);
   useEffect(() => {
     setMessage({
       ...message,
