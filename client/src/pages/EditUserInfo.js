@@ -64,7 +64,7 @@ export default function EditUserInfo({ setProfileData, editHandler }) {
       return;
     }
     axios
-      .post("http://localhost:8080/auth/nickname", { nickname })
+      .post("http://3.36.30.63/auth/nickname", { nickname })
       .then((res) => {
         setValidation({ ...validation, checkNickname: true });
         setMessage({ ...message, nickname: "사용 가능한 닉네임입니다" });
@@ -84,7 +84,7 @@ export default function EditUserInfo({ setProfileData, editHandler }) {
     const token = localStorage.getItem("token");
     axios
       .post(
-        "http://localhost:8080/auth/password",
+        "http://3.36.30.63/auth/password",
         { password: oldpassword },
         { headers: { authorization: `Bearer ${token}` } }
       )
@@ -107,7 +107,7 @@ export default function EditUserInfo({ setProfileData, editHandler }) {
     const oldToken = localStorage.getItem("token");
     axios
       .put(
-        "http://localhost:8080/auth",
+        "http://3.36.30.63/auth",
         { nickname, password: null },
         { headers: { authorization: `Bearer ${oldToken}` } }
       )
@@ -133,7 +133,7 @@ export default function EditUserInfo({ setProfileData, editHandler }) {
     const oldToken = localStorage.getItem("token");
     axios
       .put(
-        "http://localhost:8080/auth",
+        "http://3.36.30.63/auth",
         { nickname: null, password },
         { headers: { authorization: `Bearer ${oldToken}` } }
       )

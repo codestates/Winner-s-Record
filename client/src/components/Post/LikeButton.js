@@ -20,7 +20,7 @@ const LikeButton = ({ like, setLoginModal, postInfo, setPostInfo, postId }) => {
       // 좋아요 추가
       axios
         .post(
-          "http://localhost:8080/like",
+          "http://3.36.30.63/like",
           { docId: postId },
           { headers: { Authorization } }
         )
@@ -34,7 +34,7 @@ const LikeButton = ({ like, setLoginModal, postInfo, setPostInfo, postId }) => {
     } else {
       // 좋아요 제거
       axios
-        .delete("http://localhost:8080/like", {
+        .delete("http://3.36.30.63/like", {
           headers: { Authorization },
           data: { docId: postId },
         })

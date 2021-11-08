@@ -51,7 +51,7 @@ const MatchButton = ({
       const Authorization = `Bearer ${localStorage.getItem("token")}`;
       axios
         .post(
-          `http://localhost:8080/room`,
+          `http://3.36.30.63/room`,
           { docId: postId },
           { headers: { Authorization } }
         )

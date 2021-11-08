@@ -12,11 +12,6 @@ export default function Login() {
   const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
 
-  const [currentTab, setCurrentTab] = useState(0);
-  const selectTabHandler = (index) => {
-    setCurrentTab(index);
-  };
-
   const handleInputValue = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value.toLowerCase() });
     setErrorMessage("");
@@ -26,7 +21,7 @@ export default function Login() {
     const { email, password } = loginInfo;
     axios
       .post(
-        "http://localhost:8080/auth/login",
+        "http://3.36.30.63/auth/login",
         { email, password },
         { withCredentials: true }
       )
@@ -54,7 +49,7 @@ export default function Login() {
 
   const handleNaver = () => {
     axios
-      .get("http://localhost:8080/auth/naver/login")
+      .get("http://3.36.30.63/auth/naver/login")
       .then((res) => {
         console.log(res.data);
       })
@@ -65,7 +60,7 @@ export default function Login() {
 
   const handleGoogle = () => {
     axios
-      .get("http://localhost:8080/auth/google/login")
+      .get("http://3.36.30.63/auth/google/login")
       .then((res) => {
         console.log(res.data);
       })
@@ -119,15 +114,18 @@ export default function Login() {
       <div className="login--socialcontainer">
         <img
           className="login--socialbtn"
+          alt="kakao"
           src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%86%8C%EC%85%9C%EC%95%84%EC%9D%B4%EC%BD%98/btn_kakao.png"
           onClick={handleKakao}
         />
         <img
+          alt="naver"
           className="login--socialbtn"
           src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%86%8C%EC%85%9C%EC%95%84%EC%9D%B4%EC%BD%98/naver.png"
           onClick={handleNaver}
         />
         <img
+          alt="google"
           className="login--socialbtn"
           src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%86%8C%EC%85%9C%EC%95%84%EC%9D%B4%EC%BD%98/google-icon-styl.png"
           onClick={handleGoogle}
