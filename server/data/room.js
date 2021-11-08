@@ -321,3 +321,20 @@ export async function chattings(roomId, userId) {
     }
   }
 }
+
+export async function createChattingDoc(data) {
+  const {roomId, content} = data
+  await db.Chattings.create({
+    roomId, 
+    content
+  }).catch((err) => console.log(err))
+}
+
+export async function createChatting(data) {
+  const {userId, roomId, content} = data
+  await db.Chattings.create({
+    roomId,
+    userId,
+    content
+  }).catch((err) => console.log(err))
+}
