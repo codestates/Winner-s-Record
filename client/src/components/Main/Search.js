@@ -20,7 +20,7 @@ const Search = ({ setPostList, searchOption, setSearchOption }) => {
 
     axios
       .get(
-        `http://localhost:8080/doc?type=${postType}&event=${game}&${option}=${input}&page=0`
+        `http://3.36.30.63/doc?type=${postType}&event=${game}&${option}=${input}&page=0`
       )
       .then((res) => {
         if (res.status === 404) {

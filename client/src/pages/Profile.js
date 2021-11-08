@@ -10,6 +10,7 @@ import UserInfo from "../components/Profile/UserInfo";
 import ProfileRank from "../components/Profile/ProfileRank";
 import DocList from "../components/Profile/DocList";
 import Error from "./Error";
+import Header from "../components/Header";
 
 export default function Profile() {
   const { userId } = useParams();
@@ -35,7 +36,7 @@ export default function Profile() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`http://localhost:8080/auth/${userId}`, {
+      .get(`http://3.36.30.63/auth/${userId}`, {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -71,16 +72,22 @@ export default function Profile() {
             editHandler={editHandler}
           />
         ) : (
-          <div className="profile--background">
-            <UserInfo
-              editHandler={editHandler}
-              isMypage={isMypage}
-              profileData={profileData}
-              editPhoto={editPhoto}
-            />
-            <ProfileRank isMypage={isMypage} nickname={profileData.nickname} />
-            <DocList userId={userId} isMypage={isMypage} />
-          </div>
+          <>
+            <Header />
+            <div className="profile--background">
+              <UserInfo
+                editHandler={editHandler}
+                isMypage={isMypage}
+                profileData={profileData}
+                editPhoto={editPhoto}
+              />
+              <ProfileRank
+                isMypage={isMypage}
+                nickname={profileData.nickname}
+              />
+              <DocList userId={userId} isMypage={isMypage} />
+            </div>
+          </>
         )
       ) : (
         <Error />

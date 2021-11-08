@@ -30,7 +30,7 @@ function App() {
   const getUserInfo = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
-      .get("http://localhost:8080/auth/me", { headers: { Authorization } })
+      .get("http://3.36.30.63/auth/me", { headers: { Authorization } })
       .then((res) => {
         console.log(res.data);
         dispatch(setLogin());

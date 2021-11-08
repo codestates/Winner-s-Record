@@ -4,6 +4,8 @@ import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserInfo } from "../modules/userInfo";
 import { setLogin } from "../modules/isLogin";
+import dotenv from "dotenv";
+dotenv.config();
 
 export default function Login() {
   const history = useHistory();
@@ -11,11 +13,6 @@ export default function Login() {
   const prevPage = useSelector((state) => state.prevPage);
   const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
-
-  const [currentTab, setCurrentTab] = useState(0);
-  const selectTabHandler = (index) => {
-    setCurrentTab(index);
-  };
 
   const handleInputValue = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value.toLowerCase() });
@@ -26,7 +23,7 @@ export default function Login() {
     const { email, password } = loginInfo;
     axios
       .post(
-        "http://localhost:8080/auth/login",
+        "http://3.36.30.63/auth/login",
         { email, password },
         { withCredentials: true }
       )
@@ -48,13 +45,13 @@ export default function Login() {
   const handleKakao = (e) => {
     e.preventDefault();
     window.location.assign(
-      "https://kauth.kakao.com/oauth/authorize?client_id=42184b4ebbf71c527914d5cf6269aae0&redirect_uri=http://localhost:3000/redirect&&response_type=code"
+      `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_ID}&redirect_uri=http://localhost:3000/redirect&&response_type=code`
     );
   };
 
   const handleNaver = () => {
     axios
-      .get("http://localhost:8080/auth/naver/login")
+      .get("http://3.36.30.63/auth/naver/login")
       .then((res) => {
         console.log(res.data);
       })
@@ -65,7 +62,7 @@ export default function Login() {
 
   const handleGoogle = () => {
     axios
-      .get("http://localhost:8080/auth/google/login")
+      .get("http://3.36.30.63/auth/google/login")
       .then((res) => {
         console.log(res.data);
       })
@@ -119,15 +116,18 @@ export default function Login() {
       <div className="login--socialcontainer">
         <img
           className="login--socialbtn"
+          alt="kakao"
           src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%86%8C%EC%85%9C%EC%95%84%EC%9D%B4%EC%BD%98/btn_kakao.png"
           onClick={handleKakao}
         />
         <img
+          alt="naver"
           className="login--socialbtn"
           src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%86%8C%EC%85%9C%EC%95%84%EC%9D%B4%EC%BD%98/naver.png"
           onClick={handleNaver}
         />
         <img
+          alt="google"
           className="login--socialbtn"
           src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%86%8C%EC%85%9C%EC%95%84%EC%9D%B4%EC%BD%98/google-icon-styl.png"
           onClick={handleGoogle}

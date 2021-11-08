@@ -17,7 +17,7 @@ export default function ProfileRank({ isMypage, nickname }) {
 
   const handleRank = (event) => {
     axios
-      .get(`http://localhost:8080/rank?event=${event}&nickname=${nickname}`)
+      .get(`http://3.36.30.63/rank?event=${event}&nickname=${nickname}`)
       .then((res) => {
         const filterd = res.data.data.filter((e) => e.nickname === nickname);
         setRank(...filterd);
@@ -30,7 +30,7 @@ export default function ProfileRank({ isMypage, nickname }) {
   const handleHistory = (event) => {
     const token = localStorage.getItem("token");
     axios
-      .get(`http://localhost:8080/match?nickname=${nickname}&event=${event}`, {
+      .get(`http://3.36.30.63/match?nickname=${nickname}&event=${event}`, {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {

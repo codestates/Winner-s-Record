@@ -7,12 +7,19 @@ const OptionSelector = ({ searchOption, setSearchOption }) => {
   return (
     <div className="search--option--container">
       <div
-        className="search--dropdown--selector"
+        className={`search--dropdown--selector${isClicked ? " active" : ""}`}
         onClick={() => {
           setIsClicked(!isClicked);
         }}
       >
-        {selected}
+        <span>
+          {selected}
+          {isClicked ? (
+            <i className="fas fa-angle-up" />
+          ) : (
+            <i className="fas fa-angle-down" />
+          )}
+        </span>
       </div>
       {isClicked ? (
         <ul className="search--dropdown--container">

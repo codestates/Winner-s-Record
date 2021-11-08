@@ -27,22 +27,13 @@ const PostList = ({ postList, setPostList, searchOption }) => {
     } else {
       axios
         .get(
-          `http://localhost:8080/doc?type=$tournament&event=${game}&${option}=${input}&page=${page}`
+          `http://3.36.30.63/doc?type=$tournament&event=${game}&${option}=${input}&page=${page}`
         )
         .then((res) => {
-          console.log(res.data.data);
           if (!res.data.data.length) {
             setNoMoreData(true);
           } else {
-            const sorted = [...postList, ...res.data.data].sort((a, b) => {
-              if (a.status === "대기" && b.status !== "대기") {
-                return -1;
-              } else if (a.status !== "대기" && b.status === "대기") {
-                return 1;
-              } else {
-                return 0;
-              }
-            });
+            const sorted = [...postList, ...res.data.data];
             setPostList(sorted);
             setPage(page + 1);
             setFetching(false);

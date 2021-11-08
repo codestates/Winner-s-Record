@@ -13,7 +13,7 @@ export default function DocList({ userId, isMypage }) {
 
   const handleCreatedList = () => {
     axios
-      .get(`http://localhost:8080/doc?hostId=${userId}`)
+      .get(`http://3.36.30.63/doc?hostId=${userId}`)
       .then((res) => {
         setList(res.data.data);
       })
@@ -25,7 +25,7 @@ export default function DocList({ userId, isMypage }) {
 
   const handleLikeList = () => {
     axios
-      .get(`http://localhost:8080/like/${userId}`)
+      .get(`http://3.36.30.63/like/${userId}`)
       .then((res) => {
         setList(res.data.data);
       })
@@ -37,7 +37,7 @@ export default function DocList({ userId, isMypage }) {
 
   const handleProgressList = () => {
     axios
-      .get(`http://localhost:8080/doc?guestId=${userId}`)
+      .get(`http://3.36.30.63/doc?guestId=${userId}`)
       .then((res) => {
         setList(res.data.data);
       })
@@ -49,7 +49,7 @@ export default function DocList({ userId, isMypage }) {
 
   const handleHistoryList = () => {
     axios
-      .get(`http://localhost:8080/match/history?userId=${userId}`)
+      .get(`http://3.36.30.63/match/history?userId=${userId}`)
       .then((res) => {
         setHistory(res.data.myMatch);
       })
@@ -111,7 +111,7 @@ export default function DocList({ userId, isMypage }) {
         history.length ? (
           <HistoryList list={history} />
         ) : (
-          <div>hi</div>
+          <div>최근 경기기록이 없습니다.</div>
         )
       ) : null}
     </>

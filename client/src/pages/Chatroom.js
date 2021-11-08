@@ -45,7 +45,7 @@ const Chatroom = () => {
 
     axios
       .post(
-        `http://localhost:8080/room/${roomId}`,
+        `http://3.36.30.63/room/${roomId}`,
         { docId: chatPost },
         {
           headers: { Authorization },

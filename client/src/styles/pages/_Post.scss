@@ -1,0 +1,8 @@
+@import "../components/Post/ImageCarousel";
+@import "../components/Post/PostMap";
+
+.post--container {
+  @include flexbox();
+  flex-direction: column;
+  width: 100%;
+}

@@ -19,7 +19,7 @@ const Search = ({ setPostList, searchOption, setSearchOption }) => {
 
     axios
       .get(
-        `http://localhost:8080/doc?type=tournament&event=${game}&${option}=${input}&page=0`
+        `http://3.36.30.63/doc?type=tournament&event=${game}&${option}=${input}&page=0`
       )
       .then((res) => {
         if (res.status === 404) {
@@ -42,20 +42,22 @@ const Search = ({ setPostList, searchOption, setSearchOption }) => {
   };
 
   return (
-    <div>
-      <GameSelector
-        setSearchOption={setSearchOption}
-        searchOption={searchOption}
-      />
-      <OptionSelector
-        setSearchOption={setSearchOption}
-        searchOption={searchOption}
-      />
-      <SearchBar
-        searchHandler={searchHandler}
-        setSearchOption={setSearchOption}
-        searchOption={searchOption}
-      />
+    <div className="search--container">
+      <div className="wrapper">
+        <GameSelector
+          setSearchOption={setSearchOption}
+          searchOption={searchOption}
+        />
+        <OptionSelector
+          setSearchOption={setSearchOption}
+          searchOption={searchOption}
+        />
+        <SearchBar
+          searchHandler={searchHandler}
+          setSearchOption={setSearchOption}
+          searchOption={searchOption}
+        />
+      </div>
     </div>
   );
 };
