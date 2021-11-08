@@ -11,7 +11,7 @@ const Result = () => {
   const history = useHistory();
 
   const getData = () => {
-    axios.get(`http://localhost:8080/tournament/${postId}`).then((res) => {
+    axios.get(`http://3.36.30.63/tournament/${postId}`).then((res) => {
       const data = res.data.data;
       console.log(data);
 
@@ -29,7 +29,7 @@ const Result = () => {
   };
 
   const getHost = () => {
-    axios.get(`http://localhost:8080/doc/${postId}`).then((res) => {
+    axios.get(`http://3.36.30.63/doc/${postId}`).then((res) => {
       setHost(res.data.data.userData.nickname);
     });
   };

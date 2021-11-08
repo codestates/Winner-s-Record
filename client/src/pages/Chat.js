@@ -9,7 +9,7 @@ const Chat = () => {
   const getData = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
-      .get("http://localhost:8080/room", { headers: { Authorization } })
+      .get("http://3.36.30.63/room", { headers: { Authorization } })
       .then((res) => {
         setRoomList(res.data.data);
       });
