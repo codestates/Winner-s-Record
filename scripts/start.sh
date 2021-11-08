@@ -15,3 +15,4 @@ export SOCKET_PORT=$(aws ssm get-parameters --region ap-northeast-2 --names SOCK
 export TOKEN_EXPIRES_SEC=$(aws ssm get-parameters --region ap-northeast-2 --names TOKEN_EXPIRES_SEC --query Parameters[0].Value | sed 's/"//g')
 
 authbind --deep pm2 start app.js
+authbind --deep pm2 start index.cjs
