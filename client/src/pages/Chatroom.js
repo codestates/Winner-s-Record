@@ -8,7 +8,7 @@ import io from "socket.io-client";
 import Message from "../components/Chat/Message";
 import ChatPost from "../components/Chat/ChatPost";
 
-const socket = io.connect("http://localhost:8081");
+const socket = io.connect("http://3.36.30.63:8080");
 
 const Chatroom = () => {
   const { roomId } = useParams();
