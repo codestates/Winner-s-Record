@@ -174,9 +174,21 @@ export default function EditUserInfo({ setProfileData, editHandler }) {
       }
     }
   };
+  const getUserInfo = () => {
+    const Authorization = `Bearer ${localStorage.getItem("token")}`;
+    axios
+      .get("http://3.36.30.63/auth/me", { headers: { Authorization } })
+      .then((res) => {
+        console.log(res.data);
+        dispatch(setUserInfo(res.data));
+      });
+  };
+
   useEffect(() => {
-    console.log(userInfo.type);
+    getUserInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   useEffect(() => {
     setMessage({
       ...message,
