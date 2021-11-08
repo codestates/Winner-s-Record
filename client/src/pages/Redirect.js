@@ -70,6 +70,7 @@ export default function Redirect() {
       )
       .then((res) => {
         const { token, userdata } = res.data;
+        console.log(res.data);
         localStorage.setItem("token", token);
         const accessToken = localStorage.getItem("token");
         if (accessToken) {
@@ -81,7 +82,6 @@ export default function Redirect() {
       .catch((err) => {
         console.log(err);
       });
-    openModalHandler(); // 모달 열림
   };
 
   const handleKeyPress = (e) => {
