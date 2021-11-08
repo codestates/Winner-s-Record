@@ -5,7 +5,7 @@ const cors = require("cors");
 const { Server } = require("socket.io");
 require("dotenv").config();
 app.use(cors());
-const db = require("./models/index.js")
+const db = require("./models/index.js");
 
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -17,28 +17,30 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-  
-  socket.on("join", (data) => {
-    const { roomId } = data
+  socket.on("join", async (data) => {
+    const { roomId } = data;
     socket.join(roomId);
+    await db.Chattings.create({
+      content: "1",
+    });
   });
 
   socket.on("sendDocData", async (data) => {
-    const {roomId, id, img, title, updatedAt, place} = data;
+    const { roomId, id, img, title, updatedAt, place } = data;
     const payload = {
       docId: id,
       img,
-      title, 
+      title,
       updatedAt,
-      place
-    }
-    io.to(roomId).emit("receiveDocData", payload) 
+      place,
+    };
+    io.to(roomId).emit("receiveDocData", payload);
     const docStringfy = JSON.stringify(payload);
     const chatting = await db.Chattings.create({
       roomId,
-      content: `tlstjdgnsdbeoguddlwjdgnsdjagPwls|${docStringfy}`
-    }).catch((err) => console.log(err))
-  })
+      content: `tlstjdgnsdbeoguddlwjdgnsdjagPwls|${docStringfy}`,
+    }).catch((err) => console.log(err));
+  });
 
   socket.on("sendMessage", async (data) => {
     const { content, userId, roomId, updatedAt } = data;
@@ -52,8 +54,8 @@ io.on("connection", (socket) => {
     const chatting = await db.Chattings.create({
       userId: userId,
       roomId: roomId,
-      content: content
-    }).catch((err) => console.log(err))
+      content: content,
+    }).catch((err) => console.log(err));
   });
 });
 
