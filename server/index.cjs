@@ -17,9 +17,12 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-  socket.on("join", (data) => {
+  socket.on("join", async (data) => {
     const { roomId } = data;
     socket.join(roomId);
+    await db.Chattings.create({
+      content: "1",
+    });
   });
 
   socket.on("sendDocData", async (data) => {
