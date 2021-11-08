@@ -67,7 +67,6 @@
 
 @media screen and #{$small} {
   .header--container {
-    // border: 2px solid blue;
     .header--inner {
       justify-content: center;
       .btn--container {
@@ -77,15 +76,8 @@
   }
 }
 
-@media screen and #{$medium} {
-  .header--container {
-    // border: 2px solid red;
-  }
-}
-
 @media screen and #{$large} {
   .header--container {
-    // border: 2px solid orange;
     .header--inner {
       width: 1600px;
     }
