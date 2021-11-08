@@ -28,7 +28,6 @@ const Main = () => {
         searchOption={searchOption}
         setSearchOption={setSearchOption}
       />
-      MainPage
       {postList.length ? (
         <PostList
           postList={postList}

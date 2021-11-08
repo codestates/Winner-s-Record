@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
 const PostListContent = ({ postInfo }) => {
-  const { id, event, userId, type, place, price, status, title, img, like } =
-    postInfo;
+  const { event, type, place, price, status, title, img, like } = postInfo;
   const [placeToDisplay, setPlaceToDisplay] = useState("");
 
   useEffect(() => {
@@ -24,6 +23,23 @@ const PostListContent = ({ postInfo }) => {
     }
   };
 
+  const countPrice = (price) => {
+    console.log(typeof price);
+    if (price.length < 4) {
+      return `${price}`;
+    } else if (price.length < 5 && !Number(price.slice(1))) {
+      return `${price.slice(0, 1)}천`;
+    } else if (price.length < 5) {
+      return `${price.slice(0, 1)}천 ${price.slice(1)}`;
+    } else if (price.length >= 5 && !Number(price.slice(1))) {
+      return `${price.slice(0, 1)}만`;
+    } else if (price.length >= 5) {
+      return `${price.slice(0, 1)}만 ${price.slice(1)}`;
+    } else {
+      return price;
+    }
+  };
+
   return (
     <div className="list--content--container">
       <div
@@ -31,19 +47,28 @@ const PostListContent = ({ postInfo }) => {
       >
         <div className="list--content--pic">
           <img src={img[0]} alt="사진" />
+          <div
+            className={`list--content--type ${
+              type === "match" ? "match" : "trade"
+            } `}
+          >
+            <span>{type === "match" ? "경기" : "거래"}</span>
+          </div>
         </div>
-        <div
-          className={`list--content--type ${
-            type === "match" ? "match" : "trade"
-          } `}
-        >
-          {type === "match" ? "경기" : "거래"}
+        <div className="list--content--text">
+          <div className="game">
+            <span>{`#${gameNamer(event)}`}</span>
+          </div>
+          <div className="title">{title}</div>
+          <div className="place">{placeToDisplay}</div>
+          {price ? (
+            <div className="price">{countPrice(String(price))}원</div>
+          ) : null}
+          <div className="like">
+            <i class="far fa-heart"></i>
+            <span>{`${like}`}</span>
+          </div>
         </div>
-        <div className="list--content--game">{`#${gameNamer(event)}`}</div>
-        <div className="list--content--title">{title}</div>
-        <div className="list--content--place">{placeToDisplay}</div>
-        {price ? <div className="list--content--price">{price}</div> : null}
-        <div className="list--content--like">{`좋아요 ${like}`}</div>
       </div>
     </div>
   );

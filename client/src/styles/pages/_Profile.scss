@@ -180,25 +180,3 @@
     transition: 0.2s;
   }
 }
-
-.list--container {
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-  grid-auto-rows: 25rem;
-  height: auto;
-  justify-items: center;
-}
-
-.list--content--container {
-  border: 1px solid red;
-  width: 100%;
-  height: 100%;
-}
-
-.list--content--pic {
-  img {
-    width: 100%;
-    height: 100%;
-  }
-}
