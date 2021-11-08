@@ -3,10 +3,18 @@ const app = express();
 const http = require("http");
 const cors = require("cors");
 const { Server } = require("socket.io");
+const mysql = require("mysql");
 require("dotenv").config();
 app.use(cors());
-// const roomData = require("./data/room.js");
 const db = require("./models/index.js");
+
+const connection = mysql.createConnection({
+  host: process.env.DATABASE_HOST,
+  user: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
+  database: "WR",
+  port: process.env.DATABASE_PORT,
+});
 
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -33,16 +41,12 @@ io.on("connection", (socket) => {
       place,
     };
     io.to(roomId).emit("receiveDocData", payload);
+    connection.connect();
     const docStringfy = JSON.stringify(payload);
     const chatting = await db.Chattings.create({
       roomId,
       content: `tlstjdgnsdbeoguddlwjdgnsdjagPwls|${docStringfy}`,
     }).catch((err) => console.log(err));
-    // const datas = {
-    //   roomId,
-    //   content: `tlstjdgnsdbeoguddlwjdgnsdjagPwls|${docStringfy}`,
-    // };
-    // const result = await roomData.createChattingDoc(datas);
   });
 
   socket.on("sendMessage", async (data) => {
@@ -53,13 +57,12 @@ io.on("connection", (socket) => {
       roomId,
       updatedAt,
     });
+    connection.connect();
     const chatting = await db.Chattings.create({
       userId: userId,
       roomId: roomId,
       content: content,
     }).catch((err) => console.log(err));
-    // const datas = { userId, roomId, content };
-    // const result = await roomData.createChatting(datas);
   });
 });
 
