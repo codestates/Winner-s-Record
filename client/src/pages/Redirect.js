@@ -13,7 +13,7 @@ export default function Redirect() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const openModalHandler = () => {
     setIsModalOpen(!isModalOpen);
@@ -82,6 +82,7 @@ export default function Redirect() {
       .catch((err) => {
         console.log(err);
       });
+    openModalHandler(); // 모달 열림
   };
 
   const handleKeyPress = (e) => {
