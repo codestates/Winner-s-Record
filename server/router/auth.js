@@ -14,7 +14,6 @@ router.post("/nickname", authController.nicknameValidator);
 router.post("/login", authController.login);
 
 //kakao
-// router.get("/kakao/login", authController.kakaoLogin);
 router.get("/kakao/callback", authController.kakaoCallback);
 
 router.post("/password", jwtValidator, authController.passwordValidator);
