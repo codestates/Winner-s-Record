@@ -5,9 +5,10 @@ const ImageCarousel = ({ images = [] }) => {
 
   return (
     <div className="post--ic--container">
-      <div className="post--ic--image--wrapper">
+      <div className="image--wrapper">
         <img src={images[idxImg]} alt="" />
         <div
+          className="btn left"
           onClick={() => {
             if (idxImg === 0) {
               setIdxImg(images.length - 1);
@@ -16,9 +17,10 @@ const ImageCarousel = ({ images = [] }) => {
             }
           }}
         >
-          prev
+          <i className="fas fa-chevron-left" />
         </div>
         <div
+          className="btn right"
           onClick={() => {
             if (idxImg === images.length - 1) {
               setIdxImg(0);
@@ -27,7 +29,7 @@ const ImageCarousel = ({ images = [] }) => {
             }
           }}
         >
-          next
+          <i className="fas fa-chevron-right" />
         </div>
       </div>
 

@@ -22,8 +22,6 @@ $large: unquote("(min-width: 1600px)");
 @import "./FixedButton";
 @import "./components/Header";
 @import "./components/Footer";
-@import "./components/Post/ImageCarousel";
-@import "./components/Post/PostMap";
 @import "./components/Main/Search";
 
 // pages
@@ -34,3 +32,4 @@ $large: unquote("(min-width: 1600px)");
 @import "./pages/Entry";
 @import "./pages/Profile";
 @import "./pages/EditUserInfo";
+@import "./pages/Post";
