@@ -1,0 +1,173 @@
+@import url("https://fonts.googleapis.com/css2?family=Dongle:wght@700&display=swap");
+
+.landing--container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Dongle", sans-serif;
+}
+
+.landing--box {
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.first--container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.first--bottom {
+  display: flex;
+  align-items: center;
+}
+
+.first--bottom--right {
+  display: flex;
+  flex-direction: column;
+}
+
+.first--title {
+  font-size: 3rem;
+  margin-bottom: 3%;
+}
+
+.first--text {
+  margin-top: 5%;
+  font-size: 2rem;
+}
+
+.first--bottom--left > img {
+  width: 15rem;
+  height: 15rem;
+}
+
+.first--bottom--img {
+  position: relative;
+  bottom: 4.5rem;
+  right: 2.2rem;
+  transform: rotate(280deg);
+  width: 5rem;
+  height: 5rem;
+}
+
+.first--bottom--img:hover {
+  transform: rotate(275deg) scale(1.1);
+}
+
+.second {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.second--container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  bottom: 5rem;
+}
+
+.second--bottom {
+  background-color: #e3f2e4;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80vw;
+  height: 100%;
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.second--title {
+  font-size: 4rem;
+  position: relative;
+  top: 2rem;
+}
+.second--card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+  height: 80%;
+}
+.second--card--img > img {
+  width: 5rem;
+  translate: all 300ms ease;
+}
+
+.second--card--img:hover img {
+  transform: rotate(-5deg) scale(1.1);
+}
+
+.second--card--img {
+  background-color: palegoldenrod;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  width: 6.5rem;
+}
+
+.second--card--contents {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.second--card--title {
+  font-size: 2rem;
+  margin-bottom: 13%;
+}
+
+.second--card--text {
+  font-size: 1rem;
+  text-align: center;
+}
+
+.third {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+
+.third--container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.third--box--img > img {
+  width: 12rem;
+  height: 12rem;
+  margin-top: 50%;
+  transform: scaleX(-1);
+  position: relative;
+  right: 2rem;
+}
+
+.third--box--content > img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  background-color: #ffeb3b;
+  border-radius: 1rem;
+  border: none;
+  font-family: "Dongle", sans-serif;
+  font-size: 1.6rem;
+  margin-bottom: 8%;
+}
