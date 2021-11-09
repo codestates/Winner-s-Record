@@ -41,9 +41,7 @@
 }
 
 .modal--content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flexbox();
   background-color: gray;
   width: 300px;
   height: 100px;

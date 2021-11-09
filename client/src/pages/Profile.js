@@ -1,9 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { useSelector, useDispatch } from "react-redux";
-import { setUserInfo } from "../modules/userInfo";
-import { setLogin } from "../modules/isLogin";
+import { useSelector } from "react-redux";
 import EditUserInfo from "./EditUserInfo";
 import LoadingIndicator from "../components/LoadingIndicator";
 import UserInfo from "../components/Profile/UserInfo";
@@ -23,7 +21,6 @@ export default function Profile() {
   });
   const userInfo = useSelector((state) => state.userInfo);
   const isMypage = profileData.userId === userInfo.userId;
-  const dispatch = useDispatch();
 
   const editHandler = () => {
     setEdit(!edit);
@@ -40,12 +37,8 @@ export default function Profile() {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        const { userData, profileData } = res.data;
+        const { profileData } = res.data;
         setProfileData(profileData);
-        if (token) {
-          dispatch(setLogin()); // 로그인 상태 변경
-          dispatch(setUserInfo(userData)); // 유저 정보 입력
-        }
       })
       .catch((err) => {
         console.log(err);

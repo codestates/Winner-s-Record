@@ -29,9 +29,7 @@
 }
 
 .edit--btncontainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flexbox();
   flex-direction: column;
   margin: 40px;
   @media screen and (max-width: 768px) {
