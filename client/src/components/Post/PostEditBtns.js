@@ -40,9 +40,13 @@ const PostEditBtns = ({ hostId, setLoginModal, setModalBtnType }) => {
   };
 
   return (
-    <div className="post--editbtns--container">
-      <div onClick={editHandler}>수정</div>
-      <div onClick={deleteHandler}>삭제</div>
+    <div className="editbtns">
+      <div onClick={editHandler}>
+        <i className="fas fa-edit" />
+      </div>
+      <div onClick={deleteHandler}>
+        <i className="fas fa-trash-alt" />
+      </div>
     </div>
   );
 };

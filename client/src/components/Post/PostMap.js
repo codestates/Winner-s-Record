@@ -25,18 +25,17 @@ const PostMap = ({
       infowindow = new kakao.maps.InfoWindow({
         map,
         position: new kakao.maps.LatLng(Number(data[0]) + 0.0015, data[1]),
-        content: `<div class="map--infowindow">${
+        content: `<div class="map--infowindow"><span>${
           data[3] === "null" ? data[2] : data[3]
-        }</div>`,
+        }</span></div>`,
         removable: true,
       });
   }, []);
 
   return (
-    <div className="post--map">
-      <div className="post--map--container">
-        <div className="post--map" ref={container} />
-      </div>
+    <div className="post--map--container">
+      <div className="text">만날 장소</div>
+      <div className="mapbox" ref={container} />
     </div>
   );
 };

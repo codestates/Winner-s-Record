@@ -1,0 +1,11 @@
+.post--primarybtn--container {
+  @include flexbox();
+  .btn {
+    &.two {
+      @include button(40px, 0 15px);
+    }
+    &.one {
+      @include button(40px, 0 50px);
+    }
+  }
+}
