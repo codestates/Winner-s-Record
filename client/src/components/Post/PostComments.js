@@ -2,7 +2,6 @@ import axios from "axios";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { setUserInfo } from "../../modules/userInfo";
 import uuid from "react-uuid";
 
 const PostComments = ({ board, postInfo, setPostInfo }) => {

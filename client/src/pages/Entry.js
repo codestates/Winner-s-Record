@@ -7,6 +7,9 @@ import EntryPlayer from "../components/Entry/EntryPlayer";
 import { ApplyBtn, FixBtn } from "../components/Entry/EntryPrimaryButton";
 import NeedLoginModal from "../components/NeedLoginModal";
 import { modalOff } from "../modules/isModalOpen";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import TopButton from "../components/TopButton";
 
 const Entry = () => {
   const { postId } = useParams();
@@ -61,57 +64,62 @@ const Entry = () => {
 
   return (
     <div className="entry--container">
-      <div className="entry--nametag">참가 확정 인원</div>
-      <ul className="entry--fixed--container">
-        {fixed.map((userData) => {
-          return (
-            <EntryPlayer
-              key={userData.userId}
-              postId={postId}
-              userData={userData}
-              setApplied={setApplied}
-              fixed={fixed}
-              setFixed={setFixed}
-              hostId={host.userId}
-              setLoginModal={setLoginModal}
-              postType={postType}
-            />
-          );
-        })}
-      </ul>
-      <div className="entry--nametag">참가 신청 인원</div>
-      <ul className="entry--applied--container">
-        {applied.map((userData) => {
-          return (
-            <EntryPlayer
-              key={userData.userId}
-              postId={postId}
-              userData={userData}
-              setApplied={setApplied}
-              fixed={fixed}
-              setFixed={setFixed}
-              hostId={host.userId}
-              setLoginModal={setLoginModal}
-              postType={postType}
-            />
-          );
-        })}
-      </ul>
+      <Header />
+      <div className="entry--inner">
+        <div className="title">참가 확정 인원</div>
+        <ul className="player--container">
+          {fixed.map((userData) => {
+            return (
+              <EntryPlayer
+                key={userData.userId}
+                postId={postId}
+                userData={userData}
+                setApplied={setApplied}
+                fixed={fixed}
+                setFixed={setFixed}
+                hostId={host.userId}
+                setLoginModal={setLoginModal}
+                postType={postType}
+              />
+            );
+          })}
+        </ul>
+        <div className="title">참가 신청 인원</div>
+        <ul className="player--container">
+          {applied.map((userData) => {
+            return (
+              <EntryPlayer
+                key={userData.userId}
+                postId={postId}
+                userData={userData}
+                setApplied={setApplied}
+                fixed={fixed}
+                setFixed={setFixed}
+                hostId={host.userId}
+                setLoginModal={setLoginModal}
+                postType={postType}
+              />
+            );
+          })}
+        </ul>
 
-      {userInfo.userId === host.userId ? (
-        <FixBtn fixed={fixed} postType={postType} eventType={eventType} />
-      ) : (
-        <ApplyBtn
-          hostId={host.userId}
-          postId={postId}
-          fixed={fixed}
-          applied={applied}
-          setApplied={setApplied}
-          setLoginModal={setLoginModal}
-        />
-      )}
+        {userInfo.userId === host.userId ? (
+          <FixBtn fixed={fixed} postType={postType} eventType={eventType} />
+        ) : (
+          <ApplyBtn
+            hostId={host.userId}
+            postId={postId}
+            fixed={fixed}
+            applied={applied}
+            setApplied={setApplied}
+            setLoginModal={setLoginModal}
+          />
+        )}
+      </div>
 
+      <Footer />
       <BackButton />
+      <TopButton />
       {isModalOpen ? (
         <div className="modal--backdrop">
           <div className="modal--view">

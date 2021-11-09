@@ -35,7 +35,7 @@ const FixBtn = ({ fixed, postType, eventType }) => {
     }
   };
   return (
-    <div className={`entry--primary--btn`} onClick={clickHandler}>
+    <div className={`primary--btn colored`} onClick={clickHandler}>
       확정 완료
     </div>
   );
@@ -90,7 +90,7 @@ const ApplyBtn = ({
   };
 
   return (
-    <div className="entry--primary--btn" onClick={clickHandler}>
+    <div className="primary--btn colored" onClick={clickHandler}>
       신청
     </div>
   );
