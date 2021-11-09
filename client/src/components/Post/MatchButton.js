@@ -83,11 +83,18 @@ const MatchButton = ({
 
   return (
     <div className="post--primarybtn--container">
-      <div className="btn two colored" onClick={clickHandler}>
-        {buttonName}
-      </div>
-      <div classname="btn two" onClick={startChat}>
-        채팅 보내기
+      {status === "대기" && hostId !== userInfo.userId ? (
+        <div className="btn two" onClick={startChat}>
+          <span>채팅 보내기</span>
+        </div>
+      ) : null}
+      <div
+        className={`btn ${
+          status === "대기" && hostId !== userInfo.userId ? "two" : "one"
+        } ${status === "완료" ? "" : "colored"}`}
+        onClick={clickHandler}
+      >
+        <span>{buttonName}</span>
       </div>
     </div>
   );

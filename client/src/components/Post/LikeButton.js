@@ -49,6 +49,7 @@ const LikeButton = ({ like, setLoginModal, postInfo, setPostInfo, postId }) => {
   };
   return (
     <div
+      className="like"
       onClick={() => {
         clickHandler();
       }}

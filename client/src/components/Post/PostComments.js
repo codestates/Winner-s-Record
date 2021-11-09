@@ -1,28 +1,34 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { setUserInfo } from "../../modules/userInfo";
+import uuid from "react-uuid";
 
 const PostComments = ({ board, postInfo, setPostInfo }) => {
+  const userInfo = useSelector((state) => state.userInfo);
   const { postId } = useParams();
   const [input, setInput] = useState("");
 
   const postComment = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
-    console.log(postId, input);
-    console.log(Authorization);
-    axios
-      .post(
-        "http://3.36.30.63/board",
-        { docId: postId, text: input },
-        { headers: { Authorization } }
-      )
-      .then((res) => {
-        setPostInfo({ ...postInfo, board: res.data.board });
-        setInput("");
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    if (input === "") {
+      // do nothing
+    } else {
+      axios
+        .post(
+          "http://3.36.30.63/board",
+          { docId: postId, text: input },
+          { headers: { Authorization } }
+        )
+        .then((res) => {
+          setPostInfo({ ...postInfo, board: res.data.board });
+          setInput("");
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   };
 
   const deleteComment = (boardId) => {
@@ -49,24 +55,53 @@ const PostComments = ({ board, postInfo, setPostInfo }) => {
   return (
     <div className="post--comments">
       <ul>
+        <div className="title">
+          <span>댓글</span>
+        </div>
         {board.map((e) => {
-          return (
-            <li className="post--comments--content" key={e.id}>
-              <div className="img">
-                <img src={e.img} alt={e.nickname} />
-              </div>
-              <div className="name">{e.nickname}</div>
-              <div className="text">{e.text}</div>
-              <div
-                className="btn"
-                onClick={() => {
-                  deleteComment(e.id);
-                }}
-              >
-                삭제
-              </div>
-            </li>
-          );
+          console.log("postinfo", postInfo);
+          if (userInfo.nickname === e.nickname) {
+            return (
+              <li className="post--comments--content" key={uuid()}>
+                <div
+                  className="btn"
+                  onClick={() => {
+                    deleteComment(e.id);
+                  }}
+                >
+                  <i className="fas fa-trash-alt" />
+                </div>
+                <div className="text mine">
+                  <span>{e.text}</span>
+                </div>
+              </li>
+            );
+          } else {
+            return (
+              <li className="post--comments--content" key={uuid()}>
+                <div className="userinfo">
+                  <div className="img">
+                    <img src={e.img} alt={e.nickname} />
+                  </div>
+                  <div className="name">{e.nickname}</div>
+                </div>
+
+                <div className="text">
+                  <span>{e.text}</span>
+                </div>
+                {userInfo.userId === postInfo.userData.userId ? (
+                  <div
+                    className="btn"
+                    onClick={() => {
+                      deleteComment(e.id);
+                    }}
+                  >
+                    <i className="fas fa-trash-alt" />
+                  </div>
+                ) : null}
+              </li>
+            );
+          }
         })}
       </ul>
       <div className="post--comments--input">
@@ -81,8 +116,11 @@ const PostComments = ({ board, postInfo, setPostInfo }) => {
             setInput(e.target.value);
           }}
           value={input}
+          placeholder={"댓글을 입력해주세요."}
         />
-        <div onClick={postComment}>입력</div>
+        <div onClick={postComment}>
+          <i className="fas fa-paper-plane"></i>
+        </div>
       </div>
     </div>
   );
