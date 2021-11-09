@@ -47,6 +47,18 @@ export async function isEntry(docId, userId) {
   return result;
 }
 
+export async function isHost(boardId, userId) {
+  const docId = await db.Docs_Boards.findOne({
+    where: { boardId },
+  }).then((data) => data.dataValues.docId);
+  const host = await db.Docs.findOne({
+    where: { id: docId },
+  }).then((data) => data.dataValues.userId);
+  let result;
+  host ? (result = true) : (result = false);
+  return result;
+}
+
 export async function isAuth(boardId, userId) {
   const board = await db.Boards.findOne({
     where: { id: boardId, userId },
