@@ -1,0 +1,43 @@
+.ranking--content {
+  border: 1px solid red;
+  height: 7rem;
+  width: 30rem;
+  margin: 1rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  > div:first-child {
+    position: absolute;
+    left: 2rem;
+  }
+
+  > .ranking--profile {
+    left: 5rem;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    > img {
+      height: 5rem;
+      border-radius: 50%;
+    }
+  }
+
+  > .ranking--content-win {
+    position: absolute;
+    right: 14rem;
+  }
+
+  > .ranking--content-lose {
+    position: absolute;
+    right: 10rem;
+  }
+
+  > .ranking--content-point {
+    position: absolute;
+    right: 7rem;
+  }
+}

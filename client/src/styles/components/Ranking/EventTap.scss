@@ -1,0 +1,38 @@
+.ranking--taplist {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem;
+}
+
+.ranking--tap-selected {
+  transition: 0.4s;
+  background: $main-color;
+  border-radius: 3px;
+  color: white;
+  margin: 0.5rem;
+  width: 6rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.ranking--tap {
+  transition: 0.4s;
+  background: $gray;
+  border-radius: 3px;
+  color: white;
+  margin: 0.5rem;
+  width: 6rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    background-color: $main-color;
+    transition: 0.2s;
+  }
+}
