@@ -11,7 +11,7 @@ const BackButton = () => {
         history.go(-1);
       }}
     >
-      뒤로 가기
+      <i className="fas fa-chevron-left"></i>
     </div>
   );
 };

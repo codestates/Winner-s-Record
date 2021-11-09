@@ -1,3 +1,43 @@
+@import "../components/Entry/EntryPlayer";
+
 .entry--container {
-  position: absolute;
+  @include flexbox();
+
+  position: relative;
+  width: 100%;
+  flex-direction: column;
+  .entry--inner {
+    @include flexbox();
+
+    margin: 20px 0;
+    flex-direction: column;
+    width: 800px;
+    // border: 1px solid red;
+    .title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin: 10px 0;
+      margin-top: 30px;
+    }
+    .player--container {
+      @include flexbox();
+
+      width: 100%;
+      // border: 1px solid blue;
+      flex-direction: column;
+    }
+
+    .primary--btn {
+      @include button(40px, 0 60px);
+      margin: 10px 0;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .entry--container {
+    .entry--inner {
+      width: 100%;
+    }
+  }
 }

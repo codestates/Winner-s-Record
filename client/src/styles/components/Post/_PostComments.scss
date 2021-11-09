@@ -76,11 +76,11 @@
       height: 37px;
       @include flexbox();
       font-size: 1.2rem;
-      color: $main-color;
+      color: $font-gray;
       transition: 0.2s;
       &:hover {
         transition: 0.1s;
-
+        color: $main-color;
         border-bottom: 2px solid $main-color;
       }
     }
