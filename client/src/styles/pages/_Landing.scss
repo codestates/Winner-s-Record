@@ -6,6 +6,8 @@
   justify-content: center;
   align-items: center;
   font-family: "Dongle", sans-serif;
+  background-image: url("https://github.com/glen15/final-img/blob/master/%E1%84%87%E1%85%A2%E1%84%80%E1%85%A7%E1%86%BC%E1%84%8B%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8C%E1%85%B5.png?raw=true");
+  background-size: cover;
 }
 
 .landing--box {
@@ -73,11 +75,12 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  height: 90%;
   bottom: 5rem;
 }
 
 .second--bottom {
-  background-color: #e3f2e4;
+  background-color: #ccf092;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -85,6 +88,10 @@
   height: 100%;
   border-radius: 1rem;
   padding: 2rem;
+  box-shadow: rgba(225, 255, 177, 0.4) 5px 5px,
+    rgba(225, 255, 177, 0.3) 10px 10px, rgba(225, 255, 177, 0.2) 15px 15px,
+    rgba(225, 255, 177, 0.1) 20px 20px, rgba(225, 255, 177, 0.05) 25px 25px,
+    rgba(225, 255, 177, 0.03) 35px 35px;
 }
 
 .second--title {
@@ -100,6 +107,7 @@
   height: 80%;
 }
 .second--card--img > img {
+  height: 5rem;
   width: 5rem;
   translate: all 300ms ease;
 }
@@ -115,7 +123,9 @@
   align-items: center;
   border-radius: 1rem;
   margin-bottom: 2rem;
+  height: 6.5rem;
   width: 6.5rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
 .second--card--contents {
@@ -170,4 +180,19 @@
   font-family: "Dongle", sans-serif;
   font-size: 1.6rem;
   margin-bottom: 8%;
+  padding: 0 1rem;
+  cursor: pointer;
+  translate: all 300ms ease;
+  box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
+    rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+}
+
+.button:hover {
+  transform: scale(1.1);
+}
+
+.button:active {
+  box-shadow: 1px 1px 0 rgba(204, 174, 41, 0.5);
+  position: relative;
+  top: 2px;
 }
