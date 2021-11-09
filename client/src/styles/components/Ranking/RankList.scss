@@ -1,43 +1,56 @@
 .ranking--content {
-  border: 1px solid red;
   height: 7rem;
-  width: 30rem;
-  margin: 1rem;
-  display: flex;
-  align-items: center;
-  position: relative;
-
-  > div:first-child {
-    position: absolute;
-    left: 2rem;
-  }
+  width: 50rem;
+  @include flexbox();
+  border-bottom: 1px solid gray;
+  margin-bottom: 1rem;
 
   > .ranking--profile {
-    left: 5rem;
-    position: absolute;
-    display: flex;
+    @include flexbox();
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    width: 8rem;
 
     > img {
+      @include flexbox();
+      cursor: pointer;
       height: 5rem;
+      width: 5rem;
       border-radius: 50%;
+      margin-bottom: 0.5rem;
+    }
+
+    > div {
+      cursor: pointer;
     }
   }
 
+  > .ranking--content-rank {
+    font-size: 1.5rem;
+    text-align: center;
+    width: 7rem;
+  }
+
   > .ranking--content-win {
-    position: absolute;
-    right: 14rem;
+    text-align: center;
+    width: 7rem;
+    font-size: 1.5rem;
   }
 
   > .ranking--content-lose {
-    position: absolute;
-    right: 10rem;
+    text-align: center;
+    width: 7rem;
+    font-size: 1.5rem;
+  }
+
+  > .ranking--content-rate {
+    text-align: center;
+    width: 10rem;
+    font-size: 1.5rem;
   }
 
   > .ranking--content-point {
-    position: absolute;
-    right: 7rem;
+    text-align: center;
+    width: 7rem;
+    font-size: 1.5rem;
   }
 }

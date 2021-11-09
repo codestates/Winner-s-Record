@@ -1,11 +1,10 @@
 .ranking--taplist {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flexbox();
   margin: 2rem;
 }
 
 .ranking--tap-selected {
+  @include flexbox();
   transition: 0.4s;
   background: $main-color;
   border-radius: 3px;
@@ -13,13 +12,11 @@
   margin: 0.5rem;
   width: 6rem;
   height: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   cursor: pointer;
 }
 
 .ranking--tap {
+  @include flexbox();
   transition: 0.4s;
   background: $gray;
   border-radius: 3px;
@@ -27,9 +24,6 @@
   margin: 0.5rem;
   width: 6rem;
   height: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   cursor: pointer;
   &:hover {
     background-color: $main-color;
