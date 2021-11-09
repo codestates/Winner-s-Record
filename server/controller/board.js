@@ -20,10 +20,17 @@ export async function create(req, res) {
 export async function remove(req, res) {
   const userId = req.userId;
   const boardId = req.params.boardId;
-  const authCheck = await boardData.isAuth(boardId, userId);
-  if (!authCheck) {
-    return res.status(403).json({ message: "권한이 없습니다" });
+  const hostCheck = await boardData.isHost(boardId, userId);
+
+  if (hostCheck) {
+    await boardData.remove(boardId);
+    return res.sendStatus(204);
+  } else {
+    const authCheck = await boardData.isAuth(boardId, userId);
+    if (!authCheck) {
+      return res.status(403).json({ message: "권한이 없습니다" });
+    }
+    await boardData.remove(boardId);
+    return res.sendStatus(204);
   }
-  await boardData.remove(boardId);
-  return res.sendStatus(204);
 }
