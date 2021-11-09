@@ -31,6 +31,12 @@
     color: $main-color;
     cursor: pointer;
     border-bottom: 2px solid $gray;
+    transition: 0.2s;
+
+    &:hover {
+      transition: 0.1s;
+      border-bottom: 2px solid $main-color;
+    }
   }
 }
 
