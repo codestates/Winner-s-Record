@@ -1,17 +1,13 @@
 .signup--container {
-  display: flex;
+  @include flexbox();
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .signup--logo {
+  @include flexbox();
   width: 20rem;
   height: 20rem;
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   cursor: pointer;
   @media screen and (max-width: 768px) {
     width: 15rem;

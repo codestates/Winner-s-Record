@@ -60,6 +60,23 @@ const Post = ({ match }) => {
       });
   };
 
+  const countPrice = (price) => {
+    console.log(typeof price);
+    if (price.length < 4) {
+      return `${price}`;
+    } else if (price.length < 5 && !Number(price.slice(1))) {
+      return `${price.slice(0, 1)}천`;
+    } else if (price.length < 5) {
+      return `${price.slice(0, 1)}천 ${price.slice(1)}`;
+    } else if (price.length >= 5 && !Number(price.slice(1))) {
+      return `${price.slice(0, 1)}만`;
+    } else if (price.length >= 5) {
+      return `${price.slice(0, 1)}만 ${price.slice(1)}`;
+    } else {
+      return price;
+    }
+  };
+
   useEffect(() => {
     getPostData();
     setTimeout(() => {
@@ -71,6 +88,7 @@ const Post = ({ match }) => {
     userData,
     title,
     text,
+    price,
     place,
     like,
     img,
@@ -87,7 +105,7 @@ const Post = ({ match }) => {
         <div className="post--inner">
           <ImageCarousel images={img} />
           <div className="post--header">
-            <div className="post--title">{title}</div>
+            <div className="title">{title}</div>
             {isMypost ? (
               <PostEditBtns
                 hostId={userData.userId}
@@ -96,8 +114,14 @@ const Post = ({ match }) => {
               />
             ) : null}
           </div>
-
-          <PostUserInfo userData={userData} />
+          <div className="post--userinfo--price">
+            <PostUserInfo userData={userData} />
+            {price ? (
+              <div className="post--price">
+                <span>{`${countPrice(String(price))}원`}</span>
+              </div>
+            ) : null}
+          </div>
 
           <div className="post--text">{text}</div>
           <PostMap place={place} />

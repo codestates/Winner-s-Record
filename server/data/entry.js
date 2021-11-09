@@ -166,16 +166,24 @@ export async function deleteEntryPost(hostId, docId, userId) {
 }
 
 export async function changeEntryStatus(hostId, docId, userId) {
-  const checkHostDoc = await db.Entries.findOne({
+  const checkDoc = await db.Entries.findOne({
     where: {
       docId: docId,
-      status: "호스트",
+      userId: userId
     },
   })
     .then((res) => res.dataValues)
     .catch((err) => console.log(err));
 
-  if (checkHostDoc.userId === hostId) {
+  const checkHost = await db.Entries.findOne({
+    where: {
+      docId: docId,
+      status: "호스트"
+    }
+  }).then((res) => res.dataValues)
+  .catch((err) => console.log(err));
+
+  if (checkDoc.userId === hostId || checkHost.userId === hostId) {
     const entry = await db.Entries.findOne({
       where: {
         docId: docId,

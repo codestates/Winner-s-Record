@@ -1,4 +1,5 @@
 import { useHistory } from "react-router";
+import Footer from "../components/Footer.js"
 
 export default function Landing() {
   const history = useHistory();
@@ -72,7 +73,7 @@ export default function Landing() {
     <div className="landing--box third">
       <div className="third--container">
         <div className="third--box--content">
-        최근 게시글
+        gif 들어가는 자리임
           <img src="https://github.com/glen15/final-img/blob/master/%E1%84%8B%E1%85%B0%E1%86%B8%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB2.png?raw=true" width="750rem" height="500rem"/>
         </div>
         <div className="third--box--img">
@@ -80,8 +81,9 @@ export default function Landing() {
         </div>
       </div>
     </div>
-    <button className="button" onClick={() => history.replace("/main")}>시작해보기</button>
+    <button className="button" onClick={() => history.replace("/main")}>Let's go</button>
     </div>
+    <Footer />
     </>
   );
 }

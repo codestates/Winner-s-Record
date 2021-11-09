@@ -19,8 +19,12 @@
   }
 
   &.back {
+    display: none;
     left: 50px;
     top: 50px;
+    i {
+      margin-right: 3px;
+    }
   }
 
   &.create {
@@ -67,6 +71,14 @@
     &.create {
       bottom: 20px;
       right: 25px;
+    }
+  }
+}
+
+@media screen and #{$small} {
+  .fixedBtn {
+    &.back {
+      display: inherit;
     }
   }
 }

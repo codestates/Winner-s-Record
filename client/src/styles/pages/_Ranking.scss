@@ -3,10 +3,9 @@
 @import "../components/Ranking/RankList.scss";
 
 .ranking--background {
-  max-width: 1200px;
-  display: flex;
+  @include flexbox();
   flex-direction: column;
-  align-items: center;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -15,9 +14,8 @@
 }
 
 .ranking--list {
-  list-style: none;
-  display: flex;
+  @include flexbox();
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  list-style: none;
+  margin: 1rem;
 }

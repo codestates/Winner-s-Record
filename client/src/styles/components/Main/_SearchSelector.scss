@@ -31,7 +31,9 @@
 }
 
 .search--dropdown--container {
+  box-sizing: border-box;
   position: absolute;
+  z-index: 1;
   width: 100px;
   background-color: white;
   border: 1px solid $gray;

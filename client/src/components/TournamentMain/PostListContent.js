@@ -33,12 +33,17 @@ const PostListContent = ({ postInfo }) => {
         <div className="list--content--pic">
           <img src={img[0]} alt="사진" />
         </div>
-
-        <div className="list--content--game">{`#${gameNamer(event)}`}</div>
-        <div className="list--content--title">{title}</div>
-        <div className="list--content--place">{placeToDisplay}</div>
-        {price ? <div className="list--content--price">{price}</div> : null}
-        <div className="list--content--like">{`좋아요 ${like}`}</div>
+        <div className="list--content--text">
+          <div className="game">
+            <span>{`#${gameNamer(event)}`}</span>
+          </div>
+          <div className="title">{title}</div>
+          <div className="place">{placeToDisplay}</div>
+          <div className="like">
+            <i class="far fa-heart"></i>
+            <span>{`${like}`}</span>
+          </div>
+        </div>
       </div>
     </div>
   );

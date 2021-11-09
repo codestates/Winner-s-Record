@@ -1,6 +1,4 @@
 .redirect--background {
-  display: flex;
+  @include flexbox();
   flex-direction: column;
-  text-align: center;
-  align-items: center;
 }

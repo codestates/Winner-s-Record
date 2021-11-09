@@ -38,8 +38,8 @@ const TournamentButton = ({ status, setLoginModal, hostId }) => {
   }, []);
 
   return (
-    <div className="post-primarybtn" onClick={clickHandler}>
-      {buttonName}
+    <div className="post--primarybtn--container" onClick={clickHandler}>
+      <div className="btn one colored">{buttonName}</div>
     </div>
   );
 };

@@ -32,6 +32,7 @@ const EntryPlayer = ({
       dispatch(setModalText("대회 참가 인원은 7명까지 지정할 수 있어요."));
       dispatch(modalOn());
     } else {
+      console.log("이거 들어갔지 ?");
       axios
         .put(endpoint, { userId }, { headers: { Authorization } })
         .then((res) => {
@@ -89,26 +90,33 @@ const EntryPlayer = ({
     }
   };
   return (
-    <li className="entry--player--container">
-      <div className="entry--player--profile">
+    <li
+      className={`entry--player--container ${
+        status === "확정" ? "colored" : ""
+      }`}
+    >
+      <div className="profile">
         <Link to={`/profile/${userId}`}>
-          <div className="entry--player--inner">
-            <div className="entry--player--img">
+          <div className="inner">
+            <div className="img">
               <img src={img} alt={nickname} />
             </div>
-            <div className="entry--player--text">
-              <div className="name">{nickname}</div>
-              <div className="record">{`${win}승 ${lose}패 승점 ${point}점 전체 ${rank}위`}</div>
-            </div>
+
+            <div className="name">{nickname}</div>
+            <div className="record">{`${win}승 ${lose}패 승점 ${point}점 전체 ${rank}위`}</div>
           </div>
         </Link>
       </div>
-      <div className="entry-player--btns">
+      <div className="btns">
         {status === "대기" && userInfo.userId === hostId ? (
-          <div onClick={fixPlayer}>확정</div>
+          <div className="fix" onClick={fixPlayer}>
+            <i className="fas fa-check-circle"></i>
+          </div>
         ) : null}
         {userInfo.userId === hostId || userInfo.userId === userId ? (
-          <div onClick={deleteHandler}> 삭제 </div>
+          <div className="delete" onClick={deleteHandler}>
+            <i className="fas fa-ban"></i>
+          </div>
         ) : null}
       </div>
     </li>

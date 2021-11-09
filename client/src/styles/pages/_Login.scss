@@ -1,18 +1,14 @@
 .login--container {
-  display: flex;
+  @include flexbox();
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   // background-color: #f2f2f2;
 }
 
 .login--logo {
+  @include flexbox();
   width: 20rem;
   height: 20rem;
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   cursor: pointer;
   @media screen and (max-width: 768px) {
     width: 15rem;
@@ -71,11 +67,8 @@
 }
 
 .login--btncontainer {
-  display: flex;
+  @include flexbox();
   flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
   margin: 2rem;
 }
 
