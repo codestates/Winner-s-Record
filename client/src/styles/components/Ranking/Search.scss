@@ -1,0 +1,32 @@
+.ranking--searchwrapper {
+  display: flex;
+  border-bottom: 1px solid gray;
+  height: 3rem;
+  align-items: center;
+  margin: 1rem;
+  z-index: 1;
+}
+
+.ranking--search {
+  -webkit-appearance: none;
+  font-size: 1rem;
+  height: 2rem;
+  width: 25rem;
+  border: none;
+  transition: 0.4s;
+  z-index: -1;
+  margin: 1rem;
+  &:focus {
+    transition: 0.2s;
+    outline: none;
+  }
+
+  &::placeholder {
+    color: $gray;
+    font-size: 0.9rem;
+  }
+}
+
+.fa-search {
+  cursor: pointer;
+}

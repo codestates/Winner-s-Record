@@ -1,0 +1,23 @@
+@import "../components/Ranking/Search.scss";
+@import "../components/Ranking/EventTap.scss";
+@import "../components/Ranking/RankList.scss";
+
+.ranking--background {
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.ranking--title {
+  font-size: 3rem;
+}
+
+.ranking--list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
