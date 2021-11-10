@@ -10,7 +10,7 @@ import DocList from "../components/Profile/DocList";
 import Error from "./Error";
 import Header from "../components/Header";
 
-export default function Profile() {
+export default function Profile({ match }) {
   const { userId } = useParams();
   const [edit, setEdit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -45,7 +45,7 @@ export default function Profile() {
       });
     setIsLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [match.url]);
 
   useEffect(() => {
     if (isMypage) {
