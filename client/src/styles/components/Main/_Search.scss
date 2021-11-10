@@ -3,16 +3,24 @@
 @import "./SearchBar";
 
 .search--container {
-  margin: 10px 0;
-  width: 1000px;
+  margin: 30px 0;
+  width: 1200px;
+  @include flexbox();
+  flex-direction: column;
   .wrapper {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-bottom: 10px;
+    width: 1152px;
+    height: 50px;
+    background-color: $white;
+    border-radius: 10px;
+    padding: 10px 0;
   }
 }
 
-@media screen and #{$small} {
+@media screen and (max-width: 1000px) {
   .search--container {
     width: 100%;
   }
