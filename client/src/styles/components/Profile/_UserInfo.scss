@@ -1,0 +1,57 @@
+.profile--top {
+  width: 70rem;
+  height: 10rem;
+  background: $main-color;
+  z-index: -1;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.profile--photocontainer {
+  height: 12rem;
+  width: 10rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.profile--photo {
+  position: absolute;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  top: 10rem;
+}
+
+.fa-camera {
+  @include flexbox();
+  position: absolute;
+  top: 17rem;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  width: 3rem;
+  height: 3rem;
+  background: $main-color;
+  border-radius: 50%;
+}
+
+.profile--namecontainer {
+  @include flexbox();
+  align-items: flex-end;
+  font-size: 1.3rem;
+  height: 6rem;
+}
+
+.fa-pencil-alt {
+  justify-content: center;
+  align-items: center;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  color: $gray;
+  transition: 0.4s;
+  &:hover {
+    color: $main-color;
+    transition: 0.2s;
+  }
+}

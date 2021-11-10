@@ -9,6 +9,7 @@ import ProfileRank from "../components/Profile/ProfileRank";
 import DocList from "../components/Profile/DocList";
 import Error from "./Error";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function Profile({ match }) {
   const { userId } = useParams();
@@ -80,6 +81,7 @@ export default function Profile({ match }) {
               />
               <DocList userId={userId} isMypage={isMypage} />
             </div>
+            <Footer />
           </>
         )
       ) : (

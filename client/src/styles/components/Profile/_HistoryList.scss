@@ -1,0 +1,11 @@
+.profile--historybox {
+  @include flexbox();
+  flex-direction: column;
+}
+
+.profile--history {
+  @include flexbox();
+  border: 1px solid red;
+  width: 40rem;
+  height: 5rem;
+}
