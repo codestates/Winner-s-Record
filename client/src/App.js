@@ -78,7 +78,6 @@ function App() {
             <Signup />
           </Route>
           <Route path={"/profile/:userId"} component={Profile} />
-
           <Route path="/doc">
             <CreateDoc />
           </Route>
