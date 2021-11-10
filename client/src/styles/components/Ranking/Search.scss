@@ -30,3 +30,15 @@
 .fa-search {
   cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+  .ranking--search {
+    width: 18rem;
+    height: 2rem;
+    font-size: 0.7rem;
+
+    &::placeholder {
+      font-size: 0.7rem;
+    }
+  }
+}
