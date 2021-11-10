@@ -3,8 +3,8 @@
   border-bottom: 1px solid gray;
   height: 3rem;
   align-items: center;
-  margin: 1rem;
   z-index: 1;
+  margin-bottom: 1.8rem;
 }
 
 .ranking--search {
@@ -16,13 +16,14 @@
   transition: 0.4s;
   z-index: -1;
   margin: 1rem;
+  background-color: #f2f2f2;
   &:focus {
     transition: 0.2s;
     outline: none;
   }
 
   &::placeholder {
-    color: $gray;
+    color: gray;
     font-size: 0.9rem;
   }
 }
@@ -33,7 +34,7 @@
 
 @media screen and (max-width: 768px) {
   .ranking--search {
-    width: 18rem;
+    width: 15rem;
     height: 2rem;
     font-size: 0.7rem;
 
