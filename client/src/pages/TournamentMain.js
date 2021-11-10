@@ -27,7 +27,6 @@ const TournamentMain = () => {
         searchOption={searchOption}
         setSearchOption={setSearchOption}
       />
-      Tournament Page
       {postList.length ? (
         <PostList
           postList={postList}
