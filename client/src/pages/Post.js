@@ -106,7 +106,7 @@ const Post = ({ match }) => {
           <ImageCarousel images={img} />
           <div className="post--header">
             <div className="title">{title}</div>
-            {isMypost ? (
+            {isMypost && status !== "완료" ? (
               <PostEditBtns
                 hostId={userData.userId}
                 setModalBtnType={setModalBtnType}

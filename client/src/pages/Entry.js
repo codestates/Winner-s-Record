@@ -59,6 +59,7 @@ const Entry = () => {
       });
   };
   useEffect(() => {
+    dispatch(modalOff());
     getData();
   }, []);
 

@@ -54,6 +54,7 @@ const PostModal = ({
 const ChooseWinner = ({ postId, player }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [timer, setTimer] = useState(3);
+  const history = useHistory();
   const dispatch = useDispatch();
   const clickHandler = (winner, loser) => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
@@ -65,6 +66,7 @@ const ChooseWinner = ({ postId, player }) => {
       )
       .then((res) => {
         dispatch(modalOff());
+        history.push("/main");
       });
   };
 
