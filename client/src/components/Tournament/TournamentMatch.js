@@ -30,8 +30,9 @@ const TournamentMatch = ({
             <div className="player">{loser}</div>
             <div className="lose">패</div>
           </div>
-          <div className="btn">
-            {canEdit ? (
+
+          {canEdit ? (
+            <div className="btn">
               <div
                 onClick={() => {
                   if (userInfo.userId !== host) {
@@ -47,8 +48,8 @@ const TournamentMatch = ({
               >
                 수정
               </div>
-            ) : null}
-          </div>
+            </div>
+          ) : null}
         </>
       ) : (
         <>

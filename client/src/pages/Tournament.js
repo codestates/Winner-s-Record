@@ -7,6 +7,10 @@ import { setModalText } from "../modules/modalText";
 import TournamentEditModal from "../components/Tournament/TournamentEditModal";
 import TournamentMatch from "../components/Tournament/TournamentMatch";
 import TournamentModal from "../components/Tournament/TournamentModal";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import BackButton from "../components/BackButton";
+import TopButton from "../components/TopButton";
 
 const Tournament = () => {
   const { isLogin, userInfo, isModalOpen } = useSelector((state) => ({
@@ -156,110 +160,113 @@ const Tournament = () => {
 
   return (
     <div className="tournament--container">
-      <div className="title">토너먼트 페이지</div>
-      <div className="round">
-        <div className="text">예선</div>
-        {userInfo.userId === host ? (
-          <div
-            className="btn"
-            onClick={() => {
-              endRound(1);
-            }}
-          >
-            라운드 종료
-          </div>
-        ) : null}
-      </div>
-      <ul className="player--container">
-        {matches
-          .filter((matchData) => {
-            if (matchData.type !== "tournamentR1") {
-              return false;
-            } else {
-              return true;
-            }
-          })
-          .map((matchData) => {
-            return (
-              <TournamentMatch
-                host={host}
-                matchData={matchData}
-                setMatchToEdit={setMatchToEdit}
-                canEdit={canEdit[0]}
-                setIsEditModalOpen={setIsEditModalOpen}
-              />
-            );
-          })}
-      </ul>
-      <div className="round">
-        <div className="text">준결승</div>
-        {userInfo.userId === host ? (
-          <div
-            className="btn"
-            onClick={() => {
-              endRound(2);
-            }}
-          >
-            라운드 종료
-          </div>
-        ) : null}
-      </div>
-      <ul className="player--container">
-        {matches
-          .filter((matchData) => {
-            if (matchData.type !== "tournamentR2") {
-              return false;
-            } else {
-              return true;
-            }
-          })
-          .map((matchData) => {
-            return (
-              <TournamentMatch
-                host={host}
-                matchData={matchData}
-                setMatchToEdit={setMatchToEdit}
-                canEdit={canEdit[1]}
-                setIsEditModalOpen={setIsEditModalOpen}
-              />
-            );
-          })}
-      </ul>
-      <div className="round">
-        <div className="text">결승</div>
-      </div>
-      <ul className="player--container">
-        {matches
-          .filter((matchData) => {
-            if (matchData.type !== "tournamentR3") {
-              return false;
-            } else {
-              return true;
-            }
-          })
-          .map((matchData) => {
-            return (
-              <TournamentMatch
-                host={host}
-                matchData={matchData}
-                setMatchToEdit={setMatchToEdit}
-                canEdit={canEdit[2]}
-                setIsEditModalOpen={setIsEditModalOpen}
-              />
-            );
-          })}
-      </ul>
-      {userInfo.userId === host ? (
-        <div className="tournament--btn--container">
-          <div
-            onClick={() => {
-              endRound(3);
-            }}
-          >
-            대회 종료
-          </div>
+      <Header />
+      <div className="tournament--inner">
+        <div className="title">TOURNAMENT</div>
+        <div className="round">
+          <div className="text">예선</div>
+          {userInfo.userId === host ? (
+            <div
+              className="btn colored"
+              onClick={() => {
+                endRound(1);
+              }}
+            >
+              <span>라운드 종료</span>
+            </div>
+          ) : null}
         </div>
-      ) : null}
+        <ul className="player--container">
+          {matches
+            .filter((matchData) => {
+              if (matchData.type !== "tournamentR1") {
+                return false;
+              } else {
+                return true;
+              }
+            })
+            .map((matchData) => {
+              return (
+                <TournamentMatch
+                  host={host}
+                  matchData={matchData}
+                  setMatchToEdit={setMatchToEdit}
+                  canEdit={canEdit[0]}
+                  setIsEditModalOpen={setIsEditModalOpen}
+                />
+              );
+            })}
+        </ul>
+        <div className="round">
+          <div className="text">준결승</div>
+          {userInfo.userId === host ? (
+            <div
+              className="btn colored"
+              onClick={() => {
+                endRound(2);
+              }}
+            >
+              라운드 종료
+            </div>
+          ) : null}
+        </div>
+        <ul className="player--container">
+          {matches
+            .filter((matchData) => {
+              if (matchData.type !== "tournamentR2") {
+                return false;
+              } else {
+                return true;
+              }
+            })
+            .map((matchData) => {
+              return (
+                <TournamentMatch
+                  host={host}
+                  matchData={matchData}
+                  setMatchToEdit={setMatchToEdit}
+                  canEdit={canEdit[1]}
+                  setIsEditModalOpen={setIsEditModalOpen}
+                />
+              );
+            })}
+        </ul>
+        <div className="round">
+          <div className="text">결승</div>
+        </div>
+        <ul className="player--container">
+          {matches
+            .filter((matchData) => {
+              if (matchData.type !== "tournamentR3") {
+                return false;
+              } else {
+                return true;
+              }
+            })
+            .map((matchData) => {
+              return (
+                <TournamentMatch
+                  host={host}
+                  matchData={matchData}
+                  setMatchToEdit={setMatchToEdit}
+                  canEdit={canEdit[2]}
+                  setIsEditModalOpen={setIsEditModalOpen}
+                />
+              );
+            })}
+        </ul>
+        {userInfo.userId === host ? (
+          <div className="tournament--btn--container colored">
+            <div
+              onClick={() => {
+                endRound(3);
+              }}
+            >
+              대회 종료
+            </div>
+          </div>
+        ) : null}
+      </div>
 
       {isEditModalOpen ? (
         <TournamentEditModal
@@ -268,6 +275,10 @@ const Tournament = () => {
           setIsEditModalOpen={setIsEditModalOpen}
         />
       ) : null}
+      <Footer />
+      <BackButton />
+      <TopButton />
+
       {isModalOpen ? <TournamentModal /> : null}
     </div>
   );
