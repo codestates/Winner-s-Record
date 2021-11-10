@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ListRoom from "../components/Chat/ListRoom";
 import uuid from "react-uuid";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const Chat = () => {
   const [roomList, setRoomList] = useState([]);
@@ -21,11 +23,14 @@ const Chat = () => {
 
   return (
     <div className="chatroomlist--container">
+      <Header />
+      채팅
       <ul className="room--container">
         {roomList.map((roomData) => {
           return <ListRoom roomData={roomData} key={uuid()} />;
         })}
       </ul>
+      <Footer />
     </div>
   );
 };

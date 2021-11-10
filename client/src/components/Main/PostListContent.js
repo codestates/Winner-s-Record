@@ -24,7 +24,6 @@ const PostListContent = ({ postInfo }) => {
   };
 
   const countPrice = (price) => {
-    console.log(typeof price);
     if (price.length < 4) {
       return `${price}`;
     } else if (price.length < 5 && !Number(price.slice(1))) {
