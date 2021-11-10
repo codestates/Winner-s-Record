@@ -1,0 +1,57 @@
+@import "../components/Tournament/TournamentMatch";
+
+.tournament--container {
+  @include flexbox();
+  flex-direction: column;
+  width: 100%;
+
+  .tournament--inner {
+    @include flexbox();
+    margin: 50px 0 100px 0;
+
+    flex-direction: column;
+    width: 800px;
+    .title {
+      margin: 10px 0;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .round {
+      @include flexbox();
+      justify-content: flex-start;
+      padding-bottom: 10px;
+      border-bottom: 1px solid $gray;
+      margin: 20px 0;
+      width: 80%;
+      .text {
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+      .btn {
+        @include button(25px, 0 10px);
+        font-size: 0.8rem;
+        span {
+          margin-top: 2px;
+        }
+      }
+    }
+    .player--container {
+      width: 100%;
+      @include flexbox();
+      flex-direction: column;
+    }
+    .tournament--btn--container {
+      @include button(40px, 0 15px);
+      margin-top: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .tournament--container {
+    .tournament--inner {
+      width: 100%;
+    }
+  }
+}
