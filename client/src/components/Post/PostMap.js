@@ -22,13 +22,13 @@ const PostMap = ({
         map,
         position: location,
       }),
-      infowindow = new kakao.maps.InfoWindow({
+      infowindow = new kakao.maps.CustomOverlay({
         map,
-        position: new kakao.maps.LatLng(Number(data[0]) + 0.0015, data[1]),
+        position: new kakao.maps.LatLng(data[0], data[1]),
         content: `<div class="map--infowindow"><span>${
           data[3] === "null" ? data[2] : data[3]
         }</span></div>`,
-        removable: true,
+        yAnchor: 1,
       });
   }, []);
 

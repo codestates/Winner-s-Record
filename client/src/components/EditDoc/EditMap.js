@@ -19,13 +19,13 @@ const EditMap = ({ inputValue, setInputValue }) => {
         map,
         position: location,
       }),
-      infowindow = new kakao.maps.InfoWindow({
+      infowindow = new kakao.maps.CustomOverlay({
         map,
-        position: new kakao.maps.LatLng(Number(data[0]) + 0.0004, data[1]),
-        content: `<div class="map--infowindow">${
+        position: new kakao.maps.LatLng(data[0], data[1]),
+        content: `<div class="map--infowindow"><span>${
           data[3] === "null" ? data[2] : data[3]
-        }</div>`,
-        removable: true,
+        }</span></div>`,
+        yAnchor: 1,
       });
   }, [inputValue.place]);
 

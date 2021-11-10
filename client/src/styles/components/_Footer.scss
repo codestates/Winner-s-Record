@@ -1,5 +1,5 @@
 .footer--container {
-  background-color: $white;
+  background-color: $main-color;
   margin-top: 10px;
   width: 100%;
   height: 250px;
@@ -41,11 +41,12 @@
           top: 30px;
           font-size: 1.5rem;
           font-weight: bold;
+          color: $white;
         }
         > a {
           margin-top: 40px;
           font-size: 1.1rem;
-          color: $font-gray;
+          color: $white;
           transition: 0.2s;
 
           &:hover {
@@ -67,7 +68,7 @@
             justify-content: space-between;
             a {
               transition: 0.2s;
-              color: $font-gray;
+              color: $white;
               &:hover {
                 transition: 0.1s;
                 color: $main-color;
@@ -91,7 +92,7 @@
     text-align: center;
     padding-top: 10px;
 
-    color: $font-gray;
+    color: $white;
     font-size: 0.9rem;
   }
 }

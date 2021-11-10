@@ -1,12 +1,14 @@
 .search--bar--container {
+  margin: 19px 0;
+
   height: 35px;
   display: flex;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
   box-sizing: content-box;
 
   input {
     height: 100%;
-    width: 500px;
+    width: 420px;
     border: none;
     // border: 1px solid black;
     border-bottom: 2px solid $gray;
@@ -14,6 +16,7 @@
     text-align: center;
     font-size: 1.1rem;
     padding: 0;
+    background-color: $white;
 
     &:focus {
       transition: 0.1s;
@@ -42,7 +45,7 @@
   }
 }
 
-@media screen and #{$small} {
+@media screen and (max-width: 1200px) {
   .search--bar--container {
     flex: 9 0 0;
     input {
