@@ -16,8 +16,11 @@ export async function insertResult(req, res) {
     return res.status(400).json({ message: "잘못된 접근입니다" });
   }
 
-  const docdata = await matchData.findDocById(docId);
-  if (hostId !== docdata.userId) {
+  const docdata = await docData.findById(docId);
+  if (!docdata) {
+    return res.status(400).json({ message: "잘못된 접근입니다" });
+  }
+  if (hostId !== docdata.dataValues.userId) {
     return res.status(403).json({ message: "권한이 없습니다" });
   }
   const { winner, loser } = req.body;
