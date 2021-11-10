@@ -53,13 +53,13 @@ function App() {
             <Landing />
           </Route>
           <Route exact path="/post/:postId" component={Post} />
-          <Route path="/post/:postId/entry">
+          <Route exact path="/post/:postId/entry">
             <Entry />
           </Route>
-          <Route path="/post/:postId/tournament">
+          <Route exact path="/post/:postId/tournament">
             <Tournament />
           </Route>
-          <Route path="/post/:postId/result">
+          <Route exact path="/post/:postId/result">
             <Result />
           </Route>
           <Route path="/main">
@@ -77,9 +77,8 @@ function App() {
           <Route path="/signup">
             <Signup />
           </Route>
-          <Route path={"/profile/:userId"}>
-            <Profile />
-          </Route>
+          <Route path={"/profile/:userId"} component={Profile} />
+
           <Route path="/doc">
             <CreateDoc />
           </Route>
