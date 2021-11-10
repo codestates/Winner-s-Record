@@ -1,14 +1,14 @@
 .fixedBtn {
   width: 50px;
   height: 50px;
-  background-color: $main-color;
+  background-color: $light-sub-color;
   position: fixed;
   transform: translate(-50%, -50%);
   @include flexbox();
   font-size: 1.8rem;
   color: $white;
   border-radius: 50%;
-  border: 1px solid $white;
+  box-shadow: 0 0 10px black;
 
   &.top {
     bottom: 50px;

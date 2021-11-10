@@ -12,9 +12,20 @@ export default function Ranking() {
     <>
       <Header />
       <div className="ranking--background">
-        <Search event={event} setList={setList} />
-        <EventTap setList={setList} setEvent={setEvent} />
-        <div className="ranking--title">{event.toUpperCase()} Ranking</div>
+        <div className="ranking--box">
+          <EventTap setList={setList} setEvent={setEvent} />
+          <Search event={event} setList={setList} />
+        </div>
+        <div className="ranking--titlebox">
+          <img
+            className="ranking--tiara"
+            alt="tiara"
+            src="https://cdn-icons-png.flaticon.com/512/2531/2531918.png"
+          />
+          <div className="ranking--title">
+            {event.slice(0, 1).toUpperCase() + event.slice(1)} Ranking
+          </div>
+        </div>
         <ul className="ranking--list">
           {list.length ? (
             list.map((e, index) => {
