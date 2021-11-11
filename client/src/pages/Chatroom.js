@@ -8,7 +8,7 @@ import io from "socket.io-client";
 import Message from "../components/Chat/Message";
 import ChatPost from "../components/Chat/ChatPost";
 
-const socket = io.connect("http://3.36.30.63:8080");
+const socket = io.connect("https://3.36.30.63:8080");
 
 const Chatroom = () => {
   const { roomId } = useParams();
@@ -45,7 +45,7 @@ const Chatroom = () => {
 
     axios
       .post(
-        `http://3.36.30.63/room/${roomId}`,
+        `https://3.36.30.63/room/${roomId}`,
         { docId: chatPost },
         {
           headers: { Authorization },

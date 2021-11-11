@@ -100,7 +100,7 @@ export default function EditDoc() {
     const token = localStorage.getItem("token");
     axios
       .put(
-        `http://3.36.30.63/doc/${docId}`,
+        `https://3.36.30.63/doc/${docId}`,
         { type, title, event, place, price, text, img: arr },
         {
           headers: { authorization: `Bearer ${token}` },
@@ -126,7 +126,7 @@ export default function EditDoc() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`http://3.36.30.63/doc/${docId}`, {
+      .get(`https://3.36.30.63/doc/${docId}`, {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {

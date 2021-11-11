@@ -11,7 +11,7 @@ const Chat = () => {
   const getData = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
-      .get("http://3.36.30.63/room", { headers: { Authorization } })
+      .get("https://3.36.30.63/room", { headers: { Authorization } })
       .then((res) => {
         setRoomList(res.data.data);
       });
