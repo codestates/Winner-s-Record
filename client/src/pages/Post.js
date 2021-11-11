@@ -99,88 +99,90 @@ const Post = ({ match }) => {
   } = postInfo;
 
   return (
-    <div className="post--container">
-      <Header />
+    <>
       {postInfo.title ? (
-        <div className="post--inner">
-          <ImageCarousel images={img} />
-          <div className="post--header">
-            <div className="title">{title}</div>
-            {isMypost && status !== "완료" ? (
-              <PostEditBtns
-                hostId={userData.userId}
-                setModalBtnType={setModalBtnType}
-                setLoginModal={setLoginModal}
+        <div className="post--container">
+          <Header />
+          <div className="post--inner">
+            <ImageCarousel images={img} />
+            <div className="post--header">
+              <div className="title">{title}</div>
+              {isMypost && status !== "완료" ? (
+                <PostEditBtns
+                  hostId={userData.userId}
+                  setModalBtnType={setModalBtnType}
+                  setLoginModal={setLoginModal}
+                />
+              ) : null}
+            </div>
+            <div className="post--userinfo--price">
+              <PostUserInfo userData={userData} />
+              {price ? (
+                <div className="post--price">
+                  <span>{`${countPrice(String(price))}원`}</span>
+                </div>
+              ) : null}
+            </div>
+
+            <div className="post--text">{text}</div>
+            <PostMap place={place} />
+
+            {status !== "대기" &&
+            player.includes(userInfo.nickname) &&
+            type === "tournament" ? (
+              <PostComments
+                board={board}
+                postInfo={postInfo}
+                setPostInfo={setPostInfo}
               />
             ) : null}
-          </div>
-          <div className="post--userinfo--price">
-            <PostUserInfo userData={userData} />
-            {price ? (
-              <div className="post--price">
-                <span>{`${countPrice(String(price))}원`}</span>
-              </div>
-            ) : null}
-          </div>
 
-          <div className="post--text">{text}</div>
-          <PostMap place={place} />
+            <div className="post--btns">
+              {isLoading ? null : postInfo.status === "tournament" ? (
+                <TournamentButton
+                  status={status}
+                  setLoginModal={setLoginModal}
+                  hostId={userData.userId}
+                />
+              ) : (
+                <PostPrimaryButton
+                  hostId={userData.userId}
+                  type={type}
+                  status={status}
+                  setLoginModal={setLoginModal}
+                  setModalBtnType={setModalBtnType}
+                  player={player}
+                />
+              )}
 
-          {status !== "대기" &&
-          player.includes(userInfo.nickname) &&
-          type === "tournament" ? (
-            <PostComments
-              board={board}
-              postInfo={postInfo}
-              setPostInfo={setPostInfo}
+              <LikeButton
+                like={like}
+                setLoginModal={setLoginModal}
+                postInfo={postInfo}
+                setPostInfo={setPostInfo}
+                postId={postId}
+              />
+            </div>
+            <NeedLoginModal
+              isModalOpen={loginModal}
+              setIsModalOpen={setLoginModal}
             />
-          ) : null}
-
-          <div className="post--btns">
-            {isLoading ? null : postInfo.status === "tournament" ? (
-              <TournamentButton
+            {isModalOpen ? (
+              <PostModal
+                modalBtnType={modalBtnType}
                 status={status}
-                setLoginModal={setLoginModal}
-                hostId={userData.userId}
-              />
-            ) : (
-              <PostPrimaryButton
-                hostId={userData.userId}
-                type={type}
-                status={status}
-                setLoginModal={setLoginModal}
-                setModalBtnType={setModalBtnType}
+                setPostInfo={setPostInfo}
                 player={player}
               />
-            )}
-
-            <LikeButton
-              like={like}
-              setLoginModal={setLoginModal}
-              postInfo={postInfo}
-              setPostInfo={setPostInfo}
-              postId={postId}
-            />
+            ) : null}
           </div>
-          <NeedLoginModal
-            isModalOpen={loginModal}
-            setIsModalOpen={setLoginModal}
-          />
-          {isModalOpen ? (
-            <PostModal
-              modalBtnType={modalBtnType}
-              status={status}
-              setPostInfo={setPostInfo}
-              player={player}
-            />
-          ) : null}
+
+          <Footer />
         </div>
       ) : (
         <Error />
       )}
-
-      <Footer />
-    </div>
+    </>
   );
 };
 

@@ -69,16 +69,17 @@ const Result = () => {
             </div>
             <div className="secondplace">
               <span>
-                <i class="fas fa-medal"></i>
+                <i className="fas fa-medal"></i>
                 {`준우승`}
-                <i class="fas fa-medal"></i>
+                <i className="fas fa-medal"></i>
               </span>
               <span>{secondplace}</span>
             </div>
             <div className="entry--container">
               <div className="text">
                 <span>
-                  <i class="fas fa-award"></i>참가자<i class="fas fa-award"></i>
+                  <i className="fas fa-award"></i>참가자
+                  <i className="fas fa-award"></i>
                 </span>
               </div>
               {others.map((e) => {

@@ -123,7 +123,7 @@ const Entry = () => {
       <TopButton />
       {isModalOpen ? (
         <div className="modal--backdrop">
-          <div className="modal--view">
+          <div className="modal--view entry">
             <div className="modal--text--container">
               <div className="text">{modalText}</div>
             </div>

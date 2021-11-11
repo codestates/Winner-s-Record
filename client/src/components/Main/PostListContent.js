@@ -66,7 +66,7 @@ const PostListContent = ({ postInfo }) => {
               <div className="price">{countPrice(String(price))}원</div>
             ) : null}
             <div className="like">
-              <i class="far fa-heart"></i>
+              <i className="far fa-heart"></i>
               <span>{`${like}`}</span>
             </div>
           </div>

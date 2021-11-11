@@ -1,4 +1,5 @@
 @import "../components/Tournament/TournamentMatch";
+@import "../components/Tournament/TournamentModal";
 
 .tournament--container {
   @include flexbox();

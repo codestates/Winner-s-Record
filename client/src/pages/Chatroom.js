@@ -9,7 +9,7 @@ import Message from "../components/Chat/Message";
 import ChatPost from "../components/Chat/ChatPost";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Chatmodal from "../components/Chat/Chatmodal";
+import ChatModal from "../components/Chat/ChatModal";
 
 const socket = io.connect("https://server.winner-s-record.link:8080", {
   rejectUnauthorized: false,
@@ -156,7 +156,7 @@ const Chatroom = () => {
             return chatData.userId ? (
               <Message key={uuid()} chatData={chatData} />
             ) : (
-              <ChatPost chatData={chatData} />
+              <ChatPost key={uuid()} chatData={chatData} />
             );
           })}
           <div className="chatroom--chat--dummy" ref={scrollBottom} />
@@ -188,7 +188,7 @@ const Chatroom = () => {
         </div>
       </div>
       {isModalOn ? (
-        <Chatmodal roomId={roomId} setIsModalOn={setIsModalOn} />
+        <ChatModal roomId={roomId} setIsModalOn={setIsModalOn} />
       ) : null}
       <Footer />
     </div>

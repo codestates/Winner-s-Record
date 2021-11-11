@@ -23,6 +23,10 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  &.logout {
+    width: 250px;
+    margin-right: 30px;
+  }
 
   a {
     font-size: 1.05rem;

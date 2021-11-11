@@ -40,7 +40,7 @@ const PostListContent = ({ postInfo }) => {
           <div className="title">{title}</div>
           <div className="place">{placeToDisplay}</div>
           <div className="like">
-            <i class="far fa-heart"></i>
+            <i className="far fa-heart"></i>
             <span>{`${like}`}</span>
           </div>
         </div>

@@ -18,20 +18,21 @@ const PostModal = ({
 
   return (
     <div className="modal--backdrop">
-      <div className="modal--view">
-        <div className="modal--text--container"></div>
-        {modalBtnType === "result" ? (
-          <div className="modal--btns--container">
-            <div className="winner">{`승자 ${winner}`}</div>
-            <div className="loser">{`패자 ${loser}`}</div>
-          </div>
-        ) : (
-          <div className="text">{modalText}</div>
-        )}
+      <div className="modal--view post">
+        <div className="modal--text--container">
+          {modalBtnType === "result" ? (
+            <div className="modal--btns--container">
+              <div className="winner">{`승자 ${winner}`}</div>
+              <div className="loser">{`패자 ${loser}`}</div>
+            </div>
+          ) : (
+            <div className="text">{modalText}</div>
+          )}
+        </div>
         {modalBtnType === "close" || modalBtnType === "result" ? (
           <div className="modal--btns--container">
             <div
-              className="btn"
+              className="btn colored"
               onClick={() => {
                 dispatch(modalOff());
               }}
@@ -88,9 +89,9 @@ const ChooseWinner = ({ postId, player }) => {
       {isLoading ? (
         <div className="modal--timer">{timer}</div>
       ) : (
-        <div className="modal--btns--container">
+        <div className="modal--btns--container player">
           <div
-            className="player"
+            className="btn colored"
             onClick={() => {
               clickHandler(player[0], player[1]);
             }}
@@ -98,7 +99,7 @@ const ChooseWinner = ({ postId, player }) => {
             {player[0]}
           </div>
           <div
-            className="player"
+            className="btn colored"
             onClick={() => {
               clickHandler(player[1], player[0]);
             }}
@@ -136,7 +137,7 @@ const DeleteBtns = () => {
       >
         취소
       </div>
-      <div className="btn" onClick={confirmDelete}>
+      <div className="btn colored" onClick={confirmDelete}>
         삭제
       </div>
     </div>
@@ -183,7 +184,7 @@ const ChangeStatusBtn = ({ status, setPostInfo }) => {
       >
         취소
       </div>
-      <div className="btn" onClick={changeStatus}>
+      <div className="btn colored" onClick={changeStatus}>
         변경
       </div>
     </div>
