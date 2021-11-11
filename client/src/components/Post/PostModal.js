@@ -60,7 +60,7 @@ const ChooseWinner = ({ postId, player }) => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
       .post(
-        `https://3.36.30.63/match/${postId}`,
+        `http://3.36.30.63/match/${postId}`,
         { winner, loser },
         { headers: { Authorization } }
       )
@@ -119,7 +119,7 @@ const DeleteBtns = () => {
   const confirmDelete = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
-      .delete(`https://3.36.30.63/doc/${postId}`, {
+      .delete(`http://3.36.30.63/doc/${postId}`, {
         headers: { Authorization },
       })
       .then((res) => {
@@ -151,7 +151,7 @@ const ChangeStatusBtn = ({ status, setPostInfo }) => {
     if (status === "대기") {
       axios
         .put(
-          `https://3.36.30.63/doc/${postId}`,
+          `http://3.36.30.63/doc/${postId}`,
           { status: "완료" },
           { headers: { Authorization } }
         )
@@ -162,7 +162,7 @@ const ChangeStatusBtn = ({ status, setPostInfo }) => {
     } else {
       axios
         .put(
-          `https://3.36.30.63/doc/${postId}`,
+          `http://3.36.30.63/doc/${postId}`,
           { status: "대기" },
           { headers: { Authorization } }
         )

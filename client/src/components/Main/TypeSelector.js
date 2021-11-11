@@ -7,7 +7,7 @@ const TypeSelector = ({ searchOption, setSearchOption, setPostList }) => {
 
     axios
       .get(
-        `https://3.36.30.63/doc?type=${type}&event=${game}&${option}=${input}&page=0`
+        `http://3.36.30.63/doc?type=${type}&event=${game}&${option}=${input}&page=0`
       )
       .then((res) => {
         setPostList(res.data.data);

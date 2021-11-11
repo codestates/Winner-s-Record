@@ -23,7 +23,7 @@ const EntryPlayer = ({
 
   const fixPlayer = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
-    const endpoint = `https://3.36.30.63/entry/${postId}`;
+    const endpoint = `http://3.36.30.63/entry/${postId}`;
     console.log(fixed.length, postType);
     if (fixed.length && postType === "match") {
       dispatch(setModalText("다수의 상대를 지정할 수 없어요."));
@@ -52,7 +52,7 @@ const EntryPlayer = ({
 
   const deleteHandler = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
-    const endpoint = `https://3.36.30.63/entry/${postId}`;
+    const endpoint = `http://3.36.30.63/entry/${postId}`;
 
     if (!isLogin) {
       setLoginModal(true);

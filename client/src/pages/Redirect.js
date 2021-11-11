@@ -46,7 +46,7 @@ export default function Redirect() {
       return;
     }
     axios
-      .post("https://3.36.30.63/auth/nickname", { nickname }) //
+      .post("http://3.36.30.63/auth/nickname", { nickname }) //
       .then((res) => {
         setValidation({ ...validation, checkNickname: true });
         setMessage("사용 가능한 닉네임입니다");
@@ -64,7 +64,7 @@ export default function Redirect() {
   const handleSocialSignup = () => {
     axios
       .post(
-        "https://3.36.30.63/auth/social",
+        "http://3.36.30.63/auth/social",
         { type, id, nickname },
         { withCredentials: true }
       )
@@ -102,7 +102,7 @@ export default function Redirect() {
       );
       const token = result.data.access_token;
       axios
-        .get(`https://3.36.30.63/auth/kakao/callback?token=${token}`)
+        .get(`http://3.36.30.63/auth/kakao/callback?token=${token}`)
         .then((res) => {
           const { id, type } = res.data;
           console.log("aaaaaaa", id, type);

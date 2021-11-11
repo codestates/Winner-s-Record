@@ -60,7 +60,7 @@ export default function EditPhotoModal({
     const oldToken = localStorage.getItem("token");
     axios
       .put(
-        "https://3.36.30.63/auth/img",
+        "http://3.36.30.63/auth/img",
         { img: path },
         { headers: { authorization: `Bearer ${oldToken}` } }
       )

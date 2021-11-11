@@ -23,7 +23,7 @@ export default function Login() {
     const { email, password } = loginInfo;
     axios
       .post(
-        "https://3.36.30.63/auth/login",
+        "http://3.36.30.63/auth/login",
         { email, password },
         { withCredentials: true }
       )
@@ -51,7 +51,7 @@ export default function Login() {
 
   const handleNaver = () => {
     axios
-      .get("https://3.36.30.63/auth/naver/login")
+      .get("http://3.36.30.63/auth/naver/login")
       .then((res) => {
         console.log(res.data);
       })
@@ -62,7 +62,7 @@ export default function Login() {
 
   const handleGoogle = () => {
     axios
-      .get("https://3.36.30.63/auth/google/login")
+      .get("http://3.36.30.63/auth/google/login")
       .then((res) => {
         console.log(res.data);
       })

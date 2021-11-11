@@ -13,7 +13,7 @@ export default function DocList({ userId, isMypage }) {
 
   const handleCreatedList = () => {
     axios
-      .get(`https://3.36.30.63/doc?hostId=${userId}`)
+      .get(`http://3.36.30.63/doc?hostId=${userId}`)
       .then((res) => {
         setList(res.data.data);
       })
@@ -25,7 +25,7 @@ export default function DocList({ userId, isMypage }) {
 
   const handleLikeList = () => {
     axios
-      .get(`https://3.36.30.63/like/${userId}`)
+      .get(`http://3.36.30.63/like/${userId}`)
       .then((res) => {
         setList(res.data.data);
       })
@@ -37,7 +37,7 @@ export default function DocList({ userId, isMypage }) {
 
   const handleProgressList = () => {
     axios
-      .get(`https://3.36.30.63/doc?guestId=${userId}`)
+      .get(`http://3.36.30.63/doc?guestId=${userId}`)
       .then((res) => {
         setList(res.data.data);
       })
@@ -49,7 +49,7 @@ export default function DocList({ userId, isMypage }) {
 
   const handleHistoryList = () => {
     axios
-      .get(`https://3.36.30.63/match/history?userId=${userId}`)
+      .get(`http://3.36.30.63/match/history?userId=${userId}`)
       .then((res) => {
         setHistory(res.data.myMatch);
       })

@@ -8,7 +8,7 @@ const GetUserInfo = () => {
   const token = localStorage.getItem("token");
   if (token) {
     axios
-      .get("https://3.36.30.63/auth/", {
+      .get("http://3.36.30.63/auth/", {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {

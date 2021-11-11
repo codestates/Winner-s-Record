@@ -16,7 +16,7 @@ const PostComments = ({ board, postInfo, setPostInfo }) => {
     } else {
       axios
         .post(
-          "https://3.36.30.63/board",
+          "http://3.36.30.63/board",
           { docId: postId, text: input },
           { headers: { Authorization } }
         )
@@ -33,7 +33,7 @@ const PostComments = ({ board, postInfo, setPostInfo }) => {
   const deleteComment = (boardId) => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
-      .delete(`https://3.36.30.63/board/${boardId}`, {
+      .delete(`http://3.36.30.63/board/${boardId}`, {
         headers: { Authorization },
       })
       .then((res) => {
