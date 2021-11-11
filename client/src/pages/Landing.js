@@ -9,11 +9,11 @@ export default function Landing() {
       <div className="landing--box first">
         <div className="first--container">
           <div className="first--top">
-            <img src="https://github.com/glen15/final-img/blob/master/%E1%84%85%E1%85%A9%E1%84%80%E1%85%A9.png?raw=true" width="150rem" height="60rem"/>
+            <img src="https://github.com/glen15/final-img/blob/master/%E1%84%85%E1%85%A9%E1%84%80%E1%85%A9%20%E1%84%90%E1%85%AE%E1%84%86%E1%85%A7%E1%86%BC%E1%84%87%E1%85%A2%E1%84%80%E1%85%A7%E1%86%BC.png?raw=true" width="150rem" height="60rem"/>
           </div>
           <div className="first--bottom">
             <div className="first--bottom--left">
-              <img src="https://github.com/glen15/final-img/blob/master/%E1%84%90%E1%85%B3%E1%84%85%E1%85%A9%E1%84%91%E1%85%B5Gif.gif?raw=true" width="210rem" height="210rem"/>  
+              <img src="https://github.com/glen15/final-img/blob/master/%E1%84%90%E1%85%B3%E1%84%85%E1%85%A9%E1%84%91%E1%85%B5%20%E1%84%87%E1%85%A2%E1%84%80%E1%85%A7%E1%86%BC%E1%84%90%E1%85%AE%E1%84%86%E1%85%A7%E1%86%BC.gif?raw=true" width="210rem" height="210rem"/>  
             </div>
             <div className="first--bottom--right">
               <div className="first--title">'오늘 테니스 경기 하실 분?'</div>
