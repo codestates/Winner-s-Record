@@ -4,13 +4,13 @@ export default function RankList({ content }) {
   const history = useHistory();
   const handleMedalImg = (rank) => {
     if (rank === 1) {
-      return "https://cdn.discordapp.com/attachments/894417218526380033/908006103726579722/1.png";
+      return "https://cdn.discordapp.com/attachments/894417218526380033/907975532782686228/2.png";
     }
     if (rank === 2) {
-      return "https://cdn.discordapp.com/attachments/894417218526380033/908006102271144026/2.png";
+      return "https://cdn.discordapp.com/attachments/894417218526380033/907975537065074718/3.png";
     }
     if (rank === 3) {
-      return "https://cdn.discordapp.com/attachments/894417218526380033/908006099364499547/3.png";
+      return "https://cdn.discordapp.com/attachments/894417218526380033/907975538818297907/4.png";
     }
   };
 

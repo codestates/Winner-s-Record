@@ -6,7 +6,7 @@
 ➤ 자신이 참여한 경기를 기록하고 순위를 확인할 수 있는 서비스가 제공됩니다.
    - 내 전적 기록 및 확인
    - 종목별 순위 조회
-   - 친구와의 승부에서 부정할 수 없는 증거를 제시
+   - 상대방과 승부에서 부정할 수 없는 증거를 제시
 
 ➤ 자신만의 작은 대회를 개최하여 8강 토너먼트 경기를 이용하실 수 있습니다.
 
@@ -46,22 +46,108 @@
 <img width="1781" alt="TechStack" src="https://github.com/glen15/final-img/blob/master/stackIMG.png?raw=true">
 <br/>
 
-## :computer: Preview
+## 📌 Functions
 
 <details>
-<summary>랜딩 페이지</summary>
+<summary>[유저]</summary>
+   
+   * 회원가입
+   
+      * 유효성 검사
+      * 웹 로그인
+      * 소셜 로그인
+   * 회원탈퇴
+   * 로그아웃
+</details>
+
+
+<details>
+<summary>[게시글]</summary>
+   
+   * 게시글 작성
+      * 거래 / 매치 / 토너먼트
+   
+   * 게시글 검색
+   * 게시글 수정
+   * 게시글 삭제
+   * 참가자 신청목록
 
 </details>
 
 
 <details>
-<summary>메인 페이지</summary>
+<summary>[마이페이지]</summary>
+   
+   * 회원정보 수정
+   
+   * 작성글 / 관심글 / 참여중인 경기 글 확인
+   * 최근 경기 기록
+   * 종목별 랭킹
+
+</details>
+
+
+<details>
+<summary>[좋아요]</summary>
+   
+   * 관심글 추가
+   
+   * 관심글 삭제
+
+</details>
+
+
+<details>
+<summary>[참가자]</summary>
+   
+   * 참가자 확정
+   
+   * 참가자 삭제
+   * 토너먼트 참가 확정시 게시판 제공
+   
+</details>
+
+<details>
+<summary>[경기기록 / 랭킹]</summary>
+   
+   * 매치 / 토너먼트 작성자 경기 결과 입력
+   
+   * 종목별 상위 랭킹, 닉네임 검색 기능
+
+</details>
+
+<details>
+<summary>[채팅]</summary>
+   
+   * 실시간 채팅 기능
+   
+   * 채팅방 목록 or 게시글에서 채팅방 입장 / 삭제
+</details>
+
+</br>
+
+## :computer: Preview
+
+<details>
+<summary>랜딩페이지</summary>
+
+</details>
+
+
+<details>
+<summary>메인페이지</summary>
 
 </details>
 
 
 <details>
 <summary>토너먼트 진행</summary>
+
+</details>
+
+
+<details>
+<summary>마이페이지</summary>
 
 </details>
 
