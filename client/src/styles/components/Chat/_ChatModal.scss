@@ -1,0 +1,19 @@
+.modal--view.chat {
+  justify-content: center;
+  .modal--text--container {
+    margin-bottom: 50px;
+    .text {
+      font-size: 1.3rem;
+    }
+  }
+  .modal--btns--container {
+    display: flex;
+    width: 60%;
+
+    justify-content: space-between;
+    .btn {
+      @include button(35px, 0);
+      width: 100%;
+    }
+  }
+}

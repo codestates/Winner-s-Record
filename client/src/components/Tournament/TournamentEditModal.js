@@ -35,11 +35,13 @@ const TournamentEditModal = ({
         setIsEditModalOpen(false);
       }}
     >
-      <div className="modal--view">
-        <div className="text">승자를 선택하세요 !</div>
-        <div className="modal--btns--container">
+      <div className="modal--view tournament">
+        <div className="modal--text--container">
+          <div className="text">승자를 선택하세요 !</div>
+        </div>
+        <div className="modal--btns--container player">
           <div
-            className="btn"
+            className="btn colored"
             onClick={() => {
               setIsEditModalOpen(false);
               clickHandler(matchToEdit[2], matchToEdit[3]);
@@ -48,7 +50,7 @@ const TournamentEditModal = ({
             {matchToEdit[2]}
           </div>
           <div
-            className="btn"
+            className="btn colored"
             onClick={() => {
               setIsEditModalOpen(false);
               clickHandler(matchToEdit[3], matchToEdit[2]);

@@ -33,7 +33,7 @@ const TypeSelector = ({ searchOption, setSearchOption, setPostList }) => {
           }
         }}
       >
-        <i class="fas fa-running"></i>
+        <i className="fas fa-running"></i>
         <span>경기</span>
       </div>
       <div
@@ -50,7 +50,7 @@ const TypeSelector = ({ searchOption, setSearchOption, setPostList }) => {
           }
         }}
       >
-        <i class="fas fa-shopping-basket"></i>
+        <i className="fas fa-shopping-basket"></i>
 
         <span>거래</span>
       </div>

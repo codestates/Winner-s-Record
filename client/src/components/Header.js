@@ -23,7 +23,7 @@ const Header = ({ isChat }) => {
           </Link>
         </div>
 
-        <div className="btn--container">
+        <div className={`btn--container${!isLogin ? " logout" : ""}`}>
           <Link to="/tournament">
             <div className="btn">
               <span>대회</span>
@@ -32,9 +32,12 @@ const Header = ({ isChat }) => {
           <Link to="/ranking">
             <div className="btn">랭킹</div>
           </Link>
-          <Link to="/chat">
-            <div className="btn">메세지</div>
-          </Link>
+          {!isLogin ? null : (
+            <Link to="/chat">
+              <div className="btn">메세지</div>
+            </Link>
+          )}
+
           {!isLogin ? null : (
             <Link to={`/profile/${userInfo.userId}`}>
               <div className="btn">프로필</div>

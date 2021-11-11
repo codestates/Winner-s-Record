@@ -1,5 +1,6 @@
 @import "../components/Chat/ChatPost";
 @import "../components/Chat/Message";
+@import "../components/Chat/ChatModal";
 
 .chatroom--container {
   @include flexbox();

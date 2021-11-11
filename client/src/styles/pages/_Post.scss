@@ -2,6 +2,7 @@
 @import "../components/Post/PostMap";
 @import "../components/Post/PostPrimaryButton";
 @import "../components/Post/PostComments";
+@import "../components/Post/PostModal";
 
 .post--container {
   @include flexbox();

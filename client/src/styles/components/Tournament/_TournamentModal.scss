@@ -1,0 +1,25 @@
+.modal--view.tournament {
+  justify-content: center;
+  .modal--text--container {
+    margin-bottom: 50px;
+    .text {
+      font-size: 1.3rem;
+    }
+  }
+  .modal--btns--container {
+    display: flex;
+    .btn {
+      @include button(35px, 0 20px);
+    }
+
+    &.player {
+      width: 70%;
+      display: flex;
+      justify-content: space-between;
+      .btn {
+        @include button(35px, 0);
+        width: 100%;
+      }
+    }
+  }
+}

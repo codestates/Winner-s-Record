@@ -43,14 +43,15 @@ const Tournament = () => {
     const winner = r3.filter((match) => {
       return match.winner;
     });
-    console.log("r2", r2);
-    console.log("r3", r3);
-    if (winner.length) {
+
+    if (winner.length && userInfo.userId === host) {
       setCanEdit([false, false, false]);
-    } else if (r3.length) {
+    } else if (r3.length && userInfo.userId === host) {
       setCanEdit([false, false, true]);
-    } else if (r2.length) {
+    } else if (r2.length && userInfo.userId === host) {
       setCanEdit([false, true, true]);
+    } else {
+      setCanEdit([false, false, false]);
     }
   }, [matches]);
 
