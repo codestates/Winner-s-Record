@@ -5,7 +5,7 @@ import { useHistory } from "react-router";
 import { setLogout } from "../modules/isLogin";
 import { deleteUserInfo } from "../modules/userInfo";
 
-const Header = () => {
+const Header = ({ isChat }) => {
   const { userInfo, isLogin } = useSelector((state) => ({
     userInfo: state.userInfo,
     isLogin: state.isLogin,
@@ -13,7 +13,7 @@ const Header = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   return (
-    <div className="header--container">
+    <div className={`header--container${isChat ? " chat" : ""}`}>
       <div className="header--inner">
         <div className="logo--container">
           <Link to="/main">

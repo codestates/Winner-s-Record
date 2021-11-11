@@ -67,6 +67,9 @@
 
 @media screen and #{$small} {
   .header--container {
+    &.chat {
+      display: none;
+    }
     .header--inner {
       justify-content: center;
       .btn--container {
