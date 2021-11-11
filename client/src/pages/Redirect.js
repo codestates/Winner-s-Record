@@ -46,7 +46,7 @@ export default function Redirect() {
       return;
     }
     axios
-      .post("http://server.winner-s-record.link/auth/nickname", { nickname }) //
+      .post("https://server.winner-s-record.link/auth/nickname", { nickname }) //
       .then((res) => {
         setValidation({ ...validation, checkNickname: true });
         setMessage("사용 가능한 닉네임입니다");
@@ -64,7 +64,7 @@ export default function Redirect() {
   const handleSocialSignup = () => {
     axios
       .post(
-        "http://server.winner-s-record.link/auth/social",
+        "https://server.winner-s-record.link/auth/social",
         { type, id, nickname },
         { withCredentials: true }
       )
@@ -103,7 +103,7 @@ export default function Redirect() {
       const token = result.data.access_token;
       axios
         .get(
-          `http://server.winner-s-record.link/auth/kakao/callback?token=${token}`
+          `https://server.winner-s-record.link/auth/kakao/callback?token=${token}`
         )
         .then((res) => {
           const { id, type } = res.data;

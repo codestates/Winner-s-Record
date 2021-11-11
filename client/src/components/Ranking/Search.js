@@ -10,7 +10,7 @@ export default function Search({ setList, event }) {
   const handleList = () => {
     axios
       .get(
-        `http://server.winner-s-record.link/rank?event=${event}&nickname=${nickname}`
+        `https://server.winner-s-record.link/rank?event=${event}&nickname=${nickname}`
       )
       .then((res) => {
         setList(res.data.data);

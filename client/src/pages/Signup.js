@@ -57,7 +57,7 @@ export default function Signup() {
       return;
     }
     axios
-      .post("http://server.winner-s-record.link/auth/email", {
+      .post("https://server.winner-s-record.link/auth/email", {
         [key]: e.target.value,
       }) //
       .then((res) => {
@@ -80,7 +80,7 @@ export default function Signup() {
       return;
     }
     axios
-      .post("http://server.winner-s-record.link/auth/nickname", {
+      .post("https://server.winner-s-record.link/auth/nickname", {
         [key]: e.target.value,
       }) //
       .then((res) => {
@@ -100,7 +100,7 @@ export default function Signup() {
   const handleSignup = () => {
     const { email, nickname, password } = signupInfo;
     axios
-      .post("http://server.winner-s-record.link/auth", {
+      .post("https://server.winner-s-record.link/auth", {
         email,
         nickname,
         password,

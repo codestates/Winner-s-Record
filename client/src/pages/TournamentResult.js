@@ -16,7 +16,7 @@ const Result = () => {
 
   const getData = () => {
     axios
-      .get(`http://server.winner-s-record.link/tournament/${postId}`)
+      .get(`https://server.winner-s-record.link/tournament/${postId}`)
       .then((res) => {
         const data = res.data.data;
         console.log(data);
@@ -36,7 +36,7 @@ const Result = () => {
 
   const getHost = () => {
     axios
-      .get(`http://server.winner-s-record.link/doc/${postId}`)
+      .get(`https://server.winner-s-record.link/doc/${postId}`)
       .then((res) => {
         setHost(res.data.data.userData.nickname);
       });

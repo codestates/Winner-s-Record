@@ -100,7 +100,7 @@ export default function EditDoc() {
     const token = localStorage.getItem("token");
     axios
       .put(
-        `http://server.winner-s-record.link/doc/${docId}`,
+        `https://server.winner-s-record.link/doc/${docId}`,
         { type, title, event, place, price, text, img: arr },
         {
           headers: { authorization: `Bearer ${token}` },
@@ -126,7 +126,7 @@ export default function EditDoc() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`http://server.winner-s-record.link/doc/${docId}`, {
+      .get(`https://server.winner-s-record.link/doc/${docId}`, {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {

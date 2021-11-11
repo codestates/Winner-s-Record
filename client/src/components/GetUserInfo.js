@@ -8,7 +8,7 @@ const GetUserInfo = () => {
   const token = localStorage.getItem("token");
   if (token) {
     axios
-      .get("http://server.winner-s-record.link/auth/", {
+      .get("https://server.winner-s-record.link/auth/", {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {
