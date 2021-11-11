@@ -68,7 +68,7 @@ const Tournament = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
 
     axios
-      .get(`http://3.36.30.63/tournament/${postId}`, {
+      .get(`https://3.36.30.63/tournament/${postId}`, {
         headers: { Authorization },
       })
       .then((res) => {
@@ -127,7 +127,7 @@ const Tournament = () => {
     } else if (round === 3) {
       axios
         .post(
-          `http://3.36.30.63/record/${postId}`,
+          `https://3.36.30.63/record/${postId}`,
           { event, matchId },
           {
             headers: {
@@ -144,7 +144,7 @@ const Tournament = () => {
     } else {
       axios
         .post(
-          `http://3.36.30.63/record/${postId}`,
+          `https://3.36.30.63/record/${postId}`,
           { event, matchId },
           {
             headers: {

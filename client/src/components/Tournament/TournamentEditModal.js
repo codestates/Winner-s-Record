@@ -11,7 +11,7 @@ const TournamentEditModal = ({
     console.log(matchToEdit);
     axios
       .put(
-        `http://3.36.30.63/tournament/${matchToEdit[1]}`,
+        `https://3.36.30.63/tournament/${matchToEdit[1]}`,
         {
           matchId: matchToEdit[0],
           winner,
