@@ -15,27 +15,31 @@ const Result = () => {
   const history = useHistory();
 
   const getData = () => {
-    axios.get(`http://3.36.30.63/tournament/${postId}`).then((res) => {
-      const data = res.data.data;
-      console.log(data);
+    axios
+      .get(`http://server.winner-s-record.link/tournament/${postId}`)
+      .then((res) => {
+        const data = res.data.data;
+        console.log(data);
 
-      const others = [];
-      for (let match of data) {
-        if (match.type === "tournamentR3") {
-          setFirstplace(match.winner);
-          setSecondplace(match.loser);
-        } else {
-          others.push(match.loser);
+        const others = [];
+        for (let match of data) {
+          if (match.type === "tournamentR3") {
+            setFirstplace(match.winner);
+            setSecondplace(match.loser);
+          } else {
+            others.push(match.loser);
+          }
         }
-      }
-      setOthers(others);
-    });
+        setOthers(others);
+      });
   };
 
   const getHost = () => {
-    axios.get(`http://3.36.30.63/doc/${postId}`).then((res) => {
-      setHost(res.data.data.userData.nickname);
-    });
+    axios
+      .get(`http://server.winner-s-record.link/doc/${postId}`)
+      .then((res) => {
+        setHost(res.data.data.userData.nickname);
+      });
   };
 
   useEffect(() => {

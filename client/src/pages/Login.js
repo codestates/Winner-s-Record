@@ -23,7 +23,7 @@ export default function Login() {
     const { email, password } = loginInfo;
     axios
       .post(
-        "http://3.36.30.63/auth/login",
+        "http://server.winner-s-record.link/auth/login",
         { email, password },
         { withCredentials: true }
       )
@@ -51,7 +51,7 @@ export default function Login() {
 
   const handleNaver = () => {
     axios
-      .get("http://3.36.30.63/auth/naver/login")
+      .get("http://server.winner-s-record.link/auth/naver/login")
       .then((res) => {
         console.log(res.data);
       })
@@ -62,7 +62,7 @@ export default function Login() {
 
   const handleGoogle = () => {
     axios
-      .get("http://3.36.30.63/auth/google/login")
+      .get("http://server.winner-s-record.link/auth/google/login")
       .then((res) => {
         console.log(res.data);
       })
