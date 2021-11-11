@@ -57,6 +57,7 @@ app.use((error, req, res, next) => {
   res.sendStatus(500);
 });
 console.log(" 소켓 시작 전");
+console.log(`${process.env.SOCKET_PORT}`);
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
