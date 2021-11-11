@@ -129,19 +129,25 @@
 ## :computer: Preview
 
 <details>
-<summary>랜딩 페이지</summary>
+<summary>랜딩페이지</summary>
 
 </details>
 
 
 <details>
-<summary>메인 페이지</summary>
+<summary>메인페이지</summary>
 
 </details>
 
 
 <details>
 <summary>토너먼트 진행</summary>
+
+</details>
+
+
+<details>
+<summary>마이페이지</summary>
 
 </details>
 
