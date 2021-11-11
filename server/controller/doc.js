@@ -124,8 +124,12 @@ export async function getOne(req, res) {
     if (token === "null") {
       userId = "guest";
     } else {
-      const user = await jwt.verify(token, String(config.jwt.secretKey));
-      userId = user.id;
+      try {
+        const user = await jwt.verify(token, String(config.jwt.secretKey));
+        userId = user.id;
+      } catch {
+        userId = "guest";
+      }
     }
   }
   const docId = parseInt(req.params.docId);
