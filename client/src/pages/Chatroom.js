@@ -11,7 +11,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const socket = io.connect("https://server.winner-s-record.link:8080", {
-  secure: true,
+  rejectUnauthorized: false,
 });
 
 const Chatroom = () => {
