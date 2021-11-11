@@ -10,7 +10,7 @@ import ChatPost from "../components/Chat/ChatPost";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-const socket = io.connect("http://server.winner-s-record.link:8080");
+const socket = io.connect("https://server.winner-s-record.link:8080");
 
 const Chatroom = () => {
   const { roomId } = useParams();
