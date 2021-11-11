@@ -1,11 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+
 .profile--historybox {
   @include flexbox();
   flex-direction: column;
 }
 
-.profile--history {
+.profile--history-winbox {
   @include flexbox();
-  border: 1px solid red;
+  //   justify-content: start;
+  background: #f2f2f2;
   width: 40rem;
   height: 5rem;
+  margin: 1rem;
+}
+
+.profile--history-losebox {
+  @include flexbox();
+  background: #f2f2f2;
+  width: 40rem;
+  height: 5rem;
+  margin: 1rem;
+  opacity: 0.5;
+}
+
+.profile--history-event {
+  @include flexbox();
+  background: $sub-color;
+  color: #fefefe;
+  font-size: 0.8rem;
+  width: 4rem;
+  height: 2rem;
+  margin: 1rem;
+}
+
+.profile--history-win {
+  @include flexbox();
+  width: 3rem;
+  font-size: 1.5rem;
+  margin: 1rem;
+  font-weight: bold; //
+  color: $main-color; //
+  font-family: "Lobster", cursive;
+}
+
+.profile--history-lose {
+  @include flexbox();
+  width: 3rem;
+  font-size: 1.5rem;
+  margin: 1rem;
+  font-family: "Lobster", cursive;
+}
+
+.profile--history-vs {
+  @include flexbox();
+  width: 7rem;
+  height: 2rem;
+  font-size: 0.9rem;
+}
+
+.profile--history-date {
+  @include flexbox();
+  width: 7rem;
+  height: 2rem;
+  font-size: 0.9rem;
 }
