@@ -16,6 +16,7 @@ import roomRouter from "./router/room.js";
 import { config } from "./config.js";
 
 import http from "http";
+import https from "https";
 import { Server } from "socket.io";
 import db from "./models/index.js";
 
@@ -56,7 +57,7 @@ app.use((error, req, res, next) => {
   res.sendStatus(500);
 });
 
-const server = http.createServer(app);
+const server = https.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: true,
