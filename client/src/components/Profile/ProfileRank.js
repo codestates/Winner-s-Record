@@ -18,7 +18,7 @@ export default function ProfileRank({ isMypage, nickname }) {
   const handleRank = (event) => {
     axios
       .get(
-        `http://server.winner-s-record.link/rank?event=${event}&nickname=${nickname}`
+        `https://server.winner-s-record.link/rank?event=${event}&nickname=${nickname}`
       )
       .then((res) => {
         const filterd = res.data.data.filter((e) => e.nickname === nickname);
@@ -33,7 +33,7 @@ export default function ProfileRank({ isMypage, nickname }) {
     const token = localStorage.getItem("token");
     axios
       .get(
-        `http://server.winner-s-record.link/match?nickname=${nickname}&event=${event}`,
+        `https://server.winner-s-record.link/match?nickname=${nickname}&event=${event}`,
         {
           headers: { authorization: `Bearer ${token}` },
         }

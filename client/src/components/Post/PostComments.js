@@ -16,7 +16,7 @@ const PostComments = ({ board, postInfo, setPostInfo }) => {
     } else {
       axios
         .post(
-          "http://server.winner-s-record.link/board",
+          "https://server.winner-s-record.link/board",
           { docId: postId, text: input },
           { headers: { Authorization } }
         )
@@ -33,7 +33,7 @@ const PostComments = ({ board, postInfo, setPostInfo }) => {
   const deleteComment = (boardId) => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
-      .delete(`http://server.winner-s-record.link/board/${boardId}`, {
+      .delete(`https://server.winner-s-record.link/board/${boardId}`, {
         headers: { Authorization },
       })
       .then((res) => {

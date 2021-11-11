@@ -86,7 +86,7 @@ export default function CreateDoc() {
     const token = localStorage.getItem("token");
     axios
       .post(
-        "http://server.winner-s-record.link/doc",
+        "https://server.winner-s-record.link/doc",
         { type, title, event, place, price, text, img: arr },
         {
           headers: { authorization: `Bearer ${token}` },

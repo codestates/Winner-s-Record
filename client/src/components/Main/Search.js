@@ -20,7 +20,7 @@ const Search = ({ setPostList, searchOption, setSearchOption }) => {
 
     axios
       .get(
-        `http://server.winner-s-record.link/doc?type=${postType}&event=${game}&${option}=${input}&page=0`
+        `https://server.winner-s-record.link/doc?type=${postType}&event=${game}&${option}=${input}&page=0`
       )
       .then((res) => {
         if (res.status === 404) {

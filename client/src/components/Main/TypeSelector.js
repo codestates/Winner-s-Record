@@ -7,7 +7,7 @@ const TypeSelector = ({ searchOption, setSearchOption, setPostList }) => {
 
     axios
       .get(
-        `http://server.winner-s-record.link/doc?type=${type}&event=${game}&${option}=${input}&page=0`
+        `https://server.winner-s-record.link/doc?type=${type}&event=${game}&${option}=${input}&page=0`
       )
       .then((res) => {
         setPostList(res.data.data);

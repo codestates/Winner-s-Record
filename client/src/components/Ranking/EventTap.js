@@ -10,7 +10,7 @@ export default function EventTap({ setList, setEvent }) {
   const handleList = (event) => {
     axios
       .get(
-        `http://server.winner-s-record.link/rank?event=${event}&nickname=all`
+        `https://server.winner-s-record.link/rank?event=${event}&nickname=all`
       )
       .then((res) => {
         setEvent(event);
