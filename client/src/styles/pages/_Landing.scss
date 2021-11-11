@@ -1,13 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Dongle:wght@700&display=swap");
+@media screen and (min-width: 801px) and (max-width: 1100px) {
+}
+
+@media screen and (min-width: 551px) and (max-width: 800px) {
+}
+
+@media screen and (max-width: 550px) {
+}
 
 .landing--container {
-  display: flex;
+  @include flexbox();
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   font-family: "Dongle", sans-serif;
   background-image: url("https://github.com/glen15/final-img/blob/master/%E1%84%87%E1%85%A2%E1%84%80%E1%85%A7%E1%86%BC%E1%84%8B%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8C%E1%85%B5.png?raw=true");
   background-size: cover;
+  min-width: 550px;
 }
 
 .landing--box {
@@ -19,15 +26,14 @@
 }
 
 .first--container {
-  display: flex;
+  @include flexbox();
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .first--bottom {
   display: flex;
   align-items: center;
+  width: 40rem;
 }
 
 .first--bottom--right {
@@ -38,6 +44,7 @@
 .first--title {
   font-size: 3rem;
   margin-bottom: 3%;
+  width: 20rem;
 }
 
 .first--text {
@@ -46,15 +53,15 @@
 }
 
 .first--bottom--left > img {
-  width: 15rem;
-  height: 15rem;
+  width: 100%;
+  height: auto;
 }
 
 .first--bottom--img {
   position: relative;
-  bottom: 4.5rem;
-  right: 2.2rem;
-  transform: rotate(280deg);
+  bottom: 5rem;
+  right: 1.5rem;
+  transform: rotate(290deg);
   width: 5rem;
   height: 5rem;
 }
@@ -70,10 +77,8 @@
 }
 
 .second--container {
-  display: flex;
+  @include flexbox();
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   position: relative;
   height: 90%;
   bottom: 5rem;
@@ -82,6 +87,7 @@
 .second--bottom {
   background-color: #ccf092;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
   width: 80vw;
@@ -117,10 +123,8 @@
 }
 
 .second--card--img {
+  @include flexbox();
   background-color: palegoldenrod;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border-radius: 1rem;
   margin-bottom: 2rem;
   height: 6.5rem;
@@ -129,10 +133,8 @@
 }
 
 .second--card--contents {
-  display: flex;
+  @include flexbox();
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .second--card--title {
@@ -168,9 +170,7 @@
 }
 
 .third--box--content > img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flexbox();
 }
 
 .button {
