@@ -13,7 +13,7 @@ export default function DocList({ userId, isMypage, nickname }) {
 
   const handleCreatedList = () => {
     axios
-      .get(`http://3.36.30.63/doc?hostId=${userId}`)
+      .get(`https://server.winner-s-record.link/doc?hostId=${userId}`)
       .then((res) => {
         setList(res.data.data);
       })
@@ -25,7 +25,7 @@ export default function DocList({ userId, isMypage, nickname }) {
 
   const handleLikeList = () => {
     axios
-      .get(`http://3.36.30.63/like/${userId}`)
+      .get(`https://server.winner-s-record.link/like/${userId}`)
       .then((res) => {
         setList(res.data.data);
       })
@@ -37,7 +37,7 @@ export default function DocList({ userId, isMypage, nickname }) {
 
   const handleProgressList = () => {
     axios
-      .get(`http://3.36.30.63/doc?guestId=${userId}`)
+      .get(`https://server.winner-s-record.link/doc?guestId=${userId}`)
       .then((res) => {
         setList(res.data.data);
       })
@@ -49,7 +49,7 @@ export default function DocList({ userId, isMypage, nickname }) {
 
   const handleHistoryList = () => {
     axios
-      .get(`http://3.36.30.63/match/history?userId=${userId}`)
+      .get(`https://server.winner-s-record.link/match/history?userId=${userId}`)
       .then((res) => {
         setHistory(res.data.myMatch);
       })

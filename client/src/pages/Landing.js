@@ -5,6 +5,7 @@ export default function Landing() {
   const history = useHistory();
   return (
     <>
+
       <div className="landing--container">
         <div className="landing--box first">
           <div className="first--container">

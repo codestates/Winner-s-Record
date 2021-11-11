@@ -23,7 +23,7 @@ export default function Login() {
     const { email, password } = loginInfo;
     axios
       .post(
-        "http://3.36.30.63/auth/login",
+        "https://server.winner-s-record.link/auth/login",
         { email, password },
         { withCredentials: true }
       )
@@ -45,13 +45,13 @@ export default function Login() {
   const handleKakao = (e) => {
     e.preventDefault();
     window.location.assign(
-      `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_ID}&redirect_uri=http://winner-s-record.click/redirect&&response_type=code`
+      `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_ID}&redirect_uri=http://winner-s-record.link/redirect&&response_type=code`
     );
   };
 
   const handleNaver = () => {
     axios
-      .get("http://3.36.30.63/auth/naver/login")
+      .get("https://server.winner-s-record.link/auth/naver/login")
       .then((res) => {
         console.log(res.data);
       })
@@ -62,7 +62,7 @@ export default function Login() {
 
   const handleGoogle = () => {
     axios
-      .get("http://3.36.30.63/auth/google/login")
+      .get("https://server.winner-s-record.link/auth/google/login")
       .then((res) => {
         console.log(res.data);
       })

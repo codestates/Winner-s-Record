@@ -34,7 +34,7 @@ export default function Profile({ match }) {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`http://3.36.30.63/auth/${userId}`, {
+      .get(`https://server.winner-s-record.link/auth/${userId}`, {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {

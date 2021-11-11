@@ -46,7 +46,7 @@ export default function Redirect() {
       return;
     }
     axios
-      .post("http://3.36.30.63/auth/nickname", { nickname }) //
+      .post("https://server.winner-s-record.link/auth/nickname", { nickname }) //
       .then((res) => {
         setValidation({ ...validation, checkNickname: true });
         setMessage("사용 가능한 닉네임입니다");
@@ -64,7 +64,7 @@ export default function Redirect() {
   const handleSocialSignup = () => {
     axios
       .post(
-        "http://3.36.30.63/auth/social",
+        "https://server.winner-s-record.link/auth/social",
         { type, id, nickname },
         { withCredentials: true }
       )
@@ -98,11 +98,13 @@ export default function Redirect() {
       const url = new URL(window.location.href);
       const authorizationCode = url.searchParams.get("code");
       const result = await axios.post(
-        `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.REACT_APP_KAKAO_ID}&redirect_uri=http://winner-s-record.click/redirect&code=${authorizationCode}`
+        `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.REACT_APP_KAKAO_ID}&redirect_uri=http://winner-s-record.link/redirect&code=${authorizationCode}`
       );
       const token = result.data.access_token;
       axios
-        .get(`http://3.36.30.63/auth/kakao/callback?token=${token}`)
+        .get(
+          `https://server.winner-s-record.link/auth/kakao/callback?token=${token}`
+        )
         .then((res) => {
           const { id, type } = res.data;
           console.log("aaaaaaa", id, type);
