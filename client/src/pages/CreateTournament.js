@@ -4,7 +4,6 @@ import AWS from "aws-sdk";
 import dotenv from "dotenv";
 import axios from "axios";
 import CreateCompleteModal from "../components/CreateDoc/CreateCompleteModal";
-import TypeSelector from "../components/CreateDoc/TypeSelector";
 import EventSelector from "../components/CreateDoc/EventSelector";
 import ChooseMap from "../components/CreateDoc/ChooseMap";
 dotenv.config();
@@ -114,14 +113,6 @@ export default function CreateDoc() {
     <div>
       <div>
         <EventSelector setEvent={setEvent} />
-        <TypeSelector setType={setType} />
-        {type === "trade" ? (
-          <input
-            type="price"
-            onChange={handleInputValue("price")}
-            placeholder="가격"
-          />
-        ) : null}
       </div>
       <div>
         <input
