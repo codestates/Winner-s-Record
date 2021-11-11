@@ -1,14 +1,17 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
 
 const NoPost = ({ setLoginModal }) => {
+  const history = useHistory();
+
   const { isLogin, userInfo } = useSelector((state) => ({
     isLogin: state.isLogin,
     userInfo: state.userInfo,
   }));
 
   const clickHandler = () => {
-    //게시글 작성 리디렉트
+    history.push("/doc");
   };
 
   return (

@@ -9,6 +9,7 @@ import Message from "../components/Chat/Message";
 import ChatPost from "../components/Chat/ChatPost";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Chatmodal from "../components/Chat/Chatmodal";
 
 const socket = io.connect("http://3.36.30.63:8080");
 
@@ -20,6 +21,8 @@ const Chatroom = () => {
     userInfo: state.userInfo,
     chatPost: state.chatPost,
   }));
+
+  const [isModalOn, setIsModalOn] = useState(false);
 
   const [chatroomInfo, setChatroomInfo] = useState({
     id: null,
@@ -98,15 +101,17 @@ const Chatroom = () => {
   };
 
   const scrollToBottom = () => {
-    scrollBottom.current.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-    });
+    if (scrollBottom.current) {
+      scrollBottom.current.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    }
   };
 
   return (
     <div className="chatroom--container">
-      <Header />
+      <Header isChat />
       {/* 채팅 헤더 */}
       <div className="chatroom--inner">
         <div className="chatroom--header">
@@ -133,7 +138,14 @@ const Chatroom = () => {
             </Link>
           </div>
           <div className="otherBtn">
-            <div className="btn">채팅방 나가기</div>
+            <div
+              className="btn"
+              onClick={() => {
+                setIsModalOn(true);
+              }}
+            >
+              채팅방 나가기
+            </div>
           </div>
         </div>
         {/* 채팅방 */}
@@ -173,7 +185,9 @@ const Chatroom = () => {
           </div>
         </div>
       </div>
-
+      {isModalOn ? (
+        <Chatmodal roomId={roomId} setIsModalOn={setIsModalOn} />
+      ) : null}
       <Footer />
     </div>
   );

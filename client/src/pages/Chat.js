@@ -4,6 +4,8 @@ import ListRoom from "../components/Chat/ListRoom";
 import uuid from "react-uuid";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import TopButton from "../components/TopButton";
+import BackButton from "../components/BackButton";
 
 const Chat = () => {
   const [roomList, setRoomList] = useState([]);
@@ -32,6 +34,8 @@ const Chat = () => {
           return <ListRoom roomData={roomData} key={uuid()} />;
         })}
       </ul>
+      <TopButton />
+      <BackButton />
       <Footer />
     </div>
   );
