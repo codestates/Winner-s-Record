@@ -57,7 +57,7 @@ app.use((error, req, res, next) => {
   res.sendStatus(500);
 });
 
-const server = https.createServer(app);
+const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: true,
