@@ -336,6 +336,7 @@ export default function EditUserInfo({ editHandler }) {
               탈퇴하기
             </button>
             <EditCompleteModal
+              editHandler={editHandler}
               isModalOpen={isEditModalOpen}
               openModalHandler={openEditModalHandler}
             />

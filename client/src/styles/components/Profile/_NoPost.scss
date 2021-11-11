@@ -1,0 +1,32 @@
+.profile--nopost--container {
+  @include flexbox();
+  flex-direction: column;
+  margin: 30px 0;
+  .icon {
+    margin: 20px 0;
+    font-size: 5rem;
+    color: $sub-color;
+  }
+  .text--container {
+    @include flexbox();
+    flex-direction: column;
+    .title {
+      margin: 30px 0;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profile--nopost--container {
+    .icon {
+      font-size: 3rem;
+    }
+    .text--container {
+      .title {
+        font-size: 1rem;
+      }
+    }
+  }
+}

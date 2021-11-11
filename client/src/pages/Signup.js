@@ -235,9 +235,7 @@ export default function Signup() {
             가입하기
           </button>
         ) : (
-          <button className="signup--btn" onClick={openModalHandler}>
-            가입하기
-          </button>
+          <button className="signup--btn">가입하기</button>
         )}
         <SignupCompleteModal
           isModalOpen={isModalOpen}
