@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const PostListContent = ({ postInfo }) => {
-  const { event, type, place, price, status, title, img, like } = postInfo;
+  const { id, event, type, place, price, status, title, img, like } = postInfo;
   const [placeToDisplay, setPlaceToDisplay] = useState("");
 
   useEffect(() => {
@@ -41,34 +42,36 @@ const PostListContent = ({ postInfo }) => {
 
   return (
     <div className="list--content--container">
-      <div
-        className={`list--content--done ${status === "대기" ? "" : "active"}`}
-      >
-        <div className="list--content--pic">
-          <img src={img[0]} alt="사진" />
-          <div
-            className={`list--content--type ${
-              type === "match" ? "match" : "trade"
-            } `}
-          >
-            <span>{type === "match" ? "경기" : "거래"}</span>
+      <Link to={`/post/${id}`}>
+        <div
+          className={`list--content--done ${status === "대기" ? "" : "active"}`}
+        >
+          <div className="list--content--pic">
+            <img src={img[0]} alt="사진" />
+            <div
+              className={`list--content--type ${
+                type === "match" ? "match" : "trade"
+              } `}
+            >
+              <span>{type === "match" ? "경기" : "거래"}</span>
+            </div>
+          </div>
+          <div className="list--content--text">
+            <div className="game">
+              <span>{`#${gameNamer(event)}`}</span>
+            </div>
+            <div className="title">{title}</div>
+            <div className="place">{placeToDisplay}</div>
+            {price ? (
+              <div className="price">{countPrice(String(price))}원</div>
+            ) : null}
+            <div className="like">
+              <i class="far fa-heart"></i>
+              <span>{`${like}`}</span>
+            </div>
           </div>
         </div>
-        <div className="list--content--text">
-          <div className="game">
-            <span>{`#${gameNamer(event)}`}</span>
-          </div>
-          <div className="title">{title}</div>
-          <div className="place">{placeToDisplay}</div>
-          {price ? (
-            <div className="price">{countPrice(String(price))}원</div>
-          ) : null}
-          <div className="like">
-            <i class="far fa-heart"></i>
-            <span>{`${like}`}</span>
-          </div>
-        </div>
-      </div>
+      </Link>
     </div>
   );
 };
