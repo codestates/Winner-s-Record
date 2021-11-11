@@ -98,7 +98,7 @@ export default function Redirect() {
       const url = new URL(window.location.href);
       const authorizationCode = url.searchParams.get("code");
       const result = await axios.post(
-        `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.REACT_APP_KAKAO_ID}&redirect_uri=http://winner-s-record.click/redirect&code=${authorizationCode}`
+        `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.REACT_APP_KAKAO_ID}&redirect_uri=http://winner-s-record.link/redirect&code=${authorizationCode}`
       );
       const token = result.data.access_token;
       axios
