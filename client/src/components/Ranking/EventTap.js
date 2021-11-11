@@ -9,7 +9,9 @@ export default function EventTap({ setList, setEvent }) {
 
   const handleList = (event) => {
     axios
-      .get(`http://3.36.30.63/rank?event=${event}&nickname=all`)
+      .get(
+        `http://server.winner-s-record.link/rank?event=${event}&nickname=all`
+      )
       .then((res) => {
         setEvent(event);
         setList(res.data.data);
