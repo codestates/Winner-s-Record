@@ -46,6 +46,86 @@
 <img width="1781" alt="TechStack" src="https://github.com/glen15/final-img/blob/master/stackIMG.png?raw=true">
 <br/>
 
+## 📌 Functions
+
+<details>
+<summary>[유저]</summary>
+   
+   * 회원가입
+   
+      * 유효성 검사
+      * 소셜로그인
+   * 회원정보
+   * 회원정보 수정
+   * 회원탈퇴
+   * 로그아웃
+</details>
+
+
+<details>
+<summary>[게시글]</summary>
+   
+   * 게시글 작성
+   
+   * 게시글 검색
+   * 게시글 수정
+   * 게시글 삭제
+   * 참가자 신청목록
+
+</details>
+
+
+<details>
+<summary>[마이페이지]</summary>
+   
+   * 회원정보 수정
+   
+   * 작성글 / 관심글 / 참여중인 경기 글 확인
+   * 최근 경기 기록
+   * 종목별 랭킹
+
+</details>
+
+
+<details>
+<summary>[좋아요]</summary>
+   
+   * 관심글 추가
+   
+   * 관심글 삭제
+
+</details>
+
+
+<details>
+<summary>[참가자]</summary>
+   
+   * 참가자 확정
+   
+   * 참가자 삭제
+   * 토너먼트 참가 확정시 게시판 제공
+   
+</details>
+
+<details>
+<summary>[경기기록 / 랭킹]</summary>
+   
+   * 매치 / 토너먼트 작성자 경기 결과 입력
+   
+   * 종목별 상위 랭킹, 닉네임 검색 기능
+
+</details>
+
+<details>
+<summary>[채팅]</summary>
+   
+   * 실시간 채팅 기능
+   
+   * 채팅방 목록 or 게시글에서 채팅방 입장 / 삭제
+</details>
+
+</br>
+
 ## :computer: Preview
 
 <details>
