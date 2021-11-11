@@ -8,9 +8,7 @@
   @include flexbox();
   flex-direction: column;
   .wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexbox();
     margin-bottom: 10px;
     width: 1152px;
     height: 50px;
@@ -20,8 +18,20 @@
   }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
   .search--container {
     width: 100%;
+    .wrapper {
+      width: 80%;
+      padding: 10px 25px;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .search--container {
+    .wrapper {
+      height: 40px;
+    }
   }
 }

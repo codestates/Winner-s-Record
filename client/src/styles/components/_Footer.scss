@@ -1,7 +1,7 @@
 .footer--container {
   background-color: $main-color;
   width: 100%;
-  height: 250px;
+  height: 200px;
 
   @include flexbox();
   flex-direction: column;
@@ -18,12 +18,6 @@
     .logo--container {
       flex: 1 0 0;
       @include flexbox();
-      // .logo {
-      //   height: 100%;
-      //   img {
-      //     max-height: 100%;
-      //   }
-      // }
     }
     .content--outer {
       flex: 2 0 0;

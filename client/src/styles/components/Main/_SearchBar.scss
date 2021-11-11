@@ -5,6 +5,7 @@
   display: flex;
   margin-bottom: 20px;
   box-sizing: content-box;
+  // width: 100%;
 
   input {
     height: 100%;
@@ -45,12 +46,12 @@
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 800px) {
   .search--bar--container {
-    flex: 9 0 0;
+    flex: 10 0 0;
     input {
-      width: 100%;
       font-size: 1rem;
+      width: 100%;
     }
   }
 }

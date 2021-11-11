@@ -50,9 +50,19 @@
   }
 }
 
-@media screen and #{$small} {
+@media screen and (max-width: 800px) {
   .search--option--container {
     flex: 1 0 0;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    width: 80px;
+    .search--dropdown--selector {
+      width: 80px;
+      i {
+        right: 5px;
+      }
+    }
+    .search--dropdown--container {
+      width: 80px;
+    }
   }
 }
