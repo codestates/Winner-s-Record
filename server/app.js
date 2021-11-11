@@ -109,4 +109,8 @@ server.listen(process.env.SOCKET_PORT, () => {
   console.log(`${process.env.SOCKET_PORT} 서버 실행`);
 });
 
-app.listen(config.host.port);
+app.listen(config.host.port, () => {
+  console.log(
+    `=================================서버시작=====================================`
+  );
+});
