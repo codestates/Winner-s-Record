@@ -109,8 +109,6 @@ app.use((error, req, res, next) => {
 //   console.log(`${process.env.SOCKET_PORT} 서버 실행`);
 // });
 
-console.log(`${process.env.SOCKET_PORT}`);
-
 app.listen(config.host.port, () => {
   console.log(
     `=================================서버시작=====================================`
