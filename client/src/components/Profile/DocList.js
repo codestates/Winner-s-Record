@@ -3,7 +3,7 @@ import HistoryList from "./HistoryList";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function DocList({ userId, isMypage }) {
+export default function DocList({ userId, isMypage, nickname }) {
   const [list, setList] = useState([]);
   const [currentTab, setCurrentTab] = useState(0);
   const [history, setHistory] = useState([]);
@@ -109,7 +109,7 @@ export default function DocList({ userId, isMypage }) {
       ) : null}
       {docTap[currentTab].content === "최근 전적" ? (
         history.length ? (
-          <HistoryList list={history} />
+          <HistoryList nickname={nickname} list={history} />
         ) : (
           <div>최근 경기기록이 없습니다.</div>
         )

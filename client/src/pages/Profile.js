@@ -79,7 +79,11 @@ export default function Profile({ match }) {
                 isMypage={isMypage}
                 nickname={profileData.nickname}
               />
-              <DocList userId={userId} isMypage={isMypage} />
+              <DocList
+                userId={userId}
+                isMypage={isMypage}
+                nickname={userInfo.nickname}
+              />
             </div>
             <Footer />
           </>
