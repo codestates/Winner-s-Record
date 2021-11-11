@@ -57,7 +57,9 @@ export default function Signup() {
       return;
     }
     axios
-      .post("http://3.36.30.63/auth/email", { [key]: e.target.value }) //
+      .post("https://server.winner-s-record.link/auth/email", {
+        [key]: e.target.value,
+      }) //
       .then((res) => {
         setValidation({ ...validation, checkEmail: true });
         setMessage({ ...message, email: "사용 가능한 이메일입니다" });
@@ -78,7 +80,9 @@ export default function Signup() {
       return;
     }
     axios
-      .post("http://3.36.30.63/auth/nickname", { [key]: e.target.value }) //
+      .post("https://server.winner-s-record.link/auth/nickname", {
+        [key]: e.target.value,
+      }) //
       .then((res) => {
         setValidation({ ...validation, checkNickname: true });
         setMessage({ ...message, nickname: "사용 가능한 닉네임입니다" });
@@ -96,7 +100,7 @@ export default function Signup() {
   const handleSignup = () => {
     const { email, nickname, password } = signupInfo;
     axios
-      .post("http://3.36.30.63/auth", {
+      .post("https://server.winner-s-record.link/auth", {
         email,
         nickname,
         password,

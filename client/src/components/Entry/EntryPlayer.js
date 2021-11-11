@@ -23,7 +23,7 @@ const EntryPlayer = ({
 
   const fixPlayer = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
-    const endpoint = `http://3.36.30.63/entry/${postId}`;
+    const endpoint = `https://server.winner-s-record.link/entry/${postId}`;
     console.log(fixed.length, postType);
     if (fixed.length && postType === "match") {
       dispatch(setModalText("다수의 상대를 지정할 수 없어요."));
@@ -52,7 +52,7 @@ const EntryPlayer = ({
 
   const deleteHandler = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
-    const endpoint = `http://3.36.30.63/entry/${postId}`;
+    const endpoint = `https://server.winner-s-record.link/entry/${postId}`;
 
     if (!isLogin) {
       setLoginModal(true);

@@ -66,7 +66,7 @@ export default function EditUserInfo({ editHandler }) {
       return;
     }
     axios
-      .post("http://3.36.30.63/auth/nickname", { nickname })
+      .post("https://server.winner-s-record.link/auth/nickname", { nickname })
       .then((res) => {
         setValidation({ ...validation, checkNickname: true });
         setMessage({ ...message, nickname: "사용 가능한 닉네임입니다" });
@@ -86,7 +86,7 @@ export default function EditUserInfo({ editHandler }) {
     const token = localStorage.getItem("token");
     axios
       .post(
-        "http://3.36.30.63/auth/password",
+        "https://server.winner-s-record.link/auth/password",
         { password: oldpassword },
         { headers: { authorization: `Bearer ${token}` } }
       )
@@ -109,7 +109,7 @@ export default function EditUserInfo({ editHandler }) {
     const oldToken = localStorage.getItem("token");
     axios
       .put(
-        "http://3.36.30.63/auth",
+        "https://server.winner-s-record.link/auth",
         { nickname, password: null },
         { headers: { authorization: `Bearer ${oldToken}` } }
       )
@@ -135,7 +135,7 @@ export default function EditUserInfo({ editHandler }) {
     const oldToken = localStorage.getItem("token");
     axios
       .put(
-        "http://3.36.30.63/auth",
+        "https://server.winner-s-record.link/auth",
         { nickname: null, password },
         { headers: { authorization: `Bearer ${oldToken}` } }
       )
@@ -180,7 +180,9 @@ export default function EditUserInfo({ editHandler }) {
   const getUserInfo = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
-      .get("http://3.36.30.63/auth/me", { headers: { Authorization } })
+      .get("https://server.winner-s-record.link/auth/me", {
+        headers: { Authorization },
+      })
       .then((res) => {
         dispatch(setUserInfo(res.data));
         setIsLoading(false);

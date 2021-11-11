@@ -25,7 +25,7 @@ const TradeButton = ({ hostId, status, setModalBtnType }) => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
       .post(
-        `http://3.36.30.63/room`,
+        `https://server.winner-s-record.link/room`,
         { docId: postId },
         { headers: { Authorization } }
       )

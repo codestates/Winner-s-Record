@@ -7,19 +7,18 @@
 
 .profile--history-winbox {
   @include flexbox();
-  //   justify-content: start;
   background: #f2f2f2;
-  width: 40rem;
+  width: 30rem;
   height: 5rem;
-  margin: 1rem;
+  margin: 0.5rem;
 }
 
 .profile--history-losebox {
   @include flexbox();
   background: #f2f2f2;
-  width: 40rem;
+  width: 30rem;
   height: 5rem;
-  margin: 1rem;
+  margin: 0.5rem;
   opacity: 0.5;
 }
 
@@ -63,4 +62,36 @@
   width: 7rem;
   height: 2rem;
   font-size: 0.9rem;
+}
+
+@media screen and (max-width: 768px) {
+  .profile--history-winbox {
+    width: 22rem;
+    height: 4rem;
+  }
+
+  .profile--history-losebox {
+    width: 22rem;
+    height: 4rem;
+  }
+
+  .profile--history-win {
+    width: 2rem;
+    font-size: 1.2rem;
+  }
+
+  .profile--history-lose {
+    width: 2rem;
+    font-size: 1.2rem;
+  }
+
+  .profile--history-vs {
+    width: 5rem;
+    font-size: 0.8rem;
+  }
+
+  .profile--history-date {
+    width: 6rem;
+    font-size: 0.8rem;
+  }
 }

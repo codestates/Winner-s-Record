@@ -30,7 +30,9 @@ function App() {
   const getUserInfo = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
-      .get("http://3.36.30.63/auth/me", { headers: { Authorization } })
+      .get("https://server.winner-s-record.link/auth/me", {
+        headers: { Authorization },
+      })
       .then((res) => {
         console.log(res.data);
         dispatch(setLogin());
