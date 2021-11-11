@@ -1,0 +1,65 @@
+.profile--rankingcontainer {
+  border-radius: 3px;
+  box-shadow: 2px 2px 5px 1px $gray;
+  width: 30rem;
+  height: 10rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-bottom: 0.5rem;
+  margin: 2rem;
+}
+
+.profile--rankingtap {
+  display: flex;
+  justify-content: center;
+  height: 2rem;
+  margin: 0.5rem;
+}
+
+.profile--rankingbtn {
+  font-size: 0.8rem;
+  transition: 0.4s;
+  background: $gray;
+  border-radius: 3px;
+  color: white;
+  margin: 0.3rem;
+  margin-top: 0;
+  width: 5rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    background-color: $main-color;
+    transition: 0.2s;
+  }
+}
+
+.profile--rankingbtn-selected {
+  @include flexbox();
+  font-size: 0.8rem;
+  transition: 0.4s;
+  background: $main-color;
+  border-radius: 3px;
+  color: white;
+  margin: 0.3rem;
+  margin-top: 0;
+  width: 5rem;
+  height: 2rem;
+  cursor: pointer;
+}
+
+.profile--ranking {
+  @include flexbox();
+  font-size: 2rem;
+  height: 4rem;
+}
+
+.profile--score {
+  @include flexbox();
+  font-size: 1.3rem;
+  height: 1.5rem;
+  color: gray;
+}

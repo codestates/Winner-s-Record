@@ -1,0 +1,34 @@
+.profile--doclist {
+  @include flexbox();
+  height: 5rem;
+  width: 30rem;
+}
+
+.profile--doctap-selected {
+  transition: 0.4s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid $main-color;
+  color: $main-color;
+  cursor: pointer;
+  margin: 0.5rem;
+  width: 7rem;
+  height: 1.5rem;
+}
+
+.profile--doctap {
+  @include flexbox();
+  transition: 0.4s;
+  border-bottom: 2px solid $gray;
+  color: $gray;
+  cursor: pointer;
+  margin: 0.5rem;
+  width: 7rem;
+  height: 1.5rem;
+  &:hover {
+    color: $main-color;
+    border-bottom: 2px solid $main-color;
+    transition: 0.2s;
+  }
+}
