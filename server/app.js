@@ -56,7 +56,8 @@ app.use((error, req, res, next) => {
   console.error(error);
   res.sendStatus(500);
 });
-
+console.log(" 소켓 시작 전");
+console.log(`${process.env.SOCKET_PORT}`);
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
@@ -104,7 +105,7 @@ io.on("connection", (socket) => {
     }).catch((err) => console.log(err));
   });
 });
-
+console.log("서버 리슨 위");
 server.listen(process.env.SOCKET_PORT, () => {
   console.log(`${process.env.SOCKET_PORT} 서버 실행`);
 });
