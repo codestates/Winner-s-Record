@@ -4,6 +4,7 @@ import EventTap from "../components/Ranking/EventTap";
 import RankList from "../components/Ranking/RankList";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import NoUser from "../components/Ranking/NoUser";
 export default function Ranking() {
   const [list, setList] = useState([]);
   const [event, setEvent] = useState("");
@@ -32,7 +33,9 @@ export default function Ranking() {
               return <RankList key={index} content={e} />;
             })
           ) : (
-            <div>존재하지 않는 유저입니다.</div>
+            <div className="ranking--nouse">
+              <NoUser />
+            </div>
           )}
         </ul>
       </div>

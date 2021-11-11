@@ -1,5 +1,7 @@
 import ProfilePostList from "../Profile/MypagePostList";
 import HistoryList from "./HistoryList";
+import NoPost from "./NoPost";
+import NoHistory from "./NoHistory";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -104,14 +106,14 @@ export default function DocList({ userId, isMypage, nickname }) {
         list.length ? (
           <ProfilePostList postList={list} />
         ) : (
-          <div className="profile--nopost">목록이 비었습니다.</div>
+          <NoPost />
         )
       ) : null}
       {docTap[currentTab].content === "최근 전적" ? (
         history.length ? (
           <HistoryList nickname={nickname} list={history} />
         ) : (
-          <div>최근 경기기록이 없습니다.</div>
+          <NoHistory />
         )
       ) : null}
     </>
