@@ -6,17 +6,14 @@ const ChatModal = ({ roomId, setIsModalOn }) => {
   const history = useHistory();
 
   const exitChat = () => {
-    console.log(roomId);
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
-
     axios
-      .delete(`http://3.36.30.63:8080/room/${roomId}`, {
+      .delete(`http://3.36.30.63/room/${roomId}`, {
         headers: {
           Authorization,
         },
       })
       .then((res) => {
-        console.log(res);
         history.push("/chat");
         setIsModalOn(false);
       })
