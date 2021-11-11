@@ -63,3 +63,31 @@
   height: 1.5rem;
   color: gray;
 }
+
+@media screen and (max-width: 768px) {
+  .profile--rankingcontainer {
+    width: 22rem;
+    height: 8rem;
+  }
+
+  .profile--rankingbtn {
+    width: 4rem;
+    font-size: 0.8rem;
+  }
+
+  .profile--rankingbtn-selected {
+    width: 4rem;
+    font-size: 0.8rem;
+  }
+
+  .profile--ranking {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    height: 3rem;
+  }
+
+  .profile--score {
+    font-size: 1rem;
+    height: 6rem;
+  }
+}
