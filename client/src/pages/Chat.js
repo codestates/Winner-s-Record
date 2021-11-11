@@ -24,7 +24,9 @@ const Chat = () => {
   return (
     <div className="chatroomlist--container">
       <Header />
-      채팅
+      <div className="chatroomlist--title">
+        <span>채팅</span>
+      </div>
       <ul className="room--container">
         {roomList.map((roomData) => {
           return <ListRoom roomData={roomData} key={uuid()} />;
