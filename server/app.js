@@ -64,6 +64,7 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
     credentials: true,
   },
+  allowEIO3: true,
 });
 
 io.on("connection", (socket) => {
