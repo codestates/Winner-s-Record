@@ -23,10 +23,10 @@ const MatchButton = ({
   }));
 
   const clickHandler = () => {
-    if (!isLogin) {
-      setLoginModal(true);
-    } else if (buttonName === "종료된 경기입니다.") {
+    if (buttonName === "종료된 경기입니다.") {
       // 아무것도 하지마~~
+    } else if (!isLogin) {
+      setLoginModal(true);
     } else if (buttonName === "참가 신청" || buttonName === "신청자 목록") {
       history.push(`/post/${postId}/entry`);
     } else {
