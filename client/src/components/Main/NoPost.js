@@ -36,7 +36,7 @@ const NoPost = ({ setLoginModal }) => {
             <div
               className="btn colored"
               onClick={() => {
-                setLoginModal(true);
+                history.push("/login");
               }}
             >
               로그인 하기

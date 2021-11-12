@@ -26,7 +26,6 @@ import axios from "axios";
 import Result from "./pages/TournamentResult";
 import Tournament from "./pages/Tournament";
 import Chatroom from "./pages/Chatroom";
-import Landing1 from "./pages/Landing1";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,12 +51,9 @@ function App() {
     <div className="app--container">
       <Router>
         <Switch>
-          <Route path="/landing" component={Landing1} />
+          <Route exact path="/" component={Landing} />
           <Route exact path="/chat" component={Chat} />
           <Route path="/chat/:roomId" component={Chatroom} />
-          <Route exact path="/">
-            <Landing />
-          </Route>
           <Route exact path="/post/:postId" component={Post} />
           <Route exact path="/post/:postId/entry">
             <Entry />
