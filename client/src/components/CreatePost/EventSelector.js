@@ -1,36 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-export default function EventSelector({ event, setEvent }) {
+export default function EventSelector({ setEvent }) {
   const [isDropOpen, setIsDropOpen] = useState(false);
   const [selected, setSelected] = useState("종목");
 
-  useEffect(() => {
-    if (event === "tennis") {
-      setSelected("테니스");
-    }
-    if (event === "squash") {
-      setSelected("스쿼시");
-    }
-    if (event === "badminton") {
-      setSelected("배드민턴");
-    }
-    if (event === "pingpong") {
-      setSelected("탁구");
-    }
-  }, [event]);
-
   return (
-    <ul>
-      <li
+    <ul className="post--eventselector">
+      <div
+        className="post--dropdownselected"
         onClick={() => {
-          setIsDropOpen(true);
+          setIsDropOpen(!isDropOpen);
           setSelected("종목");
         }}
       >
-        {selected}
-      </li>
+        <span>{selected}</span>
+      </div>
       {isDropOpen ? (
-        <>
+        <ul className="dropdown--container">
           <li
             onClick={(e) => {
               setIsDropOpen(false);
@@ -67,7 +53,7 @@ export default function EventSelector({ event, setEvent }) {
           >
             탁구
           </li>
-        </>
+        </ul>
       ) : null}
     </ul>
   );

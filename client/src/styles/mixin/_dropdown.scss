@@ -1,6 +1,5 @@
 @mixin dropdown--selector {
   cursor: pointer;
-
   position: relative;
   @include flexbox;
   border-bottom: 2px solid $gray;
@@ -9,7 +8,7 @@
   transition: 0.2s;
   span {
     margin-top: 4px;
-    margin-right: 10px;
+    // margin-right: 10px;
   }
 }
 

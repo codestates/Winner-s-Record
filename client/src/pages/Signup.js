@@ -169,65 +169,67 @@ export default function Signup() {
         로고
       </div>
       <div className="signup--inputcontainer">
-        <input
-          className="signup--input"
-          type="email"
-          placeholder="E-mail"
-          onBlur={handleOnblurEmail("email")}
-          onChange={handleInputValue("email")}
-          onKeyPress={handleKeyPress}
-        />
-        {message.email === "이메일 주소를 입력해주세요" ? (
-          <div className="signup--default-message">{message.email}</div>
-        ) : message.email === "사용 가능한 이메일입니다" ? (
-          <div className="signup--ok-message">{message.email}</div>
-        ) : (
-          <div className="signup--error-message">{message.email}</div>
-        )}
-        <input
-          className="signup--input"
-          type="nickname"
-          placeholder="닉네임"
-          onBlur={handleOnblurName("nickname")}
-          onChange={handleInputValue("nickname")}
-          onKeyPress={handleKeyPress}
-        />
-        {message.nickname === "닉네임은 2~7 자리 한글로 입력해주세요" ? (
-          <div className="signup--default-message">{message.nickname}</div>
-        ) : message.nickname === "사용 가능한 닉네임입니다" ? (
-          <div className="signup--ok-message">{message.nickname}</div>
-        ) : (
-          <div className="signup--error-message">{message.nickname}</div>
-        )}
-        <input
-          className="signup--input"
-          type="password"
-          placeholder="비밀번호"
-          onChange={handleInputValue("password")}
-          onKeyPress={handleKeyPress}
-        />
-        {message.password ===
-        "비밀번호는 8자리 이상, 숫자, 문자, 특수문자가 포함되어야 합니다" ? (
-          <div className="signup--default-message">{message.password}</div>
-        ) : message.password === "사용할 수 있는 비밀번호 입니다" ? (
-          <div className="signup--ok-message">{message.password}</div>
-        ) : (
-          <div className="signup--error-message">{message.password}</div>
-        )}
-        <input
-          className="signup--input"
-          type="password"
-          placeholder="비밀번호 확인"
-          onChange={handleInputValue("checkPW")}
-          onKeyPress={handleKeyPress}
-        />
-        {message.checkPW === "비밀번호를 확인해주세요" ? (
-          <div className="signup--default-message">{message.checkPW}</div>
-        ) : message.checkPW === "비밀번호가 일치합니다" ? (
-          <div className="signup--ok-message">{message.checkPW}</div>
-        ) : (
-          <div className="signup--error-message">{message.checkPW}</div>
-        )}
+        <form onSubmit={(e) => e.preventDefault()}>
+          <input
+            className="signup--input"
+            type="email"
+            placeholder="E-mail"
+            onBlur={handleOnblurEmail("email")}
+            onChange={handleInputValue("email")}
+            onKeyPress={handleKeyPress}
+          />
+          {message.email === "이메일 주소를 입력해주세요" ? (
+            <div className="signup--default-message">{message.email}</div>
+          ) : message.email === "사용 가능한 이메일입니다" ? (
+            <div className="signup--ok-message">{message.email}</div>
+          ) : (
+            <div className="signup--error-message">{message.email}</div>
+          )}
+          <input
+            className="signup--input"
+            type="nickname"
+            placeholder="닉네임"
+            onBlur={handleOnblurName("nickname")}
+            onChange={handleInputValue("nickname")}
+            onKeyPress={handleKeyPress}
+          />
+          {message.nickname === "닉네임은 2~7 자리 한글로 입력해주세요" ? (
+            <div className="signup--default-message">{message.nickname}</div>
+          ) : message.nickname === "사용 가능한 닉네임입니다" ? (
+            <div className="signup--ok-message">{message.nickname}</div>
+          ) : (
+            <div className="signup--error-message">{message.nickname}</div>
+          )}
+          <input
+            className="signup--input"
+            type="password"
+            placeholder="비밀번호"
+            onChange={handleInputValue("password")}
+            onKeyPress={handleKeyPress}
+          />
+          {message.password ===
+          "비밀번호는 8자리 이상, 숫자, 문자, 특수문자가 포함되어야 합니다" ? (
+            <div className="signup--default-message">{message.password}</div>
+          ) : message.password === "사용할 수 있는 비밀번호 입니다" ? (
+            <div className="signup--ok-message">{message.password}</div>
+          ) : (
+            <div className="signup--error-message">{message.password}</div>
+          )}
+          <input
+            className="signup--input"
+            type="password"
+            placeholder="비밀번호 확인"
+            onChange={handleInputValue("checkPW")}
+            onKeyPress={handleKeyPress}
+          />
+          {message.checkPW === "비밀번호를 확인해주세요" ? (
+            <div className="signup--default-message">{message.checkPW}</div>
+          ) : message.checkPW === "비밀번호가 일치합니다" ? (
+            <div className="signup--ok-message">{message.checkPW}</div>
+          ) : (
+            <div className="signup--error-message">{message.checkPW}</div>
+          )}
+        </form>
       </div>
       <div className="signup--btncontainer">
         {isValid ? (

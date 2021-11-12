@@ -5,11 +5,11 @@ const CreatePostBtn = ({ isTournament }) => {
   return (
     <div className="fixedBtn create">
       {isTournament ? (
-        <Link to="/토너먼트 생성">
+        <Link to="/create-tournament">
           <i className="fas fa-plus"></i>
         </Link>
       ) : (
-        <Link to="/doc">
+        <Link to="/create-post">
           <i className="fas fa-plus"></i>
         </Link>
       )}

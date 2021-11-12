@@ -5,18 +5,18 @@ export default function TypeSelector({ setType }) {
   const [selected, setSelected] = useState("분류");
 
   return (
-    <ul className="search--type--container">
-      <li
-        className="search--type--btn"
+    <ul className="post--typeselector">
+      <div
+        className="post--dropdownselected"
         onClick={() => {
           setIsDropOpen(!isDropOpen);
           setSelected("분류");
         }}
       >
-        {selected}
-      </li>
+        <span>{selected}</span>
+      </div>
       {isDropOpen ? (
-        <>
+        <ul className="dropdown--container">
           <li
             onClick={(e) => {
               setIsDropOpen(false);
@@ -35,7 +35,7 @@ export default function TypeSelector({ setType }) {
           >
             거래
           </li>
-        </>
+        </ul>
       ) : null}
     </ul>
   );

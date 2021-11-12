@@ -32,18 +32,17 @@
   align-items: flex-end;
   font-size: 1.3rem;
   height: 4rem;
-}
-
-.fa-pencil-alt {
-  justify-content: center;
-  align-items: center;
-  margin-left: 0.5rem;
-  cursor: pointer;
-  color: $gray;
-  transition: 0.4s;
-  &:hover {
-    color: $main-color;
-    transition: 0.2s;
+  .fa-pencil-alt {
+    justify-content: center;
+    align-items: center;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    color: $gray;
+    transition: 0.4s;
+    &:hover {
+      color: $main-color;
+      transition: 0.2s;
+    }
   }
 }
 

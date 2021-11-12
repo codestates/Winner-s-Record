@@ -233,22 +233,26 @@ export default function EditUserInfo({ editHandler }) {
       ) : (
         <div className="signup--container">
           <div className="signup--inputcontainer">
-            <input
-              className="edit--input"
-              type="nickname"
-              placeholder="새 닉네임"
-              onBlur={handleOnblurName}
-              onChange={handleInputValue("nickname")}
-              onKeyPress={handleKeyPress}
-              value={editInfo.nickname}
-            />
-            {message.nickname === "닉네임은 2~7 자리 한글로 입력해주세요" ? (
-              <div className="signup--default-message">{message.nickname}</div>
-            ) : message.nickname === "사용 가능한 닉네임입니다" ? (
-              <div className="signup--ok-message">{message.nickname}</div>
-            ) : (
-              <div className="signup--error-message">{message.nickname}</div>
-            )}
+            <form onSubmit={(e) => e.preventDefault()}>
+              <input
+                className="edit--input"
+                type="nickname"
+                placeholder="새 닉네임"
+                onBlur={handleOnblurName}
+                onChange={handleInputValue("nickname")}
+                onKeyPress={handleKeyPress}
+                value={editInfo.nickname}
+              />
+              {message.nickname === "닉네임은 2~7 자리 한글로 입력해주세요" ? (
+                <div className="signup--default-message">
+                  {message.nickname}
+                </div>
+              ) : message.nickname === "사용 가능한 닉네임입니다" ? (
+                <div className="signup--ok-message">{message.nickname}</div>
+              ) : (
+                <div className="signup--error-message">{message.nickname}</div>
+              )}
+            </form>
             <div className="edit--btncontainer">
               {validation.nickname && validation.checkNickname ? (
                 <button className="signup--btn-ok" onClick={handleEditName}>
@@ -261,59 +265,68 @@ export default function EditUserInfo({ editHandler }) {
           </div>
           {userInfo.type === "web" ? (
             <div className="signup--inputcontainer">
-              <input
-                className="edit--input"
-                type="password"
-                placeholder="현재 비밀번호"
-                onBlur={handleOnblurPassword}
-                onChange={handleInputValue("oldpassword")}
-                onKeyPress={handleKeyPress}
-                value={editInfo.oldpassword}
-              />
-              {message.oldpassword === "현재 비밀번호를 입력해주세요" ? (
-                <div className="signup--default-message">
-                  {message.oldpassword}
-                </div>
-              ) : message.oldpassword === "새 비밀번호를 입력해주세요" ? (
-                <div className="signup--ok-message">{message.oldpassword}</div>
-              ) : (
-                <div className="signup--error-message">
-                  {message.oldpassword}
-                </div>
-              )}
-              <input
-                className="edit--input"
-                type="password"
-                placeholder="새 비밀번호"
-                onChange={handleInputValue("password")}
-                onKeyPress={handleKeyPress}
-                value={editInfo.password}
-              />
-              {message.password ===
-              "비밀번호는 8자리 이상, 숫자, 문자, 특수문자가 포함되어야 합니다" ? (
-                <div className="signup--default-message">
-                  {message.password}
-                </div>
-              ) : message.password === "사용할 수 있는 비밀번호 입니다" ? (
-                <div className="signup--ok-message">{message.password}</div>
-              ) : (
-                <div className="signup--error-message">{message.password}</div>
-              )}
-              <input
-                className="edit--input"
-                type="password"
-                placeholder="새 비밀번호 확인"
-                onChange={handleInputValue("checkPW")}
-                onKeyPress={handleKeyPress}
-                value={editInfo.checkPW}
-              />
-              {message.checkPW === "비밀번호를 확인해주세요" ? (
-                <div className="signup--default-message">{message.checkPW}</div>
-              ) : message.checkPW === "비밀번호가 일치합니다" ? (
-                <div className="signup--ok-message">{message.checkPW}</div>
-              ) : (
-                <div className="signup--error-message">{message.checkPW}</div>
-              )}
+              <form>
+                <input
+                  className="edit--input"
+                  type="password"
+                  placeholder="현재 비밀번호"
+                  onBlur={handleOnblurPassword}
+                  onChange={handleInputValue("oldpassword")}
+                  onKeyPress={handleKeyPress}
+                  value={editInfo.oldpassword}
+                />
+                {message.oldpassword === "현재 비밀번호를 입력해주세요" ? (
+                  <div className="signup--default-message">
+                    {message.oldpassword}
+                  </div>
+                ) : message.oldpassword === "새 비밀번호를 입력해주세요" ? (
+                  <div className="signup--ok-message">
+                    {message.oldpassword}
+                  </div>
+                ) : (
+                  <div className="signup--error-message">
+                    {message.oldpassword}
+                  </div>
+                )}
+                <input
+                  className="edit--input"
+                  type="password"
+                  placeholder="새 비밀번호"
+                  onChange={handleInputValue("password")}
+                  onKeyPress={handleKeyPress}
+                  value={editInfo.password}
+                />
+                {message.password ===
+                "비밀번호는 8자리 이상, 숫자, 문자, 특수문자가 포함되어야 합니다" ? (
+                  <div className="signup--default-message">
+                    {message.password}
+                  </div>
+                ) : message.password === "사용할 수 있는 비밀번호 입니다" ? (
+                  <div className="signup--ok-message">{message.password}</div>
+                ) : (
+                  <div className="signup--error-message">
+                    {message.password}
+                  </div>
+                )}
+                <input
+                  className="edit--input"
+                  type="password"
+                  placeholder="새 비밀번호 확인"
+                  onChange={handleInputValue("checkPW")}
+                  onKeyPress={handleKeyPress}
+                  value={editInfo.checkPW}
+                />
+                {message.checkPW === "비밀번호를 확인해주세요" ? (
+                  <div className="signup--default-message">
+                    {message.checkPW}
+                  </div>
+                ) : message.checkPW === "비밀번호가 일치합니다" ? (
+                  <div className="signup--ok-message">{message.checkPW}</div>
+                ) : (
+                  <div className="signup--error-message">{message.checkPW}</div>
+                )}
+              </form>
+
               <div className="edit--btncontainer">
                 {validation.oldpassword &&
                 validation.password &&
