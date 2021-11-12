@@ -96,7 +96,7 @@ export default function EditPhotoModal({
           <div className="modal--view-photo">
             <div className="modal--top">
               <img
-                alt="photo"
+                alt="camera"
                 src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%9E%90%EB%A3%8C/%E1%84%89%E1%85%A1%E1%84%8C%E1%85%B5%E1%86%AB.png"
               />
             </div>

@@ -21,7 +21,7 @@ export default function RankList({ content }) {
   return (
     <li className="ranking--content">
       <div className="ranking--content-rank">
-        {content.rank > 3 || content.rank == "-" ? (
+        {content.rank > 3 || content.rank === "-" ? (
           `${content.rank}위`
         ) : (
           <img

@@ -1,11 +1,8 @@
-import { useHistory } from "react-router";
-
 export default function EditCompleteModal({
   isModalOpen,
   openModalHandler,
   editHandler,
 }) {
-  const history = useHistory();
   return (
     <>
       {isModalOpen ? (

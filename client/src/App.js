@@ -36,7 +36,6 @@ function App() {
         headers: { Authorization },
       })
       .then((res) => {
-        console.log(res.data);
         dispatch(setLogin());
         dispatch(setUserInfo(res.data));
       });
