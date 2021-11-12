@@ -31,6 +31,28 @@
   }
 }
 
+.modal--view-photo {
+  display: flex;
+  width: 600px;
+  height: 500px;
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+  left: 50%;
+  right: 50%;
+  z-index: 1;
+  background: white;
+  border-radius: 10px;
+  transform: translate(-50%, -50%);
+  min-width: 250px;
+  flex-direction: column;
+  align-items: center;
+  &.postcode {
+    width: 60%;
+    height: 400px;
+  }
+}
+
 .modal--top {
   width: 600px;
   height: 150px;
@@ -45,6 +67,23 @@
     width: 120px;
     height: 120px;
   }
+}
+
+.modal--uploadcontainer {
+  @include flexbox();
+  flex-direction: column;
+}
+
+.modal--preview {
+  width: 12rem;
+  height: 12rem;
+  border: 2px solid $main-color;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.modal--file {
+  display: none;
 }
 
 .modal--content {
@@ -141,6 +180,16 @@
   .modal--view {
     width: 22rem;
     height: 18rem;
+  }
+
+  .modal--view-photo {
+    width: 22rem;
+    height: 20rem;
+  }
+
+  .modal--preview {
+    width: 6.5rem;
+    height: 6.5rem;
   }
 
   .modal--top {

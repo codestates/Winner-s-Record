@@ -4,17 +4,19 @@ import AWS from "aws-sdk";
 import dotenv from "dotenv";
 import axios from "axios";
 import CreateCompleteModal from "../components/CreatePost/CreateCompleteModal";
+import TypeSelector from "../components/CreatePost/TypeSelector";
 import EventSelector from "../components/CreatePost/EventSelector";
 import ChooseMap from "../components/CreatePost/ChooseMap";
 import NoImage from "../components/CreatePost/NoImage";
 dotenv.config();
 
-export default function CreateDoc() {
+export default function CreatePost() {
   const history = useHistory();
   const [preview, setPreview] = useState([]);
   const [files, setFiles] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [event, setEvent] = useState(null);
+  const [type, setType] = useState(null);
   const [docId, setDocId] = useState(null);
   const fileUpload = useRef(null);
 
@@ -93,12 +95,12 @@ export default function CreateDoc() {
   };
 
   const handleSubmit = (arr) => {
-    const { title, place, text } = inputValue;
+    const { title, place, price, text } = inputValue;
     const token = localStorage.getItem("token");
     axios
       .post(
         "https://server.winner-s-record.link/doc",
-        { type: "tournament", title, event, place, text, img: arr },
+        { type, title, event, place, price, text, img: arr },
         {
           headers: { authorization: `Bearer ${token}` },
         }
@@ -112,15 +114,23 @@ export default function CreateDoc() {
       });
   };
 
-  const isValid = event && inputValue.title && inputValue.text;
+  const isValid = (type) => {
+    if (type === "match")
+      return event && type && inputValue.title && inputValue.text;
+    if (type === "trade")
+      return (
+        event && type && inputValue.title && inputValue.text && inputValue.price
+      );
+  };
 
   return (
     <div className="post--background">
       <div className="post--selectors">
-        <div className="post--name-tournament">
-          토너먼트 생성 <i class="fa fa-users"></i>
+        <div className="post--name">
+          게시글 작성 <i class="fas fa-pencil-alt"></i>
         </div>
         <EventSelector setEvent={setEvent} />
+        <TypeSelector setType={setType} />
       </div>
       <div className="post--inputcontainer">
         <div className="post--title">
@@ -131,6 +141,17 @@ export default function CreateDoc() {
             placeholder="제목을 입력해주세요"
           />
         </div>
+        {type === "trade" ? (
+          <div className="post--price">
+            <div>가격</div>
+            <input
+              className="post--price"
+              type="number"
+              onChange={handleInputValue("price")}
+              placeholder="가격을 숫자로 입력해주세요"
+            />
+          </div>
+        ) : null}
         <div className="post--text">
           <div>내용</div>
           <textarea
@@ -143,9 +164,9 @@ export default function CreateDoc() {
           <div>사진</div>
           <input
             className="post--file"
-            type="file"
             ref={fileUpload}
             accept="image/*"
+            type="file"
             multiple
             onChange={imgOnchange}
           />
@@ -198,7 +219,7 @@ export default function CreateDoc() {
         >
           돌아가기
         </button>
-        {isValid ? (
+        {isValid(type) ? (
           <button
             className="modal--twobtn-ok"
             onClick={() => {

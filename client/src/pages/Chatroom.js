@@ -9,7 +9,7 @@ import Message from "../components/Chat/Message";
 import ChatPost from "../components/Chat/ChatPost";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import ChatModal from "../components/Chat/ChatModal";
+import ChatModal from "../components/Chat/Chatmodal";
 
 const socket = io.connect("https://server.winner-s-record.link:8080", {
   rejectUnauthorized: false,

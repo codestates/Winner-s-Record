@@ -4,11 +4,13 @@ import Redirect from "./pages/Redirect";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import Landing from "./pages/Landing";
-import EditDoc from "./pages/EditDoc";
 import Error from "./pages/Error";
 import Main from "./pages/Main";
 import Post from "./pages/Post";
-import CreateDoc from "./pages/CreateDoc";
+import CreatePost from "./pages/CreatePost";
+import EditPost from "./pages/EditPost";
+import CreateTournament from "./pages/CreateTournament";
+import EditTournament from "./pages/EditTournament";
 import Ranking from "./pages/Ranking";
 import TournamentMain from "./pages/TournamentMain";
 import Entry from "./pages/Entry";
@@ -82,11 +84,17 @@ function App() {
             <Signup />
           </Route>
           <Route path={"/profile/:userId"} component={Profile} />
-          <Route path="/doc">
-            <CreateDoc />
+          <Route path="/create-post">
+            <CreatePost />
           </Route>
-          <Route path="/edit/:docId">
-            <EditDoc />
+          <Route path="/create-tournament">
+            <CreateTournament />
+          </Route>
+          <Route path="/edit-post/:docId">
+            <EditPost />
+          </Route>
+          <Route path="/edit-tournament/:docId">
+            <EditTournament />
           </Route>
           <Route path="/ranking">
             <Ranking />

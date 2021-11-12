@@ -84,55 +84,60 @@ export default function Login() {
       <div className="login--logo" onClick={() => history.push("/main")}>
         로고
       </div>
-      <div className="login--inputcontainer">
-        <input
-          className="login--input"
-          type="email"
-          placeholder="E-mail"
-          onChange={handleInputValue("email")}
-          onKeyPress={handleKeyPress}
-        />
-        <input
-          className="login--input"
-          type="password"
-          placeholder="비밀번호"
-          onChange={handleInputValue("password")}
-          onKeyPress={handleKeyPress}
-        />
-        <div className="login--error">{errorMessage}</div>
-      </div>
-      <div className="login--btncontainer">
-        {isValid ? (
-          <button className="login--btn-ok" onClick={handleLogin}>
-            로그인
+      <form onSubmit={(e) => e.preventDefault()}>
+        <div className="login--inputcontainer">
+          <input
+            className="login--input"
+            type="email"
+            placeholder="E-mail"
+            onChange={handleInputValue("email")}
+            onKeyPress={handleKeyPress}
+          />
+          <input
+            className="login--input"
+            type="password"
+            placeholder="비밀번호"
+            onChange={handleInputValue("password")}
+            onKeyPress={handleKeyPress}
+          />
+          <div className="login--error">{errorMessage}</div>
+        </div>
+        <div className="login--btncontainer">
+          {isValid ? (
+            <button className="login--btn-ok" onClick={handleLogin}>
+              로그인
+            </button>
+          ) : (
+            <button className="login--btn">로그인</button>
+          )}
+          <button
+            className="login--btn"
+            onClick={() => history.push("/signup")}
+          >
+            회원가입
           </button>
-        ) : (
-          <button className="login--btn">로그인</button>
-        )}
-        <button className="login--btn" onClick={() => history.push("/signup")}>
-          회원가입
-        </button>
-      </div>
-      <div className="login--socialcontainer">
-        <img
-          className="login--socialbtn"
-          alt="kakao"
-          src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%86%8C%EC%85%9C%EC%95%84%EC%9D%B4%EC%BD%98/btn_kakao.png"
-          onClick={handleKakao}
-        />
-        <img
-          alt="naver"
-          className="login--socialbtn"
-          src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%86%8C%EC%85%9C%EC%95%84%EC%9D%B4%EC%BD%98/naver.png"
-          onClick={handleNaver}
-        />
-        <img
-          alt="google"
-          className="login--socialbtn"
-          src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%86%8C%EC%85%9C%EC%95%84%EC%9D%B4%EC%BD%98/google-icon-styl.png"
-          onClick={handleGoogle}
-        />
-      </div>
+        </div>
+        <div className="login--socialcontainer">
+          <img
+            className="login--socialbtn"
+            alt="kakao"
+            src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%86%8C%EC%85%9C%EC%95%84%EC%9D%B4%EC%BD%98/btn_kakao.png"
+            onClick={handleKakao}
+          />
+          <img
+            alt="naver"
+            className="login--socialbtn"
+            src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%86%8C%EC%85%9C%EC%95%84%EC%9D%B4%EC%BD%98/naver.png"
+            onClick={handleNaver}
+          />
+          <img
+            alt="google"
+            className="login--socialbtn"
+            src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%86%8C%EC%85%9C%EC%95%84%EC%9D%B4%EC%BD%98/google-icon-styl.png"
+            onClick={handleGoogle}
+          />
+        </div>
+      </form>
       <div className="login--copyright">
         © Copyright 2021 Team MeltingBrain. All rights reserved.
       </div>

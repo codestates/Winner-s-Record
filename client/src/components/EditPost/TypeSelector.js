@@ -14,17 +14,18 @@ export default function TypeSelector({ type, setType }) {
   }, [type]);
 
   return (
-    <ul>
-      <li
+    <ul className="post--eventselector">
+      <div
+        className="post--dropdownselected"
         onClick={() => {
           setIsDropOpen(true);
           setSelected("분류");
         }}
       >
-        {selected}
-      </li>
+        <span>{selected}</span>
+      </div>
       {isDropOpen ? (
-        <>
+        <ul className="dropdown--container">
           <li
             onClick={(e) => {
               setIsDropOpen(false);
@@ -43,7 +44,7 @@ export default function TypeSelector({ type, setType }) {
           >
             거래
           </li>
-        </>
+        </ul>
       ) : null}
     </ul>
   );

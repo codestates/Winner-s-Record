@@ -1,7 +1,7 @@
 import axios from "axios";
 import AWS from "aws-sdk";
 import dotenv from "dotenv";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "../../modules/userInfo";
 dotenv.config();
@@ -15,6 +15,7 @@ export default function EditPhotoModal({
   editPhoto,
 }) {
   const dispatch = useDispatch();
+  const fileInput = useRef(null);
   const [preview, setPreview] = useState(prevPhoto);
 
   const imgOnchange = (e) => {
@@ -22,10 +23,16 @@ export default function EditPhotoModal({
     setFile(imageFile);
     const data = [];
     data.push(imageFile);
-    const imageURL = window.URL.createObjectURL(
-      new Blob(data, { type: "image" })
-    );
-    setPreview(imageURL);
+    if (imageFile) {
+      const imageURL = window.URL.createObjectURL(
+        new Blob(data, { type: "image" })
+      );
+      setPreview(imageURL);
+    } else {
+      setPreview(
+        "https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%9E%90%EB%A3%8C/%E1%84%87%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A1%E1%84%8C%E1%85%B5%E1%86%AB.png"
+      );
+    }
   };
 
   AWS.config.update({
@@ -85,27 +92,44 @@ export default function EditPhotoModal({
     <>
       {isModalOpen ? (
         <div className="modal--backdrop">
-          <div className="modal--view">
-            <div>
+          <div className="modal--view-photo">
+            <div className="modal--top">
+              <img
+                alt="photo"
+                src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%9E%90%EB%A3%8C/%E1%84%89%E1%85%A1%E1%84%8C%E1%85%B5%E1%86%AB.png"
+              />
+            </div>
+            <div className="modal--uploadcontainer">
               <input
+                className="modal--file"
+                ref={fileInput}
                 type="file"
                 accept="image/*"
                 name="file"
                 onChange={(e) => imgOnchange(e)}
               />
-              <div>
-                <img
-                  style={{ width: "50%", height: "50%" }}
-                  src={preview}
-                  alt="profile"
-                />
-              </div>
+
+              <img className="modal--preview" src={preview} alt="profile" />
+              <button
+                className="modal--twobtn"
+                onClick={() => fileInput.current.click()}
+              >
+                파일 업로드
+              </button>
             </div>
             <div className="modal--btnContainer">
-              <button onClick={handleCancle}>돌아가기</button>
+              <button
+                className="modal--twobtn"
+                onClick={() => {
+                  setPreview(preview);
+                  handleCancle();
+                }}
+              >
+                돌아가기
+              </button>
               {File ? (
                 <button
-                  style={{ color: "green" }}
+                  className="modal--twobtn-ok"
                   onClick={() => {
                     uploadFile(File);
                   }}
@@ -113,7 +137,7 @@ export default function EditPhotoModal({
                   변경하기
                 </button>
               ) : (
-                <button>변경하기</button>
+                <button className="modal--twobtn">변경하기</button>
               )}
             </div>
           </div>
