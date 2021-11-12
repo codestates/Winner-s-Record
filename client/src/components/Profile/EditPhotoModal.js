@@ -15,6 +15,7 @@ export default function EditPhotoModal({
   editPhoto,
 }) {
   const dispatch = useDispatch();
+
   const fileInput = useRef(null);
   const [preview, setPreview] = useState(prevPhoto);
 
@@ -76,8 +77,8 @@ export default function EditPhotoModal({
         localStorage.removeItem("token", oldToken);
         localStorage.setItem("token", token);
         dispatch(setUserInfo(userdata));
+        setPreview(path);
         setFile(null);
-        setPreview(null);
         openModalHandler();
       });
   };

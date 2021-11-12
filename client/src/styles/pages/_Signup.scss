@@ -21,6 +21,16 @@
   align-items: left;
 }
 
+.signup--title {
+  @include flexbox();
+  justify-content: left;
+  margin-left: 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+  color: $main-color;
+  margin-top: 1rem;
+}
+
 .signup--input {
   -webkit-appearance: none;
   font-size: 1rem;

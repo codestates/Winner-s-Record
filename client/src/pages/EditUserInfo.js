@@ -233,6 +233,7 @@ export default function EditUserInfo({ editHandler }) {
       ) : (
         <div className="signup--container">
           <div className="signup--inputcontainer">
+            <div className="edit--title">닉네임 변경</div>
             <form onSubmit={(e) => e.preventDefault()}>
               <input
                 className="edit--input"
@@ -265,7 +266,8 @@ export default function EditUserInfo({ editHandler }) {
           </div>
           {userInfo.type === "web" ? (
             <div className="signup--inputcontainer">
-              <form>
+              <div className="edit--title">비밀번호 변경</div>
+              <form onSubmit={(e) => e.preventDefault()}>
                 <input
                   className="edit--input"
                   type="password"
@@ -344,10 +346,7 @@ export default function EditUserInfo({ editHandler }) {
             <button className="signup--btn" onClick={editHandler}>
               돌아가기
             </button>
-            <button
-              className="edit--btn-delete"
-              onClick={openDeleteModalHandler}
-            >
+            <button className="signup--btn" onClick={openDeleteModalHandler}>
               탈퇴하기
             </button>
             <EditCompleteModal
