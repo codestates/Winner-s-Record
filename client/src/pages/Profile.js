@@ -55,6 +55,10 @@ export default function Profile({ match }) {
     // eslint-disable-next-line
   }, [userInfo]);
 
+  useEffect(() => {
+    setProfileData(profileData);
+  }, [profileData]);
+
   return (
     <>
       {isLoading ? (
