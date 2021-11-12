@@ -57,7 +57,7 @@ app.use((error, req, res, next) => {
   res.sendStatus(500);
 });
 
-const server = http.createServer(app);
+const server = http.createServer(app).listen(process.env.SOCKET_PORT);
 const io = new Server(server, {
   cors: {
     origin: true,
@@ -104,10 +104,6 @@ io.on("connection", (socket) => {
       content: content,
     }).catch((err) => console.log(err));
   });
-});
-
-server.listen(process.env.SOCKET_PORT, () => {
-  console.log(`${process.env.SOCKET_PORT} 서버 실행`);
 });
 
 app.listen(config.host.port, () => {
