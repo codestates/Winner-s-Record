@@ -13,7 +13,7 @@ export default function Redirect() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const openModalHandler = () => {
     setIsModalOpen(!isModalOpen);
@@ -107,7 +107,6 @@ export default function Redirect() {
         )
         .then((res) => {
           const { id, type } = res.data;
-          console.log("aaaaaaa", id, type);
           if (!id) {
             const { token, userdata } = res.data;
             localStorage.setItem("token", token);
@@ -143,16 +142,13 @@ export default function Redirect() {
       ) : (
         <div className="redirect--background">
           <div className="signup--logo">
-            <div
-              onClick={() => {
-                history.replace("/main");
-              }}
-            >
-              로고
-            </div>
+            <img
+              onClick={() => history.push("/main")}
+              alt="logo"
+              src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%9E%90%EB%A3%8C/%E1%84%86%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AB2%E1%84%83%E1%85%A1%E1%86%AB.png"
+            />
           </div>
           <div className="redirect--greeting">
-            <div>환영합니다 !</div>
             <div>Winner's Record에 사용하실 닉네임을 설정해 주세요</div>
             <div>
               최초 1회만 설정해 주시면 되며, 마이페이지에서 변경 가능합니다
