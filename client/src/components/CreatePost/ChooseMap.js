@@ -8,6 +8,7 @@ const ChooseMap = ({ inputValue, setInputValue }) => {
   const addr = useRef(null);
 
   const [isOn, setIsOn] = useState(false);
+  const [display, setDisplay] = useState("장소를 검색해주세요.");
 
   useEffect(() => {
     let data = inputValue.place.split("|");
@@ -19,21 +20,20 @@ const ChooseMap = ({ inputValue, setInputValue }) => {
         map,
         position: location,
       }),
-      infowindow = new kakao.maps.InfoWindow({
+      infowindow = new kakao.maps.CustomOverlay({
         map,
-        position: new kakao.maps.LatLng(Number(data[0]) + 0.0004, data[1]),
-        content: `<div class="map--infowindow">${
+        position: new kakao.maps.LatLng(data[0], data[1]),
+        content: `<div class="map--infowindow"><span>${
           data[3] === "null" ? data[2] : data[3]
-        }</div>`,
-        removable: true,
+        }</span></div>`,
+        yAnchor: 1,
       });
   }, [inputValue.place]);
 
   // '위도|경도|주소|빌딩이름|리스트에서 보일 주소'
   const addrFinder = (data) => {
     const geocoder = new kakao.maps.services.Geocoder();
-    addr.current.textContent = data.address;
-    console.log("data", data);
+    setDisplay(data.address);
     geocoder.addressSearch(data.address, (result, status) => {
       if (status === "OK") {
         console.log(result[0]);
@@ -53,14 +53,17 @@ const ChooseMap = ({ inputValue, setInputValue }) => {
   return (
     <div className="post--map--container">
       <div className="post--map--input--container">
-        <div className="post--address" ref={addr}></div>
-        <button
+        <div className="post--map--address">
+          <span>{display}</span>
+        </div>
+        <div
+          className="post--map--btn"
           onClick={() => {
             setIsOn(true);
           }}
         >
-          주소찾기
-        </button>
+          <i className="fas fa-search"></i>
+        </div>
       </div>
       {isOn ? (
         <div

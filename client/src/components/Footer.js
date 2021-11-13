@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="logo--container">
           <div className="logo">
             <img
-              src="https://via.placeholder.com/350x150"
+              src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%9E%90%EB%A3%8C/%E1%84%89%E1%85%A5%E1%84%87%E1%85%B32%E1%84%83%E1%85%A1%E1%86%AB.png"
               alt="winnersrecord"
             />
           </div>
