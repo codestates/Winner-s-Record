@@ -160,13 +160,14 @@ export default function Signup() {
 
   return (
     <div className="signup--container">
-      <div
-        className="signup--logo"
-        onClick={() => {
-          history.replace("/main");
-        }}
-      >
-        로고
+      <div className="signup--logo">
+        <img
+          onClick={() => {
+            history.replace("/main");
+          }}
+          alt="logo"
+          src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%9E%90%EB%A3%8C/%E1%84%86%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AB2%E1%84%83%E1%85%A1%E1%86%AB.png"
+        />
       </div>
       <div className="signup--inputcontainer">
         <form onSubmit={(e) => e.preventDefault()}>
