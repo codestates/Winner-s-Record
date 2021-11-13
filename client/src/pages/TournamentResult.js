@@ -5,14 +5,22 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import BackButton from "../components/BackButton";
 import TopButton from "../components/TopButton";
+import { useDispatch, useSelector } from "react-redux";
+import { modalOff } from "../modules/isModalOpen";
 
 const Result = () => {
   const { postId } = useParams();
+  const { isModalOpen, modalText } = useSelector((state) => ({
+    isModalOpen: state.isModalOpen,
+    modalText: state.modalText,
+  }));
+
   const [host, setHost] = useState("");
   const [firstplace, setFirstplace] = useState("");
   const [secondplace, setSecondplace] = useState("");
   const [others, setOthers] = useState(["대회 진행중 입니다."]);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const getData = () => {
     axios
@@ -120,6 +128,25 @@ const Result = () => {
         </div>
       </div>
       <Footer />
+      {isModalOpen ? (
+        <div className="modal--backdrop">
+          <div className="modal--view entry">
+            <div className="modal--text--container">
+              <div className="text">{modalText}</div>
+            </div>
+            <div className="modal--btn--container">
+              <div
+                className="btn"
+                onClick={() => {
+                  dispatch(modalOff());
+                }}
+              >
+                닫기
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
       <BackButton />
       <TopButton />
     </div>
