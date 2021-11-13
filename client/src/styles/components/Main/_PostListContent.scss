@@ -41,6 +41,11 @@
         &.trade {
           background-color: $sub-color;
         }
+        &.tournament {
+          width: 50px;
+          background-color: $main-color;
+          left: 40px;
+        }
         span {
           margin-top: 2px;
         }
