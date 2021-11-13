@@ -18,7 +18,10 @@ const Header = ({ isChat }) => {
         <div className="logo--container">
           <Link to="/main">
             <div className="img">
-              <img src="https://via.placeholder.com/350x150" alt="logo" />
+              <img
+                src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%9E%90%EB%A3%8C/%E1%84%86%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%ABlong.png"
+                alt="logo"
+              />
             </div>
           </Link>
         </div>

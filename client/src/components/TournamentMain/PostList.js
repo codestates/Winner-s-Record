@@ -54,9 +54,7 @@ const PostList = ({ postList, setPostList, searchOption }) => {
       {postList.map((e) => {
         return (
           <li className="list--link--container" key={uuid()}>
-            <Link to={`/post/${e.id}`}>
-              <PostListContent postInfo={e} />
-            </Link>
+            <PostListContent postInfo={e} />
           </li>
         );
       })}

@@ -5,23 +5,34 @@
 
   @include flexbox();
   flex-direction: column;
-
-  border-image: linear-gradient(to right, $white, $main-color, $white);
-  border-image-slice: 1;
-  border-top: 1px solid;
+  // border: 1px solid red;
 
   .footer--inner {
     display: flex;
+    height: 100%;
     width: 100%;
     justify-content: center;
+    align-content: center;
+    // border: 1px solid red;
 
     .logo--container {
+      // border: 1px solid pink;
+      width: 350px;
       flex: 1 0 0;
       @include flexbox();
+      .logo {
+        // border: 1px solid black;
+        height: 150px;
+        width: 350px;
+        img {
+          width: 350px;
+        }
+      }
     }
     .content--outer {
       flex: 2 0 0;
       display: flex;
+      // border: 1px solid red;
 
       .content--container {
         flex: 1 0 0;
@@ -104,10 +115,11 @@
     .footer--inner {
       flex-direction: column;
       .logo--container {
+        width: 90%;
+        margin-top: 10px;
         .logo {
           width: 100%;
           @include flexbox();
-
           img {
             max-width: 100%;
           }
