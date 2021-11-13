@@ -108,18 +108,32 @@ const Tournament = () => {
         });
     }
 
+    const round2 = matches.filter((match) => {
+      return match.type === "tournamentR2";
+    });
+    const round3 = matches.filter((match) => {
+      return match.type === "tournamentR3";
+    });
+
     const event = matches[0].event;
     console.log(matches);
     console.log("매치 아이디", matchId);
     console.log(userInfo.userId, host);
+
     if (userInfo.userId !== host) {
       dispatch(setModalText("해당 조작은 주최자만 할 수 있어요."));
       dispatch(modalOn());
     } else if (round === 1 && matchId.length !== 4) {
       dispatch(setModalText("진행중인 경기가 있습니다."));
       dispatch(modalOn());
+    } else if (round === 1 && round2.length) {
+      dispatch(setModalText("이미 종료된 라운드입니다."));
+      dispatch(modalOn());
     } else if (round === 2 && matchId.length !== 2) {
       dispatch(setModalText("진행중인 경기가 있습니다."));
+      dispatch(modalOn());
+    } else if (round === 2 && round3.length) {
+      dispatch(setModalText("이미 종료된 라운드입니다."));
       dispatch(modalOn());
     } else if (round === 3 && matchId.length !== 1) {
       dispatch(setModalText("진행중인 경기가 있습니다."));

@@ -13,7 +13,7 @@ import LoadingIndicator from "../components/LoadingIndicator";
 const Main = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [postList, setPostList] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [searchOption, setSearchOption] = useState({
     game: "all",

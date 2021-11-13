@@ -14,7 +14,7 @@ import Footer from "../components/Footer";
 export default function Profile({ match }) {
   const { userId } = useParams();
   const [edit, setEdit] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [profileData, setProfileData] = useState({
     id: "",
     nickname: "",
