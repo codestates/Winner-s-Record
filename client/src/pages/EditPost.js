@@ -132,6 +132,8 @@ export default function EditPost() {
       return (
         event && type && inputValue.title && inputValue.text && inputValue.price
       );
+    if (type === "tournament")
+      return event && inputValue.title && inputValue.text;
   };
 
   const isTournament = type === "tournament";
@@ -143,7 +145,6 @@ export default function EditPost() {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        console.log(res.data.data.type);
         setPostInfo(res.data.data);
         const { type, title, event, place, price, text, img } = res.data.data;
         setPrevious(img);
@@ -294,10 +295,10 @@ export default function EditPost() {
                   uploadFiles(files);
                 }}
               >
-                작성하기
+                수정하기
               </button>
             ) : (
-              <button className="modal--twobtn"> 작성하기</button>
+              <button className="modal--twobtn">수정하기</button>
             )}
           </div>
           <EditCompleteModal isModalOpen={isModalOpen} docId={docId} />
