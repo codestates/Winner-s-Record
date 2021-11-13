@@ -24,6 +24,7 @@ const Tournament = () => {
   const [matches, setMatches] = useState([]);
   const [canEdit, setCanEdit] = useState([true, true, true]);
   const [host, setHost] = useState("");
+  const [matchStatus, setMatchStatus] = useState("진행");
 
   // [ 매치id, postId, player1, player2 ]
   const [matchToEdit, setMatchToEdit] = useState([]);
@@ -43,13 +44,16 @@ const Tournament = () => {
     const winner = r3.filter((match) => {
       return match.winner;
     });
-
-    if (r3.length && userInfo.userId === host) {
+    if (matchStatus === "완료") {
+      setCanEdit([false, false, false]);
+    } else if (r3.length && userInfo.userId === host) {
       setCanEdit([false, false, true]);
     } else if (r2.length && userInfo.userId === host) {
       setCanEdit([false, true, true]);
-    } else {
+    } else if (userInfo.userId === host) {
       setCanEdit([true, true, true]);
+    } else {
+      setCanEdit([false, false, false]);
     }
   }, [matches]);
 
@@ -59,10 +63,24 @@ const Tournament = () => {
 
   useEffect(() => {
     getData();
+    getStatus();
   }, []);
 
   const { postId } = useParams();
-
+  const getStatus = () => {
+    const Authorization = `Bearer ${localStorage.getItem("token")}`;
+    axios
+      .get(`https://server.winner-s-record.link/doc/${postId}`, {
+        headers: { Authorization },
+        withCredentials: true,
+      })
+      .then((res) => {
+        setMatchStatus(res.data.data.status);
+      })
+      .catch((res) => {
+        console.error(res);
+      });
+  };
   const getData = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
 
