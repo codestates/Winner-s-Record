@@ -137,7 +137,7 @@ const Tournament = () => {
         )
         .then((res) => {
           setMatches(res.data.data);
-          history.push(`/post/${postId}`);
+          history.push(`/post/${postId}/result`);
           dispatch(modalOn());
           dispatch(setModalText("대회가 종료되었습니다 !"));
         });
