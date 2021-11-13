@@ -2,3 +2,25 @@
   @include flexbox();
   flex-direction: column;
 }
+
+.redirect--greeting {
+  @include flexbox();
+  flex-direction: column;
+
+  > div:first-child {
+    color: $main-color;
+    font-weight: bold;
+  }
+  > div {
+    font-size: 1rem;
+    margin: 0.2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .redirect--greeting {
+    > div {
+      font-size: 0.8rem;
+    }
+  }
+}
