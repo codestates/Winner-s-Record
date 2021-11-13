@@ -19,7 +19,7 @@ import TournamentButton from "../components/Post/TournamentButton";
 import LoadingIndicator from "../components/LoadingIndicator";
 
 const Post = ({ match }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { userInfo, isModalOpen } = useSelector((state) => ({
     userInfo: state.userInfo,
     isModalOpen: state.isModalOpen,
