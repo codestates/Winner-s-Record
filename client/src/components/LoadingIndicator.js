@@ -2,9 +2,9 @@ export default function LoadingIndicator() {
   return (
     <div className="loadingindicator--wrapper">
       <div className="loadingindicator">
-        <div className="inner">
-          <div></div>
-          <div></div>
+        <div className="loadingindicator--inner">
+          <div className="loadingindicator--box"></div>
+          <div className="loadingindicator--box"></div>
         </div>
       </div>
     </div>

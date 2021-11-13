@@ -1,4 +1,4 @@
-@keyframes inner {
+@keyframes loadingindicator--inner {
   0% {
     top: 120.47999999999999px;
     left: 120.47999999999999px;
@@ -14,43 +14,44 @@
     opacity: 0;
   }
 }
-.inner div {
-  position: absolute;
-  border-width: 5.02px;
-  border-style: solid;
-  opacity: 1;
-  border-radius: 50%;
-  animation: inner 1.2048192771084336s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-}
-.inner div:nth-child(1) {
-  border-color: #4e894b;
-  animation-delay: 0s;
-}
-.inner div:nth-child(2) {
-  border-color: #eaa938;
-  animation-delay: -0.6024096385542168s;
-}
-.loadingindicator {
-  width: 251px;
-  height: 251px;
-  display: inline-block;
-  overflow: hidden;
-  background: #ffffff;
-}
-.inner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform: translateZ(0) scale(1);
-  backface-visibility: hidden;
-  transform-origin: 0 0;
-}
-.inner div {
-  box-sizing: content-box;
-}
 
 .loadingindicator--wrapper {
   @include flexbox();
   width: 500px;
   height: 500px;
+  .loadingindicator--inner.loadingindicator--box {
+    position: absolute;
+    border-width: 5.02px;
+    border-style: solid;
+    opacity: 1;
+    border-radius: 50%;
+    animation: loadingindicator--inner 1.2048192771084336s
+      cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  }
+  .loadingindicator--inner.loadingindicator--box:nth-child(1) {
+    border-color: #4e894b;
+    animation-delay: 0s;
+  }
+  .loadingindicator--inner.loadingindicator--box:nth-child(2) {
+    border-color: #eaa938;
+    animation-delay: -0.6024096385542168s;
+  }
+  .loadingindicator {
+    width: 251px;
+    height: 251px;
+    display: inline-block;
+    overflow: hidden;
+    background: #ffffff;
+  }
+  .loadingindicator--inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0) scale(1);
+    backface-visibility: hidden;
+    transform-origin: 0 0;
+  }
+  .loadingindicator--inner.loadingindicator--box {
+    box-sizing: content-box;
+  }
 }
