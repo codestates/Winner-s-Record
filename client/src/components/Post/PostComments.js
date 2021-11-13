@@ -106,7 +106,7 @@ const PostComments = ({ board, postInfo, setPostInfo }) => {
       <div className="post--comments--input">
         <input
           type="text"
-          onKeyUp={(e) => {
+          onKeyPress={(e) => {
             if (e.key === "Enter") {
               postComment();
             }

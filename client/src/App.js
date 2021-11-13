@@ -10,7 +10,6 @@ import Post from "./pages/Post";
 import CreatePost from "./pages/CreatePost";
 import EditPost from "./pages/EditPost";
 import CreateTournament from "./pages/CreateTournament";
-import EditTournament from "./pages/EditTournament";
 import Ranking from "./pages/Ranking";
 import TournamentMain from "./pages/TournamentMain";
 import Entry from "./pages/Entry";
@@ -89,9 +88,6 @@ function App() {
           </Route>
           <Route path="/edit-post/:docId">
             <EditPost />
-          </Route>
-          <Route path="/edit-tournament/:docId">
-            <EditTournament />
           </Route>
           <Route path="/ranking">
             <Ranking />
