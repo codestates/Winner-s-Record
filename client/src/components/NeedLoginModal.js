@@ -7,7 +7,8 @@ export default function NeedLoginModal({ isModalOpen, setIsModalOpen }) {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    const prevPage = window.location.href.split("/").slice(2).join("/");
+    // const prevPage = window.location.href.split("/").slice(2).join("/");
+    const prevPage = window.location.href.split("http://localhost:3000")[1];
     dispatch(setPrevPage(prevPage));
     history.replace("/login");
   };

@@ -1,3 +1,12 @@
 export default function LoadingIndicator() {
-  return <div>로딩 중</div>;
+  return (
+    <div className="loadingindicator--wrapper">
+      <div className="loadingindicator">
+        <div className="inner">
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  );
 }

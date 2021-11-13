@@ -26,6 +26,7 @@ import axios from "axios";
 import Result from "./pages/TournamentResult";
 import Tournament from "./pages/Tournament";
 import Chatroom from "./pages/Chatroom";
+import LoadingIndicator from "./components/LoadingIndicator";
 
 function App() {
   const dispatch = useDispatch();
@@ -50,6 +51,7 @@ function App() {
     <div className="app--container">
       <Router>
         <Switch>
+          <Route path="/loading" component={LoadingIndicator} />
           <Route exact path="/" component={Landing} />
           <Route exact path="/chat" component={Chat} />
           <Route path="/chat/:roomId" component={Chatroom} />

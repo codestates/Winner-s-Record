@@ -4,20 +4,26 @@ import NoPost from "./NoPost";
 import NoHistory from "./NoHistory";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import LoadingIndicator from "../LoadingIndicator";
 
 export default function DocList({ userId, isMypage, nickname }) {
   const [list, setList] = useState([]);
   const [currentTab, setCurrentTab] = useState(0);
   const [history, setHistory] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const selectTabHandler = (index) => {
     setCurrentTab(index);
   };
 
   const handleCreatedList = () => {
+    setIsLoading(true);
     axios
       .get(`https://server.winner-s-record.link/doc?hostId=${userId}`)
       .then((res) => {
         setList(res.data.data);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 500);
       })
       .catch((err) => {
         console.log(err);
@@ -26,10 +32,14 @@ export default function DocList({ userId, isMypage, nickname }) {
   };
 
   const handleLikeList = () => {
+    setIsLoading(true);
     axios
       .get(`https://server.winner-s-record.link/like/${userId}`)
       .then((res) => {
         setList(res.data.data);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 500);
       })
       .catch((err) => {
         console.log(err);
@@ -38,10 +48,14 @@ export default function DocList({ userId, isMypage, nickname }) {
   };
 
   const handleProgressList = () => {
+    setIsLoading(true);
     axios
       .get(`https://server.winner-s-record.link/doc?guestId=${userId}`)
       .then((res) => {
         setList(res.data.data);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 500);
       })
       .catch((err) => {
         console.log(err);
@@ -50,10 +64,14 @@ export default function DocList({ userId, isMypage, nickname }) {
   };
 
   const handleHistoryList = () => {
+    setIsLoading(true);
     axios
       .get(`https://server.winner-s-record.link/match/history?userId=${userId}`)
       .then((res) => {
         setHistory(res.data.myMatch);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 500);
       })
       .catch((err) => {
         console.log(err);
@@ -103,14 +121,18 @@ export default function DocList({ userId, isMypage, nickname }) {
         })}
       </ul>
       {docTap[currentTab].content !== "최근 전적" ? (
-        list.length ? (
+        isLoading ? (
+          <LoadingIndicator />
+        ) : list.length ? (
           <ProfilePostList postList={list} />
         ) : (
           <NoPost />
         )
       ) : null}
       {docTap[currentTab].content === "최근 전적" ? (
-        history.length ? (
+        isLoading ? (
+          <LoadingIndicator />
+        ) : history.length ? (
           <HistoryList nickname={nickname} list={history} />
         ) : (
           <NoHistory />

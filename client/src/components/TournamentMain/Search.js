@@ -5,12 +5,18 @@ import GameSelector from "./GameSelector";
 import OptionSelector from "./OptionSelector";
 import SearchBar from "./SearchBar";
 
-const Search = ({ setPostList, searchOption, setSearchOption }) => {
+const Search = ({
+  setPostList,
+  searchOption,
+  setSearchOption,
+  setIsLoading,
+}) => {
   useEffect(() => {
     searchHandler();
   }, []);
 
   const searchHandler = () => {
+    setIsLoading(true);
     if (!searchOption.input) {
       setSearchOption({ ...searchOption, input: "all" });
     }
@@ -24,16 +30,11 @@ const Search = ({ setPostList, searchOption, setSearchOption }) => {
       .then((res) => {
         if (res.status === 404) {
         } else {
-          const sorted = res.data.data.sort((a, b) => {
-            if (a.status === "대기" && b.status !== "대기") {
-              return -1;
-            } else if (a.status !== "대기" && b.status === "대기") {
-              return 1;
-            } else {
-              return 0;
-            }
-          });
+          const sorted = res.data.data;
           setPostList(sorted);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 500);
         }
       })
       .catch((res) => {

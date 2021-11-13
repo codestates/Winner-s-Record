@@ -16,9 +16,10 @@ import PostUserInfo from "../components/Post/PostUserInfo";
 import PostEditBtns from "../components/Post/PostEditBtns";
 import { useSelector } from "react-redux";
 import TournamentButton from "../components/Post/TournamentButton";
+import LoadingIndicator from "../components/LoadingIndicator";
 
 const Post = ({ match }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const { userInfo, isModalOpen } = useSelector((state) => ({
     userInfo: state.userInfo,
     isModalOpen: state.isModalOpen,
@@ -43,6 +44,7 @@ const Post = ({ match }) => {
   const [modalBtnType, setModalBtnType] = useState("close");
 
   const getPostData = () => {
+    setIsLoading(true);
     const token = localStorage.getItem("token");
 
     const Authorization = `Bearer ${token}`;
@@ -54,6 +56,9 @@ const Post = ({ match }) => {
       .then((res) => {
         console.log(res);
         setPostInfo(res.data.data);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 500);
       })
       .catch((res) => {
         console.error(res);
@@ -99,7 +104,13 @@ const Post = ({ match }) => {
 
   return (
     <>
-      {postInfo.title ? (
+      {isLoading ? (
+        <div className="post--container">
+          <Header />
+          <LoadingIndicator />
+          <Footer />
+        </div>
+      ) : postInfo.title ? (
         <div className="post--container">
           <Header />
           <div className="post--inner">

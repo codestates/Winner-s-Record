@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function EventTap({ setList, setEvent }) {
+export default function EventTap({ setList, setEvent, setIsLoading }) {
   const [currentTab, setCurrenTab] = useState(0);
   const handleCurrentTab = (tab) => {
     setCurrenTab(tab);
   };
 
   const handleList = (event) => {
+    setIsLoading(true);
     axios
       .get(
         `https://server.winner-s-record.link/rank?event=${event}&nickname=all`
@@ -15,6 +16,9 @@ export default function EventTap({ setList, setEvent }) {
       .then((res) => {
         setEvent(event);
         setList(res.data.data);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 500);
       })
       .catch((err) => {
         setList([]);
