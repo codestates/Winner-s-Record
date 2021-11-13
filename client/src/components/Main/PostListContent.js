@@ -31,10 +31,10 @@ const PostListContent = ({ postInfo }) => {
       return `${price.slice(0, 1)}천`;
     } else if (price.length < 5) {
       return `${price.slice(0, 1)}천 ${price.slice(1)}`;
-    } else if (price.length >= 5 && !Number(price.slice(1))) {
-      return `${price.slice(0, 1)}만`;
+    } else if (price.length >= 5 && !Number(price.slice(-4))) {
+      return `${price.slice(0, -4)}만`;
     } else if (price.length >= 5) {
-      return `${price.slice(0, 1)}만 ${price.slice(1)}`;
+      return `${price.slice(0, -4)}만 ${price.slice(-4)}`;
     } else {
       return price;
     }
