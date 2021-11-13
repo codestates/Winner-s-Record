@@ -44,14 +44,12 @@ const Tournament = () => {
       return match.winner;
     });
 
-    if (winner.length && userInfo.userId === host) {
-      setCanEdit([false, false, false]);
-    } else if (r3.length && userInfo.userId === host) {
+    if (r3.length && userInfo.userId === host) {
       setCanEdit([false, false, true]);
     } else if (r2.length && userInfo.userId === host) {
       setCanEdit([false, true, true]);
     } else {
-      setCanEdit([false, false, false]);
+      setCanEdit([true, true, true]);
     }
   }, [matches]);
 
@@ -73,6 +71,7 @@ const Tournament = () => {
         headers: { Authorization },
       })
       .then((res) => {
+        console.log(res.data);
         setMatches(res.data.data);
         setHost(res.data.hostId);
       });

@@ -54,10 +54,12 @@
           @include flexbox();
           padding: 10px;
           .img {
+            height: 50px;
             width: 50px;
             @include flexbox();
             img {
-              max-width: 100%;
+              height: 50px;
+              width: 50px;
               border-radius: 50%;
             }
           }
