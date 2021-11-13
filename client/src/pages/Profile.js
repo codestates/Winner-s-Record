@@ -14,7 +14,7 @@ import Footer from "../components/Footer";
 export default function Profile({ match }) {
   const { userId } = useParams();
   const [edit, setEdit] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [profileData, setProfileData] = useState({
     id: "",
     nickname: "",
@@ -32,6 +32,7 @@ export default function Profile({ match }) {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     const token = localStorage.getItem("token");
     axios
       .get(`https://server.winner-s-record.link/auth/${userId}`, {
@@ -40,11 +41,13 @@ export default function Profile({ match }) {
       .then((res) => {
         const { profileData } = res.data;
         setProfileData(profileData);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 500);
       })
       .catch((err) => {
         console.log(err);
       });
-    setIsLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [match.url]);
 
@@ -62,7 +65,13 @@ export default function Profile({ match }) {
   return (
     <>
       {isLoading ? (
-        <LoadingIndicator />
+        <>
+          <Header />
+          <div className="profile--background">
+            <LoadingIndicator />
+          </div>
+          <Footer />
+        </>
       ) : profileData.userId ? (
         edit ? (
           <EditUserInfo

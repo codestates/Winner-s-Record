@@ -8,10 +8,12 @@ import NeedLoginModal from "../components/NeedLoginModal";
 import CreatePostBtn from "../components/CreatePostBtn";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import LoadingIndicator from "../components/LoadingIndicator";
 
 const Main = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [postList, setPostList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [searchOption, setSearchOption] = useState({
     game: "all",
@@ -27,8 +29,12 @@ const Main = () => {
         setPostList={setPostList}
         searchOption={searchOption}
         setSearchOption={setSearchOption}
+        setIsLoading={setIsLoading}
       />
-      {postList.length ? (
+
+      {isLoading ? (
+        <LoadingIndicator />
+      ) : postList.length ? (
         <PostList
           postList={postList}
           setPostList={setPostList}

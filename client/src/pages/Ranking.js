@@ -5,17 +5,23 @@ import RankList from "../components/Ranking/RankList";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import NoUser from "../components/Ranking/NoUser";
+import LoadingIndicator from "../components/LoadingIndicator";
 export default function Ranking() {
   const [list, setList] = useState([]);
   const [event, setEvent] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <>
       <Header />
       <div className="ranking--background">
         <div className="ranking--box">
-          <EventTap setList={setList} setEvent={setEvent} />
-          <Search event={event} setList={setList} />
+          <EventTap
+            setList={setList}
+            setEvent={setEvent}
+            setIsLoading={setIsLoading}
+          />
+          <Search event={event} setList={setList} setIsLoading={setIsLoading} />
         </div>
         <div className="ranking--titlebox">
           <img
@@ -28,7 +34,9 @@ export default function Ranking() {
           </div>
         </div>
         <ul className="ranking--list">
-          {list.length ? (
+          {isLoading ? (
+            <LoadingIndicator />
+          ) : list.length ? (
             list.map((e, index) => {
               return <RankList key={index} content={e} />;
             })

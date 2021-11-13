@@ -6,13 +6,19 @@ import GameSelector from "./GameSelector";
 import OptionSelector from "./OptionSelector";
 import SearchBar from "./SearchBar";
 
-const Search = ({ setPostList, searchOption, setSearchOption }) => {
+const Search = ({
+  setPostList,
+  searchOption,
+  setSearchOption,
+  setIsLoading,
+}) => {
   useEffect(() => {
     searchHandler();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const searchHandler = () => {
+    setIsLoading(true);
     if (!searchOption.input) {
       setSearchOption({ ...searchOption, input: "all" });
     }
@@ -27,6 +33,9 @@ const Search = ({ setPostList, searchOption, setSearchOption }) => {
         } else {
           const sorted = res.data.data;
           setPostList(sorted);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 500);
         }
       })
       .catch((err) => {
@@ -50,6 +59,7 @@ const Search = ({ setPostList, searchOption, setSearchOption }) => {
           searchHandler={searchHandler}
           setSearchOption={setSearchOption}
           searchOption={searchOption}
+          setIsLoading={setIsLoading}
         />
       </div>
 

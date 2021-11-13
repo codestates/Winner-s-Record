@@ -90,13 +90,15 @@ const Result = () => {
                   <i className="fas fa-award"></i>
                 </span>
               </div>
-              {others.map((e) => {
-                return (
-                  <div className="entries">
-                    <span>{e}</span>
-                  </div>
-                );
-              })}
+              <div className="inner">
+                {others.map((e) => {
+                  return (
+                    <div className="entries">
+                      <span>{e}</span>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </>
         ) : (

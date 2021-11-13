@@ -57,18 +57,28 @@
       }
     }
     .entry--container {
+      margin-top: 20px;
+
       .text {
         font-size: 1.2rem;
         font-weight: 500;
-        margin: 5px 0;
+        margin: 20px 0;
         i {
           margin: 0 10px;
           color: brown;
         }
       }
-      .entries {
-        font-size: 1.1rem;
-        margin: 5px 0;
+      .inner {
+        @include flexbox();
+        width: 100%;
+        flex-wrap: wrap;
+
+        .entries {
+          @include flexbox();
+          width: 120px;
+          font-size: 1.1rem;
+          margin: 5px 5px;
+        }
       }
     }
     .result--btn--container {
