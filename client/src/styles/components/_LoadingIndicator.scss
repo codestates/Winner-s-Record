@@ -19,7 +19,7 @@
   @include flexbox();
   width: 500px;
   height: 500px;
-  .loadingindicator--inner.loadingindicator--box {
+  .loadingindicator--inner div {
     position: absolute;
     border-width: 5.02px;
     border-style: solid;
@@ -28,11 +28,11 @@
     animation: loadingindicator--inner 1.2048192771084336s
       cubic-bezier(0, 0.2, 0.8, 1) infinite;
   }
-  .loadingindicator--inner.loadingindicator--box:nth-child(1) {
+  .loadingindicator--inner div:nth-child(1) {
     border-color: #4e894b;
     animation-delay: 0s;
   }
-  .loadingindicator--inner.loadingindicator--box:nth-child(2) {
+  .loadingindicator--inner div:nth-child(2) {
     border-color: #eaa938;
     animation-delay: -0.6024096385542168s;
   }
@@ -51,7 +51,7 @@
     backface-visibility: hidden;
     transform-origin: 0 0;
   }
-  .loadingindicator--inner.loadingindicator--box {
+  .loadingindicator--inner div {
     box-sizing: content-box;
   }
 }
