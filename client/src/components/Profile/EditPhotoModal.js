@@ -1,5 +1,6 @@
 import axios from "axios";
-import AWS from "aws-sdk";
+import S3 from "react-aws-s3";
+import { v4 } from "uuid";
 import dotenv from "dotenv";
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
@@ -36,32 +37,24 @@ export default function EditPhotoModal({
     }
   };
 
-  AWS.config.update({
+  const config = {
+    bucketName: process.env.REACT_APP_S3_BUCKET,
+    region: process.env.REACT_APP_REGION,
     accessKeyId: process.env.REACT_APP_ACCESS_KEY,
     secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
-  });
+  };
 
-  const myBucket = new AWS.S3({
-    params: { Bucket: process.env.REACT_APP_S3_BUCKET },
-    region: process.env.REACT_APP_REGION,
-  });
+  const ReactS3Client = new S3(config);
+  const newFileName = v4();
 
   const uploadFile = async (file) => {
-    const params = {
-      ACL: "public-read",
-      Body: file,
-      Bucket: process.env.REACT_APP_S3_BUCKET,
-      Key: file.name,
-      ContentType: "image",
-    };
-    await myBucket
-      .putObject(params)
-      .promise()
-      .then((res) => {
-        const path = `${process.env.REACT_APP_BUCKET_URL}${res.$response.request.httpRequest.path}`;
+    await ReactS3Client.uploadFile(file, newFileName)
+      .then((data) => {
+        const path = data.location;
         editPhoto(path);
         handleEdit(path);
-      });
+      })
+      .catch((err) => console.error(err));
   };
 
   const handleEdit = (path) => {
