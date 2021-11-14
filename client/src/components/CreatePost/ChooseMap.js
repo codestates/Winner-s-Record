@@ -32,6 +32,7 @@ const ChooseMap = ({ inputValue, setInputValue }) => {
 
   // '위도|경도|주소|빌딩이름|리스트에서 보일 주소'
   const addrFinder = (data) => {
+    console.log("postcode-data", data);
     const geocoder = new kakao.maps.services.Geocoder();
     setDisplay(data.address);
     geocoder.addressSearch(data.address, (result, status) => {
