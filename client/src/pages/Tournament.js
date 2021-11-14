@@ -67,7 +67,7 @@ const Tournament = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
 
     axios
-      .get(`https://server.winner-s-record.link/tournament/${postId}`, {
+      .get(`http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/tournament/${postId}`, {
         headers: { Authorization },
       })
       .then((res) => {
@@ -127,7 +127,7 @@ const Tournament = () => {
     } else if (round === 3) {
       axios
         .post(
-          `https://server.winner-s-record.link/record/${postId}`,
+          `http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/record/${postId}`,
           { event, matchId },
           {
             headers: {
@@ -144,7 +144,7 @@ const Tournament = () => {
     } else {
       axios
         .post(
-          `https://server.winner-s-record.link/record/${postId}`,
+          `http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/record/${postId}`,
           { event, matchId },
           {
             headers: {

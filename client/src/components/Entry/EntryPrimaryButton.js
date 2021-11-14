@@ -20,7 +20,7 @@ const FixBtn = ({ fixed, postType, eventType }) => {
       const Authorization = `Bearer ${localStorage.getItem("token")}`;
       axios
         .put(
-          `https://server.winner-s-record.link/doc/${postId}`,
+          `http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/doc/${postId}`,
           { status: "진행", type: postType, event: eventType },
           { headers: { Authorization } }
         )
@@ -72,7 +72,7 @@ const ApplyBtn = ({
       const Authorization = `Bearer ${localStorage.getItem("token")}`;
       axios
         .post(
-          `https://server.winner-s-record.link/entry/${postId}`,
+          `http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/entry/${postId}`,
           {
             userId: userInfo.userId,
           },

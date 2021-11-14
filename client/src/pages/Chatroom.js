@@ -11,7 +11,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ChatModal from "../components/Chat/ChatModal";
 
-const socket = io("http://localhost:8081");
+const socket = io("http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com:8081");
 
 const Chatroom = () => {
   const { roomId } = useParams();
@@ -52,7 +52,7 @@ const Chatroom = () => {
 
     axios
       .post(
-        `http://localhost:8080/room/${roomId}`,
+        `http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/room/${roomId}`,
         { docId: chatPost },
         {
           headers: { Authorization },

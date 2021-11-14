@@ -19,7 +19,7 @@ export default function DeleteUserModal({ isModalOpen, openModalHandler }) {
   const handleDelete = () => {
     const token = localStorage.getItem("token");
     axios
-      .delete("https://server.winner-s-record.link/auth", {
+      .delete("http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/auth", {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {

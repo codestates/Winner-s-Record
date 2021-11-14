@@ -8,7 +8,7 @@ const GetUserInfo = () => {
   const token = localStorage.getItem("token");
   if (token) {
     axios
-      .get("https://server.winner-s-record.link/auth/", {
+      .get("http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/auth/", {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {

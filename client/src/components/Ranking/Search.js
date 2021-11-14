@@ -11,7 +11,7 @@ export default function Search({ setList, event, setIsLoading }) {
     setIsLoading(true);
     axios
       .get(
-        `https://server.winner-s-record.link/rank?event=${event}&nickname=${nickname}`
+        `http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/rank?event=${event}&nickname=${nickname}`
       )
       .then((res) => {
         setList(res.data.data);

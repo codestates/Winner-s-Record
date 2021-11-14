@@ -32,7 +32,7 @@ function App() {
   const getUserInfo = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
-      .get("https://server.winner-s-record.link/auth/me", {
+      .get("http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/auth/me", {
         headers: { Authorization },
       })
       .then((res) => {

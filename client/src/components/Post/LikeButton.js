@@ -20,7 +20,7 @@ const LikeButton = ({ like, setLoginModal, postInfo, setPostInfo, postId }) => {
       // 좋아요 추가
       axios
         .post(
-          "https://server.winner-s-record.link/like",
+          "http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/like",
           { docId: postId },
           { headers: { Authorization } }
         )
@@ -34,7 +34,7 @@ const LikeButton = ({ like, setLoginModal, postInfo, setPostInfo, postId }) => {
     } else {
       // 좋아요 제거
       axios
-        .delete("https://server.winner-s-record.link/like", {
+        .delete("http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/like", {
           headers: { Authorization },
           data: { docId: postId },
         })
