@@ -22,9 +22,9 @@
       font-weight: 500;
     }
     .time {
-      align-self: flex-end;
+      align-self: flex-start;
       margin-top: 5px;
-      margin-right: 5px;
+      margin-left: 5px;
       font-size: 0.8rem;
       color: $font-gray;
     }
@@ -35,6 +35,9 @@
       .content--box {
         background-color: $main-color;
         color: $white;
+      }
+      .time {
+        align-self: flex-end;
       }
     }
   }

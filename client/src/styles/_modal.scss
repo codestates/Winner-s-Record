@@ -26,7 +26,7 @@
   flex-direction: column;
   align-items: center;
   &.postcode {
-    width: 60%;
+    width: 500px;
     height: 400px;
   }
 }
@@ -180,6 +180,10 @@
   .modal--view {
     width: 22rem;
     height: 18rem;
+    &.postcode {
+      width: 80%;
+      height: 400px;
+    }
   }
 
   .modal--view-photo {

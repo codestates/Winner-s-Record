@@ -81,7 +81,12 @@ const Landing = () => {
               </span>
             </div>
             <div className={`img--container${scrollY > 200 ? "" : " before"}`}>
-              <img src={main} alt="match" />
+              <img
+                src={
+                  "https://github.com/glen15/final-img/blob/master/%E1%84%85%E1%85%A2%E1%86%AB%E1%84%83%E1%85%B5%E1%86%BC%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%89%E1%85%A1%E1%84%80%E1%85%A1%E1%86%A8%20%E1%84%86%E1%85%A2%E1%84%8E%E1%85%B5%E1%84%80%E1%85%A5%E1%86%B7%E1%84%89%E1%85%A2%E1%86%A8%20%E1%84%92%E1%85%AE%20%E1%84%89%E1%85%B5%E1%86%AB%E1%84%8E%E1%85%A5%E1%86%BC%201.5.gif?raw=true"
+                }
+                alt="match"
+              />
             </div>
           </div>
         </div>
@@ -95,7 +100,10 @@ const Landing = () => {
               </span>
             </div>
             <div className={`img--container${scrollY > 900 ? "" : " before"}`}>
-              <img src="https://via.placeholder.com/300x500" alt="match" />
+              <img
+                src="https://github.com/glen15/final-img/blob/master/%E1%84%85%E1%85%A2%E1%86%AB%E1%84%83%E1%85%B5%E1%86%BC%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%89%E1%85%A1%E1%84%80%E1%85%A1%E1%86%A8%20%E1%84%90%E1%85%A9%E1%84%82%E1%85%A5%E1%84%86%E1%85%A5%E1%86%AB%E1%84%90%E1%85%B3%E1%84%8C%E1%85%B5%E1%86%AB%E1%84%92%E1%85%A2%E1%86%BC%201.5.gif?raw=true"
+                alt="match"
+              />
             </div>
           </div>
         </div>
@@ -112,7 +120,10 @@ const Landing = () => {
               </span>
             </div>
             <div className={`img--container${scrollY > 1730 ? "" : " before"}`}>
-              <img src="https://via.placeholder.com/300x500" alt="match" />
+              <img
+                src="https://github.com/glen15/final-img/blob/master/%E1%84%85%E1%85%A2%E1%86%AB%E1%84%83%E1%85%B5%E1%86%BC%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%89%E1%85%A1%E1%84%80%E1%85%A1%E1%86%A8%20%E1%84%85%E1%85%A2%E1%86%BC%E1%84%8F%E1%85%B5%E1%86%BC%201.5.gif?raw=true"
+                alt="match"
+              />
             </div>
           </div>
         </div>
@@ -129,7 +140,10 @@ const Landing = () => {
               </span>
             </div>
             <div className={`img--container${scrollY > 2520 ? "" : " before"}`}>
-              <img src="https://via.placeholder.com/300x500" alt="match" />
+              <img
+                src="https://github.com/glen15/final-img/blob/master/%E1%84%85%E1%85%A2%E1%86%AB%E1%84%83%E1%85%B5%E1%86%BC%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%89%E1%85%A1%E1%84%80%E1%85%A1%E1%86%A8%20%E1%84%80%E1%85%A5%E1%84%85%E1%85%A2%E1%84%8E%E1%85%A2%E1%84%90%E1%85%B5%E1%86%BC%E1%84%87%E1%85%A1%E1%86%BC%201.5.gif?raw=true"
+                alt="match"
+              />
             </div>
           </div>
         </div>
