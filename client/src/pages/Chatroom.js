@@ -11,9 +11,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ChatModal from "../components/Chat/ChatModal";
 
-const socket = io.connect("https://server.winner-s-record.link:8081", {
-  rejectUnauthorized: false,
-});
+const socket = io("http://localhost:8081");
 
 const Chatroom = () => {
   const { roomId } = useParams();
@@ -54,7 +52,7 @@ const Chatroom = () => {
 
     axios
       .post(
-        `https://server.winner-s-record.link/room/${roomId}`,
+        `http://localhost:8080/room/${roomId}`,
         { docId: chatPost },
         {
           headers: { Authorization },

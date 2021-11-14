@@ -171,6 +171,20 @@ module.exports = {
           .replace(/T/, " ")
           .replace(/\..+/, ""),
       },
+      {
+        id: 13,
+        userId: 10,
+        roomId: 6,
+        content: "하이헬로?",
+        createdAt: new Date()
+          .toISOString()
+          .replace(/T/, " ")
+          .replace(/\..+/, ""),
+        updatedAt: new Date()
+          .toISOString()
+          .replace(/T/, " ")
+          .replace(/\..+/, ""),
+      },
     ]
     await queryInterface.bulkInsert('Chattings', Chattings, {})
   },

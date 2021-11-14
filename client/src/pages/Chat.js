@@ -13,7 +13,7 @@ const Chat = () => {
   const getData = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
-      .get("https://server.winner-s-record.link/room", {
+      .get("http://localhost:8080/room", {
         headers: { Authorization },
       })
       .then((res) => {

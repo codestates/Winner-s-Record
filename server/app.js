@@ -16,7 +16,6 @@ import roomRouter from "./router/room.js";
 import { config } from "./config.js";
 
 import http from "http";
-import https from "https";
 import { Server } from "socket.io";
 import db from "./models/index.js";
 
@@ -57,7 +56,7 @@ app.use((error, req, res, next) => {
   res.sendStatus(500);
 });
 
-const server = http.createServer(app).listen(process.env.SOCKET_PORT);
+const server = http.createServer(app)
 const io = new Server(server, {
   cors: {
     origin: true,
@@ -106,8 +105,7 @@ io.on("connection", (socket) => {
   });
 });
 
-app.listen(config.host.port, () => {
-  console.log(
-    `=================================서버시작=====================================`
-  );
-});
+server.listen(8081, () => { 
+  console.log('kdsafhasdghgakjshjags')
+})
+app.listen(config.host.port);
