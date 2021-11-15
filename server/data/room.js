@@ -95,7 +95,7 @@ export async function chatList(userId) {
       }
     }
   }
-  return roomsList;
+  return roomsList.reverse();
 }
 
 export async function validUser(roomId, userId) {
