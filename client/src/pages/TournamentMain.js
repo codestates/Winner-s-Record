@@ -44,7 +44,7 @@ const TournamentMain = () => {
         <NoPost setLoginModal={setLoginModal} />
       )}
       <TopButton isMain />
-      <CreatePostBtn isTournament />
+      <CreatePostBtn isTournament setLoginModal={setLoginModal} />
       <NeedLoginModal isModalOpen={loginModal} setIsModalOpen={setLoginModal} />
       <Footer />
     </div>
