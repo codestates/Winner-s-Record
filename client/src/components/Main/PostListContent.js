@@ -50,10 +50,20 @@ const PostListContent = ({ postInfo }) => {
             <img src={img[0]} alt="사진" />
             <div
               className={`list--content--type ${
-                type === "match" ? "match" : "trade"
+                type === "trade"
+                  ? "trade"
+                  : type === "tournament"
+                  ? "tournament"
+                  : "match"
               } `}
             >
-              <span>{type === "match" ? "경기" : "거래"}</span>
+              <span>
+                {type === "trade"
+                  ? "거래"
+                  : type === "tournament"
+                  ? "토너먼트"
+                  : "경기"}
+              </span>
             </div>
           </div>
           <div className="list--content--text">

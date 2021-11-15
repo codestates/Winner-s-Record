@@ -53,18 +53,21 @@ const EditMap = ({ inputValue, setInputValue }) => {
   return (
     <div className="post--map--container">
       <div className="post--map--input--container">
-        <div className="post--address" ref={addr}>
-          {inputValue.place.split("|")[3] !== "null"
-            ? inputValue.place.split("|")[3]
-            : inputValue.place.split("|")[2]}
+        <div className="post--map--address">
+          <span ref={addr}>
+            {inputValue.place.split("|")[3] !== "null"
+              ? inputValue.place.split("|")[3]
+              : inputValue.place.split("|")[2]}
+          </span>
         </div>
-        <button
+        <div
+          className="post--map--btn"
           onClick={() => {
             setIsOn(true);
           }}
         >
-          주소찾기
-        </button>
+          <i className="fas fa-search"></i>
+        </div>
       </div>
       {isOn ? (
         <div

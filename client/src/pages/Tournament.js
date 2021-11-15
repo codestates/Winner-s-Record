@@ -24,6 +24,7 @@ const Tournament = () => {
   const [matches, setMatches] = useState([]);
   const [canEdit, setCanEdit] = useState([true, true, true]);
   const [host, setHost] = useState("");
+  const [matchStatus, setMatchStatus] = useState("진행");
 
   // [ 매치id, postId, player1, player2 ]
   const [matchToEdit, setMatchToEdit] = useState([]);
@@ -43,13 +44,16 @@ const Tournament = () => {
     const winner = r3.filter((match) => {
       return match.winner;
     });
-
-    if (r3.length && userInfo.userId === host) {
+    if (matchStatus === "완료") {
+      setCanEdit([false, false, false]);
+    } else if (r3.length && userInfo.userId === host) {
       setCanEdit([false, false, true]);
     } else if (r2.length && userInfo.userId === host) {
       setCanEdit([false, true, true]);
-    } else {
+    } else if (userInfo.userId === host) {
       setCanEdit([true, true, true]);
+    } else {
+      setCanEdit([false, false, false]);
     }
   }, [matches]);
 
@@ -59,10 +63,24 @@ const Tournament = () => {
 
   useEffect(() => {
     getData();
+    getStatus();
   }, []);
 
   const { postId } = useParams();
-
+  const getStatus = () => {
+    const Authorization = `Bearer ${localStorage.getItem("token")}`;
+    axios
+      .get(`https://server.winner-s-record.link/doc/${postId}`, {
+        headers: { Authorization },
+        withCredentials: true,
+      })
+      .then((res) => {
+        setMatchStatus(res.data.data.status);
+      })
+      .catch((res) => {
+        console.error(res);
+      });
+  };
   const getData = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
 
@@ -108,18 +126,32 @@ const Tournament = () => {
         });
     }
 
+    const round2 = matches.filter((match) => {
+      return match.type === "tournamentR2";
+    });
+    const round3 = matches.filter((match) => {
+      return match.type === "tournamentR3";
+    });
+
     const event = matches[0].event;
     console.log(matches);
     console.log("매치 아이디", matchId);
     console.log(userInfo.userId, host);
+
     if (userInfo.userId !== host) {
       dispatch(setModalText("해당 조작은 주최자만 할 수 있어요."));
       dispatch(modalOn());
     } else if (round === 1 && matchId.length !== 4) {
       dispatch(setModalText("진행중인 경기가 있습니다."));
       dispatch(modalOn());
+    } else if (round === 1 && round2.length) {
+      dispatch(setModalText("이미 종료된 라운드입니다."));
+      dispatch(modalOn());
     } else if (round === 2 && matchId.length !== 2) {
       dispatch(setModalText("진행중인 경기가 있습니다."));
+      dispatch(modalOn());
+    } else if (round === 2 && round3.length) {
+      dispatch(setModalText("이미 종료된 라운드입니다."));
       dispatch(modalOn());
     } else if (round === 3 && matchId.length !== 1) {
       dispatch(setModalText("진행중인 경기가 있습니다."));

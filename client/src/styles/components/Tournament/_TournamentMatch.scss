@@ -23,9 +23,15 @@
       flex: 1 0 0;
       text-align: center;
     }
-    .win,
+    .win {
+      font-size: 1.1rem;
+      color: $main-color;
+      font-weight: bold;
+    }
     .lose {
       font-size: 1.1rem;
+      color: red;
+      font-weight: bold;
     }
   }
   .btn {

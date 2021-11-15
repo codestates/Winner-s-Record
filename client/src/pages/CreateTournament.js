@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { useHistory } from "react-router";
-import AWS from "aws-sdk";
+import S3 from "react-aws-s3";
+import { v4 } from "uuid";
 import dotenv from "dotenv";
 import axios from "axios";
 import CreateCompleteModal from "../components/CreatePost/CreateCompleteModal";
@@ -61,33 +62,24 @@ export default function CreateDoc() {
     setInputValue({ ...inputValue, [key]: e.target.value });
   };
 
-  AWS.config.update({
+  const config = {
+    bucketName: process.env.REACT_APP_S3_BUCKET,
+    region: process.env.REACT_APP_REGION,
     accessKeyId: process.env.REACT_APP_ACCESS_KEY,
     secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
-  });
+  };
 
-  const myBucket = new AWS.S3({
-    params: { Bucket: process.env.REACT_APP_S3_BUCKET },
-    region: process.env.REACT_APP_REGION,
-  });
+  const ReactS3Client = new S3(config);
+  const newFileName = v4();
 
   const uploadFiles = async (fileArr) => {
     const pathArr = [];
     for (let file of fileArr) {
-      const params = {
-        ACL: "public-read",
-        Body: file,
-        Bucket: process.env.REACT_APP_S3_BUCKET,
-        Key: file.name,
-        ContentType: "image",
-      };
-      await myBucket
-        .putObject(params)
-        .promise()
-        .then((res) => {
-          const path = `${process.env.REACT_APP_BUCKET_URL}${res.$response.request.httpRequest.path}`;
-          pathArr.push(path);
-        });
+      await ReactS3Client.uploadFile(file, newFileName)
+        .then((data) => {
+          pathArr.push(data.location);
+        })
+        .catch((err) => console.error(err));
     }
     handleSubmit(pathArr);
   };

@@ -122,7 +122,7 @@ const Result = () => {
           <div
             className="btn colored"
             onClick={() => {
-              history.go(-1);
+              history.push(`/post/${postId}`);
             }}
           >
             <span>돌아가기</span>
