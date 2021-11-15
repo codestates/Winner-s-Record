@@ -18,7 +18,9 @@ export default function DocList({ userId, isMypage, nickname }) {
   const handleCreatedList = () => {
     setIsLoading(true);
     axios
-      .get(`http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/doc?hostId=${userId}`)
+      .get(
+        `http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/doc?hostId=${userId}`
+      )
       .then((res) => {
         setList(res.data.data);
         setTimeout(() => {
@@ -28,13 +30,16 @@ export default function DocList({ userId, isMypage, nickname }) {
       .catch((err) => {
         console.log(err);
         setList([]);
+        setIsLoading(false);
       });
   };
 
   const handleLikeList = () => {
     setIsLoading(true);
     axios
-      .get(`http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/like/${userId}`)
+      .get(
+        `http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/like/${userId}`
+      )
       .then((res) => {
         setList(res.data.data);
         setTimeout(() => {
@@ -44,13 +49,16 @@ export default function DocList({ userId, isMypage, nickname }) {
       .catch((err) => {
         console.log(err);
         setList([]);
+        setIsLoading(false);
       });
   };
 
   const handleProgressList = () => {
     setIsLoading(true);
     axios
-      .get(`http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/doc?guestId=${userId}`)
+      .get(
+        `http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/doc?guestId=${userId}`
+      )
       .then((res) => {
         setList(res.data.data);
         setTimeout(() => {
@@ -60,13 +68,16 @@ export default function DocList({ userId, isMypage, nickname }) {
       .catch((err) => {
         console.log(err);
         setList([]);
+        console.log(err);
       });
   };
 
   const handleHistoryList = () => {
     setIsLoading(true);
     axios
-      .get(`http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/match/history?userId=${userId}`)
+      .get(
+        `http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/match/history?userId=${userId}`
+      )
       .then((res) => {
         setHistory(res.data.myMatch);
         setTimeout(() => {
@@ -76,6 +87,7 @@ export default function DocList({ userId, isMypage, nickname }) {
       .catch((err) => {
         console.log(err);
         setList([]);
+        console.log(err);
       });
   };
 
