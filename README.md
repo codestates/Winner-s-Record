@@ -130,31 +130,36 @@
 
 <details>
 <summary>랜딩페이지</summary>
-
+   
+![랜딩](https://github.com/glen15/final-img/blob/master/wikiGIF/%EB%9E%9C%EB%94%A9/%E1%84%85%E1%85%A2%E1%86%AB%E1%84%83%E1%85%B5%E1%86%BC%E1%84%91%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%8C%E1%85%B5.gif?raw=true)
 </details>
 
 
 <details>
 <summary>메인페이지</summary>
 
+![조건별 검색](https://github.com/glen15/final-img/blob/master/wikiGIF/%E1%84%86%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%8B%E1%85%A6%E1%84%89%E1%85%A5%20%20%E1%84%80%E1%85%A5%E1%86%B7%E1%84%89%E1%85%A2%E1%86%A8%20%E1%84%8C%E1%85%A5%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%85%E1%85%A3%E1%86%BC.gif?raw=true)
 </details>
 
 
 <details>
 <summary>토너먼트 진행</summary>
 
+![토너먼트 진행 및 결과](https://github.com/glen15/final-img/blob/master/wikiGIF/%ED%86%A0%EB%84%88%EB%A8%BC%ED%8A%B8/%ED%86%A0%EB%84%88%EB%A8%BC%ED%8A%B8%20123%EC%A7%84%ED%96%89%20%EA%B2%B0%EA%B3%BC.gif?raw=true)
 </details>
 
 
 <details>
 <summary>마이페이지</summary>
-
+   
+![작성관심진행](https://github.com/glen15/final-img/blob/master/wikiGIF/%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80/%EC%9E%91%EC%84%B1%EA%B8%80%EA%B4%80%EC%8B%AC%EA%B8%80%EC%A7%84%ED%96%89%EC%A4%91.gif?raw=true)
 </details>
 
 
 <details>
 <summary>1:1 채팅</summary>
-
+   
+![실시간 채팅](https://github.com/glen15/final-img/blob/master/wikiGIF/%EC%B1%84%ED%8C%85/%EC%8B%A4%EC%8B%9C%EA%B0%84%EC%B1%84%ED%8C%85.gif?raw=true)
 </details>
 
 </br>
