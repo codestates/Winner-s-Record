@@ -58,7 +58,6 @@ const PostComments = ({ board, postInfo, setPostInfo }) => {
           <span>댓글</span>
         </div>
         {board.map((e) => {
-          console.log("postinfo", postInfo);
           if (userInfo.nickname === e.nickname) {
             return (
               <li className="post--comments--content" key={uuid()}>

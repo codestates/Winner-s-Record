@@ -35,8 +35,6 @@ const PostEditBtns = ({ hostId, setLoginModal, setModalBtnType }) => {
       setModalBtnType("close");
       dispatch(modalOn());
     } else {
-      const url = window.location.href;
-      console.log(url);
       history.push(`/edit-post/${postId}`);
     }
   };

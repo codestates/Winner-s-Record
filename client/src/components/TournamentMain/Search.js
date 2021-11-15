@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import GameSelector from "./GameSelector";
 import OptionSelector from "./OptionSelector";
@@ -13,6 +13,7 @@ const Search = ({
 }) => {
   useEffect(() => {
     searchHandler();
+    // eslint-disable-next-line
   }, []);
 
   const searchHandler = () => {

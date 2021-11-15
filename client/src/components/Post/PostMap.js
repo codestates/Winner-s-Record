@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const { kakao } = window;
 
@@ -18,10 +18,12 @@ const PostMap = ({
         center: location,
         level: 5,
       }),
+      // eslint-disable-next-line
       marker = new kakao.maps.Marker({
         map,
         position: location,
       }),
+      // eslint-disable-next-line
       infowindow = new kakao.maps.CustomOverlay({
         map,
         position: new kakao.maps.LatLng(data[0], data[1]),
@@ -30,6 +32,7 @@ const PostMap = ({
         }</span></div>`,
         yAnchor: 1,
       });
+    // eslint-disable-next-line
   }, []);
 
   return (

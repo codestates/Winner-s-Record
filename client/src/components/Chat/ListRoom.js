@@ -12,7 +12,6 @@ const ListRoom = ({ roomData }) => {
 
   useEffect(() => {
     setIsLoading(false);
-    console.log(roomData);
   }, [roomData]);
   return (
     <>

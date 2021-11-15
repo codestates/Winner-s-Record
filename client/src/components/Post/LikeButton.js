@@ -2,9 +2,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 
 const LikeButton = ({ like, setLoginModal, postInfo, setPostInfo, postId }) => {
-  const { isLogin, userInfo } = useSelector((state) => ({
+  const { isLogin } = useSelector((state) => ({
     isLogin: state.isLogin,
-    userInfo: state.userInfo,
   }));
 
   const clickHandler = () => {

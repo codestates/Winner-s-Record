@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import Footer from "../components/Footer";
-import { tennis, pingpong, badminton, main } from "../images";
+import { tennis, pingpong, badminton } from "../images";
 
 const Landing = () => {
   const history = useHistory();

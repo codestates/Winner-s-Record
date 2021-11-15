@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import PostListContent from "./PostListContent";
 import axios from "axios";
 import uuid from "react-uuid";

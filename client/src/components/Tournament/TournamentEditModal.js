@@ -8,7 +8,6 @@ const TournamentEditModal = ({
 }) => {
   const clickHandler = (winner, loser) => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
-    console.log(matchToEdit);
     axios
       .put(
         `https://server.winner-s-record.link/tournament/${matchToEdit[1]}`,

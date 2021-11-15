@@ -13,8 +13,7 @@ import BackButton from "../components/BackButton";
 import TopButton from "../components/TopButton";
 
 const Tournament = () => {
-  const { isLogin, userInfo, isModalOpen } = useSelector((state) => ({
-    isLogin: state.isLogin,
+  const { userInfo, isModalOpen } = useSelector((state) => ({
     userInfo: state.userInfo,
     isModalOpen: state.isModalOpen,
   }));
@@ -31,9 +30,6 @@ const Tournament = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   useEffect(() => {
-    console.log("토너먼트 매치 데이터", matches);
-    console.log("유저정보 확인", userInfo);
-
     const r2 = matches.filter((match) => {
       return match.type === "tournamentR2";
     });
@@ -41,9 +37,6 @@ const Tournament = () => {
       return match.type === "tournamentR3";
     });
 
-    const winner = r3.filter((match) => {
-      return match.winner;
-    });
     if (matchStatus === "완료") {
       setCanEdit([false, false, false]);
     } else if (r3.length && userInfo.userId === host) {
@@ -55,15 +48,13 @@ const Tournament = () => {
     } else {
       setCanEdit([false, false, false]);
     }
+    // eslint-disable-next-line
   }, [matches]);
-
-  useEffect(() => {
-    console.log(canEdit);
-  }, [canEdit]);
 
   useEffect(() => {
     getData();
     getStatus();
+    // eslint-disable-next-line
   }, []);
 
   const { postId } = useParams();
@@ -89,7 +80,6 @@ const Tournament = () => {
         headers: { Authorization },
       })
       .then((res) => {
-        console.log(res.data);
         setMatches(res.data.data);
         setHost(res.data.hostId);
       });
@@ -134,10 +124,6 @@ const Tournament = () => {
     });
 
     const event = matches[0].event;
-    console.log(matches);
-    console.log("매치 아이디", matchId);
-    console.log(userInfo.userId, host);
-
     if (userInfo.userId !== host) {
       dispatch(setModalText("해당 조작은 주최자만 할 수 있어요."));
       dispatch(modalOn());

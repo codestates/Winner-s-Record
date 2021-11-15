@@ -27,7 +27,6 @@ const Result = () => {
       .get(`https://server.winner-s-record.link/tournament/${postId}`)
       .then((res) => {
         const data = res.data.data;
-        console.log(data);
 
         const others = [];
         for (let match of data) {
@@ -53,6 +52,7 @@ const Result = () => {
   useEffect(() => {
     getData();
     getHost();
+    // eslint-disable-next-line
   }, []);
 
   return (

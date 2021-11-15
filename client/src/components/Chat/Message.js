@@ -12,6 +12,7 @@ const Message = ({ chatData }) => {
     } else {
       setIsMine(false);
     }
+    // eslint-disable-next-line
   }, []);
 
   return (

@@ -33,12 +33,7 @@ const Post = ({ match }) => {
     },
   });
 
-  const [edit, setEdit] = useState(false);
   const isMypost = postInfo.userData.userId === userInfo.userId;
-
-  useEffect(() => {
-    console.log("포스트 인포 확인하세요", postInfo);
-  }, [postInfo]);
 
   const [loginModal, setLoginModal] = useState(false);
   const [modalBtnType, setModalBtnType] = useState("close");
@@ -54,7 +49,6 @@ const Post = ({ match }) => {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res);
         setPostInfo(res.data.data);
         setTimeout(() => {
           setIsLoading(false);
@@ -86,6 +80,7 @@ const Post = ({ match }) => {
     setTimeout(() => {
       setIsLoading(false);
     }, 300);
+    // eslint-disable-next-line
   }, [match.url]);
 
   let {

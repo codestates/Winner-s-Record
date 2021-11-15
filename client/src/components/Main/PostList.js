@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import PostListContent from "./PostListContent";
 import uuid from "react-uuid";
 
@@ -23,7 +22,6 @@ const PostList = ({ postList, setPostList, searchOption, setSearchOption }) => {
     const { postType, game, option, input } = searchOption;
     setFetching(true);
     if (noMoreData) {
-      console.log("데이터 없어요~~");
       // 받아올 데이터가 없음
     } else {
       axios

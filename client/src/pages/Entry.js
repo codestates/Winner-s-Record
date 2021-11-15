@@ -35,8 +35,6 @@ const Entry = () => {
         headers: { Authorization },
       })
       .then((res) => {
-        console.log("데이터", res.data);
-
         const host = res.data.data.filter((e) => {
           return e.status === "호스트" ? true : false;
         });
@@ -61,6 +59,7 @@ const Entry = () => {
   useEffect(() => {
     dispatch(modalOff());
     getData();
+    // eslint-disable-next-line
   }, []);
 
   return (

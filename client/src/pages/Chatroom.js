@@ -47,6 +47,7 @@ const Chatroom = () => {
       setPayload({ ...payload, userId: userInfo.userId });
       socket.emit("join", { roomId, nickname: userInfo.nickname });
     }
+    // eslint-disable-next-line
   }, [userInfo]);
 
   useEffect(() => {
@@ -78,11 +79,11 @@ const Chatroom = () => {
         setChatroomInfo(res.data.userData);
         scrollToBottom();
       });
+    // eslint-disable-next-line
   }, [chatPost]);
 
   useEffect(() => {
     socket.on("receiveMessage", (data) => {
-      console.log("receive", data);
       setChatData((chats) => [...chats, data]);
       scrollToBottom();
     });
@@ -91,6 +92,7 @@ const Chatroom = () => {
       setChatData((chats) => [...chats, data]);
       scrollToBottom();
     });
+    // eslint-disable-next-line
   }, [socket]);
 
   const sendMessage = async () => {

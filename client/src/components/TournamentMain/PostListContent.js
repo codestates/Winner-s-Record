@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const PostListContent = ({ postInfo }) => {
-  const { id, event, userId, type, place, price, status, title, img, like } =
-    postInfo;
+  const { id, event, place, status, title, img, like } = postInfo;
 
   const [placeToDisplay, setPlaceToDisplay] = useState("");
 
   useEffect(() => {
     const data = place.split("|");
     setPlaceToDisplay(data[4]);
+    // eslint-disable-next-line
   }, []);
 
   const gameNamer = (game) => {
