@@ -68,7 +68,7 @@ export default function DocList({ userId, isMypage, nickname }) {
       .catch((err) => {
         console.log(err);
         setList([]);
-        console.log(err);
+        setIsLoading(false);
       });
   };
 
@@ -87,7 +87,7 @@ export default function DocList({ userId, isMypage, nickname }) {
       .catch((err) => {
         console.log(err);
         setList([]);
-        console.log(err);
+        setIsLoading(false);
       });
   };
 
