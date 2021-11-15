@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { modalOn } from "../../modules/isModalOpen";
 import { setModalText } from "../../modules/modalText";
@@ -12,12 +12,8 @@ const TournamentMatch = ({
 }) => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.userInfo);
-  const { id, event, winner, loser, docId, player = "" } = matchData;
+  const { id, winner, loser, docId, player = "" } = matchData;
   const players = player.split("vs");
-
-  useEffect(() => {
-    console.log(userInfo.userId, host);
-  }, [userInfo]);
 
   return (
     <li className="tournament--match--container">

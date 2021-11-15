@@ -18,10 +18,8 @@ const TournamentButton = ({ status, setLoginModal, hostId }) => {
       history.push(`/post/${postId}/entry`);
     } else if (buttonName === "진행 확인") {
       history.push(`/post/${postId}/tournament`);
-      // 토너먼트 페이지로 리디렉션
     } else {
       history.push(`/post/${postId}/result`);
-      // 토너먼트 결과 조회로 리디렉션
     }
   };
 
@@ -35,6 +33,7 @@ const TournamentButton = ({ status, setLoginModal, hostId }) => {
     } else {
       setButtonName("결과 조회");
     }
+    // eslint-disable-next-line
   }, []);
 
   return (

@@ -3,13 +3,6 @@ import { useState } from "react";
 const GameSelector = ({ searchOption, setSearchOption }) => {
   const [displayGame, setDisplayGame] = useState("전체");
   const [isClicked, setIsClicked] = useState(false);
-  const [scrollEvent, setScrollEvent] = useState([
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
 
   return (
     <div className="search--option--container">

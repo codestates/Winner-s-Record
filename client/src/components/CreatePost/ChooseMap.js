@@ -5,7 +5,6 @@ const { kakao } = window;
 
 const ChooseMap = ({ inputValue, setInputValue }) => {
   const container = useRef(null);
-  const addr = useRef(null);
 
   const [isOn, setIsOn] = useState(false);
   const [display, setDisplay] = useState("장소를 검색해주세요.");
@@ -13,13 +12,16 @@ const ChooseMap = ({ inputValue, setInputValue }) => {
   useEffect(() => {
     let data = inputValue.place.split("|");
     const location = new kakao.maps.LatLng(data[0], data[1]);
+
     let map = new kakao.maps.Map(container.current, {
         center: location,
       }),
+      // eslint-disable-next-line
       marker = new kakao.maps.Marker({
         map,
         position: location,
       }),
+      // eslint-disable-next-line
       infowindow = new kakao.maps.CustomOverlay({
         map,
         position: new kakao.maps.LatLng(data[0], data[1]),
@@ -32,12 +34,10 @@ const ChooseMap = ({ inputValue, setInputValue }) => {
 
   // '위도|경도|주소|빌딩이름|리스트에서 보일 주소'
   const addrFinder = (data) => {
-    console.log("postcode-data", data);
     const geocoder = new kakao.maps.services.Geocoder();
     setDisplay(data.address);
     geocoder.addressSearch(data.address, (result, status) => {
       if (status === "OK") {
-        console.log(result[0]);
         const lat = result[0].y;
         const lng = result[0].x;
         const place = result[0].road_address.address_name;

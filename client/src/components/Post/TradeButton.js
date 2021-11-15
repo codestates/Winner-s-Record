@@ -30,7 +30,6 @@ const TradeButton = ({ hostId, status, setModalBtnType }) => {
         { headers: { Authorization } }
       )
       .then((res) => {
-        // console.log(res.data.id);
         dispatch(setChatPost(Number(postId)));
         history.push(`/chat/${res.data.id}`);
       });

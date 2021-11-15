@@ -15,10 +15,12 @@ const EditMap = ({ inputValue, setInputValue }) => {
     let map = new kakao.maps.Map(container.current, {
         center: location,
       }),
+      // eslint-disable-next-line
       marker = new kakao.maps.Marker({
         map,
         position: location,
       }),
+      // eslint-disable-next-line
       infowindow = new kakao.maps.CustomOverlay({
         map,
         position: new kakao.maps.LatLng(data[0], data[1]),
@@ -33,10 +35,8 @@ const EditMap = ({ inputValue, setInputValue }) => {
   const addrFinder = (data) => {
     const geocoder = new kakao.maps.services.Geocoder();
     addr.current.textContent = data.address;
-    console.log("data", data);
     geocoder.addressSearch(data.address, (result, status) => {
       if (status === "OK") {
-        console.log(result[0]);
         const lat = result[0].y;
         const lng = result[0].x;
         const place = result[0].road_address.address_name;

@@ -68,7 +68,6 @@ const ApplyBtn = ({
       dispatch(setModalText("신청자 목록을 확인해주세요."));
       dispatch(modalOn());
     } else {
-      console.log(fixed);
       const Authorization = `Bearer ${localStorage.getItem("token")}`;
       axios
         .post(

@@ -70,7 +70,6 @@ export default function Redirect() {
       )
       .then((res) => {
         const { token, userdata } = res.data;
-        console.log(res.data);
         localStorage.setItem("token", token);
         const accessToken = localStorage.getItem("token");
         if (accessToken) {

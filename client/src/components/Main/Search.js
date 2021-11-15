@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import TypeSelector from "./TypeSelector";
 import GameSelector from "./GameSelector";

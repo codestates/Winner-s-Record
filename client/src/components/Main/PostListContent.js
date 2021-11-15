@@ -8,6 +8,7 @@ const PostListContent = ({ postInfo }) => {
   useEffect(() => {
     const data = place.split("|");
     setPlaceToDisplay(data[4]);
+    // eslint-disable-next-line
   }, []);
 
   const gameNamer = (game) => {
