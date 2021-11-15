@@ -11,7 +11,9 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ChatModal from "../components/Chat/ChatModal";
 
-const socket = io("https://server.winners-record.click:8081");
+const socket = io("https://server.winners-record.click:8081", {
+  withCredentials: true
+});
 
 const Chatroom = () => {
   const { roomId } = useParams();
