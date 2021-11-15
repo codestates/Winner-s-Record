@@ -57,7 +57,7 @@ export default function Signup() {
       return;
     }
     axios
-      .post("http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth/email", {
+      .post("https://server.winners-record.click/auth/email", {
         [key]: e.target.value,
       }) //
       .then((res) => {
@@ -80,7 +80,7 @@ export default function Signup() {
       return;
     }
     axios
-      .post("http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth/nickname", {
+      .post("https://server.winners-record.click/auth/nickname", {
         [key]: e.target.value,
       }) //
       .then((res) => {
@@ -100,7 +100,7 @@ export default function Signup() {
   const handleSignup = () => {
     const { email, nickname, password } = signupInfo;
     axios
-      .post("http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth", {
+      .post("https://server.winners-record.click/auth", {
         email,
         nickname,
         password,

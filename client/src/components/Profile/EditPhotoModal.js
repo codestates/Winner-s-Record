@@ -61,7 +61,7 @@ export default function EditPhotoModal({
     const oldToken = localStorage.getItem("token");
     axios
       .put(
-        "http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth/img",
+        "https://server.winners-record.click/auth/img",
         { img: path },
         { headers: { authorization: `Bearer ${oldToken}` } }
       )
