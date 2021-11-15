@@ -329,5 +329,5 @@ export async function remove(docId) {
 }
 
 export async function slicePage(docList, page) {
-  return docList.slice(page * 10, page * 10 + 10);
+  return docList.slice(page * 12, page * 12 + 12);
 }
