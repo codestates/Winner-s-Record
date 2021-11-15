@@ -36,7 +36,7 @@ const Landing = () => {
               라켓스포츠에 흥미가 생겼는데 <br /> 같이 즐길 사람이 없으신가요 ?
             </span>
             <span className="text">
-              지금 위너스 레코드와 스포츠 메이트를 찾아보세요.
+              지금 Winner's Record와 스포츠 메이트를 찾아보세요.
             </span>
             <div
               className="btn"
@@ -76,7 +76,7 @@ const Landing = () => {
               <span className="text">
                 원하는 종목의 매치 글을 작성하거나 검색이 가능해요.
                 <br />
-                원하는 매치 상대와 실시간 채팅으로 매치 일정을 맞춰보세요
+                원하는 매치 상대와 실시간 채팅으로 매치 일정을 맞춰보세요.
               </span>
             </div>
             <div className={`img--container${scrollY > 200 ? "" : " before"}`}>
@@ -95,7 +95,7 @@ const Landing = () => {
               <span className="title">토너먼트</span>
               <span className="text">
                 8강 토너먼트로 진행되는 나만의 대회를 개최할 수 있어요.
-                <br /> 대진표는 저희가 만들어드릴게요!
+                <br /> 대진표는 저희가 만들어드립니다!
               </span>
             </div>
             <div className={`img--container${scrollY > 900 ? "" : " before"}`}>
@@ -115,7 +115,7 @@ const Landing = () => {
               <span className="text">
                 종목별 상위 랭킹과 나의 랭킹을 확인할 수 있어요.
                 <br />
-                대전기록을 확인하여 나와 맞는 상대방과 경기하실 수 있어요.
+                상대방의 대전기록을 확인한 후에 경기하실 수 있어요.
               </span>
             </div>
             <div className={`img--container${scrollY > 1730 ? "" : " before"}`}>
@@ -149,7 +149,7 @@ const Landing = () => {
         <div className="container">
           <div className="content--container">
             <span className="text">
-              위너스레코드와 함께 즐거운 스포츠라이프를 지금 시작해보세요 !
+              Winner's Record와 함께 즐거운 스포츠라이프를 시작해보세요 !
             </span>
           </div>
           <div className="btn--container">

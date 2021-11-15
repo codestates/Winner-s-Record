@@ -105,6 +105,6 @@ io.on("connection", (socket) => {
 });
 
 server.listen(8081, () => { 
-  console.log('kdsafhasdghgakjshjags')
+  console.log('소켓 연결')
 })
 app.listen(config.host.port);
