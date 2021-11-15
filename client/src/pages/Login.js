@@ -23,7 +23,7 @@ export default function Login() {
     const { email, password } = loginInfo;
     axios
       .post(
-        "http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/auth/login",
+        "http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth/login",
         { email, password },
         { withCredentials: true }
       )
@@ -51,7 +51,7 @@ export default function Login() {
 
   const handleNaver = () => {
     axios
-      .get("http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/auth/naver/login")
+      .get("http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth/naver/login")
       .then((res) => {
         console.log(res.data);
       })
@@ -62,7 +62,7 @@ export default function Login() {
 
   const handleGoogle = () => {
     axios
-      .get("http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/auth/google/login")
+      .get("http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth/google/login")
       .then((res) => {
         console.log(res.data);
       })

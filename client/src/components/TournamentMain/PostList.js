@@ -27,7 +27,7 @@ const PostList = ({ postList, setPostList, searchOption }) => {
     } else {
       axios
         .get(
-          `http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/doc?type=$tournament&event=${game}&${option}=${input}&page=${page}`
+          `http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/doc?type=$tournament&event=${game}&${option}=${input}&page=${page}`
         )
         .then((res) => {
           if (!res.data.data.length) {

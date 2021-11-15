@@ -57,7 +57,7 @@ export default function Signup() {
       return;
     }
     axios
-      .post("http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/auth/email", {
+      .post("http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth/email", {
         [key]: e.target.value,
       }) //
       .then((res) => {
@@ -80,7 +80,7 @@ export default function Signup() {
       return;
     }
     axios
-      .post("http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/auth/nickname", {
+      .post("http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth/nickname", {
         [key]: e.target.value,
       }) //
       .then((res) => {
@@ -100,7 +100,7 @@ export default function Signup() {
   const handleSignup = () => {
     const { email, nickname, password } = signupInfo;
     axios
-      .post("http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/auth", {
+      .post("http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth", {
         email,
         nickname,
         password,

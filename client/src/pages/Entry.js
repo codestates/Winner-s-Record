@@ -31,7 +31,7 @@ const Entry = () => {
   const getData = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
-      .get(`http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/entry/${postId}`, {
+      .get(`http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/entry/${postId}`, {
         headers: { Authorization },
       })
       .then((res) => {

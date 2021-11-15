@@ -46,7 +46,7 @@ export default function Redirect() {
       return;
     }
     axios
-      .post("http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/auth/nickname", { nickname }) //
+      .post("http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth/nickname", { nickname }) //
       .then((res) => {
         setValidation({ ...validation, checkNickname: true });
         setMessage("사용 가능한 닉네임입니다");
@@ -64,7 +64,7 @@ export default function Redirect() {
   const handleSocialSignup = () => {
     axios
       .post(
-        "http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/auth/social",
+        "http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth/social",
         { type, id, nickname },
         { withCredentials: true }
       )
@@ -103,7 +103,7 @@ export default function Redirect() {
       const token = result.data.access_token;
       axios
         .get(
-          `http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/auth/kakao/callback?token=${token}`
+          `http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth/kakao/callback?token=${token}`
         )
         .then((res) => {
           const { id, type } = res.data;

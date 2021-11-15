@@ -18,7 +18,7 @@ export default function ProfileRank({ isMypage, nickname }) {
   const handleRank = (event) => {
     axios
       .get(
-        `http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/rank?event=${event}&nickname=${nickname}`
+        `http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/rank?event=${event}&nickname=${nickname}`
       )
       .then((res) => {
         const filterd = res.data.data.filter((e) => e.nickname === nickname);
@@ -33,7 +33,7 @@ export default function ProfileRank({ isMypage, nickname }) {
     const token = localStorage.getItem("token");
     axios
       .get(
-        `http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/match?nickname=${nickname}&event=${event}`,
+        `http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/match?nickname=${nickname}&event=${event}`,
         {
           headers: { authorization: `Bearer ${token}` },
         }

@@ -103,7 +103,7 @@ export default function EditPost() {
     const token = localStorage.getItem("token");
     axios
       .put(
-        `http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/doc/${docId}`,
+        `http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/doc/${docId}`,
         { type, title, event, place, price, text, img: arr },
         {
           headers: { authorization: `Bearer ${token}` },
@@ -133,7 +133,7 @@ export default function EditPost() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`http://ec2-13-124-226-101.ap-northeast-2.compute.amazonaws.com/doc/${docId}`, {
+      .get(`http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/doc/${docId}`, {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {
