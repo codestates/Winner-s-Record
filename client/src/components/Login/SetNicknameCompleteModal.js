@@ -15,7 +15,12 @@ export default function SetNicknameCompleteModal({ isModalOpen }) {
             </div>
             <div className="modal--content">닉네임 설정이 완료되었습니다</div>
             <div className="modal--btncontainer">
-              <button onClick={() => history.replace("/main")}>시작하기</button>
+              <button
+                className="modal--btn-ok"
+                onClick={() => history.replace("/main")}
+              >
+                시작하기
+              </button>
             </div>
           </div>
         </div>
