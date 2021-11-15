@@ -76,8 +76,7 @@ const Landing = () => {
               <span className="text">
                 원하는 종목의 매치 글을 작성하거나 검색이 가능해요.
                 <br />
-                매치 상대가 확정되면 실시간 채팅으로 매치 일정을 맞춰보실 수
-                있어요.
+                원하는 매치 상대와 실시간 채팅으로 매치 일정을 맞춰보세요
               </span>
             </div>
             <div className={`img--container${scrollY > 200 ? "" : " before"}`}>

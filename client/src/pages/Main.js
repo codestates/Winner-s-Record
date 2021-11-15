@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Search from "../components/Main/Search";
 import PostList from "../components/Main/PostList";
@@ -21,6 +21,13 @@ const Main = () => {
     input: "all",
     postType: "all",
   });
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   return (
     <div className={"main--container"}>
