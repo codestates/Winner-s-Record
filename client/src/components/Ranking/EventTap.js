@@ -11,7 +11,7 @@ export default function EventTap({ setList, setEvent, setIsLoading }) {
     setIsLoading(true);
     axios
       .get(
-        `https://server.winner-s-record.link/rank?event=${event}&nickname=all`
+        `http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/rank?event=${event}&nickname=all`
       )
       .then((res) => {
         setEvent(event);

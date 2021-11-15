@@ -66,7 +66,7 @@ export default function EditUserInfo({ editHandler }) {
       return;
     }
     axios
-      .post("https://server.winner-s-record.link/auth/nickname", { nickname })
+      .post("http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth/nickname", { nickname })
       .then((res) => {
         setValidation({ ...validation, checkNickname: true });
         setMessage({ ...message, nickname: "사용 가능한 닉네임입니다" });
@@ -86,7 +86,7 @@ export default function EditUserInfo({ editHandler }) {
     const token = localStorage.getItem("token");
     axios
       .post(
-        "https://server.winner-s-record.link/auth/password",
+        "http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth/password",
         { password: oldpassword },
         { headers: { authorization: `Bearer ${token}` } }
       )
@@ -109,7 +109,7 @@ export default function EditUserInfo({ editHandler }) {
     const oldToken = localStorage.getItem("token");
     axios
       .put(
-        "https://server.winner-s-record.link/auth",
+        "http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth",
         { nickname, password: null },
         { headers: { authorization: `Bearer ${oldToken}` } }
       )
@@ -135,7 +135,7 @@ export default function EditUserInfo({ editHandler }) {
     const oldToken = localStorage.getItem("token");
     axios
       .put(
-        "https://server.winner-s-record.link/auth",
+        "http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth",
         { nickname: null, password },
         { headers: { authorization: `Bearer ${oldToken}` } }
       )
@@ -180,7 +180,7 @@ export default function EditUserInfo({ editHandler }) {
   const getUserInfo = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
-      .get("https://server.winner-s-record.link/auth/me", {
+      .get("http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth/me", {
         headers: { Authorization },
       })
       .then((res) => {

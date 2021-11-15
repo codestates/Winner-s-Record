@@ -10,7 +10,7 @@ const TournamentEditModal = ({
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
       .put(
-        `https://server.winner-s-record.link/tournament/${matchToEdit[1]}`,
+        `http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/tournament/${matchToEdit[1]}`,
         {
           matchId: matchToEdit[0],
           winner,

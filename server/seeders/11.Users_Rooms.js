@@ -135,7 +135,7 @@ module.exports = {
       },
       {
         id: 11,
-        userId: 11,
+        userId: 6,
         roomId: 6,
         createdAt: new Date()
           .toISOString()
@@ -148,7 +148,7 @@ module.exports = {
       },
       {
         id: 12,
-        userId: 23,
+        userId: 10,
         roomId: 6,
         createdAt: new Date()
           .toISOString()
