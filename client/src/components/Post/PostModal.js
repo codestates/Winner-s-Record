@@ -113,16 +113,20 @@ const ChooseWinner = ({ postId, player }) => {
 };
 
 const DeleteBtns = () => {
-  const postId = useParams();
+  const { postId } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
 
   const confirmDelete = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
+
     axios
-      .delete(`http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/doc/${postId}`, {
-        headers: { Authorization },
-      })
+      .delete(
+        `http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/doc/${postId}`,
+        {
+          headers: { Authorization },
+        }
+      )
       .then((res) => {
         history.push("/main");
       });
