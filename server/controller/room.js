@@ -54,7 +54,7 @@ export async function chattingList(req, res) {
     const chatting = await roomData.chatList(user.id)
     if(user && chatting) {
       return res.status(200).send({data: chatting})
-    } else {
+    } else { 
       return res.status(403).send({message: '권한이 없습니다'})
     }
   }
