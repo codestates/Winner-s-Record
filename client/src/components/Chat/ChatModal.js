@@ -8,7 +8,7 @@ const ChatModal = ({ roomId, setIsModalOn }) => {
   const exitChat = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
-      .delete(`https://server.winner-s-record.link:8080/room/${roomId}`, {
+      .delete(`http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/room/${roomId}`, {
         headers: {
           Authorization,
         },

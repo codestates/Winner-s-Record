@@ -35,7 +35,7 @@ export default function Profile({ match }) {
     setIsLoading(true);
     const token = localStorage.getItem("token");
     axios
-      .get(`https://server.winner-s-record.link/auth/${userId}`, {
+      .get(`http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth/${userId}`, {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {

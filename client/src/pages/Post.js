@@ -49,7 +49,7 @@ const Post = ({ match }) => {
 
     const Authorization = `Bearer ${token}`;
     axios
-      .get(`https://server.winner-s-record.link/doc/${postId}`, {
+      .get(`http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/doc/${postId}`, {
         headers: { Authorization },
         withCredentials: true,
       })

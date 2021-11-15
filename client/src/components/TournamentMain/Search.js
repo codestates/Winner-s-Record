@@ -25,7 +25,7 @@ const Search = ({
 
     axios
       .get(
-        `https://server.winner-s-record.link/doc?type=tournament&event=${game}&${option}=${input}&page=0`
+        `http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/doc?type=tournament&event=${game}&${option}=${input}&page=0`
       )
       .then((res) => {
         if (res.status === 404) {
