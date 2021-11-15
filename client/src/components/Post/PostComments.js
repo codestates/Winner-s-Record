@@ -16,7 +16,7 @@ const PostComments = ({ board, postInfo, setPostInfo }) => {
     } else {
       axios
         .post(
-          "https://server.winners-record.click/board",
+          "http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/board",
           { docId: postId, text: input },
           { headers: { Authorization } }
         )
@@ -33,7 +33,7 @@ const PostComments = ({ board, postInfo, setPostInfo }) => {
   const deleteComment = (boardId) => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
-      .delete(`https://server.winners-record.click/board/${boardId}`, {
+      .delete(`http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/board/${boardId}`, {
         headers: { Authorization },
       })
       .then((res) => {

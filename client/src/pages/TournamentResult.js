@@ -24,7 +24,7 @@ const Result = () => {
 
   const getData = () => {
     axios
-      .get(`https://server.winners-record.click/tournament/${postId}`)
+      .get(`http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/tournament/${postId}`)
       .then((res) => {
         const data = res.data.data;
         console.log(data);
@@ -44,7 +44,7 @@ const Result = () => {
 
   const getHost = () => {
     axios
-      .get(`https://server.winners-record.click/doc/${postId}`)
+      .get(`http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/doc/${postId}`)
       .then((res) => {
         setHost(res.data.data.userData.nickname);
       });

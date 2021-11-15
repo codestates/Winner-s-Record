@@ -61,7 +61,7 @@ const ChooseWinner = ({ postId, player }) => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
       .post(
-        `https://server.winners-record.click/match/${postId}`,
+        `http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/match/${postId}`,
         { winner, loser },
         { headers: { Authorization } }
       )
@@ -120,7 +120,7 @@ const DeleteBtns = () => {
   const confirmDelete = () => {
     const Authorization = `Bearer ${localStorage.getItem("token")}`;
     axios
-      .delete(`https://server.winners-record.click/doc/${postId}`, {
+      .delete(`http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/doc/${postId}`, {
         headers: { Authorization },
       })
       .then((res) => {
@@ -152,7 +152,7 @@ const ChangeStatusBtn = ({ status, setPostInfo }) => {
     if (status === "대기") {
       axios
         .put(
-          `https://server.winners-record.click/doc/${postId}`,
+          `http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/doc/${postId}`,
           { status: "완료" },
           { headers: { Authorization } }
         )
@@ -163,7 +163,7 @@ const ChangeStatusBtn = ({ status, setPostInfo }) => {
     } else {
       axios
         .put(
-          `https://server.winners-record.click/doc/${postId}`,
+          `http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/doc/${postId}`,
           { status: "대기" },
           { headers: { Authorization } }
         )

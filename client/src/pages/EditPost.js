@@ -103,7 +103,7 @@ export default function EditPost() {
     const token = localStorage.getItem("token");
     axios
       .put(
-        `https://server.winners-record.click/doc/${docId}`,
+        `http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/doc/${docId}`,
         { type, title, event, place, price, text, img: arr },
         {
           headers: { authorization: `Bearer ${token}` },
@@ -133,7 +133,7 @@ export default function EditPost() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`https://server.winners-record.click/doc/${docId}`, {
+      .get(`http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/doc/${docId}`, {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {

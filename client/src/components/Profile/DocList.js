@@ -18,7 +18,7 @@ export default function DocList({ userId, isMypage, nickname }) {
   const handleCreatedList = () => {
     setIsLoading(true);
     axios
-      .get(`https://server.winners-record.click/doc?hostId=${userId}`)
+      .get(`http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/doc?hostId=${userId}`)
       .then((res) => {
         setList(res.data.data);
         setTimeout(() => {
@@ -34,7 +34,7 @@ export default function DocList({ userId, isMypage, nickname }) {
   const handleLikeList = () => {
     setIsLoading(true);
     axios
-      .get(`https://server.winners-record.click/like/${userId}`)
+      .get(`http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/like/${userId}`)
       .then((res) => {
         setList(res.data.data);
         setTimeout(() => {
@@ -50,7 +50,7 @@ export default function DocList({ userId, isMypage, nickname }) {
   const handleProgressList = () => {
     setIsLoading(true);
     axios
-      .get(`https://server.winners-record.click/doc?guestId=${userId}`)
+      .get(`http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/doc?guestId=${userId}`)
       .then((res) => {
         setList(res.data.data);
         setTimeout(() => {
@@ -66,7 +66,7 @@ export default function DocList({ userId, isMypage, nickname }) {
   const handleHistoryList = () => {
     setIsLoading(true);
     axios
-      .get(`https://server.winners-record.click/match/history?userId=${userId}`)
+      .get(`http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/match/history?userId=${userId}`)
       .then((res) => {
         setHistory(res.data.myMatch);
         setTimeout(() => {
