@@ -168,7 +168,6 @@
 ## 🗣 Contributors
 
 <table>
-  <tbody>
     <tr>
       <td align="center">
           <sub>
@@ -256,7 +255,6 @@
       </td>
     </tr>
     <tr>
-  </tbody>
 </table>
 
 
