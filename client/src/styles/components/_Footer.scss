@@ -55,7 +55,7 @@
 
           &:hover {
             transition: 0.1s;
-            color: $main-color;
+            color: $sub-color;
             font-weight: bold;
           }
         }
@@ -75,7 +75,7 @@
               color: $white;
               &:hover {
                 transition: 0.1s;
-                color: $main-color;
+                color: $sub-color;
                 font-weight: bold;
               }
               i {
