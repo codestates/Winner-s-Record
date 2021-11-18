@@ -94,7 +94,7 @@ export async function entryList(docId, entries) {
 
   const ranking = []
   let result = []
-  recordRankList.map((el) => {
+  rankList.map((el) => {
     if (result.length === 0) {
       result.push(el);
     } else {
