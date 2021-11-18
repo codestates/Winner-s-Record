@@ -80,11 +80,41 @@ export async function entryList(docId, entries) {
     where: {
       event: event,
     },
+    order: [['point', 'DESC']]
   }).catch((err) => console.log(err));
 
-  const rankList = rank
-    .map((el) => el.dataValues)
-    .sort((a, b) => b.point - a.point);
+  const rankList = rank.map((el) => el.dataValues)
+
+  rankList.sort((a, b) => a.nickname < b.nickname ? -1 : a.nickname > b.nickname ? 1 : 0)
+  .sort((a, b) => b.point - a.point);
+
+  for(let i = 0; i < rankList.length; i++) {
+    rankList[i].rank = i+1
+  }
+
+  const ranking = []
+  let result = []
+  recordRankList.map((el) => {
+    if (result.length === 0) {
+      result.push(el);
+    } else {
+      if (result[result.length - 1].point !== el.point) {
+        ranking.push(...result);
+        result = [];
+        result.push(el);
+      } else {
+        result.push(el);
+        result.map((el2) => (el2.rank = result[0].rank));
+      }
+    }
+  });
+  ranking.push(...result)
+
+  for(let i = 0; i < ranking.length; i++) {
+    if(ranking[i].point === 0) {
+      ranking[i].rank = '-'
+    }
+  }
 
   for (let i = 0; i < entries.length; i++) {
     for (let j = 0; j < userList.length; j++) {
@@ -96,12 +126,12 @@ export async function entryList(docId, entries) {
   }
 
   for (let i = 0; i < entries.length; i++) {
-    for (let j = 0; j < rankList.length; j++) {
-      if (entries[i].userId === rankList[j].userId) {
-        entries[i].win = rankList[j].win;
-        entries[i].lose = rankList[j].lose;
-        entries[i].point = rankList[j].point;
-        entries[i].rank = rankList.indexOf(rankList[j]) + 1;
+    for (let j = 0; j < ranking.length; j++) {
+      if (entries[i].userId === ranking[j].userId) {
+        entries[i].win = ranking[j].win;
+        entries[i].lose = ranking[j].lose;
+        entries[i].point = ranking[j].point;
+        entries[i].rank = ranking[j].rank;
       }
     }
   }

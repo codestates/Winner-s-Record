@@ -104,7 +104,7 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(8081, () => { 
+server.listen(process.env.SOCKET_PORT, () => { 
   console.log('소켓 연결')
 })
 app.listen(config.host.port);
