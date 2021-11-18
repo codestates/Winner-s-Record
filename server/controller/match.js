@@ -24,13 +24,17 @@ export async function insertResult(req, res) {
     return res.status(403).json({ message: "권한이 없습니다" });
   }
   const { winner, loser } = req.body;
+  const winnerData = await userData.findByNickname(winner);
+  const loserData = await userData.findByNickname(loser);
+  const winnerId = winnerData.id;
+  const loserId = loserData.id;
   const event = docdata.event;
 
   const result = await matchData.createMatch({
     type: "match",
     event,
-    winner,
-    loser,
+    winner: winnerId,
+    loser: loserId,
     player: `${winner}vs${loser}`,
     docId,
   });
@@ -41,7 +45,7 @@ export async function insertResult(req, res) {
     loser,
   });
   await docData.editDoc(docId, { status: "완료" });
-  return res.status(200).json({ ...result });
+  return res.status(201).json({ ...result });
 }
 
 export async function headToHead(req, res) {
@@ -69,7 +73,6 @@ export async function headToHead(req, res) {
 
 export async function myMatch(req, res) {
   const userId = req.query.userId;
-  const user = await userData.findById(userId);
-  const myMatch = await matchData.myMatch(user.nickname);
+  const myMatch = await matchData.myMatch(userId);
   return res.status(200).json({ myMatch });
 }

@@ -77,29 +77,38 @@ export async function findHeadToHead(event, user, rival) {
   return result;
 }
 
-export async function myMatch(nickname) {
+export async function myMatch(userId) {
   const matchData = await db.Matches.findAll({
     limit: 10,
     where: {
       [Op.or]: [
         {
-          winner: nickname,
+          winner: userId,
         },
         {
-          loser: nickname,
+          loser: userId,
         },
       ],
     },
   });
-  const myMatch = matchData.map((el) => {
-    let date = el.dataValues.createdAt.toString();
-
-    return {
-      event: el.dataValues.event,
-      winner: el.dataValues.winner,
-      loser: el.dataValues.loser,
+  let result = [];
+  for (let i = 0; i < matchData.length; i++) {
+    let date = matchData[i].dataValues.createdAt.toString();
+    const winnerData = await db.Users.findOne({
+      where: { id: matchData[i].dataValues.winner },
+    });
+    const loserData = await db.Users.findOne({
+      where: { id: matchData[i].dataValues.loser },
+    });
+    const winnerNickname = winnerData.dataValues.nickname;
+    const loserNickname = loserData.dataValues.nickname;
+    result.push({
+      event: matchData[i].dataValues.event,
+      winner: winnerNickname,
+      loser: loserNickname,
       date,
-    };
-  });
-  return myMatch;
+    });
+  }
+
+  return result;
 }
