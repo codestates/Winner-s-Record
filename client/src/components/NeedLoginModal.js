@@ -8,7 +8,9 @@ export default function NeedLoginModal({ isModalOpen, setIsModalOpen }) {
 
   const handleClick = () => {
     // const prevPage = window.location.href.split("/").slice(2).join("/");
-    const prevPage = window.location.href.split("http://localhost:3000")[1];
+    const prevPage = window.location.href.split(
+      "http://winners-record.click"
+    )[1];
     dispatch(setPrevPage(prevPage));
     history.replace("/login");
   };
