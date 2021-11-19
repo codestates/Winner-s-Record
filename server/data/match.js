@@ -1,5 +1,6 @@
 import pkg from "sequelize";
 import db from "../models/index.js";
+import * as userData from "./auth.js";
 const { Op } = pkg;
 
 export async function createMatch(result) {
@@ -13,8 +14,11 @@ export async function createMatch(result) {
   };
 }
 
-export async function eidtMatch(matchId, winner, loser) {
-  await db.Matches.update({ winner, loser }, { where: { id: matchId } });
+export async function eidtMatch(matchId, winnerId, loserId) {
+  await db.Matches.update(
+    { winner: winnerId, loser: loserId },
+    { where: { id: matchId } }
+  );
   const editedMatch = await db.Matches.findOne({
     where: { id: matchId },
   });
@@ -48,27 +52,33 @@ export async function tournamentMatch(docId, event, players) {
 }
 
 export async function findHeadToHead(event, user, rival) {
+  const userInfo = await userData.findById(user);
+  const rivalInfo = await userData.findById(rival);
+  const userNickname = userInfo.nickname;
+  const rivalNickname = rivalInfo.nickname;
+
   const matchData1 = await db.Matches.findAll({
     where: { event, winner: user, loser: rival },
   });
   const matchData2 = await db.Matches.findAll({
     where: { event, winner: rival, loser: user },
   });
+
   const result = [];
 
   for (let i = 0; i < matchData1.length; i++) {
     const match = {
       id: matchData1[i].dataValues.id,
-      winner: matchData1[i].dataValues.winner,
-      loser: matchData1[i].dataValues.loser,
+      winner: userNickname,
+      loser: rivalNickname,
     };
     result.push(match);
   }
   for (let i = 0; i < matchData2.length; i++) {
     const match = {
       id: matchData2[i].dataValues.id,
-      winner: matchData2[i].dataValues.winner,
-      loser: matchData2[i].dataValues.loser,
+      winner: rivalNickname,
+      loser: userNickname,
     };
     result.push(match);
   }
