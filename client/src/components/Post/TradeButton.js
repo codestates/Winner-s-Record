@@ -5,9 +5,12 @@ import { modalOn } from "../../modules/isModalOpen";
 import { setModalText } from "../../modules/modalText";
 import { setChatPost } from "../../modules/chatPost";
 
-const TradeButton = ({ hostId, status, setModalBtnType }) => {
+const TradeButton = ({ hostId, status, setModalBtnType, setLoginModal }) => {
   const { postId } = useParams();
-  const userInfo = useSelector((state) => state.userInfo);
+  const { userInfo, isLogin } = useSelector((state) => ({
+    userInfo: state.userInfo,
+    isLoign: state.isLogin,
+  }));
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -22,17 +25,22 @@ const TradeButton = ({ hostId, status, setModalBtnType }) => {
   };
 
   const startChat = () => {
-    const Authorization = `Bearer ${localStorage.getItem("token")}`;
-    axios
-      .post(
-        `http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/room`,
-        { docId: postId },
-        { headers: { Authorization } }
-      )
-      .then((res) => {
-        dispatch(setChatPost(Number(postId)));
-        history.push(`/chat/${res.data.id}`);
-      });
+    if (!isLogin) {
+      // 로그인 모달
+      setLoginModal(true);
+    } else {
+      const Authorization = `Bearer ${localStorage.getItem("token")}`;
+      axios
+        .post(
+          `http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/room`,
+          { docId: postId },
+          { headers: { Authorization } }
+        )
+        .then((res) => {
+          dispatch(setChatPost(Number(postId)));
+          history.push(`/chat/${res.data.id}`);
+        });
+    }
   };
 
   return (

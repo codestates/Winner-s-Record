@@ -11,9 +11,12 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ChatModal from "../components/Chat/ChatModal";
 
-const socket = io("http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com:8081", {
-  withCredentials: true
-});
+const socket = io(
+  "http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com:8081",
+  {
+    withCredentials: true,
+  }
+);
 
 const Chatroom = () => {
   const { roomId } = useParams();
