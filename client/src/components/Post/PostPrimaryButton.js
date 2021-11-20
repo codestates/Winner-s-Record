@@ -17,6 +17,7 @@ const PostPrimaryButton = ({
           hostId={hostId}
           status={status}
           setModalBtnType={setModalBtnType}
+          setLoginModal={setLoginModal}
         />
       ) : type === "match" ? (
         <MatchButton
