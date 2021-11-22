@@ -64,7 +64,7 @@ const MatchButton = ({
 
   useEffect(() => {
     if (status === "완료") {
-      setButtonName("종료된 경기입니다.");
+      setButtonName("이미 종료된 경기입니다.");
     } else if (
       hostId !== userInfo.userId &&
       !player.includes(userInfo.nickname)
