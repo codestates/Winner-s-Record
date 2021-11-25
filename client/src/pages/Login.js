@@ -49,27 +49,31 @@ export default function Login() {
     );
   };
 
-  const handleNaver = () => {
-    axios
-      .get("http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth/naver/login")
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const handleNaver = () => {
+  //   axios
+  //     .get(
+  //       "http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth/naver/login"
+  //     )
+  //     .then((res) => {
+  //       console.log(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
-  const handleGoogle = () => {
-    axios
-      .get("http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth/google/login")
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const handleGoogle = () => {
+  //   axios
+  //     .get(
+  //       "http://ec2-3-35-18-23.ap-northeast-2.compute.amazonaws.com/auth/google/login"
+  //     )
+  //     .then((res) => {
+  //       console.log(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   const handleKeyPress = (e) => {
     if (e.type === "keypress" && e.code === "Enter" && isValid) {
@@ -128,7 +132,7 @@ export default function Login() {
             src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%86%8C%EC%85%9C%EC%95%84%EC%9D%B4%EC%BD%98/btn_kakao.png"
             onClick={handleKakao}
           />
-          <img
+          {/* <img
             alt="naver"
             className="login--socialbtn"
             src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%86%8C%EC%85%9C%EC%95%84%EC%9D%B4%EC%BD%98/naver.png"
@@ -139,7 +143,7 @@ export default function Login() {
             className="login--socialbtn"
             src="https://winnersrecordimagestorage.s3.ap-northeast-2.amazonaws.com/%EC%86%8C%EC%85%9C%EC%95%84%EC%9D%B4%EC%BD%98/google-icon-styl.png"
             onClick={handleGoogle}
-          />
+          /> */}
         </div>
       </form>
       <div className="login--copyright">
