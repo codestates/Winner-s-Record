@@ -1,0 +1,43 @@
+// variables
+$main-color: #4e894b;
+$light-main-color: #4e894ba1;
+$sub-color: #eaa938;
+$light-sub-color: #eaa938ea;
+$white: #f2f2f2;
+$gray: #d9d9d9;
+$light-gray: #d9d9d9b0;
+$font-gray: #666666;
+
+//media variables
+$small: unquote("(max-width: 768px)");
+$medium: unquote("(min-width: 768px) and (max-width: 1200px)");
+$large: unquote("(min-width: 1600px)");
+
+// reset
+@import "./reset";
+
+//mixin
+@import "./mixin";
+
+// components
+@import "./modal";
+@import "./FixedButton";
+@import "./components/Header";
+@import "./components/Footer";
+@import "./components/LoadingIndicator";
+// pages
+@import "./pages/Landing";
+@import "./pages/Login";
+@import "./pages/Signup";
+@import "./pages/Main";
+@import "./pages/Entry";
+@import "./pages/Profile";
+@import "./pages/Post";
+@import "./pages/Redirect";
+@import "./pages/Ranking";
+@import "./pages/Tournament";
+@import "./pages/TournamentResult";
+@import "./pages/Error";
+@import "./pages/Chat";
+@import "./pages/Chatroom";
+@import "./pages/CreatePost";

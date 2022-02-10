@@ -1,0 +1,26 @@
+.post--map--container {
+  .post--map--input--container {
+    background-color: $gray;
+
+    @include flexbox();
+    .post--map--address {
+      width: 90%;
+      height: 2rem;
+      padding: 10px;
+      text-align: center;
+      span {
+        display: inline-block;
+        margin-top: 8px;
+      }
+    }
+    .post--map--btn {
+      @include flexbox();
+      width: 10%;
+    }
+  }
+
+  .post--map {
+    margin-top: 10px;
+    height: 20rem;
+  }
+}

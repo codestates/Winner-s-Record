@@ -1,0 +1,18 @@
+@import "../components/Profile/EditUserInfo";
+@import "../components/Profile/DocList";
+@import "../components/Profile/UserInfo.scss";
+@import "../components/Profile/ProfileRank";
+@import "../components/Profile/HistoryList";
+@import "../components/Profile/NoPost";
+@import "../components/Profile/NoHistory";
+
+.profile--background {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: auto;
+  text-align: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}

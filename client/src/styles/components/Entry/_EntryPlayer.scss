@@ -1,0 +1,95 @@
+.entry--player--container {
+  width: 80%;
+  height: 100px;
+  @include flexbox();
+  justify-content: space-between;
+  margin: 10px 0;
+  border: 1px solid $gray;
+  box-shadow: 5px 5px 10px $gray;
+  border-radius: 15px;
+  &.colored {
+    background-color: $light-main-color;
+    .profile {
+      .inner {
+        .name {
+          color: white;
+        }
+        .record {
+          color: $white;
+        }
+      }
+    }
+  }
+  .profile {
+    margin-left: 20px;
+    width: 80%;
+    .inner {
+      @include flexbox();
+      justify-content: space-between;
+      .img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+
+        img {
+          border-radius: 50%;
+          width: 80px;
+          height: 80px;
+          object-fit: cover;
+        }
+      }
+      .name {
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+      .record {
+        color: $font-gray;
+      }
+    }
+  }
+  .btns {
+    @include flexbox();
+    margin-right: 20px;
+    font-size: 1.5rem;
+    div {
+      cursor: pointer;
+      i {
+        margin: 0 5px;
+      }
+      &.fix {
+        color: $main-color;
+      }
+      &.delete {
+        color: red;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .entry--player--container {
+    height: 100px;
+    .profile {
+      .inner {
+        .img {
+          width: 80px;
+          height: 80px;
+          img {
+            width: 80px;
+            height: 80px;
+          }
+        }
+
+        .name {
+          font-size: 1rem;
+        }
+        .record {
+          font-size: 0.8rem;
+        }
+      }
+    }
+    .btns {
+      font-size: 1.2rem;
+    }
+  }
+}

@@ -1,0 +1,70 @@
+.post--ic--container {
+  position: relative;
+
+  width: 800px;
+  height: 800px;
+  .image--wrapper {
+    width: 100%;
+    height: 100%;
+    @include flexbox;
+    border-radius: 15px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+      object-fit: cover;
+    }
+  }
+  .btn {
+    cursor: pointer;
+    position: absolute;
+    box-shadow: 0 0 2px $white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    @include flexbox();
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    background-color: $light-main-color;
+    color: $white;
+
+    &.left {
+      left: 50px;
+    }
+    &.right {
+      right: 10px;
+    }
+  }
+}
+
+.post--ic--image--indicator {
+  background-color: $light-gray;
+  border-radius: 10px;
+  padding: 0 10px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  li {
+    display: inline-block;
+    margin: 2px;
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 50%;
+    border: 1px solid $main-color;
+    box-shadow: 0 0 2px $white;
+    transition: 0.15s;
+    &.displaying {
+      transition: 0.15s;
+      background-color: $main-color;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .post--ic--container {
+    width: 100%;
+    height: 100vw;
+  }
+}

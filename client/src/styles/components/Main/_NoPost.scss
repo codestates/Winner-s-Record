@@ -1,0 +1,30 @@
+.main--nopost--container {
+  @include flexbox();
+  flex-direction: column;
+  margin: 30px 0;
+  .icon {
+    margin: 20px 0;
+    font-size: 5rem;
+    color: $sub-color;
+  }
+  .text--container {
+    @include flexbox();
+    flex-direction: column;
+    .title {
+      margin: 30px 0;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    .text {
+      font-size: 1.3rem;
+      margin: 10px 0;
+    }
+  }
+  .btn {
+    @include button(50px, 0 20px);
+    margin: 20px 0;
+    a {
+      color: $white;
+    }
+  }
+}

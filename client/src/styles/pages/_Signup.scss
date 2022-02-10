@@ -1,0 +1,130 @@
+.signup--container {
+  @include flexbox();
+  flex-direction: column;
+}
+
+.signup--logo {
+  @include flexbox();
+  width: 20rem;
+  height: 20rem;
+  > img {
+    cursor: pointer;
+    width: 20rem;
+  }
+  @media screen and (max-width: 768px) {
+    width: 15rem;
+    height: 15rem;
+    > img {
+      width: 15rem;
+    }
+  }
+}
+
+.signup--inputcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.signup--input {
+  -webkit-appearance: none;
+  font-size: 1rem;
+  height: 3rem;
+  width: 25rem;
+  border: none;
+  border-bottom: solid 1px $gray;
+  transition: 0.4s;
+  margin: 1rem;
+  &:focus {
+    transition: 0.2s;
+    outline: none;
+    border-bottom: solid 1px $main-color;
+  }
+
+  &::placeholder {
+    color: $gray;
+    font-size: 0.9rem;
+  }
+  @media screen and (max-width: 768px) {
+    width: 18rem;
+    height: 2rem;
+    font-size: 0.7rem;
+
+    &::placeholder {
+      color: gray;
+      font-size: 0.7rem;
+    }
+  }
+}
+
+.signup--default-message {
+  font-size: 0.8rem;
+  height: 1.5rem;
+  margin-left: 1rem;
+  color: gray;
+  @media screen and (max-width: 768px) {
+    font-size: 0.6rem;
+  }
+}
+
+.signup--ok-message {
+  font-size: 0.8rem;
+  height: 1.5rem;
+  margin-left: 1rem;
+  color: $main-color;
+  @media screen and (max-width: 768px) {
+    font-size: 0.6rem;
+  }
+}
+
+.signup--error-message {
+  font-size: 0.8rem;
+  height: 1.5rem;
+  margin-left: 1rem;
+  color: red;
+  @media screen and (max-width: 768px) {
+    font-size: 0.6rem;
+  }
+}
+
+.signup--btncontainer {
+  margin: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: 768px) {
+    margin: 2rem;
+  }
+}
+
+.signup--btn-ok {
+  color: white;
+  border: none;
+  background-color: $main-color;
+  border-radius: 3px;
+  height: 50px;
+  width: 300px;
+  margin: 5px;
+  cursor: pointer;
+  @media screen and (max-width: 768px) {
+    width: 15rem;
+    height: 3rem;
+    font-size: 0.7rem;
+  }
+}
+
+.signup--btn {
+  color: $main-color;
+  border: 1px solid $gray;
+  background-color: white;
+  border-radius: 3px;
+  height: 50px;
+  width: 300px;
+  margin: 5px;
+  cursor: pointer;
+  @media screen and (max-width: 768px) {
+    width: 15rem;
+    height: 3rem;
+    font-size: 0.7rem;
+  }
+}

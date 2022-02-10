@@ -1,0 +1,125 @@
+.list--content--container {
+  position: relative;
+  @include flexbox();
+  width: 100%;
+  height: 350px;
+
+  .list--content--done {
+    &.active {
+      color: grey;
+      opacity: 0.5;
+    }
+
+    .list--content--pic {
+      position: relative;
+      border-radius: 10px;
+      width: 250px;
+      height: 250px;
+      border: 1px solid $gray;
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+
+      .list--content--type {
+        @include flexbox();
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 20px;
+        left: 30px;
+        color: $white;
+        font-size: 0.8rem;
+        width: 35px;
+        height: 20px;
+        border-radius: 6px;
+        &.match {
+          background-color: $main-color;
+        }
+        &.trade {
+          background-color: $sub-color;
+        }
+        &.tournament {
+          width: 50px;
+          background-color: $main-color;
+          left: 40px;
+        }
+        span {
+          margin-top: 2px;
+        }
+      }
+    }
+    .list--content--text {
+      position: relative;
+      margin-top: 5%;
+      width: 250px;
+      height: 100px;
+      > div {
+        margin: 5px 0;
+      }
+      .game {
+        display: inline-block;
+        color: $white;
+        background-color: #c2c0c2;
+        font-size: 0.8rem;
+        border-radius: 6px;
+        height: 20px;
+        padding: 0 7px;
+
+        span {
+          display: inline-block;
+          margin-top: 5px;
+        }
+      }
+      .title {
+        margin: 8px 0;
+        height: 20px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .place {
+        color: $font-gray;
+        font-size: 0.9rem;
+      }
+      .like {
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+        color: $font-gray;
+        i {
+          margin-right: 3px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .list--content--container {
+    width: 100%;
+    height: 150px;
+    .list--content--done {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      width: 100%;
+      .list--content--pic {
+        width: 125px;
+        height: 125px;
+        margin-left: 20px;
+      }
+      .list--content--text {
+        width: 325px;
+        margin-top: 10px;
+        .like {
+          right: 10px;
+        }
+      }
+    }
+  }
+}

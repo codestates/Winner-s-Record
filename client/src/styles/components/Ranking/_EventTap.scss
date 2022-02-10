@@ -1,0 +1,52 @@
+.ranking--taplist {
+  @include flexbox();
+  margin: 1rem;
+}
+
+.ranking--tap-selected {
+  @include flexbox();
+  transition: 0.4s;
+  background: $main-color;
+  border-radius: 3px;
+  color: white;
+  margin: 0.7rem;
+  width: 6rem;
+  height: 3rem;
+  cursor: pointer;
+}
+
+.ranking--tap {
+  @include flexbox();
+  transition: 0.4s;
+  background: $gray;
+  border-radius: 3px;
+  color: white;
+  margin: 0.7rem;
+  width: 6rem;
+  height: 3rem;
+  cursor: pointer;
+  &:hover {
+    background-color: $main-color;
+    transition: 0.2s;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .ranking--taplist {
+    margin: 1rem;
+  }
+
+  .ranking--tap-selected {
+    font-size: 0.8rem;
+    width: 5rem;
+    height: 2rem;
+    margin: 0.2rem;
+  }
+
+  .ranking--tap {
+    font-size: 0.8rem;
+    width: 5rem;
+    height: 2rem;
+    margin: 0.2rem;
+  }
+}

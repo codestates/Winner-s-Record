@@ -1,0 +1,13 @@
+@import "../components/Main/Search";
+@import "../components/Main/PostList";
+@import "../components/Main/PostListContent";
+@import "../components/Main/NoPost";
+
+.main--container {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

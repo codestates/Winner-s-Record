@@ -1,0 +1,62 @@
+.tournament--match--container {
+  @include flexbox();
+  justify-content: space-between;
+  width: 80%;
+  height: 60px;
+  border: 1px solid $gray;
+  border-radius: 15px;
+  box-shadow: 5px 5px 10px $gray;
+  margin: 10px 0;
+
+  .content {
+    @include flexbox();
+    margin-left: 10%;
+    width: 60%;
+
+    .player {
+      font-size: 1.2rem;
+      font-weight: 500;
+      flex: 1 0 0;
+      text-align: center;
+    }
+    .vs {
+      flex: 1 0 0;
+      text-align: center;
+    }
+    .win {
+      font-size: 1.1rem;
+      color: $main-color;
+      font-weight: bold;
+    }
+    .lose {
+      font-size: 1.1rem;
+      color: red;
+      font-weight: bold;
+    }
+  }
+  .btn {
+    @include button(30px, 0 10px);
+    margin-right: 10%;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .tournament--match--container {
+    .content {
+      margin-left: 5%;
+      width: 70%;
+      .player {
+        font-size: 1rem;
+        flex: 5 0 0;
+      }
+      .win,
+      .lose {
+        font-size: 0.9rem;
+      }
+    }
+    .btn {
+      margin-right: 5%;
+    }
+  }
+}

@@ -1,0 +1,54 @@
+.edit--input {
+  font-size: 1rem;
+  height: 3rem;
+  width: 25rem;
+  border: none;
+  border-bottom: solid 1px $gray;
+  transition: 0.4s;
+  margin: 0.5rem;
+  &:focus {
+    transition: 0.2s;
+    outline: none;
+    border-bottom: solid 1px $main-color;
+  }
+
+  &::placeholder {
+    color: $gray;
+    font-size: 0.9rem;
+  }
+  @media screen and (max-width: 768px) {
+    width: 18rem;
+    height: 2rem;
+    font-size: 0.7rem;
+
+    &::placeholder {
+      color: gray;
+      font-size: 0.7rem;
+    }
+  }
+}
+
+.edit--btncontainer {
+  @include flexbox();
+  flex-direction: column;
+  margin: 20px;
+  @media screen and (max-width: 768px) {
+    margin: 10px;
+  }
+}
+
+.edit--title {
+  @include flexbox();
+  justify-content: left;
+  margin-left: 0.5rem;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: $main-color;
+  margin-top: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .edit--title {
+    font-size: 1rem;
+  }
+}

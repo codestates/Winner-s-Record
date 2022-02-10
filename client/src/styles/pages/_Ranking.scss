@@ -1,0 +1,59 @@
+@import "../components/Ranking/Search.scss";
+@import "../components/Ranking/EventTap.scss";
+@import "../components/Ranking/RankList.scss";
+@import "../components/Ranking/NoUser";
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+
+.ranking--background {
+  @include flexbox();
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ranking--box {
+  @include flexbox();
+  flex-direction: column;
+  width: 45rem;
+  margin: 1rem;
+  background: #f2f2f2;
+  margin-bottom: 2rem;
+}
+
+.ranking--titlebox {
+  @include flexbox();
+  flex-direction: column;
+  > img {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+.ranking--title {
+  font-family: "Lobster", cursive;
+  font-size: 4rem;
+  color: $main-color;
+}
+
+.ranking--list {
+  @include flexbox();
+  flex-direction: column;
+  list-style: none;
+  margin: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .ranking--titlebox {
+    > img {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
+
+  .ranking--box {
+    width: 25rem;
+  }
+  .ranking--title {
+    font-size: 2.5rem;
+  }
+}

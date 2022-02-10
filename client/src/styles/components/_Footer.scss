@@ -1,0 +1,136 @@
+.footer--container {
+  background-color: $main-color;
+  width: 100%;
+  height: 200px;
+
+  @include flexbox();
+  flex-direction: column;
+  // border: 1px solid red;
+
+  .footer--inner {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-content: center;
+    // border: 1px solid red;
+
+    .logo--container {
+      // border: 1px solid pink;
+      width: 350px;
+      flex: 1 0 0;
+      @include flexbox();
+      .logo {
+        // border: 1px solid black;
+        height: 150px;
+        width: 350px;
+        img {
+          width: 350px;
+        }
+      }
+    }
+    .content--outer {
+      flex: 2 0 0;
+      display: flex;
+      // border: 1px solid red;
+
+      .content--container {
+        flex: 1 0 0;
+        @include flexbox();
+        flex-direction: column;
+        position: relative;
+
+        .title {
+          position: absolute;
+          top: 30px;
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: $white;
+        }
+        > a {
+          margin-top: 40px;
+          font-size: 1.1rem;
+          color: $white;
+          transition: 0.2s;
+
+          &:hover {
+            transition: 0.1s;
+            color: $sub-color;
+            font-weight: bold;
+          }
+        }
+        .container {
+          @include flexbox();
+          flex-direction: column;
+          margin-top: 30px;
+
+          .wrapper {
+            font-size: 1.1rem;
+            margin-top: 10px;
+            width: 200px;
+            @include flexbox();
+            justify-content: space-between;
+            a {
+              transition: 0.2s;
+              color: $white;
+              &:hover {
+                transition: 0.1s;
+                color: $sub-color;
+                font-weight: bold;
+              }
+              i {
+                margin-left: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .copyright {
+    width: 100%;
+
+    margin-top: 5px;
+
+    text-align: center;
+    padding-top: 10px;
+
+    color: $white;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and #{$large} {
+  .footer--container {
+    .footer--inner {
+      width: 1600px;
+    }
+  }
+}
+
+@media screen and #{$small} {
+  .footer--container {
+    height: 400px;
+    .footer--inner {
+      flex-direction: column;
+      .logo--container {
+        width: 90%;
+        margin-top: 10px;
+        .logo {
+          width: 100%;
+          @include flexbox();
+          img {
+            max-width: 100%;
+          }
+        }
+      }
+
+      .content--outer {
+        .content--container {
+          height: 200px;
+        }
+      }
+    }
+  }
+}

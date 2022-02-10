@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+
+.profile--historybox {
+  @include flexbox();
+  flex-direction: column;
+}
+
+.profile--history-winbox {
+  @include flexbox();
+  background: #f2f2f2;
+  width: 30rem;
+  height: 5rem;
+  margin: 0.5rem;
+}
+
+.profile--history-losebox {
+  @include flexbox();
+  background: #f2f2f2;
+  width: 30rem;
+  height: 5rem;
+  margin: 0.5rem;
+  opacity: 0.5;
+}
+
+.profile--history-event {
+  @include flexbox();
+  background: $sub-color;
+  color: #fefefe;
+  font-size: 0.8rem;
+  width: 4rem;
+  height: 2rem;
+  margin: 1rem;
+}
+
+.profile--history-win {
+  @include flexbox();
+  width: 3rem;
+  font-size: 1.5rem;
+  margin: 1rem;
+  font-weight: bold; //
+  color: $main-color; //
+  font-family: "Lobster", cursive;
+}
+
+.profile--history-lose {
+  @include flexbox();
+  width: 3rem;
+  font-size: 1.5rem;
+  margin: 1rem;
+  font-family: "Lobster", cursive;
+}
+
+.profile--history-vs {
+  @include flexbox();
+  width: 7rem;
+  height: 2rem;
+  font-size: 0.9rem;
+}
+
+.profile--history-date {
+  @include flexbox();
+  width: 7rem;
+  height: 2rem;
+  font-size: 0.9rem;
+}
+
+@media screen and (max-width: 768px) {
+  .profile--history-winbox {
+    width: 22rem;
+    height: 4rem;
+  }
+
+  .profile--history-losebox {
+    width: 22rem;
+    height: 4rem;
+  }
+
+  .profile--history-win {
+    width: 2rem;
+    font-size: 1.2rem;
+  }
+
+  .profile--history-lose {
+    width: 2rem;
+    font-size: 1.2rem;
+  }
+
+  .profile--history-vs {
+    width: 5rem;
+    font-size: 0.8rem;
+  }
+
+  .profile--history-date {
+    width: 6rem;
+    font-size: 0.8rem;
+  }
+}

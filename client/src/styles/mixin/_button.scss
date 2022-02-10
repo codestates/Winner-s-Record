@@ -1,0 +1,24 @@
+@mixin button($height, $padding) {
+  @include flexbox();
+  cursor: pointer;
+
+  height: $height;
+  padding: $padding;
+
+  border-radius: 10px;
+  background-color: $gray;
+  margin: 0 10px;
+
+  transition: 0.2s;
+  box-shadow: 2px 2px 5px $gray;
+
+  &:hover {
+    transition: 0.2s;
+    box-shadow: 2px 2px 20px $gray;
+  }
+  &.colored {
+    background-color: $main-color;
+    color: $white;
+  }
+  @content;
+}
